@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="large-6 columns">
+        <h6><a href="/{{ backURL }}" style="">&laquo; back to sets</a></h6>
+        <h1>{{ set.name }}</h1>
+    </div>
+    <div class="large-6 columns">
+        <a href="#" data-reveal-id="newPostModal" style="margin-top:20px;" class="radius small button right">Create a new post</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="large-block-grid-5" style="margin-top:43px;">
+            <li ng-repeat="post in set.posts | filter:searchText | orderBy:'name'">
+                <div class="panel bottom-space" style="min-height:200px; margin-bottom: 0px;">
+                	<a href="#" class="panel-delete" ng-click="deletePost(post._id)">x</a>
+                    <h4><a href="/{{ backURL }}/{{ set._id }}/{{ post._id }}">{{ post.name }}</a></h4>
+                    <p style="clear:both;">{{ post.description }}</p>
+                    <img src="/{{ post.imageURL }}" />  
+                </div>
+            </li>
+            <li>
+                <div class="new panel" data-reveal-id="newPostModal">
+                    <p>+</p>   
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="newPostModal" class="reveal-modal medium" data-reveal modal>
+    <h2>Create a new Post</h2>
+    <div class="newPostForm">
+        <div class="large-12 columns">
+        	<form name="imageForm" id="imageForm" resetable>
+	            <label><span ng-class="{'red' : imageUp === 0}">*</span> Image <span style="color:grey;"><i>(.jpg and .png only)</i></span>
+	                <input type="file" name="image" id="imageFileUpload" onchange="angular.element(this).scope().uploadFile(this.files);" ng-model="formData.image" ng-disabled="imageUp === 1" />
+	            </label>
+				<button ng-disabled="imageButtonState === 'Uploading...' || imageButtonState === 'Invalid file type'" ng-show="imageButtonState != ''" type="reset" class="button tiny alert" ng-click="resetImage()">{{ imageButtonState }}</button>
+                <span style="color:red;" ng-show="errorMessage != ''">{{ errorMessage }}</span>
+           	</form>
+            <form name="createForm" novalidate enctype="multipart/form-data">
+                <label><span ng-class="{'red' : createForm.name.$pristine || createForm.name.$invalid}">*</span> Name
+                    <input type="text" name="name" placeholder="name of post" ng-model="formData.name" required/>
+                </label>
+                <label>Description
+                    <input type="text" name="description" placeholder="description" ng-model="formData.description" />
+                </label>
+                <button type="submit" class="button" ng-click="addPost(); dReset('imageForm'); dClose('newPostModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid || imageUp == 0">Create Post</button>
+            </form>
+        </div>
+        <a class="close-reveal-modal" ng-click="resetImage(); clearForm(); dReset('imageForm');">&#215;</a>
+    </div>
+</div>

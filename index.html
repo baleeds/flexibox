@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FlexiBox</title>
+        <link rel="stylesheet" href="/dependencies/css/foundation/foundation.css" />
+        <link rel="stylesheet" href="/styles/style.css" />
+    </head>
+    <body ng-controller="FlexiBox.session.sessionController">
+        <div class="login-bar row">
+            <div class="small-4 columns">
+                <a href="/" class="brand"><b>FlexiBox</b></a>
+            </div>
+            <div class="small-4 columns">
+                <input type="text" ng-model="searchText" placeholder="Filter">
+            </div>
+        	<div class="small-4 columns">
+	            <form name="loginForm" class="login-form row collapse" ng-show="username === ''">
+					<div class="small-8 columns">
+						<input type="text" name="name" ng-model="fd.name" placeholder="Enter Name..." ng-minlength="3" required />
+					</div>
+					<div class="small-4 columns">
+						<a href="#" class="button small postfix" ng-click="login();" ng-disabled="loginForm.name.$pristine || loginForm.name.$invalid">Login</a>
+					</div>
+	            </form>
+                <div class="row" ng-show="username != ''">
+                    <div class="small-8 columns " >
+                        <p class="hello-name right">Hello, <b>{{username}}</b></p>
+                    </div>
+                    <div class="small-4 columns">
+                        <a href="#" class="button small postfix " ng-click="logout();">Logout</a>
+                    </div>
+                </div>
+        	</div>
+        </div>
+
+        <div ng-view>
+
+        </div>
+
+        <!-- SCRIPTS -->
+        <script data-main="/app/main" src="/dependencies/js/requirejs/require.js"></script>
+    </body>
+</html>

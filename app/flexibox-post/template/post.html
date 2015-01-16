@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="large-6 columns">
+    	<h6><a href="/{{ backURL }}" style="">&laquo; back to set</a></h6>
+        <h1>{{ post.name }}</b></h1>
+    </div>
+</div>
+
+<div class="row">
+	<div id="imageDiv">
+    	<img draggable="false" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" style="max-width: none" />
+    	<div ng-repeat="comment in post.comments" class="flexiBox" id="comment{{ comment.number }}" style="top:{{ comment.smallest.y }}px; left:{{ comment.smallest.x }}px; width:{{ comment.width }}px; height:{{ comment.height }}px; border: 4px solid {{ comment.color }};">
+    		<div class="flexiNumber" style="background: {{ comment.color }};">{{ comment.number }}</div>
+    	</div>
+    </div>
+    <div id="commentBox">
+	    <h5>Comments</h5>
+	    <div class="panel">
+			<ul style="margin-left: 0px;">
+				<li ng-repeat="comment in post.comments" class="commentBlock" style="list-style:none;">
+					<div class="commentNumber" style="background: {{ comment.color }};">{{ comment.number }}</div>
+					<div class="commentContent">
+						<h6>{{ comment.posterName }}</h6>
+						<p>{{ comment.txt }}</p>
+					</div>
+				</li>
+			</ul>
+			<form name="newComment" novalidate enctype="multipart/form-data">
+				<input type="text" name="txt" placeholder="post a comment..." ng-model="newComment.cText" ng-minlength="2" required/>
+				<div class="panel callout" ng-show="$parent.username === ''"><p>Please login first.</p></div>
+				<div class="panel callout" ng-show="newDiv === 0"><p>Select an area on the picture to comment on</p></div>
+				<button type="submit" class="button" ng-click="addComment();" ng-disabled="newComment.txt.$pristine || newComment.txt.$invalid || $parent.username === ''">Post</button>
+			</form>
+	    </div>
+   	</div>
+</div>

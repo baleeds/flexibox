@@ -1,0 +1,57 @@
+{
+   "name": "FlexiBox",
+   "version": "0.0.1-SNAPSHOT",
+   "main": [
+      "./dist/js/FlexiBox.full.min.js",
+      "./dist/js/FlexiBox.min.js",
+      "./dist/index.html"  
+   ],
+   "description": "Application to enable collaboration on UX mockups for DB projects",
+   "ignore": [
+      "bower_components",
+      "test",
+      "build"
+   ],
+   "dependencies": {
+      "angular": "https://github.com/angular/bower-angular.git",
+      "angular_route": "https://github.com/angular/bower-angular-route.git",
+      "angular_sanitize": "https://github.com/angular/bower-angular-sanitize.git",
+      "foundation": "https://github.com/zurb/bower-foundation.git"
+   },
+   "devDependencies": {
+      "requirejs": "https://github.com/jrburke/requirejs.git"
+   },
+   "exportsOverride": {
+      "angular": {
+         "js": "angular.min.js"
+      },
+      "angular_route": {
+         "js": "angular-route.min.js"
+      },
+      "angular_sanitize": {
+         "js": "angular-sanitize.min.js"
+      },
+      "foundation": {
+         "js": "js/foundation.min.js",
+         "css": "css/foundation.css"
+      },
+      "fastclick": {
+         "js": "lib/fastclick.js"
+      },
+      "jquery-placeholder": {
+         "js": "jquery.placeholder.js"
+      },
+      "jquery.cookie": {
+         "js": "jquery.cookie.js"
+      },
+      "jquery": {
+         "js": "dist/jquery.js"
+      }, 
+      "modernizr": {
+         "js": "modernizr.js"
+      },
+      "requirejs": {
+         "js": "require.js"
+      }
+   }
+}

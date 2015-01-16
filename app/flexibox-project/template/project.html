@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="large-6 columns">
+        <h6><a href="/" style="">&laquo; back to projects</a></h6>
+        <h1>{{ project.name }}</h1>
+    </div>
+    <div class="large-6 columns">
+        <a href="#" data-reveal-id="newSetModal" style="margin-top:20px;" class="radius small button right">Create a new set</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="large-block-grid-5">
+            <li ng-repeat="set in project.sets | filter:searchText | orderBy:'name'">
+                <div class="panel" style="height:200px; margin-bottom: 0px;">
+                    <a href="#" class="panel-delete repeated-item" ng-click="deleteSet(set._id)">&#215;</a>
+                    <h4><a href="/{{ project._id }}/{{ set._id }}">{{ set.name }}</a></h4>
+                    <p style="clear:both;">{{ set.description }}</p>    
+                </div>
+            </li>
+            <li>
+                <div class="new panel" data-reveal-id="newSetModal">
+                    <p>+</p>   
+                </div>
+            </li>    
+        </ul>
+    </div>
+</div>
+
+<div id="newSetModal" class="reveal-modal medium" data-reveal modal>
+    <h2>Create a new Set</h2>
+    <div class="newSetForm">
+        <div class="large-12 columns">
+            <form name="createForm" enctype="multipart/form-data">
+                <label><span ng-class="{'red' : createForm.name.$pristine || createForm.name.$invalid}">*</span> Name
+                    <input type="text" name="name" placeholder="name of set" ng-model="formData.name" ng-maxlength="64" ng-minlength="3" required/>
+                </label>
+                <label>Description
+                    <input type="text" name="description" placeholder="description" ng-model="formData.description" ng-maxlength="256" />
+                </label>
+                <button type="submit" class="button" ng-click="addSet(); dClose('newSetModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Create Set</button>
+            </form>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+</div>

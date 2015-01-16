@@ -1,0 +1,91 @@
+Knowledge Transfer
+===
+
+First: the advantages of a full Javascript stack -
+1. Javascript is extremely customizeable.  Programming in Javascript is entirely based on what libraries you use.
+2. It's fast and getting faster.  Browser companies are working hard to make the best Javasript environment.
+3. There is less object-relational impedance mismatch.  Mongo stores JSON format, angular displays JSON format.
+
+#Technologies
+
+* NodeJS
+* Mongodb
+* Bower
+* Grunt
+* RequireJS
+* ExpressJS
+* MongooseJS
+* AngularJS
+
+##What are they?
+
+* NodeJS - A platform built on Chrome's V8 javascript runtime environment.  It's designed for data-intensive web services.  We use it to run our server.  It provides the static content and has API routes that serve dyamic content.  Node is single-threaded, meaning that it is also lock free (data won't be accessed by two threads). 
+
+* MongoDB - A db that stores info in documents.  Each root element (projects) is a new document.  These documents are JSON format, and can contain subdocuments (arrays) at an infinitely deep level.  It is not written IN javascript, but it is designed to interface with javascript.
+
+* Bower - A package manager for the web.  It is installed from the NPM (node package manager), and it handles web libraries and frameworks for you.  Including versioning.  The packages are stored in bower.json
+
+* Grunt - A build system for our stack.  Installed from the NPM.  Includes minification, compilation, unit testing, linting.  Has the ability to combine our JS files into one single resource.  
+
+* RequireJS - A dependency management system and module loader.  Each file has the ability to 'require' other files to be loaded previously.
+
+* ExpressJS - Provides basic tools for NodeJS, including routing.  We use the Express 'router' object to handle all incoming connections.
+
+* MongooseJS - Provides schema implementation for NodeJS and includes helpful query options.  We can make fields mandatory and have default values.  More easily search through documents to manipulate subdocuments.
+
+* AngularJS - The front end framework for managing and displaying dynamic content.  Encourages strong use of modules and reuseable code.  Has extremely useful helpers such as sorting, filtering, display loops.  Supports manipulating HTML through directives.  Supports having a one page site by having a front end router to dynamically serve views.
+
+##What have I experienced?
+
+* NodeJS - Pretty easy to install.  Very extensible.  Easy to pick up the callback programming style
+
+* MongoDB - Very different from a relational database.  The things that make it great are also the things that hold it back (nested objects).  NOT good for databases with many-to-many relationships because it doesn't support merge.  Storing in JSON is amazing for sending to Angular.
+
+* Bower - Ask Sarah Brolley
+
+* Grunt - Ask Sarah Brolley
+
+* RequireJS - Very useful as the application get's bigger.  It would be annoying to manually include all of the different JS files, because they should be split into easily digestable, angular chunks.  Slightly annoying to understand at first.
+
+* ExpressJS - I don't use too many express functions becuase it wasn't needed.  But the routing is easy to understand and it works well.
+
+* MongooseJS - Provides some crucial functions, such as getting an array element by ID.  Node only supports returning a whole document (in my understanding).  Also, having the schemas with required values seems like a must-have
+
+* AngularJS - I love programming in angular.  Everything seems easier in Angular.  The style is easy to pick up and puts a good amount of pressure on the developer to use best practices.  $scope is a good way to encourage MVC, because logic is different than front-end values.  
+
+#Project Details
+
+Most of the FlexiBox core functionality lives in the app folder.  This is where we store our directives, controllers, views, factories (services) and other important files.
+
+* directives: Directives are attached to the DOM by inserting them into a tag ( <input type="text" directiveName> ).  Adding a directive to an element attaches functionality to that element, allowing Angular to manipulate the DOM.  In MVC terms, directives connect the controller to the view.
+
+* controllers: Controllers are attached to the DOM using the ng-controller directiver ( <div ng-controller="mainController"> ).  They are used to add behavior to the $scope object, which can be accessed in the DOM for logic and data-binding.  For instance, we load our projects into $scope.projects, and then we can display all projects on the front end. The DOM reflects real-time changed to the $scope variable.  DOM should never be directly manipulated by a controller.
+
+* view: Views are html segments that are loaded into our index.html depending on the current route.  When we have specified a projectId in the URL, the project view is loaded into the index.
+
+* factories: Factories contain the code that provides calls to the API.  Factories are a singleton object that can be called into controllers and used to retrieve data.  In MVC terms, factories connect the model to the controller.
+
+* Other files....
+
+* app.js - The declaration of our primary FlexiBox module.  Other angular components are injected into the module in this file.
+
+* main.js - Provides info for dependencies, loads dependency and then bootstraps Angular
+
+* namespace.js - Provides an easily changed name format.
+
+* routes.js - Configures URL routes to load respective views and controllers.
+
+
+In the app folder, each 'area' has it's own folder.  The areas are as follows:
+
+* flexibox-session: The area that is the whole page.  Other areas are loaded inside of the session controller.  Has ability to store information used by all areas, such as username.
+
+* flexibox-home: The area that is loaded on index.  Contains a list of projects.
+
+* flexibox-project: The area that is loaded when we click a project.  Contains the project's sets. 
+
+* flexibox-set: The area that is loaded when we click a set.  Contains the set's posts.
+
+* flexibox-post: The area that is loaded when we click a post.  Displays the post picture and allows for commenting.
+
+
