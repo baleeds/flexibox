@@ -1,0 +1,25 @@
+{
+  "name": "FlexiBox",
+  "description": "Internal Notable Project",
+  "version": "0.0.1-SNAPSHOT",
+  "filename": "FlexiBox.min.js",
+  "homepage": "https://stash.gto.intranet.db.com:8081/users/benjamin.leeds_db.com/repos/flexibox-with-modularjs/browse/FlexiBox-webapp",
+  "author": "Sarah Brolley <sarah.brolley@db.com>, Benjamin Leeds <baleeds@ncsu.edu>",
+
+  "//": "See https://github.com/npm/node-semver/ for version number syntax", 
+  "dependencies": {
+    "express": "~4.0.0",
+    "mongoose": "~3.6.13",
+    "body-parser": "~1.0.1",
+    "multer": "~0.1.0",
+    "nodemon": "~1.2.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-cli": "^0.1.7",
+    "grunt-requirejs": "^0.4.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0"
+  }
+}
