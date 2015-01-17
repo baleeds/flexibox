@@ -97,13 +97,13 @@ Most of the FlexiBox core functionality lives in the app folder.  This is where 
 #Todo's
 
 ##Cleanup
-[] Make the API match up with the REST API design document.
-    [] Creating a new project does POST and gets entire db back as a response
-    [] Code to use entryUrl, setsUrl, postsUrl, and commentsUrl to make calls rather than building url's in UI code
-    [] Needs a more through review for other issues...
-[] Move the uploads folder out of the project folder. Requires implementing REST API to retrieve static images from server.
-[] Move code for each route in server.js to it's own file rather than dumping them all in one large file
-[X] Remove requirement to select portion of image to add a comment (this requirement doesn't work in FF so has made adding comments non-functional in that browser)
+*[] Make the API match up with the REST API design document.
+*    [] Creating a new project does POST and gets entire db back as a response
+*    [] Code to use entryUrl, setsUrl, postsUrl, and commentsUrl to make calls rather than building url's in UI code
+*    [] Needs a more through review for other issues...
+- [] Move the uploads folder out of the project folder. Requires implementing REST API to retrieve static images from server.
+- [] Move code for each route in server.js to it's own file rather than dumping them all in one large file
+- [X] Remove requirement to select portion of image to add a comment (this requirement doesn't work in FF so has made adding comments non-functional in that browser)
 [] Don't filter on id from the filter box (name and description only)
 [] Filter feature shouldn't be visible on image details page
 [] Post comment button is disabled when not logged in but styling doesn't show that well.
