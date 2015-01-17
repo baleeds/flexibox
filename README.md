@@ -97,30 +97,33 @@ Most of the FlexiBox core functionality lives in the app folder.  This is where 
 #Todo's
 
 ##Cleanup
-- [] Make the API match up with the REST API design document.
-    - [] Creating a new project does POST and gets entire db back as a response
-    - [] Code to use entryUrl, setsUrl, postsUrl, and commentsUrl to make calls rather than building url's in UI code
-    - [] Needs a more through review for other issues...
-- [] Move the uploads folder out of the project folder. Requires implementing REST API to retrieve static images from server.
-- [] Move code for each route in server.js to it's own file rather than dumping them all in one large file
-- [X] Remove requirement to select portion of image to add a comment (this requirement doesn't work in FF so has made adding comments non-functional in that browser)
-- [] Don't filter on id from the filter box (name and description only)
-- [] Filter feature shouldn't be visible on image details page
-- [] Post comment button is disabled when not logged in but styling doesn't show that well.
-- [] Test concurrent user operations
-- [] Cleanup and test code added to draw contextual comment box (not working well from initial tests)
-- [] index.html to use built javascript files and test index page for debug mode
-- [x] Document MongoDB install and server start up instructions in README
-- [x] Use version of foundation.css from bower dependencies
-- [] Enter key inside username text field doesn't submit login
+[] Make the API match up with the REST API design document.
+    [] Creating a new project does POST and gets entire db back as a response
+    [] Code to use entryUrl, setsUrl, postsUrl, and commentsUrl to make calls rather than building url's in UI code
+    [] Needs a more through review for other issues...
+[] Move the uploads folder out of the project folder. Requires implementing REST API to retrieve static images from server.
+[] Move code for each route in server.js to it's own file rather than dumping them all in one large file
+[X] Remove requirement to select portion of image to add a comment (this requirement doesn't work in FF so has made adding comments non-functional in that browser)
+[] Don't filter on id from the filter box (name and description only)
+[] Filter feature shouldn't be visible on image details page
+[] Post comment button is disabled when not logged in but styling doesn't show that well.
+[] Test concurrent user operations
+[] Cleanup and test code added to draw contextual comment box (not working well from initial tests)
+[] index.html to use built javascript files and test index page for debug mode
+[x] Document MongoDB install and server start up instructions in README
+[x] Use version of foundation.css from bower dependencies
+[] Enter key inside username text field doesn't submit login
 
 ##Features
-- [] Add unit testing
-- [] Add a thumbnail gallery at the bottom to navigate to other posts in a set.
-- [] Ability to edit title and description for project, set, post
-- [] Pagination of projects, sets, posts
-- [] Add alert for users when opening Flexibox in IE < 10
-- [] @ tag someone in comments
-- [] Threaded comments
-- [] Add visual indicator in comments pane for no existing comments yet
-- [] Add dropdown for "sorted by" to allow users to change sorting parameter
+[] Add unit testing
+[] Add a thumbnail gallery at the bottom to navigate to other posts in a set.
+[] Ability to edit title and description for project, set, post
+[] Pagination of projects, sets, posts
+[] Add alert for users when opening Flexibox in IE < 10
+[] @ tag someone in comments
+[] Threaded comments
+[] Add visual indicator in comments pane for no existing comments yet
+[] Add dropdown for "sorted by" to allow users to change sorting parameter
+
+##Bugs
+[] Fix login button -
