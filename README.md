@@ -98,9 +98,9 @@ Most of the FlexiBox core functionality lives in the app folder.  This is where 
 
 ##Cleanup
 - [ ] Make the API match up with the REST API design document.
-    - [ ] Creating a new project does POST and gets entire db back as a response
-    - [ ] Code to use entryUrl, setsUrl, postsUrl, and commentsUrl to make calls rather than building url's in UI code
-    - [ ] Needs a more through review for other issues...
+    - [x] Creating a new project does POST and gets entire db back as a response
+    - [x] Code to use entryUrl, setsUrl, postsUrl, and commentsUrl to make calls rather than building url's in UI code
+    - [ ] Needs a more thorough review for other issues...
 - [ ] Move the uploads folder out of the project folder. Requires implementing REST API to retrieve static images from server.
 - [ ] Move code for each route in server.js to it's own file rather than dumping them all in one large file
 - [X] Remove requirement to select portion of image to add a comment (this requirement doesn't work in FF so has made adding comments non-functional in that browser)
@@ -130,7 +130,10 @@ Most of the FlexiBox core functionality lives in the app folder.  This is where 
 - [ ] Add indicator for how many people have seen the post
 - [ ] Add authentication system for users
 - [ ] Add user roles (administrator, editor, viewer)
-- [ ]
+- [ ] In post view mode, add navigation method (hold space bar to navigate?)
+- [ ] Add download feature (with comments and without)
+- [ ] Add settings page for user accounts
+- [ ] Update/add UI design
 
 
 ##Bugs
