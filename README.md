@@ -116,7 +116,7 @@ Most of the FlexiBox core functionality lives in the app folder.  This is where 
 
 ##Features
 - [ ] Add unit testing
-- [ ] Add a thumbnail gallery at the bottom to navigate to other posts in a set.
+- [ ] Add a thumbnail gallery at the bottom to navigate to other posts in a set
 - [ ] Ability to edit title and description for project, set, post
 - [ ] Pagination of projects, sets, posts
 - [ ] Add alert for users when opening Flexibox in IE < 10
@@ -124,6 +124,14 @@ Most of the FlexiBox core functionality lives in the app folder.  This is where 
 - [ ] Threaded comments
 - [ ] Add visual indicator in comments pane for no existing comments yet
 - [ ] Add dropdown for "sorted by" to allow users to change sorting parameter
+- [ ] Add versioning system
+- [ ] Add notification center for users
+- [ ] Add indicator for new actions (comments, uploads) in projects/sets/posts
+- [ ] Add indicator for how many people have seen the post
+- [ ] Add authentication system for users
+- [ ] Add user roles (administrator, editor, viewer)
+- [ ]
+
 
 ##Bugs
 - [ ] Fix login button - It logs you in without having specified a name.
