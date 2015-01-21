@@ -11,6 +11,7 @@ require.config({
         "angular": "../dependencies/js/angular/angular.min",
         "angularRoute": "../dependencies/js/angular_route/angular-route.min",
         "angularSanitize": "../dependencies/js/angular_sanitize/angular-sanitize.min",
+        "angularMocks": "../dependencies/js/angular_mocks/angular-mocks",
         "foundation": "../dependencies/js/foundation/foundation.min",
         "jquery": "../dependencies/js/jquery/jquery",
         "modernizr": "../dependencies/js/modernizr/modernizr",
@@ -30,6 +31,9 @@ require.config({
         angularSanitize: {
             deps: ["angular"]
         },
+        angularMocks: {
+            deps: ["angular"]
+        },
         foundation: {
             deps: ["jquery"],
             exports: "foundation"
@@ -45,9 +49,9 @@ require.config({
 
 require([
         "angular",
-        "namespace",
+        "specs/flexibox-session-spec",
         "routes",
-        "specs/flexibox-session-spec"
+        "angularMocks"
     ],
     function (angular, namespace) {
         jasmine.getEnv().execute();
