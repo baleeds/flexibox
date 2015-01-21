@@ -559,7 +559,9 @@ app.use('/api', router);
 app.get('/', function(req, res) {
 	res.sendfile('./index.html');
 });
-
+app.get('/test/', function(req, res) {
+	res.sendfile('./test/specRunner.html');
+});
 app.get('*', function(req, res) {
 	res.sendfile('./index.html');
 });
