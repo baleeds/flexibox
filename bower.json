@@ -4,7 +4,7 @@
    "main": [
       "./dist/js/FlexiBox.full.min.js",
       "./dist/js/FlexiBox.min.js",
-      "./dist/index.html"  
+      "./dist/index.html"
    ],
    "description": "Application to enable collaboration on UX mockups for DB projects",
    "ignore": [
@@ -19,9 +19,7 @@
       "foundation": "https://github.com/zurb/bower-foundation.git"
    },
    "devDependencies": {
-      "requirejs": "https://github.com/jrburke/requirejs.git",
-      "jasmine": "https://github.com/jasmine/jasmine/releases/download/v2.1.3/jasmine-standalone-2.1.3.zip",
-      "angular_mocks": "https://github.com/angular/bower-angular-mocks.git"
+      "requirejs": "https://github.com/jrburke/requirejs.git"
    },
    "exportsOverride": {
       "angular": {
@@ -48,19 +46,12 @@
       },
       "jquery": {
          "js": "dist/jquery.js"
-      }, 
+      },
       "modernizr": {
          "js": "modernizr.js"
       },
       "requirejs": {
          "js": "require.js"
-      },
-      "jasmine" : {
-         "js": "lib/jasmine-2.1.3/*.js",
-         "css": "lib/jasmine-2.1.3/jasmine.css"
-      },
-      "angular_mocks" : {
-         "js": "angular-mocks.js"
       }
    }
 }
