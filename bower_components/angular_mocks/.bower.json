@@ -1,0 +1,17 @@
+{
+  "name": "angular-mocks",
+  "version": "1.2.21",
+  "main": "./angular-mocks.js",
+  "dependencies": {
+    "angular": "1.2.21"
+  },
+  "_cacheHeaders": {
+    "ETag": "\"ab33e90eaec5bb2c96126e808ae9f44cf59b7205\"",
+    "Content-Type": "application/zip",
+    "Content-Disposition": "attachment; filename=bower-angular-mocks-1.2.21.zip"
+  },
+  "_release": "e-tag:ab33e90ea",
+  "_source": "https://github.com/angular/bower-angular-mocks/archive/v1.2.21.zip",
+  "_target": "*",
+  "_originalSource": "https://github.com/angular/bower-angular-mocks/archive/v1.2.21.zip"
+}
