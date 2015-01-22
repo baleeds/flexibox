@@ -20,7 +20,7 @@ define(
             });
 
             describe(name, function(){
-                it("$scope.login", function(){
+                it("login", function(){
                     var $scope = {};
 
                     $controller(name, {$scope : $scope});
@@ -31,7 +31,7 @@ define(
                     expect($scope.username).toEqual("Ben Leeds");
                 });
 
-                it("$scope.logout", function(){
+                it("logout", function(){
                     var $scope = {};
 
                     $controller(name, {$scope : $scope});
