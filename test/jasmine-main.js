@@ -51,6 +51,7 @@ require([
         "angular",
         "specs/flexibox-session-spec",
         "specs/utilityFactory-spec",
+        "specs/homeFactorySpec",
         "routes",
         "angularMocks"
     ],

@@ -22,7 +22,7 @@ define([
 			// Create a project from form data
 			homeFactory.createProject = function(fd) {
 				return $http.post('/api/projects', fd, {
-					'content-type': 'multipart/form-data',
+					'content-type': 'multipart/form-data'
 				});
 			};
 
@@ -34,7 +34,7 @@ define([
 			// Update a project's persistence to match project object
 			homeFactory.updateProject = function(id, fd) {
 				return $http.put('/api/projects' + id, fd, {
-					'content-type': 'multipart/form-data',
+					'content-type': 'multipart/form-data'
 				});
 			};
 
