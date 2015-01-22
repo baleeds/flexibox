@@ -8,25 +8,38 @@ define(
 
         describe(ctrlNamespace, function() {
 
-            var $controller;
-
+            //The name of the factory we are testing
             var name = ctrlNamespace + ".utilityFactory";
 
+            //The variable to hold the utilityFactory
+            var utilityFactory;
+
             beforeEach(function () {
+                //Mock the app module
                 module(namespace);
 
-                inject(function (_$controller_) {
-                    $controller = _$controller_;
+                inject(function ($injector) {
+                    //use $injector to pull get the utilityFactory!
+                    utilityFactory = $injector.get(name);
                 });
             });
 
             describe(name, function(){
-                it("$scope.login", function(){
-                    var $scope = {};
+                it(name + ".findById", function(){
+                    var data = [
+                        {_id : 1, value: 1},
+                        {_id : 2, value: 2},
+                        {_id : 3, value: 3},
+                        {_id : 4, value: 4},
+                        {_id : 5, value: 5},
+                        {_id : 6, value: 6},
+                        {_id : 7, value: 7},
+                        {_id : 8, value: 8}
+                    ];
 
-                    $controller(name, {$scope : $scope});
+                    expect(utilityFactory.findById(data, 1).value).toEqual(1);
 
-                    debugger;
+                    expect(utilityFactory.findById(data, 10)).toEqual("");
 
                 });
 
