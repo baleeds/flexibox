@@ -5,11 +5,11 @@ define(
     ["namespace", "flexibox-session/namespace", "flexibox-session/module.require"],
     function(namespace, ctrlNamespace){
 
-        describe(ctrlNamespace, function() {
+        var name = ctrlNamespace + ".sessionController";
+
+        describe(name, function() {
 
             var $controller;
-
-            var name = ctrlNamespace + ".sessionController";
 
             beforeEach(function () {
                 module(namespace);
@@ -19,8 +19,8 @@ define(
                 });
             });
 
-            describe(name, function(){
-                it("login", function(){
+            describe("login tests", function(){
+                it("Valid Login name", function(){
                     var $scope = {};
 
                     $controller(name, {$scope : $scope});
@@ -30,8 +30,11 @@ define(
 
                     expect($scope.username).toEqual("Ben Leeds");
                 });
+            });
 
-                it("logout", function(){
+            describe("logout tests", function(){
+
+                it("logout without logging in", function(){
                     var $scope = {};
 
                     $controller(name, {$scope : $scope});
@@ -42,7 +45,7 @@ define(
 
                     expect($scope.username).toEqual("");
                 });
-            })
+            });
         });
 
     });
