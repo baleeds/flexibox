@@ -50,6 +50,7 @@ require.config({
 require([
         "angular",
         "specs/flexibox-session-spec",
+        "specs/utilityFactory-spec",
         "routes",
         "angularMocks"
     ],
