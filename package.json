@@ -5,14 +5,13 @@
   "filename": "FlexiBox.min.js",
   "homepage": "https://stash.gto.intranet.db.com:8081/users/benjamin.leeds_db.com/repos/flexibox-with-modularjs/browse/FlexiBox-webapp",
   "author": "Sarah Brolley <sarah.brolley@db.com>, Benjamin Leeds <baleeds@ncsu.edu>",
-
-  "//": "See https://github.com/npm/node-semver/ for version number syntax", 
+  "//": "See https://github.com/npm/node-semver/ for version number syntax",
   "dependencies": {
+    "body-parser": "~1.0.1",
     "express": "~4.0.0",
     "mongoose": "~3.6.13",
-    "body-parser": "~1.0.1",
     "multer": "~0.1.0",
-    "nodemon": "~1.2.1"
+    "nodemon": "^1.2.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

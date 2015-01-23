@@ -13,7 +13,7 @@
             <li ng-repeat="project in projects | filter:searchText | orderBy:'name'">
                 <div class="panel" style="height:200px; margin-bottom: 0px;">
                     <a href="#" class="panel-delete" ng-click="deleteProject(project._id)">&#215;</a>
-                    <h4><a href="/{{ project._id }}">{{ project.name }}</a></h4>
+                    <h4><a href="/projects/{{ project._id }}">{{ project.name }}</a></h4>
                     <p style="clear:both;">{{ project.description }}</p>    
                 </div>
             </li>
