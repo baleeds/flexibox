@@ -18,32 +18,38 @@ define([
                 $routeProvider
                 
                     // When at root page
-                    .when('/', {
+                    .when('/projects', {
                         templateUrl : '/app/flexibox-home/template/home.html',
                         controller  : 'FlexiBox.home.homeController'
                     })
 
                     // When specified projectId (/<project_id>)
-                    .when('/:projectId', {
+                    .when('/projects/:projectId', {
                         templateUrl : '/app/flexibox-project/template/project.html',
                         controller  : 'FlexiBox.project.projectController'
                     })
 
                     // When specified projectId and setId (/<project_id>/<set_id>)
-                    .when('/:projectId/:setId', {
+                    .when('/projects/:projectId/:setId', {
                         templateUrl : '/app/flexibox-set/template/set.html',
                         controller  : 'FlexiBox.set.setController'
                     })
 
                     // When specified projectId and setId and postId (/<project_id>/<set_id>/<post_id>)
-                    .when('/:projectId/:setId/:postId', {
+                    .when('/projects/:projectId/:setId/:postId', {
                         templateUrl : '/app/flexibox-post/template/post.html',
                         controller  : 'FlexiBox.post.postController'
                     })
 
+                    // When specified at login page
+                    .when('/login', {
+                        templateUrl : '/app/flexibox-login/template/login.html',
+                        controller  : 'FlexiBox.login.loginController'
+                    })
+
                     // When url is undefined
                     .otherwise({
-                        redirectTo: '/'
+                        redirectTo: '/login'
                     });
                 $locationProvider.html5Mode(true);
             }
