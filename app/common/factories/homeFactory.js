@@ -33,7 +33,7 @@ define([
 
 			// Update a project's persistence to match project object
 			homeFactory.updateProject = function(id, fd) {
-				return $http.put('/api/projects' + id, fd, {
+				return $http.put('/api/projects/' + id, fd, {
 					'content-type': 'multipart/form-data'
 				});
 			};

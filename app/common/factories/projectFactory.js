@@ -14,7 +14,7 @@ define([
 
 			var projectFactory = {};
 			
-						// Get one project by ID
+			// Get one project by ID
 			projectFactory.getProject = function(id) {
 				return $http.get('/api/projects/' + id + '?includeSets=1');
 			};
@@ -30,7 +30,7 @@ define([
 			};
 
 			projectFactory.updateSet = function(pid, sid, fd) {
-				return $http.put('/api/projects/' + pid + '/sets/' + id, fd, {
+				return $http.put('/api/projects/' + pid + '/sets/' + sid, fd, {
 					'content-type': 'multipart/form-data'
 				});
 			};
