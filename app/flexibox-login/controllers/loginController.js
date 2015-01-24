@@ -14,12 +14,8 @@ define([
         module.controller(name,
               ['$scope','$rootScope', '$log',
                function ($scope, $rootScope, $log) {
-                   
 
 
-            if ($rootScope.username != "") {
-                $location.path('/projects');
-            }
 
         }]);
     });

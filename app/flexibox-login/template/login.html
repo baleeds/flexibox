@@ -6,14 +6,33 @@
 
 <div class="row">
     <div class="large-12 columns">
-        <form name="login" enctype="multipart/form-data">
-            <label>Username:
-                <input type="text" name="name" placeholder="Username" ng-model="formData.name" required />
-            </label>
-            <label>Password:
-                <input type="text" name="password" ng-model="formData.password" required />
-            </label>
-            <button type="submit" class="button">Login</button>
+        Login:
+        <form action="/api/login" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Login</button>
         </form>
+
+        Sign up:
+        <form action="/api/signup" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
+
     </div>
 </div>

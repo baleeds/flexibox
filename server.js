@@ -8,6 +8,11 @@ var bodyParser     = require('body-parser');
 var mongoose       = require('mongoose');
 var multer         = require('multer');
 var fs             = require('fs');
+var session		   = require('express-session');
+var cookieParser   = require('cookie-parser');
+
+var passport = require('passport');
+var flash    = require('connect-flash');
 
 // call the schemas we created
 var Project = require('./app/common/models/projects');
@@ -16,6 +21,9 @@ var User = require('./app/common/models/users');
 // get server config
 var config = require('./config');
 console.log("Server config = ", config);
+
+
+require('./passport/passport')(passport); // pass passport for configuration
 
 //connect to local server
 mongoose.connect('mongodb://' + config.server.host + '/flexibox');
@@ -27,13 +35,63 @@ app.use(bodyParser());
 app.use(multer({ dest: config.uploadsDir }));
 
 
+
+	// set up our express application
+	app.use(cookieParser()); // read cookies (needed for auth)
+
+	// required for passport
+	app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+	app.use(passport.initialize());
+	app.use(passport.session()); // persistent login sessions
+	app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+
 // Routes for our app
 // ==================================================
+
 var router = express.Router();             // get an instance of the router
 // middleware to use for all requests
 router.use(function(req, res, next) {
 	next();
 });
+
+
+// process the login form
+router.route('/login')
+
+	.post(passport.authenticate('local-login', {
+		successRedirect : '/projects', // redirect to the secure profile section
+		failureRedirect : '/login', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+}));
+
+// process the signup form
+router.route('/signup')
+	.post(passport.authenticate('local-signup', {
+		successRedirect : '/projects', // redirect to the secure profile section
+		failureRedirect : '/login', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+}));
+
+router.route('/logout')
+	.get(function(req, res) {
+		req.logout();
+		res.redirect('/');
+});
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/');
+};
+
+
 
 
 router.route('/all') // accessed at //<server>:<port>/api/all
@@ -460,8 +518,6 @@ router.route('/projects/:project_id/sets/:set_id/posts/:post_id/comments/:commen
 
 
 
-/* NOT IMPLEMENTED
-   ---------------
 
 // USER ROUTES
 // =====================================================================================
@@ -531,7 +587,6 @@ router.route('/users/:user_id')
 			res.json({message:'Successfully deleted'});
 		});
 	});
-*/
 
 router.route('/upload')
 	.post(function(req, res) {
