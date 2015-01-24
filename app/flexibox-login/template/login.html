@@ -7,31 +7,27 @@
 <div class="row">
     <div class="large-12 columns">
         Login:
-        <form action="/api/login" method="post">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password">
-            </div>
+        <form name="loginForm">
+            <label>Email
+                <input type="text" name="email" placeholder="email" ng-model="loginData.email" ng-maxlength="256" />
+            </label>
+            <label>Password
+                <input type="password" name="password" placeholder="password" ng-model="loginData.password" ng-maxlength="256" />
+            </label>
 
-            <button type="submit" class="btn btn-warning btn-lg">Login</button>
+            <button type="submit" class="button" ng-click="login()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
         </form>
 
         Sign up:
-        <form action="/api/signup" method="post">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password">
-            </div>
+        <form name="signupForm">
+            <label>Email
+                <input type="text" name="email" placeholder="email" ng-model="signupData.email" ng-maxlength="256" />
+            </label>
+            <label>Password
+                <input type="password" name="password" placeholder="password" ng-model="signupData.password" ng-maxlength="256" />
+            </label>
 
-            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+            <button type="submit" class="button" ng-click="signup()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
         </form>
 
     </div>

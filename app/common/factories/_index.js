@@ -3,7 +3,9 @@ define([
         "./projectFactory",
         "./setFactory",
         "./postFactory",
-        "./utilityFactory"
+        "./utilityFactory",
+        "./flashFactory",
+        "./loginFactory"
 ], function () {
    "use strict";
 });
