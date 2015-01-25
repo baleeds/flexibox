@@ -5,3 +5,4 @@ uploads
 backup
 .idea
 test-results.xml
+coverage.xml

@@ -52,7 +52,7 @@ require.config({
     },
 
   // dynamically load all test files
-  deps: allTestFiles.concat(["angular", "angularRoute", "angularSanitize", "angularMocks"]),
+  deps: ["angular", "routes", "angularMocks"].concat(allTestFiles),
 
   // we have to kickoff jasmine, as it is asynchronous
   callback: window.__karma__.start

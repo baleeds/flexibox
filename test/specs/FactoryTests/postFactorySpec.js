@@ -3,7 +3,7 @@
  */
 
 define(
-    ["../../../app/namespace", "common/namespace", "common/module.require"],
+    ["namespace", "common/namespace", "common/module.require"],
     function(namespace, ctrlNamespace){
 
         //The name of the factory we are testing
@@ -17,7 +17,6 @@ define(
             beforeEach(function () {
                 //Mock the app module
                 module(namespace);
-
                 inject(function ($injector) {
                     //use $injector to pull get the postFactory!
                     postFactory = $injector.get(name);
