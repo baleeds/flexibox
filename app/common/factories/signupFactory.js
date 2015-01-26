@@ -1,3 +1,6 @@
+/**
+ * Created by dfperry on 1/25/2015.
+ */
 // ------------------------------------------------------------
 //
 //-------------------------------------------------------------
@@ -8,16 +11,15 @@ define([
     function (module, namespace) {
         'use strict';
 
-        var name = namespace + ".loginFactory";
+        var name = namespace + ".signupFactory";
         module.factory(name, ['$http', function ($http) {
 
-            var loginFactory = {};
+            var signupFactory = {};
 
             // Get all projects
-            loginFactory.login = function(fd) {
-                return $http.post('/api/login', fd);
-
+           signupFactory.signup = function(fd) {
+                return $http.post('/api/signup', fd);
             };
-            return loginFactory;
+            return signupFactory;
         }]);
     });

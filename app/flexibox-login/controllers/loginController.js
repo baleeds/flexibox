@@ -20,25 +20,15 @@ define([
 
            $scope.login = function() {
                loginFactory.login($scope.loginData)
-                   .success(function(err) {
+                 .success(function(err, user, flash) {
                        alert("successful login");
-                        $location.path('/projects');
-                   })
-                   .error(function(err) {
-                       logger.error('Login error: ' + err);
-                   });
-           };
-
-           $scope.signup = function() {
-               loginFactory.signup($scope.signupData)
-                   .success(function(err) {
-                       alert("successful registration");
                        $location.path('/projects');
                    })
                    .error(function(err) {
-                       logger.error('Signup error: ' + err);
+                       $log.error('Login error: ' + err);
+                       alert("There was an error logging in")
+                       $location.path('/');
                    });
            };
-
         }]);
     });

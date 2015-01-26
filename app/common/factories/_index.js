@@ -5,7 +5,8 @@ define([
         "./postFactory",
         "./utilityFactory",
         "./flashFactory",
-        "./loginFactory"
+        "./loginFactory",
+        "./signupFactory"
 ], function () {
    "use strict";
 });

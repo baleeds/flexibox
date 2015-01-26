@@ -88,7 +88,7 @@ function isLoggedIn(req, res, next) {
 		return next();
 
 	// if they aren't redirect them to the home page
-	res.redirect('/');
+	res.redirect('/api/login');
 };
 
 
@@ -136,7 +136,7 @@ router.route('/projects')  // accessed at //<server>:<port>/api/projects
 	})
 
 	// get all projects
-	.get(function(req, res) {
+	.get(isLoggedIn, function(req, res) {
 		Project
 		.find()
 		.select('name description setsURL entryURL')
@@ -620,7 +620,16 @@ app.get('/test/', function(req, res) {
 app.get('*', function(req, res) {
 	res.sendfile('./index.html');
 });
+/**
+ *  Attempted to use isLoggedIn.. does not work here...
+ *  More work should be done in terms of discovering how to
+ *  protect an route.
+ *
+app.get('/projects',isLoggedIn(), function(req,res){
+	res.sendfile('./projects.html');
+});
 
+*/
 // Start the server
 // ====================================================
 app.listen(port);

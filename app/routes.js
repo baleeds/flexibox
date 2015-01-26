@@ -46,7 +46,11 @@ define([
                         templateUrl : '/app/flexibox-login/template/login.html',
                         controller  : 'FlexiBox.login.loginController'
                     })
-
+                    // When specified at signup page
+                    .when('/signup', {
+                        templateUrl : '/app/flexibox-signup/template/signup.html',
+                        controller  : 'FlexiBox.signup.signupController'
+                    })
                     // When url is undefined
                     .otherwise({
                         redirectTo: '/login'

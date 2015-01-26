@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="large-6 columns">
+        <h1>Welcome to <b>FlexiBox</b></h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+       <h4> Create Your Account </h4>
+        <form name="signupForm">
+            <label>Email
+                <input type="text" name="email" placeholder="email" ng-model="signupData.email" ng-maxlength="256" />
+            </label>
+            <label>Password
+                <input type="password" name="password" placeholder="password" ng-model="signupData.password" ng-maxlength="256" />
+            </label>
+
+            <button type="submit" class="button" ng-click="signup()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Submit</button>
+        </form>
+    </div>
+</div>
