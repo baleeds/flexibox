@@ -49,7 +49,7 @@ require.config({
 
 require([
         "angular",
-        "specs/flexibox-session-spec",
+        "specs/ControllerTests/sessionSpec",
 
         "specs/FactoryTests/utilityFactorySpec",
         "specs/FactoryTests/homeFactorySpec",
