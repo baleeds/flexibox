@@ -16,19 +16,25 @@ define([
                function ($scope, $rootScope, $log, loginFactory, $location) {
 
            $scope.loginData = {};
-           $scope.signupData = {};
+          // $scope.signupData = {};
 
            $scope.login = function() {
-               loginFactory.login($scope.loginData)
-                 .success(function(err, user, flash) {
-                       alert("successful login");
-                       $location.path('/projects');
-                   })
-                   .error(function(err) {
-                       $log.error('Login error: ' + err);
-                       alert("There was an error logging in")
-                       $location.path('/');
-                   });
+               if(!$scope.loginData.password && $scope.loginData.password != 0){
+                   $("#loginFailDiv").show();
+               }else if( !$scope.loginData.email && $scope.loginData.email != 0){
+                   $("#loginFailDiv").show();
+               } else {
+                   loginFactory.login($scope.loginData)
+                       .success(function (err, user, flash) {
+                           alert("successful login");
+                           $location.path('/projects');
+                       })
+                       .error(function (err) {
+                           $log.error('Login error: ' + err);
+                           //$location.path('/');
+                           $("#loginFailDiv").show();
+                       });
+               }
            };
         }]);
     });

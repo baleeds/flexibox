@@ -7,15 +7,20 @@
 <div class="row">
     <div class="large-12 columns">
         Login:
+
+        <div id="loginFailDiv" name="loginFailDiv" style="display: none; background-color:indianred">
+            <strong> There was a problem logging in.</strong> <br/>
+            Your email and/or password is not correct.
+        </div>
         <form name="loginForm">
             <label>Email
-                <input type="text" name="email" placeholder="email" ng-model="loginData.email" ng-maxlength="256" />
+                <input type="text" id="email" name="email" placeholder="email" ng-model="loginData.email" ng-maxlength="256" />
             </label>
             <label>Password
-                <input type="password" name="password" placeholder="password" ng-model="loginData.password" ng-maxlength="256" />
+                <input type="password" id="password" name="password" placeholder="password" ng-model="loginData.password" ng-maxlength="256" />
             </label>
 
-            <button type="submit" class="button" ng-click="login()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
+            <button type="submit" class="button"  onClick="this.form.reset()" ng-click="login()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
         </form>
         <a href="/signup">Click here to register</a>
     <!--
