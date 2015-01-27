@@ -13,7 +13,8 @@ define([
         return app.config([
             '$routeProvider',
             '$locationProvider',
-            function ($routeProvider, $locationProvider) {
+            '$httpProvider',
+            function ($routeProvider, $locationProvider, $httpProvider) {
 
                 $routeProvider
                 
@@ -56,6 +57,31 @@ define([
                         redirectTo: '/login'
                     });
                 $locationProvider.html5Mode(true);
+
+                //
+                $httpProvider.interceptors.push(['$q', '$location', function($q, $location){
+                        return {
+                            'request' : function(config){
+                                return config;
+                            },
+
+                            'requestError' : function(rejection){
+                                return $q.reject(rejection);
+                            },
+                            'response' : function(config){
+                                return config;
+                            },
+
+                            'responseError' : function(rejection){
+                                if(rejection.status == 401) {
+                                    $location.path("/login");
+                                    return $q.reject(rejection);
+                                }
+                                return $q.reject(rejection);
+                            }
+                        }
+                    }]
+                )
             }
         ]);
     });
