@@ -82,7 +82,7 @@ router.route('/logout')
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-	console.log("Inside logged in function")
+
 	// if user is authenticated in the session, carry on
 	console.log(req.isAuthenticated());
 	if (req.isAuthenticated()) {
@@ -91,7 +91,7 @@ function isLoggedIn(req, res, next) {
 	}
 	else {
 		// if they aren't redirect them to the home
-		return res.sendfile('./login');
+		return res.status('401').end();
 		//next();
 	}
 };
@@ -618,26 +618,29 @@ app.use('/api', router);
 
 app.get('/', function(req, res) {
 	res.sendfile('./index.html');
+
 });
 app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
+	console.log(req.user);
 });
 app.get('*', function(req, res) {
 	res.sendfile('./index.html');
 });
+
 /**
  *  Attempted to use isLoggedIn.. does not work here...
  *  More work should be done in terms of discovering how to
  *  protect an route.
  *
- *
+ */
+
 app.get('/projects',isLoggedIn, function(req,res){
-		console.log("Sending");
+
 		res.sendfile('./projects.html');
 
 
 });
-**/
 
 // Start the server
 // ====================================================
