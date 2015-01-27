@@ -103,7 +103,7 @@ function isLoggedIn(req, res, next) {
 
 
 router.route('/all') // accessed at //<server>:<port>/api/all
-
+    .all(isLoggedIn)
 	// used to return all data
 	.get(function(req, res) {
 		Project.find().exec(function(err,projects) {
@@ -121,7 +121,7 @@ router.route('/all') // accessed at //<server>:<port>/api/all
 // PROJECT ROUTES
 // ==========================================================================
 router.route('/projects')  // accessed at //<server>:<port>/api/projects
-	
+    .all(isLoggedIn)
 	// add a project
 	.post(function(req, res) {
 		console.log(req.body);
@@ -144,7 +144,7 @@ router.route('/projects')  // accessed at //<server>:<port>/api/projects
 	})
 
 	// get all projects
-	.get(isLoggedIn, function(req, res) {
+	.get(function(req, res) {
 		Project
 		.find()
 		.select('name description setsURL entryURL')
@@ -157,7 +157,7 @@ router.route('/projects')  // accessed at //<server>:<port>/api/projects
 	});
 
 router.route('/projects/:project_id') // accessed at //<server>:<port>/api/projects/id
-
+    .all(isLoggedIn)
 	// get a project
 	.get(function(req, res) {
 		if (req.query.includeSets) {
@@ -225,7 +225,7 @@ router.route('/projects/:project_id') // accessed at //<server>:<port>/api/proje
 // SET ROUTES
 // ==========================================================================
 router.route('/projects/:project_id/sets') // accessed at //<server>:<port>/api/projects/<project_id>/sets
-
+    .all(isLoggedIn)
 	.get(function(req, res) {
 		Project
 		.findById(req.params.project_id)
@@ -262,7 +262,7 @@ router.route('/projects/:project_id/sets') // accessed at //<server>:<port>/api/
 	});
 
 router.route('/projects/:project_id/sets/:set_id') // accessed at //<server>:<port>/api/projects/<project_id>/sets/<set_id>
-
+    .all(isLoggedIn)
 	// get a set
 	.get(function(req, res) {
 		if (req.query.includePosts) {
@@ -329,7 +329,7 @@ router.route('/projects/:project_id/sets/:set_id') // accessed at //<server>:<po
 // POST ROUTES
 // ==========================================================================
 router.route('/projects/:project_id/sets/:set_id/posts') // accessed at //<server>:<port>/api/projects/<project_id>/sets/<set_id>/posts
-
+    .all(isLoggedIn)
 	.get(function(req, res) {
 		if (req.query.includeComments) {
 			Project
@@ -377,7 +377,7 @@ router.route('/projects/:project_id/sets/:set_id/posts') // accessed at //<serve
 
 
 router.route('/projects/:project_id/sets/:set_id/posts/:post_id') // accessed at //<server>:<port>/api/projects/<project_id>/sets/<set_id>/posts/<post_id>
-
+    .all(isLoggedIn)
 	// get a post
 	.get(function(req,res) {
 		if (req.query.includeComments) {
@@ -441,8 +441,8 @@ router.route('/projects/:project_id/sets/:set_id/posts/:post_id') // accessed at
 // COMMENT ROUTES
 // ==========================================================================
 router.route('/projects/:project_id/sets/:set_id/posts/:post_id/comments') // accessed at //<server>:<port>/api/projects/<project_id>/sets/<set_id>/posts/<post_id>/comments
-	
-	.get(function(req, res) {
+    .all(isLoggedIn)
+    .get(function(req, res) {
 		Project
 		.findById(req.params.project_id)
 		.select('sets._id sets.posts._id sets.posts.comments.posterName sets.posts.comments.txt sets.posts.comments')
@@ -480,8 +480,8 @@ router.route('/projects/:project_id/sets/:set_id/posts/:post_id/comments') // ac
 	});
 
 router.route('/projects/:project_id/sets/:set_id/posts/:post_id/comments/:comment_id') // accessed at //<server>:<port>/api/projects/<project_id>/sets/<set_id>/posts/<post_id>/comments/<comment_id>
-	
-	.get(function(req, res) {
+    .all(isLoggedIn)
+    .get(function(req, res) {
 		Project
 		.findById(req.params.project_id)
 		.exec(function(err, project) {
@@ -530,7 +530,7 @@ router.route('/projects/:project_id/sets/:set_id/posts/:post_id/comments/:commen
 // USER ROUTES
 // =====================================================================================
 router.route('/users')  // accessed at POST //<server>:<port>/api/users
-	
+    .all(isLoggedIn)
 	.post(function(req, res) {
 		var user = new User();
 
@@ -556,7 +556,8 @@ router.route('/users')  // accessed at POST //<server>:<port>/api/users
 	});
 
 router.route('/users/:user_id')
-	.get(function(req, res) {
+    .all(isLoggedIn)
+    .get(function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
 			if (err)
 				res.send(err);
@@ -597,13 +598,15 @@ router.route('/users/:user_id')
 	});
 
 router.route('/upload')
-	.post(function(req, res) {
+    .all(isLoggedIn)
+    .post(function(req, res) {
 		
 		res.json({imageURL:req.files.image.path});
 	});
 
 router.route('/upload/:url')
-	.delete(function(req, res) {
+    .all(isLoggedIn)
+    .delete(function(req, res) {
 		fs.unlink('./uploads/' + req.params.url, function(err) {
 			if (err) throw err;
 			res.json({message:'Successfully Deleted'});
@@ -626,12 +629,6 @@ app.get('/', function(req, res) {
 app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
 	console.log(req.user);
-});
-
-app.get('/projects/*',isLoggedIn, function(req,res){
-
-	res.sendfile('./projects.html');
-
 });
 
 app.get('*', function(req, res) {
