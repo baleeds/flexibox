@@ -82,13 +82,18 @@ router.route('/logout')
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-
+	console.log("Inside logged in function")
 	// if user is authenticated in the session, carry on
-	if (req.isAuthenticated())
-		return next();
+	console.log(req.isAuthenticated());
+	if (req.isAuthenticated()) {
 
-	// if they aren't redirect them to the home page
-	res.redirect('/api/login');
+		return next();
+	}
+	else {
+		// if they aren't redirect them to the home
+		return res.sendfile('./login');
+		//next();
+	}
 };
 
 
@@ -625,11 +630,15 @@ app.get('*', function(req, res) {
  *  More work should be done in terms of discovering how to
  *  protect an route.
  *
-app.get('/projects',isLoggedIn(), function(req,res){
-	res.sendfile('./projects.html');
-});
+ *
+app.get('/projects',isLoggedIn, function(req,res){
+		console.log("Sending");
+		res.sendfile('./projects.html');
 
-*/
+
+});
+**/
+
 // Start the server
 // ====================================================
 app.listen(port);

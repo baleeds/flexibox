@@ -50,14 +50,15 @@ module.exports = function(passport) {
 
                 // check to see if theres already a user with that email
                 if (user) {
-                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    err = "That email is already taken";
+                    return done(err, false, req.flash('signupMessage', 'That email is already taken.'));
                 } else {
 
                     // if there is no user with that email
                     // create the user
                     var newUser            = new User();
 
-                    // set the user's local credentials
+                    // set the user's local credentialspp
                     newUser.local.email    = email;
                     newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
                     console.log("here");
