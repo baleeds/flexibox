@@ -4,13 +4,15 @@
 //-------------------------------------------------------------
 define([
 		'../module',
-		'../namespace'
+		'../namespace',
+		'../../common/namespace'
 	],
-function (module, namespace) {
+function (module, namespace, namespaceCommon) {
 	'use strict';
 
 	var name = namespace + ".sessionController";
-	module.controller(name, ['$scope','$rootScope', function ($scope, $rootScope) {
+	module.controller(name, ['$scope','$rootScope', namespaceCommon + '.sessionFactory', '$location', function ($scope,
+																			$rootScope, sessionFactory, $location) {
 
 	$scope.username = "";     // username that's logged in
 	$scope.fd = {};           // form data from the view
@@ -22,7 +24,8 @@ function (module, namespace) {
 
 	// Log out user
 	$scope.logout = function() {
-		$scope.username = "";
+		sessionFactory.logout();
+		$location.path('/login');
 	};
 
 

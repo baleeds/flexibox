@@ -61,10 +61,11 @@ router.use(function(req, res, next) {
 router.route('/login')
 
 	.post(passport.authenticate('local-login', {
+
 		successRedirect : '/projects', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
-}));
+	}));
 
 // process the signup form
 router.route('/signup')
@@ -77,7 +78,8 @@ router.route('/signup')
 router.route('/logout')
 	.get(function(req, res) {
 		req.logout();
-		res.redirect('/');
+		console.log("Logged out");
+		res.redirect('/login');
 });
 
 // route middleware to make sure
@@ -85,8 +87,9 @@ function isLoggedIn(req, res, next) {
 
 	// if user is authenticated in the session, carry on
 	console.log(req.isAuthenticated());
-	if (req.isAuthenticated()) {
 
+	if (req.isAuthenticated()) {
+		console.log(req.user);
 		return next();
 	}
 	else {
@@ -624,6 +627,13 @@ app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
 	console.log(req.user);
 });
+
+app.get('/projects/*',isLoggedIn, function(req,res){
+
+	res.sendfile('./projects.html');
+
+});
+
 app.get('*', function(req, res) {
 	res.sendfile('./index.html');
 });
@@ -634,13 +644,6 @@ app.get('*', function(req, res) {
  *  protect an route.
  *
  */
-
-app.get('/projects',isLoggedIn, function(req,res){
-
-		res.sendfile('./projects.html');
-
-
-});
 
 // Start the server
 // ====================================================

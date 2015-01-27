@@ -16,21 +16,8 @@
                 <input type="text" ng-model="searchText" placeholder="Filter">
             </div>
         	<div class="small-4 columns">
-	            <form name="loginForm" class="login-form row collapse" ng-show="username === ''">
-					<div class="small-8 columns">
-						<input type="text" name="name" ng-model="fd.name" placeholder="Enter Name..." ng-minlength="3" required />
-					</div>
-					<div class="small-4 columns">
-						<a href="#" class="button small postfix" ng-click="login();" ng-disabled="loginForm.name.$pristine || loginForm.name.$invalid">Login</a>
-					</div>
-	            </form>
-                <div class="row" ng-show="username != ''">
-                    <div class="small-8 columns " >
-                        <p class="hello-name right">Hello, <b>{{username}}</b></p>
-                    </div>
-                    <div class="small-4 columns">
-                        <a href="#" class="button small postfix " ng-click="logout();">Logout</a>
-                    </div>
+                <div class="small-4 columns">
+                    <a href="#" class="button small postfix " ng-click="logout();">Logout</a>
                 </div>
         	</div>
         </div>
