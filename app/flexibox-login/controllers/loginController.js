@@ -26,6 +26,9 @@ define([
                } else {
                    loginFactory.login($scope.loginData)
                        .success(function (err, user, flash) {
+                           console.log(err);
+                           console.log(user);
+                           console.log(flash);
                            $scope.$parent.username = user;  // need to change;
                            $location.path('/projects');
                        })

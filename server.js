@@ -79,17 +79,17 @@ router.route('/logout')
 	.get(function(req, res) {
 		req.logout();
 		console.log("Logged out");
-		res.redirect('/login');
+		res.redirect('/');
 });
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
 
 	// if user is authenticated in the session, carry on
-	console.log(req.isAuthenticated());
+	console.log("Are you logged in: " + req.isAuthenticated());
 
 	if (req.isAuthenticated()) {
-		console.log(req.user);
+		console.log("Current User: " + req.user.id);
 		return next();
 	}
 	else {
