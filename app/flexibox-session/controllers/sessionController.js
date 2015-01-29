@@ -16,15 +16,12 @@ function (module, namespace, namespaceCommon) {
 
 	$scope.username = "";     // username that's logged in
 	$scope.fd = {};           // form data from the view
-
-	// Set username to logged in name
-	$scope.login = function() {
-		$scope.username = $scope.fd.name;
-	};
+	$scope.location = $location.path();
 
 	// Log out user
 	$scope.logout = function() {
 		sessionFactory.logout();
+		$scope.username = "";
 		$location.path('/login');
 	};
 
