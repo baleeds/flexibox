@@ -4,7 +4,6 @@ define([
         "./setFactory",
         "./postFactory",
         "./utilityFactory",
-        "./flashFactory",
         "./loginFactory",
         "./signupFactory",
         "./sessionFactory",
