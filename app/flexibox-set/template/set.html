@@ -1,16 +1,16 @@
 <div class="row">
-    <div class="large-6 columns">
-        <h6><a href="/projects/{{ backURL }}" style="">&laquo; back to sets</a></h6>
-        <h1>{{ set.name }}</h1>
+    <div class="small-12 back-link">
+        <a href="/projects/{{ backURL }}" >&larr; back to sets</a>
     </div>
-    <div class="large-6 columns">
-        <a href="#" data-reveal-id="newPostModal" style="margin-top:20px;" class="radius small button right">Create a new post</a>
+    <div class="large-12 columns">
+        <h1 class="left">{{ set.name }}</h1>
+        <a href="#" data-reveal-id="newPostModal" class="tiny button left secondary add-item">Create a new post</a>
     </div>
 </div>
 
 <div class="row">
     <div class="large-12 columns">
-        <ul class="large-block-grid-5" style="margin-top:43px;">
+        <ul class="large-block-grid-5">
             <li ng-repeat="post in set.posts | filter:searchText | orderBy:'name'">
                 <div class="panel bottom-space" style="min-height:200px; margin-bottom: 0px;">
                 	<a href="#" class="panel-delete" ng-click="deletePost(post._id)">x</a>

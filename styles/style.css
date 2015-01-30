@@ -161,6 +161,12 @@
   margin-top: 30px;
   padding: 30px;
 }
+.add-item {
+  margin: 16px 30px;
+}
+.back-link {
+  margin: 12px 0 0 16px;
+}
 /*
   We're using CSS transitions for when
   the enter and move events are triggered
