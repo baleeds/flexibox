@@ -7,7 +7,7 @@ define([
         "./flashFactory",
         "./loginFactory",
         "./signupFactory",
-        "./sessionFactory"
+        "./sessionFactory",
 ], function () {
    "use strict";
 });

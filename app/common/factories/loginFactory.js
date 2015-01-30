@@ -18,6 +18,10 @@ define([
                 return $http.post('/api/login', fd);
 
             };
+
+            loginFactory.getCurrentUser = function() {
+                return $http.get('/api/users/current');
+            };
             return loginFactory;
         }]);
     });

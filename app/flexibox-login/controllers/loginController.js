@@ -12,8 +12,8 @@ define([
 
         var name = namespace + ".loginController";
         module.controller(name,
-              ['$scope','$rootScope', '$log', namespaceCommon + '.loginFactory', '$location',
-               function ($scope, $rootScope, $log, loginFactory, $location) {
+              ['$scope','$rootScope', '$log', namespaceCommon + '.sessionFactory', '$location',
+               function ($scope, $rootScope, $log, sessionFactory, $location) {
 
            $scope.loginData = {};
           // $scope.signupData = {};
@@ -24,12 +24,15 @@ define([
                }else if( !$scope.loginData.email && $scope.loginData.email != 0){
                    $("#loginFailDiv").show();
                } else {
-                   loginFactory.login($scope.loginData)
+                   sessionFactory.login($scope.loginData)
                        .success(function (err, user, flash) {
-                           console.log(err);
-                           console.log(user);
-                           console.log(flash);
-                           $scope.$parent.username = user;  // need to change;
+                           sessionFactory.getCurrentUser()
+                               .success(function(user) {
+                                   $rootScope.$broadcast('userChanged', user);
+                               })
+                               .error(function (err) {
+                                   $log.error('Login error: ' + err);
+                               });
                            $location.path('/projects');
                        })
                        .error(function (err) {

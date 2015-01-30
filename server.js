@@ -555,10 +555,11 @@ router.route('/users')  // accessed at POST //<server>:<port>/api/users
 		});
 	});
 
-router.route('/users/:user_id')
+router.route('/users/current')
     .all(isLoggedIn)
     .get(function(req, res) {
-		User.findById(req.params.user_id, function(err, user) {
+		console.log(req.user);
+		User.findById(req.user.id, function(err, user) {
 			if (err)
 				res.send(err);
 			res.json(user);
