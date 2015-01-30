@@ -11,7 +11,8 @@ function (module, namespace, namespaceCommon) {
 	'use strict';
 
 	var name = namespace + ".postController";
-	module.controller(name, ['$scope','$rootScope', namespaceCommon + '.postFactory', namespaceCommon + '.utilityFactory', '$routeParams', function ($scope, $rootScope, postFactory, utilityFactory, $routeParams) {
+	module.controller(name, ['$scope','$rootScope', namespaceCommon + '.postFactory', namespaceCommon + '.utilityFactory', '$routeParams',
+		function ($scope, $rootScope, postFactory, utilityFactory, $routeParams) {
 
 	$scope.post = {};                                                          // local instance of focused post
 	$scope.newComment = {};                                                    // data from form in upload modal
@@ -44,7 +45,7 @@ function (module, namespace, namespaceCommon) {
 	$scope.addComment = function() {
 		var fd = {};
 		fd.txt = $scope.newComment.cText;
-		fd.posterName = $scope.$parent.username;
+		fd.posterName = $scope.$parent.user.name;
 		fd.smallest   = smallest;
 		fd.width      = biggest.x - smallest.x;
 		fd.height     = biggest.y - smallest.y;
