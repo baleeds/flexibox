@@ -12,8 +12,8 @@ define([
 
         var name = namespace + ".signupController";
         module.controller(name,
-            ['$scope','$rootScope', '$log', namespaceCommon + '.signupFactory', '$location',
-                function ($scope, $rootScope, $log, signupFactory, $location) {
+            ['$scope','$rootScope', '$log', namespaceCommon + '.sessionFactory', '$location',
+                function ($scope, $rootScope, $log, sessionFactory, $location) {
 
                     $scope.signupData = {};
                     $scope.signup = function() {
@@ -25,9 +25,15 @@ define([
                             $('#signupFailDiv').html("<strong> There was an error in signing up</strong> <br/> This was most likely caused by a blank email field");
                             $('#signupFailDiv').show();
                         } else {
-                            signupFactory.signup($scope.signupData)
+                            sessionFactory.signup($scope.signupData)
                                 .success(function (err) {
-                                    alert("successful registration");
+                                    sessionFactory.getCurrentUser()
+                                        .success(function(user) {
+                                            $rootScope.$broadcast('userChanged', user);
+                                        })
+                                        .error(function (err) {
+                                            $log.error('Login error: ' + err);
+                                        });
                                     $location.path('/projects');
                                 })
                                 .error(function (err) {

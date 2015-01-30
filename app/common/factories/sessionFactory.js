@@ -27,6 +27,9 @@ define([
             };
 
 
+            sessionFactory.signup = function(fd) {
+                return $http.post('/api/signup', fd);
+            };
 
             return sessionFactory;
         }]);

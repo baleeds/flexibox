@@ -17,9 +17,10 @@ define([
             var signupFactory = {};
 
             // Get all projects
-           signupFactory.signup = function(fd) {
+            signupFactory.signup = function(fd) {
                 return $http.post('/api/signup', fd);
             };
+
             return signupFactory;
         }]);
     });
