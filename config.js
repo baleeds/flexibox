@@ -3,7 +3,7 @@
 var config = {
    server: {
       host: "localhost",
-      port: "8080"
+      port: "8081"
    },
    // TODO: need a new REST api to serve up the image files before specifying an upload directory outside
    // the webapp will work.  Right now the images can be rendered using relative URL's because they are in
