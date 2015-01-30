@@ -13,11 +13,11 @@
                 <a href="/projects" class="brand"><b>FlexiBox</b></a>
             </div>
             <div class="small-4 columns">
-                <input type="text" ng-model="searchText" placeholder="Filter">
+                <input type="text" ng-model="searchText" placeholder="Filter" ng-hide="!user.name">
             </div>
         	<div class="small-4 columns ng-hide=" ng-hide="!user.name">
                 <div class="small-8 columns">
-                    <span>Hello, {{user.name}}</span>
+                    <p style="float:right; padding-top: 5px;">Hello, {{user.name}}</p>
                 </div>
                 <div class="small-4 columns">
                     <a href="#" class="button small postfix " ng-click="logout();">Logout</a>
