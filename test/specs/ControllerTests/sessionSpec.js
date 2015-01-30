@@ -19,18 +19,6 @@ define(
                 });
             });
 
-            describe("login tests", function(){
-                it("Valid Login name", function(){
-                    var $scope = {};
-
-                    $controller(name, {$scope : $scope});
-
-                    $scope.fd.name = "Ben Leeds";
-                    $scope.login();
-
-                    expect($scope.username).toEqual("Ben Leeds");
-                });
-            });
 
             describe("logout tests", function(){
 
@@ -39,11 +27,11 @@ define(
 
                     $controller(name, {$scope : $scope});
 
-                    $scope.username = "Ben Leeds";
+                    $scope.user = 'Ben Leeds';
 
                     $scope.logout();
 
-                    expect($scope.username).toEqual("");
+                    expect($scope.user).toEqual({});
                 });
             });
         });

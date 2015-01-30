@@ -56,6 +56,7 @@ require([
         "specs/FactoryTests/projectFactorySpec",
         "specs/FactoryTests/setFactorySpec",
         "specs/FactoryTests/postFactorySpec",
+        "specs/FactoryTests/sessionFactorySpec",
 
         "routes",
         "angularMocks"
