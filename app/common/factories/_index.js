@@ -4,7 +4,6 @@ define([
         "./setFactory",
         "./postFactory",
         "./utilityFactory",
-        "./loginFactory",
         "./signupFactory",
         "./sessionFactory"
 ], function () {
