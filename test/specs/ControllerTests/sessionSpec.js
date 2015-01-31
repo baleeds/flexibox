@@ -31,7 +31,7 @@ define(
 
                     $scope.logout();
 
-                    expect($scope.user).toEqual({});
+                    expect($scope.user).toEqual(null);
                 });
             });
         });

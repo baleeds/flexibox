@@ -51,7 +51,7 @@ define([
 
 			// Delete an image by URL
 			setFactory.deleteUpload = function(url) {
-				return $http.delete('/api/upload/' + url.substring(7));
+				return $http.delete('/api/upload/' + url.substring(8));
 			};
 
 			

@@ -3,7 +3,7 @@
  */
 
 define(
-    ["../../../app/namespace", "common/namespace", "common/module.require"],
+    ["namespace", "common/namespace", "common/module.require"],
     function(namespace, ctrlNamespace){
 
         //The name of the factory we are testing
@@ -140,9 +140,9 @@ define(
 
                 it("testing deleteUpload call", function() {
                     var time = Date.now();
-                    var urlTarget = "deleteupload";
+                    var urlTarget = "upload/735a9f04d669502f505fc7604c8d0757.PNG";
 
-                    $httpBackend.expectDELETE('/api/upload/' + urlTarget.substring(7)).respond(200, {time : time});
+                    $httpBackend.expectDELETE('/api/upload/' + urlTarget.substring(8)).respond(200, {time : time});
                     setFactory.deleteUpload(urlTarget).success(
                         function(data) {
                             expect(data.time).toEqual(time);
