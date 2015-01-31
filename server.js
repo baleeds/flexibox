@@ -114,15 +114,15 @@ router.route('/all') // accessed at //<server>:<port>/api/all
 	});
 
 
-require('./server/projectRoutes.js')(router, isLoggedIn);
+require('./server/routes/projectRoutes.js')(router, isLoggedIn);
 
-require('./server/setRoutes.js')(router, isLoggedIn);
+require('./server/routes/setRoutes.js')(router, isLoggedIn);
 
-require('./server/postRoutes.js')(router, isLoggedIn);
+require('./server/routes/postRoutes.js')(router, isLoggedIn);
 
-require('./server/commentRoutes.js')(router, isLoggedIn);
+require('./server/routes/commentRoutes.js')(router, isLoggedIn);
 
-require('./server/userRoutes.js')(router, isLoggedIn);
+require('./server/routes/userRoutes.js')(router, isLoggedIn);
 
 
 router.route('/upload')

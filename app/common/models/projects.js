@@ -34,7 +34,11 @@ var ProjectSchema = new Schema({
 				color: String,
 				number: Number,
 				posterName: String,
-				txt: String
+				txt: String,
+                replies : [{
+                    posterName: String,
+                    txt: String
+                }]
 			}]
 		}]
 	}]

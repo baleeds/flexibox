@@ -1,4 +1,4 @@
-var User = require('../app/common/models/users');
+var User = require('../../app/common/models/users');
 
 module.exports = function(router, protect) {
 // USER ROUTES

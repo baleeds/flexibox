@@ -1,4 +1,5 @@
-var Project = require('../app/common/models/projects');
+var Project = require('../../app/common/models/projects');
+var Utils = require('../utils');
 
 module.exports = function(router, protect) {
     // COMMENT ROUTES
@@ -22,7 +23,7 @@ module.exports = function(router, protect) {
                 if (err)
                     res.send(err);
 
-                newComment = {};
+                var newComment = {};
                 newComment.posterName = req.body.posterName;
                 newComment.txt = req.body.txt;
                 newComment.smallest = req.body.smallest;
@@ -51,6 +52,26 @@ module.exports = function(router, protect) {
                     if (err)
                         res.send(err);
                     res.json(project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.id(req.params.comment_id));
+                });
+        })
+
+        .post(function(req, res){
+            Project
+                .findById(req.params.project_id)
+                .exec(function(err, project) {
+                    if(err)
+                        res.send(err);
+                    var reply = {};
+                    reply.posterName = Utils.getUserName(req);
+                    reply.txt = req.body.txt;
+
+                    project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.id(req.params.comment_id).replies.push(reply);
+
+                    project.save(function(err){
+                        if(err)
+                            res.send(err);
+                        res.json(project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.id(req.params.comment_id));
+                    })
                 });
         })
 

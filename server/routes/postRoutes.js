@@ -1,4 +1,4 @@
-var Project = require('../app/common/models/projects');
+var Project = require('../../app/common/models/projects');
 
 module.exports = function(router, protect) {
 
