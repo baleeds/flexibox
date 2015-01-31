@@ -1,10 +1,11 @@
 <div class="row">
-    <div class="large-4 large-centered columns login-window">
+    <div class="large-4 large-centered columns login-window" ng-hide="isLoggedIn">
         <h4>Log in using email.</h4>
         <div id="loginFailDiv" name="loginFailDiv" style="display: none; background-color:indianred">
             <strong> There was a problem logging in.</strong> <br/>
             Your email and/or password is not correct.
         </div>
+
         <form name="loginForm">
             <label>
                 <input type="text" id="email" name="email" placeholder="email" ng-model="loginData.email" ng-maxlength="256" />
@@ -16,18 +17,8 @@
             <button type="submit" class="button small"  onClick="this.form.reset()" ng-click="login()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
         </form>
         <a href="/signup">Click here to register</a>
-    <!--
-        Sign up:
-        <form name="signupForm">
-            <label>Email
-                <input type="text" name="email" placeholder="email" ng-model="signupData.email" ng-maxlength="256" />
-            </label>
-            <label>Password
-                <input type="password" name="password" placeholder="password" ng-model="signupData.password" ng-maxlength="256" />
-            </label>
-
-            <button type="submit" class="button" ng-click="signup()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
-        </form>
-    -->
+    </div>
+    <div class="large-4 large-centered columns login-window" ng-show="isLoggedIn">
+        <h4>{{username}}, you are already logged in.</h4>
     </div>
 </div>

@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
 	name: String,
-	displayName: String,
 	imageURL: String,
 	emailSettings: Number,
 	projectsVisible: [Schema.ObjectId],

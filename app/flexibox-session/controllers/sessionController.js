@@ -15,6 +15,14 @@ function (module, namespace, namespaceCommon) {
 																			$rootScope, sessionFactory, $location) {
 	$scope.user = {}; // user that is currently logged in
 
+	sessionFactory.getCurrentUser()
+		.success(function(user) {
+			$scope.user = user;
+		})
+		.error(function(err) {
+			// Do nothing
+		});
+
 	$rootScope.$on('userChanged', function(event, newUser) {
 		$scope.user = newUser;
 	});
@@ -25,7 +33,8 @@ function (module, namespace, namespaceCommon) {
 	// Log out user
 	$scope.logout = function() {
 		sessionFactory.logout();
-		$scope.user = {};
+		$scope.user = null;
+		sessionFactory.user = null;
 		$location.path('/login');
 	};
 

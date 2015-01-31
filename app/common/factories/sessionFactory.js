@@ -13,13 +13,14 @@ define([
 
             var sessionFactory = {};
 
+            sessionFactory.user = null;
+
             sessionFactory.logout = function() {
                 return $http.get('/api/logout/');
             };
 
             sessionFactory.login = function(fd) {
                 return $http.post('/api/login', fd);
-
             };
 
             sessionFactory.getCurrentUser = function() {

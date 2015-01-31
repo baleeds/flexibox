@@ -16,6 +16,16 @@ define([
                function ($scope, $rootScope, $log, sessionFactory, $location) {
 
            $scope.loginData = {};
+           $scope.isLoggedIn = false;
+           $scope.username = "";
+
+
+           if (sessionFactory.user != null) {
+               console.log("Yes");
+               $scope.isLoggedIn = true;
+               $scope.username = sessionFactory.user.name;
+           }
+
           // $scope.signupData = {};
 
            $scope.login = function() {
@@ -29,6 +39,7 @@ define([
                            sessionFactory.getCurrentUser()
                                .success(function(user) {
                                    $rootScope.$broadcast('userChanged', user);
+                                   sessionFactory.user = user;
                                })
                                .error(function (err) {
                                    $log.error('Login error: ' + err);
