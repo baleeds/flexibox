@@ -3,7 +3,7 @@
  */
 
 define(
-    ["../../../app/namespace", "common/namespace", "common/module.require"],
+    ["namespace", "common/namespace", "common/module.require"],
     function(namespace, ctrlNamespace){
 
         //The name of the factory we are testing

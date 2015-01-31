@@ -2,7 +2,7 @@
  * Created by dfperry on 1/21/2015.
  */
 define(
-    ["../../../app/namespace", "flexibox-session/namespace", "flexibox-session/module.require"],
+    ["namespace", "flexibox-session/namespace", "flexibox-session/module.require"],
     function(namespace, ctrlNamespace){
 
         var name = ctrlNamespace + ".sessionController";
