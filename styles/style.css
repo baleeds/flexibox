@@ -27,13 +27,6 @@
 	background-color: #eee;
 	padding: 9px;
 }
-.hoverComment h6 {
-  font-weight: bold;
-  font-size: 14px;
-  color: #d4d4d4;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
 .commentBlock h6 {
   font-weight: bold;
   font-size: 14px;
@@ -140,33 +133,40 @@
   width: 100%;
   left: 0;
   z-index: 99;
-  color: white;
   padding: 8px;
   visibility: hidden;
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;
   transition:0.2s linear all;
+
+}
+.hoverComment h6 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #e7e7e7;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.hoverComment p {
+  color: rgb(199, 199, 199);
+  font-size: .8em;
 }
 .flexiNumber {
   display: block;
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
   text-align: center;
-  padding: 10px 0 0 0;
   font-weight: bold;
-  color: white;
-  font-size: 21px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -20px;
-  margin-left: -20px;
+  margin-top: -15px !important;
+  margin-left: -15px;
+  padding-top: 7px !important;
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;
   transition:0.2s linear all;
+
 }
 .maybe {
   background: rgba(52, 112, 160, 0) ;
@@ -174,19 +174,21 @@
 }
 .commentNumber {
   float: left;
-  height: 40px;
-  width: 40px;
-  border-radius: 20px;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
   font-weight: bold;
-
   color: white;
   text-align: center;
-  font-size: 21px;
+  font-size: 15px;
   padding-top: 4px;
+  margin-top: 4px;
 }
 .commentContent {
-  float: left;
-  margin-left: 15px;
+  margin-left: 45px;
+}
+.commentContent p {
+  font-size: .8em;
 }
 .login-window {
   background-color: #E4E4E4;
