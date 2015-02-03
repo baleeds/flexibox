@@ -68,6 +68,11 @@ function (module, namespace, namespaceCommon) {
 			});
 	};
 
+    /**
+     * mDown is the mouseDown call back. This is called when a user is depresses the mouse button.
+     * When this is called, we obtain the mouse down location, and store it.
+     * @param e {MouseEvent} The event object created by the mouse down event.
+     */
 	$scope.mDown = function(e) {
 		if ($scope.newDiv !== 0) {
 			document.getElementById('imageDiv').removeChild($scope.newDiv);
@@ -77,7 +82,14 @@ function (module, namespace, namespaceCommon) {
 		a.y = e.offsetY;
 	};
 
-	$scope.mUp = function(e) {
+    /**
+     * mUp is the mouseUp call back. This is called when a user is releases the mouse button.
+     * When this is called, we obtain the mouse up location, and calculate the rectangle that
+     * was formed by the user clicks. Once we have calculated this, we then create a new div
+     * based on those values.
+     * @param e {MouseEvent} The event object created by the mouse up event.
+     */
+    $scope.mUp = function(e) {
 		b.x = e.offsetX;
 		b.y = e.offsetY;
 

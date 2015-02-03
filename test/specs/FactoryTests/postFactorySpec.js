@@ -98,6 +98,28 @@ define(
                 });
             });
 
+            describe("addReply test", function () {
+
+                it("testing addReply call", function() {
+                    var time = Date.now();
+                    var projectIdTarget = "54cd03edf35c8f0c1d000004";
+                    var setIdTarget = "54cd03f6f35c8f0c1d000005";
+                    var postIdTarget = "54cd4bc97a3e43e41d000005";
+                    var commentTarget = "54cd4bd87a3e43e41d000006";
+
+                    $httpBackend.expectPOST('/api/projects/' + projectIdTarget + '/sets/'
+                        + setIdTarget + '/posts/' + postIdTarget + '/comments/' + commentTarget).respond(200, {time : time});
+                    postFactory.addReply(projectIdTarget, setIdTarget, postIdTarget, commentTarget).success(
+                        function(data) {
+                            expect(data.time).toEqual(time);
+                        })
+                        .error(function(){
+                            fail("Error with the http (create post) request");
+                        });
+                    $httpBackend.flush();
+                });
+            });
+
         });
 
     });
