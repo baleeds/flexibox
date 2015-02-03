@@ -27,6 +27,13 @@
 	background-color: #eee;
 	padding: 9px;
 }
+.hoverComment h6 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #d4d4d4;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
 .commentBlock h6 {
   font-weight: bold;
   font-size: 14px;
@@ -113,6 +120,29 @@
 
 .flexiBox:hover > .flexiNumber {
   opacity: .1;
+  -webkit-transition:0.2s linear all;
+  -moz-transition:0.2s linear all;
+  -o-transition:0.2s linear all;
+  transition:0.2s linear all;
+}
+.flexiBox:hover > .hoverComment {
+  opacity: 1;
+  -webkit-transition:0.2s linear all;
+  -moz-transition:0.2s linear all;
+  -o-transition:0.2s linear all;
+  transition:0.2s linear all;
+  visibility: visible;
+}
+.hoverComment {
+  background-color: #323232;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 99;
+  color: white;
+  padding: 8px;
+  visibility: hidden;
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;

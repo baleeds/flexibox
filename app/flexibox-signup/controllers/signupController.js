@@ -16,14 +16,16 @@ define([
                 function ($scope, $rootScope, $log, sessionFactory, $location) {
 
                     $scope.signupData = {};
-                    $scope.signup = function() {
+                    $scope.error = "";
 
-                        if (!$scope.signupData.password && $scope.signupData.password != 0) {
-                            $('#signupFailDiv').html("<strong> There was an error in signing up</strong> <br/> This was most likely caused by a blank password field");
-                            $('#signupFailDiv').show();
-                        } else if (!$scope.signupData.email && $scope.signupData.email != 0) {
-                            $('#signupFailDiv').html("<strong> There was an error in signing up</strong> <br/> This was most likely caused by a blank email field");
-                            $('#signupFailDiv').show();
+
+                    $scope.signup = function() {
+                        if (!$scope.signupData.password) {
+                            $scope.error = "password";
+                        } else if (!$scope.signupData.email) {
+                            $scope.error = "email";
+                        } else if (!$scope.signupData.name) {
+                            $scope.error = "name";
                         } else {
                             sessionFactory.signup($scope.signupData)
                                 .success(function (err) {
@@ -38,10 +40,7 @@ define([
                                 })
                                 .error(function (err) {
                                     $log.error('Signup error: ' + err);
-                                    $('#signupFailDiv').html("<strong> There was an error in signing up</strong> <br/>" + err);
-                                    $('#signupFailDiv').show();
-
-
+                                    $scope.error = "unknown";
                                 });
                         }
                     }

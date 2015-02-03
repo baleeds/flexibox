@@ -4,7 +4,6 @@ define([
         "./setFactory",
         "./postFactory",
         "./utilityFactory",
-        "./signupFactory",
         "./sessionFactory"
 ], function () {
    "use strict";

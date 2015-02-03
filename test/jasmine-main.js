@@ -50,6 +50,7 @@ require.config({
 require([
         "angular",
         "specs/ControllerTests/sessionSpec",
+        "specs/ControllerTests/signupSpec",
 
         "specs/FactoryTests/utilityFactorySpec",
         "specs/FactoryTests/homeFactorySpec",
