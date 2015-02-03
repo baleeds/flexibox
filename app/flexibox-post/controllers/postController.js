@@ -68,6 +68,24 @@ function (module, namespace, namespaceCommon) {
 			});
 	};
 
+	// Add comment using comment input and username
+	$scope.addReply = function(commentId, text) {
+		var fd = {};
+		fd.txt = text;
+
+		postFactory.addReply($routeParams.projectId, $routeParams.setId, $routeParams.postId, commentId, fd)
+			.success(function(post) {
+				$scope.post.comments[$scope.replyIndex] = post;
+			})
+			.error(function(post) {
+				console.error('postController - Error adding comment: ' + post);
+			});
+	};
+
+    $scope.showReply = function(index){
+        $scope.replyIndex = index;
+    };
+
     /**
      * mDown is the mouseDown call back. This is called when a user is depresses the mouse button.
      * When this is called, we obtain the mouse down location, and store it.

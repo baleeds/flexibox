@@ -25,6 +25,19 @@
 					<div class="commentContent">
 						<h6>{{ comment.posterName }}</h6>
 						<p>{{ comment.txt }}</p>
+                        <ul>
+                            <li ng-repeat="reply in comment.replies">
+                                <h6>{{ reply.posterName }}</h6>
+                                <p>{{ reply.txt }}</p>
+                            </li>
+                            <li>
+                                <a ng-click="showReply($index)" ng-hide="$index == replyIndex">Add a reply</a>
+                                <form name="newReply" ng-show="$index == replyIndex">
+                                    <input type="text" name="txt" placeholder="post a reply..." ng-model="newReply.rText" ng-minlength="2" required/>
+                                    <button type="submit" class="button" ng-click="addReply(comment._id, newReply.rText);" ng-disabled="newReply.txt.$pristine || newReply.txt.$invalid || $parent.username === ''">Reply</button>
+                                </form>
+                            </li>
+                        </ul>
 					</div>
 				</li>
 			</ul>
