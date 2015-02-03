@@ -1,3 +1,6 @@
+.row {
+    max-width:none;
+}
 .red {
 	color: red;
 }
