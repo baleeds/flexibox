@@ -1,5 +1,6 @@
 .row {
     max-width:none;
+    padding: 0 40px;
 }
 .red {
 	color: red;
