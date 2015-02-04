@@ -55,5 +55,9 @@ require.config({
   deps: ["angular", "routes", "angularMocks"].concat(allTestFiles),
 
   // we have to kickoff jasmine, as it is asynchronous
-  callback: window.__karma__.start
+  callback: function(){
+      Foundation.global.namespace = "";
+      window.__karma__.start();
+
+  }
 });

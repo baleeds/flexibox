@@ -51,6 +51,7 @@ require([
         "angular",
         "specs/ControllerTests/sessionSpec",
         "specs/ControllerTests/signupSpec",
+        "specs/ControllerTests/postSpec",
 
         "specs/FactoryTests/utilityFactorySpec",
         "specs/FactoryTests/homeFactorySpec",
@@ -63,5 +64,6 @@ require([
         "angularMocks"
     ],
     function (angular, namespace) {
+        Foundation.global.namespace = "";
         jasmine.getEnv().execute();
     });
