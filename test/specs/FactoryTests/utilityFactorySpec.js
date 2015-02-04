@@ -67,7 +67,7 @@ define(
                 var regex = /rgb\((\d{1,3}),(\d{1,3}),(\d{1,3})\)/;
 
                 it("Expected pattern", function() {
-                    expect(regex.test(utilityFactory.randomColor(5))).toEqual(true);
+                    expect(utilityFactory.randomColor(5)).toMatch(regex);
                 });
             })
 
