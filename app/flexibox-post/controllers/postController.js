@@ -17,8 +17,8 @@ function (module, namespace, namespaceCommon) {
 	$scope.post = {};                                                          // local instance of focused post
 	$scope.newComment = {};                                                    // data from form in upload modal
 	$scope.backURL = $routeParams.projectId + '/' + $routeParams.setId;        // url to the previous page.  Used to feed routeParams to the front end.
+	$scope.currentComment = 0;
 
-	
 	var firstClick = 1;
 	var a = {};
 	var b = {};

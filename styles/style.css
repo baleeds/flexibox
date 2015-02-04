@@ -38,6 +38,7 @@
   list-style: none;
   width: 100%;
   display: inline-block;
+  padding: 10px;
 }
 .login-bar {
   width: 100%;
@@ -83,16 +84,9 @@
   user-select: none;
   position: relative;
   float: left;
-  overflow: scroll;
-  width: 70%;
   cursor: crosshair;
+  margin-top: 20px;
 }
-
-#commentBox {
-  float: left;
-  width: 29%;
-}
-
 .flexiBox {
   background: rgba(255, 255, 255, 0.63);
   border-radius: 8px;
@@ -103,7 +97,7 @@
   transition:0.2s linear all;
 }
 
-.flexiBox:hover {
+.flexiBoxHover {
   background: rgba(255, 255, 255, 0.05);
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
@@ -111,20 +105,26 @@
   transition:0.2s linear all;
 }
 
-.flexiBox:hover > .flexiNumber {
+.flexiNumberHover {
   opacity: .1;
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;
   transition:0.2s linear all;
 }
-.flexiBox:hover > .hoverComment {
-  opacity: 1;
+.commentPanel {
+  padding: 0px;
+}
+.hoverCommentHover {
+  opacity: 1 !important;
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;
   transition:0.2s linear all;
-  visibility: visible;
+  visibility: visible !important;
+}
+.commentBlockHovered {
+  background-color: #E5E5E5;
 }
 .hoverComment {
   background-color: #323232;
@@ -139,7 +139,6 @@
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;
   transition:0.2s linear all;
-
 }
 .hoverComment h6 {
   font-weight: bold;
@@ -196,6 +195,21 @@
   border: 1px solid #CFCFCF;
   margin-top: 30px;
   padding: 30px;
+}
+.commentContent ul {
+  margin: -6px 0 0 0;
+}
+.commentContent ul li {
+  list-style: none;
+  border-left: 3px solid;
+  padding-left: 10px;
+  margin: -10px 0 0 2px;
+}
+.replyLink {
+  font-size: .8em !important;
+}
+.replyBlock {
+  border-color: #CBCBCB !important;
 }
 .add-item {
   margin: 16px 30px;
