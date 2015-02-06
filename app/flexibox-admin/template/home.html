@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="large-12 columns">
+        <h1 class="left">Welcome to <b>FlexiBox</b></h1>
+        <a href="#" data-reveal-id="newProjectModal" class="tiny button left secondary add-item">Create a project</a>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <ul class="large-block-grid-5">
+            <li ng-repeat="project in projects | filter:searchText | orderBy:'name'">
+                <div class="panel" style="height:200px; margin-bottom: 0px;">
+                    <a href="#" class="panel-delete" ng-click="deleteProject(project._id)">&#215;</a>
+                    <h4><a href="/projects/{{ project._id }}">{{ project.name }}</a></h4>
+                    <p style="clear:both;">{{ project.description }}</p>    
+                </div>
+            </li>
+            <li>
+                <div class="new panel" data-reveal-id="newProjectModal">
+                    <p>+</p>   
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+<!-- MODALS -->
+<div id="newProjectModal" class="reveal-modal medium" data-reveal modal>
+    <h2>Create a new project!</h2>
+    <div class="large-12 columns">
+        <form name="createForm" enctype="multipart/form-data">
+            <label><span ng-class="{'red' : createForm.name.$pristine || createForm.name.$invalid}">*</span> Name
+                <input type="text" name="name" placeholder="name of project" ng-model="formData.name" ng-maxlength="64" ng-minlength="3" required/>
+            </label>
+            <label>Description
+                <input type="text" name="description" placeholder="description" ng-model="formData.description" ng-maxlength="256" />
+            </label>
+            <button type="submit" class="button" ng-click="createProject(); dClose('newProjectModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Create Project</button>
+        </form>
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>

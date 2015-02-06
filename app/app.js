@@ -13,6 +13,7 @@ define([
 		"./flexibox-session/namespace",
 		"./flexibox-login/namespace",
 		"./flexibox-signup/namespace",
+		"./flexibox-admin/namespace",
 		"jquery",
 		"foundation",
 		"angularRoute",
@@ -24,9 +25,10 @@ define([
 		"./flexibox-post/module.require",
 		"./flexibox-session/module.require",
 		"./flexibox-login/module.require",
-		"./flexibox-signup/module.require"
+		"./flexibox-signup/module.require",
+		"./flexibox-admin/module.require"
 	],
-	function (angular, namespace, namespaceCommon, namespaceIndex, namespaceSet, namespaceProject, namespacePost, namespaceSession, namespaceLogin, namespaceSignup) {
+	function (angular, namespace, namespaceCommon, namespaceIndex, namespaceSet, namespaceProject, namespacePost, namespaceSession, namespaceLogin, namespaceSignup, namespaceAdmin) {
 		"use strict";
 
 		var app = angular.module(namespace,
@@ -40,7 +42,8 @@ define([
 			namespacePost,
 			namespaceSession,
 			namespaceLogin,
-			namespaceSignup
+			namespaceSignup,
+			namespaceAdmin
       ]).run(["$log", function($log) {
             
          // Configure enhanced logging
