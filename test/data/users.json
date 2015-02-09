@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "54d81fffb46e200418000005" }, "name" : "commenter", "local" : { "password" : "$2a$08$Y80WxOvh19ya7XXrYYnm2eppZJ2OikRh.S0EZyd7ilE2NsQIJxel6", "email" : "commenter@test.com" }, "role" : "commenter", "projectsVisible" : [], "__v" : 0 }
