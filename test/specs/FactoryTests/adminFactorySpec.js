@@ -30,27 +30,67 @@ define(
                 $httpBackend.verifyNoOutstandingExpectation();
                 $httpBackend.verifyNoOutstandingRequest();
             });
-
-        describe("admin tests", function () {
-            it("testing getAll Userscall", function () {
-               var time = Date.now();
-
-                    //Tell the HTTP Backend to expect a GET method at '/api/projects'
-                    //(found in the sessionFactory file), and to respond with an HTTP
-                    //Status of 200 with some JSON object we can use to test the data
-                    //is being properly returned.
-                    $httpBackend.expectGET('/api/users').respond(200, {time : time});
+            /**
+             * Makes sure the "getAll" function is calling the correct route, and recieving
+             * the response from that route appropiately.
+             */
+            describe("admin tests", function () {
+                it("testing getAll function", function () {
+                    var time = Date.now();
+                    $httpBackend.expectGET('/api/users').respond(200, {time: time});
                     adminFactory.getAllUsers()
                         .success(
-                        function(data){
+                        function (data) {
                             expect(data.time).toEqual(time);
                         })
-                        .error(function(){
+                        .error(function () {
+                            fail("Error with the http (getAllUsers) request");
+                        });
+                    $httpBackend.flush();
+                });
+                /**
+                 * Test that the updateRoles function is properly passing on data to the
+                 * API route call, and that the data is the data we expect it to be.
+                 */
+                it("testing updateRoles function", function () {
+                    var time = Date.now();
+                    var fd = [{"id": "5", "name": "Dylan", "role": "Commenter"}];
+                    $httpBackend.whenPOST('/api/users/updateRoles',
+                        function (postData) {
+                            expect(postData.id).toEqual(fd.id);
+                            expect(postData.name).toEqual(fd.name);
+                            expect(postData.role).toEqual(fd.role);
+                            return true;
+                        }).respond(200, true);
+
+                    adminFactory.updateRoles(fd)
+                        .success(
+                        function (data) {
+                            expect(data).toEqual(true);
+                        })
+                        .error(function () {
+                            fail("Error with the http (getAllUsers) request");
+                        });
+                    $httpBackend.flush();
+                });
+                /**
+                 * Test that the function is recieving the response from the correct place.
+                 */
+                it("testing updateRole response", function () {
+                    var time = Date.now();
+
+                    $httpBackend.expectPOST('/api/users/updateRoles').respond(200, {time: time});
+                    var fd = [{"id": "5", "name": "Dylan", "role": "Commenter"}];
+                    adminFactory.updateRoles(fd)
+                        .success(
+                        function (data) {
+                            expect(data.time).toEqual(time);
+                        })
+                        .error(function () {
                             fail("Error with the http (getAllUsers) request");
                         });
                     $httpBackend.flush();
                 });
             });
         });
-
     });
