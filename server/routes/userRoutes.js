@@ -71,4 +71,13 @@ module.exports = function(router, protect) {
                 res.json({message: 'Successfully deleted'});
             });
         });
+    /**
+     * Potentially unnecessary route. Just written right now as a place holder, needs to be extended.
+     * Just a user route that will (hopefully) be used to update user roles.
+     */
+    router.route('/users/updateRoles')
+        .all(protect)
+        .post(function (req, res) {
+
+        })
 };

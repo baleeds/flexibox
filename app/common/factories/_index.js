@@ -4,7 +4,8 @@ define([
         "./setFactory",
         "./postFactory",
         "./utilityFactory",
-        "./sessionFactory"
+        "./sessionFactory",
+        "./adminFactory"
 ], function () {
    "use strict";
 });
