@@ -78,6 +78,15 @@ module.exports = function(router, protect) {
     router.route('/users/updateRoles')
         .all(protect)
         .post(function (req, res) {
-
+            for(var i = 0; i< req.body.length; i++){
+                var query = {_id: req.body[i].id};
+                var update = {$set: {role:req.body[i].role}};
+                var options = {multi: true};
+                User.update(query, update, options, function(err, numAffected){
+                    if(err)
+                        res.send(err);
+                })
+            }
+            res.json({message: "Sucessfully updated"});
         })
 };

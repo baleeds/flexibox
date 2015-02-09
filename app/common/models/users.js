@@ -10,7 +10,7 @@ var UserSchema = new Schema({
 	imageURL: String,
 	emailSettings: Number,
 	projectsVisible: [Schema.ObjectId],
-	role: {type: String, default: "commenter"},
+	role: {type: String, default: "Commenter"},
 	local            : {
 		email        : String,
 		password     : String

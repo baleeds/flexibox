@@ -16,9 +16,9 @@ define([
             $scope.userList = {};
             $scope.userModels = [];
             $scope.options = [
-                { label: 'Commenter', value: 'commenter' },
-                { label: 'Project Owner', value: 'projOwner' },
-                {label:  'System Admin', value: 'sysAdmin'}
+                { label: 'Commenter', value: 'Commenter' },
+                { label: 'Project Owner', value: 'Project Owner' },
+                {label:  'System Admin', value: 'System Admin'}
             ];
 
             $scope.formDataArray = [];
@@ -34,16 +34,17 @@ define([
 
             $scope.updateRoles = function(){
                 for(var i = 0; i<$scope.userModels.length; i++){
-                    if($scope.userModels[i] == null){
+                    if($scope.userModels[i].value == null){
                         console.log(i);
                     }
                     else{
-                        console.log("Hey");
-                        formObj.id = $scope.userList[i]._id;
-                        formObj.name = $scope.userList[i].name;
-                        formObj.role = $scope.userModels[i];
-                        $scope.formDataArray = $scope.formDataArray.concat(formObj);
-                        formObj = {};
+                        if($scope.userModels[i].value != $scope.userList[i]){
+                            formObj.id = $scope.userList[i]._id;
+                            formObj.name = $scope.userList[i].name;
+                            formObj.role = $scope.userModels[i].value;
+                            $scope.formDataArray = $scope.formDataArray.concat(formObj);
+                            formObj = {};
+                        }
                     }
                 }
                 adminFactory.updateRoles($scope.formDataArray);

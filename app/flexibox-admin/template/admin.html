@@ -22,15 +22,12 @@
                         <p>  {{ user.role }}</p>
                     </td>
                     <td>
-                        <select id="roleDropdown" ng-model="userModels[$index]">
-                            <option value="commenter" label="Commenter"> </option>
-                            <option value="owner" label="Project Owner" > </option>
-                            <option value="sysAdmin" label="System Admin"> </option>
+                        <select id="roleDropdown" ng-model="userModels[$index]" ng-options="opt as opt.label for opt in options">
                         </select>
                     </td>
                 </tr>
             </table>
-            <input type="button" value="Submit Changes" ng-click="updateRoles()"/>
+            <input type="button" value="Submit Changes"  ng-click="updateRoles()" onClick="location.reload()"/>
         </form>
     </div>
 </div>
