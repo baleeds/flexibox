@@ -1,20 +1,93 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
-1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'install' ]
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'jasmine-node-istanbul',
+1 verbose cli   '--save-dev' ]
 2 info using npm@1.4.28
-3 info using node@v0.10.35
-4 verbose node symlink C:\Program Files\nodejs\\node.exe
-5 error Error: ENOENT, stat 'C:\Users\Benjamin\AppData\Roaming\npm'
-6 error If you need help, you may report this *entire* log,
-6 error including the npm and node versions, at:
-6 error     <http://github.com/npm/npm/issues>
-7 error System Windows_NT 6.1.7601
-8 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
-9 error cwd D:\G Drive\Documents\FlexiBox
-10 error node -v v0.10.35
-11 error npm -v 1.4.28
-12 error path C:\Users\Benjamin\AppData\Roaming\npm
-13 error code ENOENT
-14 error errno 34
-15 verbose exit [ 34, true ]
+3 info using node@v0.10.34
+4 verbose node symlink C:\Program Files (x86)\nodejs\\node.exe
+5 warn package.json FlexiBox@0.0.1-SNAPSHOT No repository field.
+6 warn package.json karma-coverage@0.2.7 No README data
+7 warn package.json passport-local@0.1.6 No README data
+8 warn package.json logger@0.0.1 No repository field.
+9 verbose readDependencies using package.json deps
+10 verbose cache add [ 'jasmine-node-istanbul', null ]
+11 verbose cache add name=undefined spec="jasmine-node-istanbul" args=["jasmine-node-istanbul",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: 'jasmine-node-istanbul',
+12 verbose parsed url   path: 'jasmine-node-istanbul',
+12 verbose parsed url   href: 'jasmine-node-istanbul' }
+13 silly lockFile a6e85cbe-jasmine-node-istanbul jasmine-node-istanbul
+14 verbose lock jasmine-node-istanbul C:\Users\Nolan\AppData\Roaming\npm-cache\a6e85cbe-jasmine-node-istanbul.lock
+15 silly lockFile a6e85cbe-jasmine-node-istanbul jasmine-node-istanbul
+16 silly lockFile a6e85cbe-jasmine-node-istanbul jasmine-node-istanbul
+17 verbose addNamed [ 'jasmine-node-istanbul', '' ]
+18 verbose addNamed [ null, '*' ]
+19 silly lockFile 399fb475-jasmine-node-istanbul jasmine-node-istanbul@
+20 verbose lock jasmine-node-istanbul@ C:\Users\Nolan\AppData\Roaming\npm-cache\399fb475-jasmine-node-istanbul.lock
+21 silly addNameRange { name: 'jasmine-node-istanbul', range: '*', hasData: false }
+22 verbose request where is /jasmine-node-istanbul
+23 verbose request registry https://registry.npmjs.org/
+24 verbose request id ca272da7f535fc97
+25 verbose url raw /jasmine-node-istanbul
+26 verbose url resolving [ 'https://registry.npmjs.org/', './jasmine-node-istanbul' ]
+27 verbose url resolved https://registry.npmjs.org/jasmine-node-istanbul
+28 verbose request where is https://registry.npmjs.org/jasmine-node-istanbul
+29 info trying registry request attempt 1 at 14:34:39
+30 http GET https://registry.npmjs.org/jasmine-node-istanbul
+31 http 404 https://registry.npmjs.org/jasmine-node-istanbul
+32 verbose headers { date: 'Mon, 09 Feb 2015 19:34:37 GMT',
+32 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+32 verbose headers   'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=0',
+32 verbose headers   'content-length': '52',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   age: '0',
+32 verbose headers   'x-served-by': 'cache-atl6230-ATL',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1423510477.371075,VS0,VE315',
+32 verbose headers   'keep-alive': 'timeout=10, max=50',
+32 verbose headers   connection: 'Keep-Alive' }
+33 silly registry.get cb [ 404,
+33 silly registry.get   { date: 'Mon, 09 Feb 2015 19:34:37 GMT',
+33 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+33 silly registry.get     'content-type': 'application/json',
+33 silly registry.get     'cache-control': 'max-age=0',
+33 silly registry.get     'content-length': '52',
+33 silly registry.get     'accept-ranges': 'bytes',
+33 silly registry.get     via: '1.1 varnish',
+33 silly registry.get     age: '0',
+33 silly registry.get     'x-served-by': 'cache-atl6230-ATL',
+33 silly registry.get     'x-cache': 'MISS',
+33 silly registry.get     'x-cache-hits': '0',
+33 silly registry.get     'x-timer': 'S1423510477.371075,VS0,VE315',
+33 silly registry.get     'keep-alive': 'timeout=10, max=50',
+33 silly registry.get     connection: 'Keep-Alive' } ]
+34 silly lockFile 399fb475-jasmine-node-istanbul jasmine-node-istanbul@
+35 silly lockFile 399fb475-jasmine-node-istanbul jasmine-node-istanbul@
+36 error 404 404 Not Found: jasmine-node-istanbul
+36 error 404
+36 error 404 'jasmine-node-istanbul' is not in the npm registry.
+36 error 404 You should bug the author to publish it
+36 error 404 It was specified as a dependency of 'FlexiBox'
+36 error 404
+36 error 404 Note that you can also install from a
+36 error 404 tarball, folder, or http url, or git url.
+37 error System Windows_NT 6.1.7601
+38 error command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "jasmine-node-istanbul" "--save-dev"
+39 error cwd C:\Users\Nolan\WebstormProjects\2015springTeam22
+40 error node -v v0.10.34
+41 error npm -v 1.4.28
+42 error code E404
+43 verbose exit [ 1, true ]

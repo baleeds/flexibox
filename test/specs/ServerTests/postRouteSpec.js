@@ -1,9 +1,13 @@
+require('../../../server');
 var frisby = require('frisby');
+var Utils = require('../../testingUtils');
 
 var URL = "http://localhost:8080/";
 var PID = "54d82057b46e200418000006";
 var SID = "54d82082b46e200418000007";
 var OID = "54d8209cb46e200418000008";
+
+Utils.loadTestData();
 
 frisby.create("commentRoutes")
     .post("http://localhost:8080/api/login",
