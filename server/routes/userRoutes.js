@@ -1,5 +1,5 @@
 var User = require('../../app/common/models/users');
-
+var Utils = require('../utils.js');
 module.exports = function(router, protect) {
 // USER ROUTES
 // =====================================================================================
@@ -20,7 +20,7 @@ module.exports = function(router, protect) {
             });
         })
 
-        .get(function (req, res) {
+        .get(Utils.isAdmin, function (req, res) {
             User.find(function (err, users) {
                 if (err)
                     res.send(err);

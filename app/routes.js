@@ -81,6 +81,10 @@ define([
                                     $location.path("/login");
                                     return $q.reject(rejection);
                                 }
+                                else if(rejection.status == 402){
+                                    $location.path("/projects");
+                                    return $q.reject(rejection);
+                                }
                                 return $q.reject(rejection);
                             }
                         }

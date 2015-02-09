@@ -13,7 +13,7 @@ define([
         var name = namespace + ".adminController";
         module.controller(name, ['$scope','$rootScope', namespaceCommon + '.adminFactory', '$location', function ($scope,
                                                                                                                     $rootScope, adminFactory, $location) {
-            $scope.userList = {};
+            $scope.userList;
             $scope.userModels = [];
             $scope.options = [
                 { label: 'Commenter', value: 'Commenter' },
@@ -26,7 +26,9 @@ define([
 
             adminFactory.getAllUsers()
                 .success(function(users){
-                    $scope.userList = users;
+                    for(var i=0; i<users.length; i++) {
+                        $scope.userList = users;
+                    }
                 })
                 .error(function(err){
                     // do nothing
@@ -34,8 +36,8 @@ define([
 
             $scope.updateRoles = function(){
                 for(var i = 0; i<$scope.userModels.length; i++){
-                    if($scope.userModels[i].value == null){
-                        // do nothing
+                    if(typeof $scope.userModels[i] == "undefined"){
+                        $scope.userModels[i] = null;
                     }
                     else{
                         if($scope.userModels[i].value != $scope.userList[i].role){

@@ -14,7 +14,7 @@
                     <th> Current Role </th>
                     <th> New Role </th>
                 </tr>
-                <tr ng-repeat="user in userList| filter:searchText" > <!--  orderBy:'name'" -->
+                <tr ng-repeat="user in userList| filter:searchText"  > <!--  orderBy:'name'" -->
                     <td>
                         <p style="clear:both;">{{ user.name }}</p>
                     </td>
@@ -23,6 +23,11 @@
                     </td>
                     <td>
                         <select id="roleDropdown" ng-model="userModels[$index]" ng-options="opt as opt.label for opt in options">
+                            <!--
+                            <option value="Commenter" label="Commenter"></option>
+                            <option value="Project Owner" label ="Project Owner"></option>
+                            <option value="System Admin" label="System Admin"></option>
+                            -->
                         </select>
                     </td>
                 </tr>
