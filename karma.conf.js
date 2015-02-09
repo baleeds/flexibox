@@ -66,14 +66,14 @@ module.exports = function(config) {
           singleRun: true,
 
           junitReporter: {
-              outputFile: 'test-results.xml'
+              outputFile: './reports/test-results.xml'
           },
 
           coverageReporter: {
               type: 'cobertura',
               dir: '.',
               subdir: '.',
-              file: 'coverage.xml'
+              file: './reports/coverage.xml'
           }
       }
   );
