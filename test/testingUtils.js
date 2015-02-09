@@ -5,5 +5,10 @@ module.exports = {
     loadTestData : function(){
         exec("mongoimport -db flexibox -c users test/data/users.json --drop");
         exec("mongoimport -d flexibox -c projects test/data/projects.json --drop");
+        var now = Date.now();
+        while(Date.now() - now < 5000){
+            //Wait for 5 seconds so that child processes can finish.
+        }
     }
+
 };
