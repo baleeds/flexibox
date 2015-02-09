@@ -52,6 +52,7 @@ require([
         "specs/ControllerTests/sessionSpec",
         "specs/ControllerTests/signupSpec",
         "specs/ControllerTests/postSpec",
+        "specs/ControllerTests/adminSpec",
 
         "specs/FactoryTests/utilityFactorySpec",
         "specs/FactoryTests/homeFactorySpec",

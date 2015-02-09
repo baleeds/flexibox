@@ -144,7 +144,6 @@ define(
                     $scope.post = {"comments": []};
                     var testLoc = {"offsetX": 100 , "offsetY": 150};
                     var testLoc2 = {"offsetX": 150 , "offsetY": 275};
-
                     var $element = document.createElement('div');
                     $element.id = 'imageDiv';
                     document.body.appendChild($element);
@@ -209,7 +208,7 @@ define(
                     $httpBackend.flush();
                     expect($scope.post.comments[$scope.replyIndex]).toEqual("Test Comment");
                 });
-                it("Test shbowReply", function(){
+                it("Test showReply", function(){
                     var $scope = {};
                     var $commentId = 5;
                     $controller(name, {$scope : $scope});

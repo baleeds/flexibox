@@ -35,10 +35,10 @@ define([
             $scope.updateRoles = function(){
                 for(var i = 0; i<$scope.userModels.length; i++){
                     if($scope.userModels[i].value == null){
-                        console.log(i);
+                        // do nothing
                     }
                     else{
-                        if($scope.userModels[i].value != $scope.userList[i]){
+                        if($scope.userModels[i].value != $scope.userList[i].role){
                             formObj.id = $scope.userList[i]._id;
                             formObj.name = $scope.userList[i].name;
                             formObj.role = $scope.userModels[i].value;
