@@ -15,14 +15,14 @@ Modelled after the Zurb tool, Notable.
 * MongooseJS - Nodejs framework for queries and schemas
 * NodeJS - server written in JavaScript
 * Mongodb - database that uses documents instead of tables
+* Jasmine - unit testing!!
+* Karma - Angular unit test runner
 
 
 ### Future possibilities for third party tools (in case of amnesia...) ###
 * jquery - basic JavaScript library, make sure Angular doesn't provide same functionality before pulling in!
 * almond.js - alternate to full blown AMD loader (i.e. requireJS) for small apps or standalone libraries
-* Jasmine - unit testing!!
 * PhantomJS - unit testing
-* Karma - Angular unit test runner
 
 ### Directories ###
 * app - Source code for the application
