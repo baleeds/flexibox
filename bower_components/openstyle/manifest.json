@@ -1,0 +1,8 @@
+{
+    "name": "openStyle",
+    "description": "lightweight html5 css built on Bootstrap for the creation of web applications",
+    "tags": ["bootstrap", "DarkBlue", "LightBlue", "AWM", "CB&S", "GTB", "Brand", "autobahn", "adk", "theme", "blue", "platinum"],
+	"platforms": ["js", "javascript", "html", "html5", "css", "ie10+", "chrome", "firefox", "html5", "javascript"    ],
+    "demo": "http://staging.dev.montage.gm.intranet.db.com/{{name}}/dev/components/index.html",
+}    
+        

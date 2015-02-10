@@ -1,0 +1,17 @@
+//
+// Typography
+// --------------------------------------------------
+
+
+// Blockquotes
+blockquote {
+  font-size: $blockquote-font-size;
+  background: $gray-240;
+  border-left: 0;
+  border-top: 1px solid $blockquote-border-color;
+  border-bottom: 1px solid $blockquote-border-color;
+    h4 {
+      color: $gray-50;
+      font-weight: bold;
+    }
+}

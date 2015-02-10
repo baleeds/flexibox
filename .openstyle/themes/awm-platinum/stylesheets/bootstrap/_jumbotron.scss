@@ -1,0 +1,18 @@
+//
+// Jumbotron
+// --------------------------------------------------
+
+
+.jumbotron {
+  padding: $jumbotron-padding;
+  margin-bottom: $jumbotron-padding;
+  color: $jumbotron-color;
+  //@include gradient-vertical($gray-panel-lighter, $gray-panel-light, 10%, 100%); 
+  background-color: $jumbotron-bg;
+}
+
+// TODO: Sassify
+/*.jumbotron-inverse {
+  background: #073459;
+  color: #f1f1f1;
+}*/

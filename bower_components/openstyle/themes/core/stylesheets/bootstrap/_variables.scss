@@ -1,0 +1,38 @@
+// When true, asset path helpers are used, otherwise the regular CSS `url()` is used.
+// When there no function is defined, `fn('')` is parsed as string that equals the right hand side
+// NB: in Sass 3.3 there is a native function: function-exists(twbs-font-path)
+
+
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+
+// Autobahn blues for gradient header
+
+$brand-primary-light:    #0d436e !default;
+$brand-primary-dark:   #062641 !default;
+
+// Top and Bottom Margin based on Vertical Rhythm
+// TODO: Need to have a discussion around if we want to include these classes. WN
+
+// Top Margins*/
+.top-none     {margin-top:    0;}
+.top-xs       {margin-top:    10px;}
+.top-s        {margin-top:    20px;}
+.top-m        {margin-top:    30px;}
+.top-l        {margin-top:    40px;}
+.top-xl       {margin-top:    50px;}
+
+// Bottom Margins
+.bottom-none  {margin-bottom: 0;}
+.bottom-xs    {margin-bottom: 10px;}
+.bottom-s     {margin-bottom: 20px;}
+.bottom-m     {margin-bottom: 30px;}
+.bottom-l     {margin-bottom: 40px;}
+.bottom-xl    {margin-bottom: 50px;}

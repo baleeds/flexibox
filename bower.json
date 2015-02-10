@@ -16,7 +16,7 @@
       "angular": "https://github.com/angular/bower-angular.git",
       "angular_route": "https://github.com/angular/bower-angular-route.git",
       "angular_sanitize": "https://github.com/angular/bower-angular-sanitize.git",
-      "foundation": "https://github.com/zurb/bower-foundation.git"
+      "openstyle": "./.openstyle"
    },
    "devDependencies": {
       "requirejs": "https://github.com/jrburke/requirejs.git",
@@ -36,9 +36,9 @@
       "angular_mocks": {
          "js": "angular-mocks.js"
       },
-      "foundation": {
-         "js": "js/foundation.min.js",
-         "css": "css/foundation.css"
+      "openstyle": {
+         "js": "assets/javascripts/bootstrap.js",
+         "css": ["components/css/fonts/font-awesome-4.2.0/css/font-awesome.min.css", "themes/autobahn-Flat/stylesheets/autobahn-flat.css"]
       },
       "fastclick": {
          "js": "lib/fastclick.js"

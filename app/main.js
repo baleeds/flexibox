@@ -7,14 +7,14 @@ require.config({
 		"angular": "../dependencies/js/angular/angular.min",
 		"angularRoute": "../dependencies/js/angular_route/angular-route.min",
 		"angularSanitize": "../dependencies/js/angular_sanitize/angular-sanitize.min",
-		"foundation": "../dependencies/js/foundation/foundation.min",
+		"bootstrap": "../dependencies/js/openstyle/bootstrap",
 		"jquery": "../dependencies/js/jquery/jquery",
 		"modernizr": "../dependencies/js/modernizr/modernizr"
 	},
 
 	shim: {
 		app: {
-			deps: ["angular","foundation", "angularRoute","angularSanitize"]
+			deps: ["angular","bootstrap", "angularRoute","angularSanitize"]
 		},
 		angular: {
 			exports: "angular"
@@ -25,9 +25,9 @@ require.config({
 		angularSanitize: {
 			deps: ["angular"]
 		},
-		foundation: {
+		bootstrap: {
 			deps: ["jquery"],
-			exports: "foundation"
+			exports: "bootstrap"
 		},
 		jquery: {
 			exports: "jquery"

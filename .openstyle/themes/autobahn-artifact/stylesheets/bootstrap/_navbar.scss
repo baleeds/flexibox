@@ -1,0 +1,74 @@
+//
+// Navbars
+// --------------------------------------------------
+.brandbar {
+    @extend .navbar-default;
+    @include linear-gradient($brand-primary-dark, $brand-primary-light);
+    margin-bottom: 0;
+    border: none;
+
+    .navbar-brand {
+        color: #fff; // $navbar-inverse-brand-color
+        
+        &,
+        &:hover,
+        &:focus {
+        color: #fff;
+        }
+    }
+
+    .navbar-nav {
+        > li > a {
+            color: #fff; // $navbar-inverse-link-color;
+
+            &:hover,
+            &:focus {
+            background-color: #083b64;
+            border: 1px solid #062b4a;
+            box-shadow: 0 -1px 0 1px #054a6e inset; 
+            color: #fff;
+            margin-top: -1px;
+            }
+        }
+
+// TO DO: SASSIFY THIS
+
+        .open .dropdown-menu {
+            background-color: #083b64;
+            border: 1px solid #062b4a;
+            box-shadow: 0 -1px 0 1px #054a6e inset;
+            margin-top: -1px;
+
+            > li {
+                background-color: #083b64;
+                border-top: 1px solid #062b4a;
+
+                > a {
+                    color: #fff;
+                    
+                    &:hover,
+                    &:focus {
+                    background: #0170a4;
+                    color: #fff;  
+                    }
+                }
+            }       
+        }   
+
+        > .open > a,
+        > .active > a {
+            &,
+            &:hover,
+            &:focus {
+            background-color: #083b64;
+            border: 1px solid #062b4a;
+            box-shadow: 0 -1px 0 1px #054a6e inset;
+            color: #fff; 
+            
+                span {
+                color: #016fa3;
+                }
+            }
+        }
+    }    
+}

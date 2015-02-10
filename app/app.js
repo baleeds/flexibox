@@ -15,7 +15,7 @@ define([
 		"./flexibox-signup/namespace",
 		"./flexibox-admin/namespace",
 		"jquery",
-		"foundation",
+		"bootstrap",
 		"angularRoute",
 		"angularSanitize",
 		"./common/module.require",

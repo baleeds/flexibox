@@ -1,0 +1,99 @@
+//
+// Navbars
+// --------------------------------------------------
+
+.navbar-default {
+    //@extend .navbar-default;
+    background-color: $brand-primary-dark; // $navbar-inverse-bg
+    margin-bottom: 0;
+    border: none;
+
+    .navbar-brand {
+        color: #fff; // $navbar-inverse-brand-color
+
+// TODO: Add modernizer support for SVG
+        .logo {
+            width: 135px;
+        }
+    }
+
+    .navbar-nav {
+        > li > a {
+            color: #fff; // $navbar-inverse-link-color;
+
+            &:hover,
+            &:focus {
+            color: #7bc5e7; // $navbar-inverse-link-hover-color
+            }
+        }
+        
+        .open .dropdown-menu > li > a {
+
+            &:hover,
+            &:focus {
+                background: #7bc5e7;
+                color: #fff;
+            }
+        }
+        
+        > .active > a, 
+        > .open > a {
+            &,
+            &:hover,
+            &:focus {
+                color: #7bc5e7; // $navbar-inverse-link-hover-color;
+                background-color: transparent; // $navbar-inverse-link-active-bg
+                border-bottom: 2px solid #7bc5e7; //TODO: Sassify New Declaration
+            }
+        }
+
+    }
+}
+
+// 
+// Autobahn Side Nav
+//----------------------------------------------------
+
+.side-nav {
+
+    .side-nav-group {
+        list-style: none;
+        margin: 0 0 15px 0;
+        padding: 0;
+        
+        > li > a {
+            color: $gray-20;
+            display:block;
+            margin: 4px 0;
+            padding: 4px 15px;
+                
+            &:hover, 
+            &:focus {
+                background: $brand-blue-light;
+                text-decoration: none;
+            }
+        }
+                
+        > li > a.selected {
+            background: $brand-primary;
+            color: #fff;
+            &:hover, &:focus {}
+        }
+
+        
+        .side-nav-group-header {
+            > a {
+                background-color: $gray-230;
+                font-weight: bold;
+                padding: 8px 15px;
+
+                &:hover,
+                &:focus {
+                    background-color: $gray-230;
+                }
+            }
+        }
+    }
+}
+
+

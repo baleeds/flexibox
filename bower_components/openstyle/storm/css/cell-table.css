@@ -1,0 +1,107 @@
+table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
+    line-height: 1em;
+}
+
+table {
+    border-collapse: collapse;
+    border-style: 1px solid #b0b4b8;
+    font-size: .75em;
+    margin: 0;
+}
+
+table thead {
+    background-color: #fff;
+    color: #222;
+}
+
+table thead tr th {
+    color: #222;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+table thead th i.fa {
+    margin: 0 0 0 .325em;
+}
+
+table tr th, table tr td {
+    line-height: 1rem;
+    padding: 1rem;
+    word-wrap: break-word;
+}
+
+table tbody tr td {
+    line-height: 1rem;
+    padding: 0.5rem;
+}
+
+table thead tr th:nth-child(1),
+table thead tr th:nth-child(2),
+table tbody tr td:nth-child(1) div,
+table tbody tr td:nth-child(2) div {
+    padding-left: 1em;
+    text-align: left;
+}
+
+table thead tr th:nth-child(3),
+table thead tr th:nth-child(4),
+table thead tr th:nth-child(5),
+table thead tr th:nth-child(6),
+table tbody tr td:nth-child(3) div,
+table tbody tr td:nth-child(4) div,
+table tbody tr td:nth-child(5) div,
+table tbody tr td:nth-child(6) div{
+    text-align: right;
+}
+
+table thead tr th:nth-child(7) div,
+table tbody tr td:nth-child(7) div {
+    text-align: center;
+}
+
+table tbody tr:nth-child(odd), .cellTableOddRow {
+    background-color: #f0f4f8;
+}
+
+table tbody tr:nth-child(even), .cellTableEvenRow {
+    background-color: #fff;
+}
+
+table tbody tr:hover {
+    background-color: #cce7f2;
+    color: #333;
+    cursor: pointer;
+}
+
+
+table tbody tr.selected,
+table tbody tr.selected:hover,
+.cellTableKeyboardSelectedRow,
+.cellTableKeyboardSelectedRow:hover {
+    background-color: #0082bc;
+    color: #fff;
+}
+
+table tbody tr.selected td div {
+    color: #fff;
+}
+
+table tbody tr td div span.client-details {
+    display:block;
+    margin: 1em 0 -.25em 0;
+}
+
+table tbody tr td div span.client-location {
+    display:block;
+    font-size: .75em;
+    padding: 0 0 1em 0;
+}
+
+table tbody tr td div span.breach-percentage, .breach-percentage {
+    background-color: #ee0000;
+    border-radius: 0.1875em 0.1875em;
+    color: #fff;
+    display: inline !important;
+    padding: .25em .375em;
+}
+

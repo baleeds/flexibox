@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>openstyle • Components</title>
+
+    <script src="../assets/javascripts/jquery-1.11.2.js"></script>
+    <script src="../assets/javascripts/bootstrap.js"></script>
+    <!--[if lt IE 9]>
+        <script src="/assets/javascripts/html5shiv.js"></script>
+        <script src="/assets/javascripts/respond.min.js"></script>
+    <![endif]-->
+
+	<!--3rd party css-->
+	<link rel="stylesheet" href="./css/fonts/font-awesome-4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/prism.css">
+
+    <!-- our theme css -->
+    <link rel="stylesheet" href="../themes/autobahn-flat/stylesheets/autobahn-flat.css">
+	
+    <!--custom css for OpenStyle -->
+    <script src="js/openStyle.js"></script>
+    <script src="js/prism.min.js"></script>
+	<link rel="stylesheet" href="./css/openstyle.css">	
+</head>
+<body class="openstyle">
+	<!-----------------------------------------
+		openStyle header aka top navigation
+	------------------------------------------>
+	<!-- openStyle header -->
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+
+			<div class="navbar-header">
+				<a class="navbar-brand"
+				   href="./index.html"><img class="logo" src="images/openstyle.svg" alt="openStyle Logo"></a>
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<div class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+						   aria-expanded="false">Themes <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" onclick=" changeTheme('../themes/autobahn-flat/stylesheets/autobahn-flat.css', 3); ">Flat</a></li>
+                            <li><a href="#" onclick=" changeTheme('../themes/autobahn-light/stylesheets/autobahn-light.css', 3); ">Light Blue</a></li>
+                            <li><a href="#" onclick=" changeTheme('../themes/awm-platinum/stylesheets/awm-platinum.css', 3); ">AWM Platinum</a></li>
+                        </ul>
+					</li>
+					<!--<li class="dropdown">-->
+					<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Download <span class="caret"></span></a>-->
+					<!--<ul class="dropdown-menu" aria-labelledby="download">-->
+					<!--<li><a href="bootstrap.min.css">bootstrap.min.css</a></li>-->
+					<!--<li><a href="bootstrap.css">bootstrap.css</a></li>-->
+					<!--</ul>-->
+					<!--</li>-->
+
+					<li>
+						<a href="components.html">Components</a>
+					</li>
+					<li class="active">
+						<a href="about.html">About</a>
+					</li>
+					<li>
+						<a href="get-started.html">Get Started</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron jumbotron-inverse">
+		<div class="container">
+			<h1>About</h1>
+            <p>Made with love by the Design + UI team in Cary NC.</p>
+		</div>
+	</div>
+
+		<div class="container">
+
+			<div class="row">
+
+			<div class="col-lg-9">
+                    <h2>The Project</h2>
+					<p>The openStyle project was created to assist in the implementation of the Autobahn styleguide on web applications.</p>
+
+                    <hr />
+                    <h2>The Maintainers</h2>
+                       <div class="row">
+                               <div class="col-lg-2"><a href="https://mydb.intranet.db.com/people/2399151" target="_blank" class="thumbnail"><img src="images/ja.png"/><div class="caption"><h4>James Abbott</h4></div></a></div>
+                               <div class="col-lg-2"><a href="https://mydb.intranet.db.com/people/2517893" target="_blank" class="thumbnail"><img src="images/sk.png"/><div class="caption"><h4>Sarah Kahn</h4></div></a></div>
+                               <div class="col-lg-2"><a href="https://mydb.intranet.db.com/people/2561010" target="_blank" class="thumbnail"><img src="images/ml.png"/><div class="caption"><h4>Melissa Lyon</h4></div></a></div>
+                               <div class="col-lg-2"><a href="https://mydb.intranet.db.com/people/2553655" target="_blank" class="thumbnail"><img src="images/wn.png"/><div class="caption"><h4>Will Neville</h4></div></a></div>
+                       </div>  
+                       <div class="row">
+
+                       </div>
+
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

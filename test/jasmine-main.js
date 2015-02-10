@@ -12,7 +12,7 @@ require.config({
         "angularRoute": "../dependencies/js/angular_route/angular-route.min",
         "angularSanitize": "../dependencies/js/angular_sanitize/angular-sanitize.min",
         "angularMocks": "../dependencies/js/angular_mocks/angular-mocks",
-        "foundation": "../dependencies/js/foundation/foundation.min",
+        "bootstrap": "../dependencies/js/openstyle/bootstrap",
         "jquery": "../dependencies/js/jquery/jquery",
         "modernizr": "../dependencies/js/modernizr/modernizr",
         "specs": "../test/specs"
@@ -34,9 +34,9 @@ require.config({
         angularMocks: {
             deps: ["angular"]
         },
-        foundation: {
+        bootstrap: {
             deps: ["jquery"],
-            exports: "foundation"
+            exports: "bootstrap"
         },
         jquery: {
             exports: "jquery"

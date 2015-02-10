@@ -15,7 +15,7 @@ module.exports = function (grunt) {
             "jquery": "../dependencies/js/jquery/jquery",
             "angularRoute": "../dependencies/js/angular_route/angular-route.min",
             "angularSanitize": "../dependencies/js/angular_sanitize/angular-sanitize.min",
-            "foundation": "../dependencies/js/foundation/foundation.min",
+            "bootstrap": "../dependencies/js/openstyle/bootstrap",
             "modernizr": "../dependencies/js/modernizr/modernizr",
 
             "FlexiBox": "../<%=pkg.name%>"
