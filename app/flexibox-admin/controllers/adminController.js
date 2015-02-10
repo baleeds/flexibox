@@ -13,7 +13,7 @@ define([
         var name = namespace + ".adminController";
         module.controller(name, ['$scope','$rootScope', namespaceCommon + '.adminFactory', '$location', function ($scope,
                                                                                                                     $rootScope, adminFactory, $location) {
-            $scope.userList;
+            $scope.userList = {};
             $scope.userModels = [];
             $scope.options = [
                 { label: 'Commenter', value: 'Commenter' },
