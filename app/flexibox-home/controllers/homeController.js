@@ -58,7 +58,5 @@ define([
                     });
             };
 
-            $(document).foundation(); // Load foundation when view loads
-
         }]);
     });

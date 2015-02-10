@@ -9,13 +9,13 @@ require.config({
     baseUrl: "../app",
     paths: {
         "angular": "../dependencies/js/angular/angular.min",
-        "angularRoute": "../dependencies/js/angular_route/angular-route.min",
-        "angularSanitize": "../dependencies/js/angular_sanitize/angular-sanitize.min",
-        "angularMocks": "../dependencies/js/angular_mocks/angular-mocks",
+        "angularRoute": "../dependencies/js/angular-route/angular-route.min",
+        "angularSanitize": "../dependencies/js/angular-sanitize/angular-sanitize.min",
+        "angularMocks": "../dependencies/js/angular-mocks/angular-mocks",
         "bootstrap": "../dependencies/js/openstyle/bootstrap",
         "jquery": "../dependencies/js/jquery/jquery",
-        "modernizr": "../dependencies/js/modernizr/modernizr",
-        "specs": "../test/specs"
+        "specs": "../test/specs",
+        "boot" : "../dependencies/js/jasmine-core/boot"
     },
     /** This error comes from the fact that it cannot find the specs file, relative to this file. However, by using a
      * different base url, this problem it is resolved
@@ -40,9 +40,6 @@ require.config({
         },
         jquery: {
             exports: "jquery"
-        },
-        modernizr: {
-            exports: "modernizr"
         }
     }
 });
@@ -66,6 +63,6 @@ require([
         "angularMocks"
     ],
     function (angular, namespace) {
-        Foundation.global.namespace = "";
+        $(".alert").html("");
         jasmine.getEnv().execute();
     });

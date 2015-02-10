@@ -132,7 +132,5 @@ function (module, namespace, namespaceCommon) {
 
 	};
 
-	$(document).foundation(); // Load foundation when view loads
-
 	}]);
 });

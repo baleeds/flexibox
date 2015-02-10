@@ -5,11 +5,10 @@ require.config({
 	waitSeconds: 1000,
 	paths: {
 		"angular": "../dependencies/js/angular/angular.min",
-		"angularRoute": "../dependencies/js/angular_route/angular-route.min",
-		"angularSanitize": "../dependencies/js/angular_sanitize/angular-sanitize.min",
+		"angularRoute": "../dependencies/js/angular-route/angular-route.min",
+		"angularSanitize": "../dependencies/js/angular-sanitize/angular-sanitize.min",
 		"bootstrap": "../dependencies/js/openstyle/bootstrap",
-		"jquery": "../dependencies/js/jquery/jquery",
-		"modernizr": "../dependencies/js/modernizr/modernizr"
+		"jquery": "../dependencies/js/jquery/jquery"
 	},
 
 	shim: {
@@ -31,9 +30,6 @@ require.config({
 		},
 		jquery: {
 			exports: "jquery"
-		},
-		modernizr: {
-			exports: "modernizr"
 		}
 	}
 });
