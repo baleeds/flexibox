@@ -36,24 +36,30 @@ define(
 */
                 it("Test mDown with new Div as 2", function(){
                     var $scope = {};
-                    var testLoc = {"offsetX": 100 , "offsetY": 150};
-                    $scope.newDiv = 2;
+                    var testLoc = {"pageX": 100 , "pageY": 150};
 
                     $controller(name, {$scope : $scope});
+
+                    $scope.newDiv = document.createElement('div');
 
                     var $element = document.createElement('div');
                     $element.id = 'imageDiv';
                     document.body.appendChild($element);
 
+                    $element.appendChild($scope.newDiv);
+
+                    var $testDiv = $scope.newDiv;
+
                     $scope.mDown(testLoc);
 
+                    expect($testDiv.parentNode).toBe(null);
+
                     document.body.removeChild($element);
-                    expect($scope.newDiv).toEqual(0);
                 });
 
                 it("Test mDown With newDiv as 0", function(){
                     var $scope = {};
-                    var testLoc = {"offsetX": 100 , "offsetY": 150};
+                    var testLoc = {"pageX": 100 , "pageY": 150};
                     $scope.newDiv = 0;
 
                     $controller(name, {$scope : $scope});
@@ -63,31 +69,74 @@ define(
                     document.body.appendChild($element);
 
                     $scope.mDown(testLoc);
+
                     document.body.removeChild($element);
-                    expect($scope.newDiv).toEqual(0);
+                    expect($scope.isDown).toBe(true);
                 });
 
-/**
-
- */
-                it("Test mUp", function(){
+                it("Tests eager mMove", function(){
+                    var testLoc = {"pageX": 100 , "pageY": 150};
                     var $scope = {};
 
                     $controller(name, {$scope : $scope});
-                    var testLoc = {"offsetX": 100 , "offsetY": 150};
-                    var testLoc2 = {"offsetX": 150 , "offsetY": 275};
+
+                    expect($scope.isDown).toBe(false);
+
+                    try {
+                        $scope.mMove(testLoc);
+                    } catch ( err ){
+                        fail();
+                    }
+
+                    expect($scope.isDown).toBe(false);
+                });
+
+                it("Test mMove", function(){
+                    var testLoc = {"pageX": 100 , "pageY": 150};
+                    var testLoc2 = {"pageX": 150 , "pageY": 275};
+                    var $scope = {};
+
+                    $controller(name, {$scope : $scope});
 
                     var $element = document.createElement('div');
                     $element.id = 'imageDiv';
                     document.body.appendChild($element);
 
                     $scope.mDown(testLoc);
-                    $scope.mUp(testLoc2);
+
+                    expect($scope.isDown).toBe(true);
+
+                    $scope.mMove(testLoc2);
+
+                    expect($scope.newDiv.style.width).toBe((testLoc2.pageX - testLoc.pageX) + "px");
+                    expect($scope.newDiv.style.height).toBe((testLoc2.pageY - testLoc.pageY) + "px");
+
+                    expect($scope.newDiv.style.left).toBe((testLoc.pageX - $element.offsetLeft) + "px");
+                    expect($scope.newDiv.style.top).toBe((testLoc.pageY - $element.offsetTop) + "px");
 
                     document.body.removeChild($element);
 
-                    expect($scope.newDiv.style.width).toEqual('50px');
-                    expect($scope.newDiv.style.height).toEqual('125px');
+                });
+
+                it("Test mUp", function(){
+                    var $scope = {};
+
+                    $controller(name, {$scope : $scope});
+                    var testLoc = {"offsetX": 100 , "offsetY": 150};
+
+                    var $element = document.createElement('div');
+                    $element.id = 'imageDiv';
+                    document.body.appendChild($element);
+
+                    $scope.mDown(testLoc);
+
+                    expect($scope.isDown).toBe(true);
+
+                    document.body.removeChild($element);
+
+                    $scope.mUp();
+
+                    expect($scope.isDown).toBe(false);
                 });
 
                 it("Test addComment", function(){
