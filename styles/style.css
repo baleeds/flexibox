@@ -253,6 +253,7 @@
 .workspace {
   height: auto;
   overflow-x: scroll;
+  overflow-y: hidden;
   background: url("/img/workspace-bg.jpg");
 }
 
