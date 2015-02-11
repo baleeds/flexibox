@@ -116,5 +116,6 @@ define([
 						logger.error('setController - Error deleting posts: ' + data);
 					});
 			};
+
 		}]);
 	});

@@ -17,12 +17,11 @@ require.config({
   baseUrl: '/base/app',
     paths: {
         "angular": "/base/dependencies/js/angular/angular.min",
-        "angularRoute": "/base/dependencies/js/angular_route/angular-route.min",
-        "angularSanitize": "/base/dependencies/js/angular_sanitize/angular-sanitize.min",
-        "angularMocks": "/base/dependencies/js/angular_mocks/angular-mocks",
+        "angularRoute": "/base/dependencies/js/angular-route/angular-route.min",
+        "angularSanitize": "/base/dependencies/js/angular-sanitize/angular-sanitize.min",
+        "angularMocks": "/base/dependencies/js/angular-mocks/angular-mocks",
         "bootstrap": "/base/dependencies/js/openstyle/bootstrap",
         "jquery": "/base/dependencies/js/jquery/jquery",
-        "modernizr": "/base/dependencies/js/modernizr/modernizr",
         "specs": "/base/test/specs"
     },
 
@@ -45,9 +44,6 @@ require.config({
         },
         jquery: {
             exports: "jquery"
-        },
-        modernizr: {
-            exports: "modernizr"
         }
     },
 
@@ -56,8 +52,6 @@ require.config({
 
   // we have to kickoff jasmine, as it is asynchronous
   callback: function(){
-      Foundation.global.namespace = "";
       window.__karma__.start();
-
   }
 });

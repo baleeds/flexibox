@@ -57,5 +57,6 @@ define([
                         logger.error('homeController - Error deleting project: ' + projectData);
                     });
             };
+
         }]);
     });

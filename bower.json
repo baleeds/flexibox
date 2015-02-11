@@ -1,66 +1,67 @@
 {
-   "name": "FlexiBox",
-   "version": "0.0.1-SNAPSHOT",
-   "main": [
-      "./dist/js/FlexiBox.full.min.js",
-      "./dist/js/FlexiBox.min.js",
-      "./dist/index.html"
-   ],
-   "description": "Application to enable collaboration on UX mockups for DB projects",
-   "ignore": [
-      "bower_components",
-      "test",
-      "build"
-   ],
-   "dependencies": {
-      "angular": "https://github.com/angular/bower-angular.git",
-      "angular_route": "https://github.com/angular/bower-angular-route.git",
-      "angular_sanitize": "https://github.com/angular/bower-angular-sanitize.git",
-      "openstyle": "./.openstyle"
-   },
-   "devDependencies": {
-      "requirejs": "https://github.com/jrburke/requirejs.git",
-      "angular_mocks": "https://github.com/angular/bower-angular-mocks/archive/v1.2.21.zip",
-      "jasmine": "https://github.com/jasmine/jasmine/releases/download/v2.1.3/jasmine-standalone-2.1.3.zip"
-   },
-   "exportsOverride": {
-      "angular": {
-         "js": "angular.min.js"
-      },
-      "angular_route": {
-         "js": "angular-route.min.js"
-      },
-      "angular_sanitize": {
-         "js": "angular-sanitize.min.js"
-      },
-      "angular_mocks": {
-         "js": "angular-mocks.js"
-      },
-      "openstyle": {
-         "js": "assets/javascripts/bootstrap.js",
-         "css": ["components/css/fonts/font-awesome-4.2.0/css/font-awesome.min.css", "themes/autobahn-Flat/stylesheets/autobahn-flat.css"]
-      },
-      "fastclick": {
-         "js": "lib/fastclick.js"
-      },
-      "jquery-placeholder": {
-         "js": "jquery.placeholder.js"
-      },
-      "jquery.cookie": {
-         "js": "jquery.cookie.js"
-      },
-      "jquery": {
-         "js": "dist/jquery.js"
-      },
-      "modernizr": {
-         "js": "modernizr.js"
-      },
-      "requirejs": {
-         "js": "require.js"
-      },
-      "jasmine" : {
-         "js": "lib/jasmine-2.1.3/*.js",
-         "css": "lib/jasmine-2.1.3/jasmine.css"
-      }
-   }
+  "name": "FlexiBox",
+  "version": "0.0.1-SNAPSHOT",
+  "authors": [
+    "Andie <analdana@ncsu.edu>",
+    "Ben <baleeds@ncsu.edu>",
+    "Dylan <dfperry2@ncsu.edu>",
+    "Nolan <njpiland@ncsu.edu>"
+  ],
+  "main": [
+    "./dist/js/FlexiBox.full.min.js",
+    "./dist/js/FlexiBox.min.js",
+    "./dist/index.html"
+  ],
+  "description": "Application to enable collaboration on UX mockups for DB projects",
+  "ignore": [
+    "bower_components",
+    "test",
+    "build"
+  ],
+  "dependencies": {
+    "angular": "1.2.21",
+    "angular-route": "1.2.21",
+    "angular-sanitize": "1.2.21",
+    "openstyle": "./.openstyle",
+    "jquery": "2.1.1"
+  },
+  "devDependencies": {
+    "requirejs-bower": "2.1.14",
+    "angular-mocks": "1.2.21",
+    "jasmine-core": "2.1.3"
+  },
+  "exportsOverride": {
+    "angular": {
+      "js": "angular.min.js"
+    },
+    "angular-route": {
+      "js": "angular-route.min.js"
+    },
+    "angular-sanitize": {
+      "js": "angular-sanitize.min.js"
+    },
+    "angular-mocks": {
+      "js": "angular-mocks.js"
+    },
+    "openstyle": {
+      "js": "assets/javascripts/bootstrap.js",
+      "css": [
+        "components/css/fonts/font-awesome-4.2.0/css/font-awesome.min.css",
+        "themes/autobahn-Flat/stylesheets/autobahn-flat.css"
+      ]
+    },
+    "jquery": {
+      "js": "dist/jquery.js"
+    },
+    "requirejs-bower": {
+      "js": "require.js"
+    },
+    "jasmine-core": {
+      "js": ["lib/jasmine-core/boot.js",
+        "lib/jasmine-core/console.js",
+        "lib/jasmine-core/jasmine.js",
+        "lib/jasmine-core/jasmine-html.js"],
+      "css": "lib/jasmine-core/jasmine.css"
+    }
+  }
 }

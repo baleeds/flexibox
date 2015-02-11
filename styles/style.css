@@ -104,18 +104,18 @@
   background: rgba(255, 255, 255, 0.63);
   border-radius: 8px;
   position: absolute;
-  -webkit-transition:0.2s linear all;
-  -moz-transition:0.2s linear all;
-  -o-transition:0.2s linear all;
-  transition:0.2s linear all;
+  -webkit-transition:0.2s linear background;
+  -moz-transition:0.2s linear background;
+  -o-transition:0.2s linear background;
+  transition:0.2s linear background;
 }
 
 .flexiBoxHover {
   background: rgba(255, 255, 255, 0.05);
-  -webkit-transition:0.2s linear all;
-  -moz-transition:0.2s linear all;
-  -o-transition:0.2s linear all;
-  transition:0.2s linear all;
+  -webkit-transition:0.2s linear background;
+  -moz-transition:0.2s linear background;
+  -o-transition:0.2s linear background;
+  transition:0.2s linear background;
 }
 
 .flexiNumberHover {

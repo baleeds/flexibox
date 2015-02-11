@@ -4,7 +4,7 @@
   "version": "0.0.1-SNAPSHOT",
   "filename": "FlexiBox.min.js",
   "homepage": "https://stash.gto.intranet.db.com:8081/users/benjamin.leeds_db.com/repos/flexibox-with-modularjs/browse/FlexiBox-webapp",
-  "author": "Sarah Brolley <sarah.brolley@db.com>, Benjamin Leeds <baleeds@ncsu.edu>",
+  "author": "Andie Aldana <analdana@ncsu.edu>, Benjamin Leeds <baleeds@ncsu.edu>, Dylan Perry <dfperry2@ncsu.edu>, Nolan Piland <njpiland@ncsu.edu>",
   "//": "See https://github.com/npm/node-semver/ for version number syntax",
   "dependencies": {
     "bcrypt-nodejs": "latest",

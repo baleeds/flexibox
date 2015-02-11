@@ -18,6 +18,8 @@ function (module, namespace, namespaceCommon) {
 	$scope.newComment = {};                                                    // data from form in upload modal
 	$scope.backURL = $routeParams.projectId + '/' + $routeParams.setId;        // url to the previous page.  Used to feed routeParams to the front end.
 	$scope.currentComment = 0;
+    $scope.container = null;
+    $scope.isDown = false;
 
 	var firstClick = 1;
 	var a = {};
@@ -92,12 +94,29 @@ function (module, namespace, namespaceCommon) {
      * @param e {MouseEvent} The event object created by the mouse down event.
      */
 	$scope.mDown = function(e) {
+        if($scope.container == null){
+            $scope.container = document.getElementById('imageDiv')
+        }
 		if ($scope.newDiv !== 0) {
-			document.getElementById('imageDiv').removeChild($scope.newDiv);
+            $scope.container.removeChild($scope.newDiv);
 			$scope.newDiv = 0;
 		}
-		a.x = e.offsetX;
-		a.y = e.offsetY;
+        $scope.isDown = true;
+		a.x = e.pageX - $scope.container.offsetLeft;
+		a.y = e.pageY - $scope.container.offsetTop;
+
+        $scope.newDiv = document.createElement("div");
+
+        $scope.newDiv.className = 'flexiBox maybe';
+        $scope.newDiv.innerHTML = '<div class="flexiNumber">New</div>';
+
+        $scope.newDiv.style.top = a.y + 'px';
+        $scope.newDiv.style.left = a.x + 'px';
+
+        document.getElementById('imageDiv').appendChild($scope.newDiv);
+
+        $scope.newDiv.onmousemove = function(e){$scope.mMove(e);};
+        $scope.newDiv.onmouseup = function(e){$scope.mUp(e);};
 	};
 
     /**
@@ -107,29 +126,29 @@ function (module, namespace, namespaceCommon) {
      * based on those values.
      * @param e {MouseEvent} The event object created by the mouse up event.
      */
-    $scope.mUp = function(e) {
-		b.x = e.offsetX;
-		b.y = e.offsetY;
+    $scope.mUp = function(e){
+        $scope.isDown = false;
+    };
 
-		console.log(a);
-		console.log(b);
 
-		smallest.x = ((a.x < b.x) ? a.x : b.x);
-		smallest.y = ((a.y < b.y) ? a.y : b.y);
+    $scope.mMove = function(e) {
+        if($scope.isDown) {
+            b.x = e.pageX - $scope.container.offsetLeft;
+            b.y = e.pageY - $scope.container.offsetTop;
 
-		biggest.x = ((a.x > b.x) ? a.x : b.x);
-		biggest.y = ((a.y > b.y) ? a.y : b.y);
+            smallest.x = ((a.x < b.x) ? a.x : b.x);
+            smallest.y = ((a.y < b.y) ? a.y : b.y);
 
-		$scope.newDiv = document.createElement("div");
-		$scope.newDiv.style.width = (biggest.x - smallest.x) + 'px';
-		$scope.newDiv.style.height = (biggest.y - smallest.y) + 'px';
-		$scope.newDiv.style.top = smallest.y + 'px';
-		$scope.newDiv.style.left = smallest.x + 'px';
-		$scope.newDiv.className = 'flexiBox maybe';
-		$scope.newDiv.innerHTML = '<div class="flexiNumber">New</div>';
+            biggest.x = ((a.x > b.x) ? a.x : b.x);
+            biggest.y = ((a.y > b.y) ? a.y : b.y);
 
-		document.getElementById('imageDiv').appendChild($scope.newDiv);
+            $scope.newDiv.style.width = (biggest.x - smallest.x) + 'px';
+            $scope.newDiv.style.height = (biggest.y - smallest.y) + 'px';
+            $scope.newDiv.style.top = smallest.y + 'px';
+            $scope.newDiv.style.left = smallest.x + 'px';
+        }
 
 	};
+
 	}]);
 });
