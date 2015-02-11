@@ -111,8 +111,8 @@ define(
                     expect($scope.newDiv.style.width).toBe((testLoc2.pageX - testLoc.pageX) + "px");
                     expect($scope.newDiv.style.height).toBe((testLoc2.pageY - testLoc.pageY) + "px");
 
-                    expect($scope.newDiv.style.left).toBe((testLoc.pageX - $element.offsetLeft) + "px");
-                    expect($scope.newDiv.style.top).toBe((testLoc.pageY - $element.offsetTop) + "px");
+                    expect($scope.newDiv.style.left).toBe((testLoc.pageX - $scope.container.scrollLeft) + "px");
+                    expect($scope.newDiv.style.top).toBe((testLoc.pageY - $scope.container.offsetTop - $scope.container.scrollTop) + "px");
 
                     document.body.removeChild($element);
 

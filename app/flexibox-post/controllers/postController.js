@@ -102,8 +102,8 @@ function (module, namespace, namespaceCommon) {
 			$scope.newDiv = 0;
 		}
         $scope.isDown = true;
-		a.x = e.pageX - $scope.container.offsetLeft;
-		a.y = e.pageY - $scope.container.offsetTop;
+		a.x = e.pageX + $scope.container.scrollLeft;
+		a.y = e.pageY - $scope.container.offsetTop - $scope.container.scrollTop;
 
         $scope.newDiv = document.createElement("div");
 
@@ -133,8 +133,8 @@ function (module, namespace, namespaceCommon) {
 
     $scope.mMove = function(e) {
         if($scope.isDown) {
-            b.x = e.pageX - $scope.container.offsetLeft;
-            b.y = e.pageY - $scope.container.offsetTop;
+            b.x = e.pageX + $scope.container.scrollLeft;
+            b.y = e.pageY - $scope.container.offsetTop - $scope.container.scrollTop;
 
             smallest.x = ((a.x < b.x) ? a.x : b.x);
             smallest.y = ((a.y < b.y) ? a.y : b.y);
