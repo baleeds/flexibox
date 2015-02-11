@@ -1,37 +1,41 @@
-<div class="row">
-    <div class="large-4 large-centered columns login-window">
-       <h4>Create Your Account</h4>
-        <div id="signupEmailError" class="bg-danger error" ng-show="error=='email'">
-            <h4>There was an error signing up.</h4>
-            <p>This is most likely due to an empty or invalid email.</p>
-        </div>
-        <div id="signupPasswordError" class="bg-danger error" ng-show="error=='password'">
-            <h4>There was an error signing up.</h4>
-            <p>This is most likely due to an empty password field.</p>
-        </div>
-        <div id="signupPasswordError" class="bg-danger error" ng-show="error=='name'">
-            <h4>There was an error signing up.</h4>
-            <p>This is most likely due to an empty name field.</p>
-        </div>
-        <div id="signupPasswordError" class="bg-danger error" ng-show="error=='unknown'">
-            <h4>There was an error signing up.</h4>
-            <p>We've hit an unknown error.</p>
-        </div>
-        <form name="signupForm">
-            <label><span ng-class="{'red' : !signupForm.name.$valid}">*</span>Name
-                <input type="text" name="name" placeholder="name" ng-model="signupData.name " ng-maxlength="256" required />
-            </label>
-            <label><span ng-class="{'red' : !signupForm.email.$valid}">*</span>Email
-                <input type="text" name="email" placeholder="email" ng-model="signupData.email" ng-maxlength="256" required />
-            </label>
-            <label><span ng-class="{'red' : !signupForm.password.$valid}">*</span>Password
-                <input type="password" name="password" placeholder="password" ng-model="signupData.password" ng-maxlength="256" required />
-            </label>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 login-window">
+           <h4>Create Your Account</h4>
+            <div id="signupEmailError" class="bg-danger error" ng-show="error=='email'">
+                <h4>There was an error signing up.</h4>
+                <p>This is most likely due to an empty or invalid email.</p>
+            </div>
+            <div id="signupPasswordError" class="bg-danger error" ng-show="error=='password'">
+                <h4>There was an error signing up.</h4>
+                <p>This is most likely due to an empty password field.</p>
+            </div>
+            <div id="signupPasswordError" class="bg-danger error" ng-show="error=='name'">
+                <h4>There was an error signing up.</h4>
+                <p>This is most likely due to an empty name field.</p>
+            </div>
+            <div id="signupPasswordError" class="bg-danger error" ng-show="error=='unknown'">
+                <h4>There was an error signing up.</h4>
+                <p>We've hit an unknown error.</p>
+            </div>
+            <form name="signupForm">
+                <div class="form-group">
+                    <label class="control-label"><span ng-class="{'red' : !signupForm.name.$valid}">* </span>Name</label>
+                    <input class="form-control" type="text" name="name" placeholder="name" ng-model="signupData.name " ng-maxlength="256" required />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><span ng-class="{'red' : !signupForm.email.$valid}">* </span>Email</label>
+                    <input class="form-control" type="text" name="email" placeholder="email" ng-model="signupData.email" ng-maxlength="256" required />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><span ng-class="{'red' : !signupForm.password.$valid}">* </span>Password</label>
+                    <input class="form-control" type="password" name="password" placeholder="password" ng-model="signupData.password" ng-maxlength="256" required />
+                </div>
 
-            <button type="submit" class="button" onClick="this.form.reset()" ng-click="signup()" ng-disabled="!signupForm.name.$valid || !signupForm.email.$valid || !signupForm.password.$valid">Submit</button>
+                <button type="submit" style="margin-bottom: 12px;" class="btn btn-primary" onClick="this.form.reset()" ng-click="signup()" ng-disabled="!signupForm.name.$valid || !signupForm.email.$valid || !signupForm.password.$valid">Submit</button>
 
-        </form>
-        <a href="/login">« back to login</a>
+            </form>
+            <a href="/login">« back to login</a>
+        </div>
     </div>
-
 </div>
