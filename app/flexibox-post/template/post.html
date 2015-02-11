@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-3 col-md-offset-9 sidebar">
 		<ul style="margin: 0px; padding: 0px;">
-			<li ng-repeat="comment in post.comments" class="commentBlock" style="list-style:none;" ng-class="{'commentBlockHovered': $parent.currentComment == comment._id}" ng-mouseenter="$parent.currentComment = comment._id" ng-mouseleave="$parent.currentComment = 0">
+			<li ng-repeat="comment in post.comments" class="commentBlock" style="list-style:none;" ng-class="{'commentBlockHovered': $parent.currentComment == comment._id}" ng-mouseenter="$parent.isOver(comment._id)" ng-mouseleave="$parent.currentComment = 0">
 				<div class="commentNumber" ng-style="{background: '{{ comment.color }}'}">{{ comment.number }}</div>
 				<div class="commentContent">
 					<h6>{{ comment.posterName }}</h6>

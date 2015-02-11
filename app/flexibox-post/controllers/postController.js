@@ -150,5 +150,16 @@ function (module, namespace, namespaceCommon) {
 
 	};
 
+    $scope.isOver = function(commentId){
+        if($scope.container == null) {
+            $scope.container = document.getElementById('imageDiv')
+        }
+        $scope.currentComment = commentId;
+        var comment = utilityFactory.findById($scope.post.comments, commentId);
+
+        window.scrollTo(0, comment.smallest.y - ( (window.innerHeight - comment.height) / 2));
+        $scope.container.scrollLeft = comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2);
+    };
+
 	}]);
 });
