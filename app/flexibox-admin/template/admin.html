@@ -6,28 +6,35 @@
     <div>
         <!-- Add Search Bar for Table -->
     </div>
+</div>
+<div class="row">
     <div>
         <form id="changeRole" ngModel="formData">
-            <table>
-                <tr>
-                    <th> Username </th>
-                    <th> Current Role </th>
-                    <th> New Role </th>
-                </tr>
-                <tr ng-repeat="user in userList| filter:searchText"  > <!--  orderBy:'name'" -->
-                    <td>
-                        <p style="clear:both;">{{ user.name }}</p>
-                    </td>
-                    <td>
-                        <p>  {{ user.role }}</p>
-                    </td>
-                    <td>
-                        <select id="roleDropdown" ng-model="userModels[$index]" ng-options="opt as opt.label for opt in options">
-                        </select>
-                    </td>
-                </tr>
+            <table class="table table-striped table-hover" style="width: 900px">
+                <thead>
+                    <tr>
+                        <th> Username </th>
+                        <th> Current Role </th>
+                        <th> New Role </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in userList| filter:searchText"  > <!--  orderBy:'name'" -->
+                        <td>
+                            <p style="clear:both;">{{ user.name }}</p>
+                        </td>
+                        <td>
+                            <p>  {{ user.role }}</p>
+                        </td>
+                        <td>
+                            <select id="roleDropdown" ng-model="userModels[$index]" ng-options="opt as opt.label for opt in options">
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-            <input type="button" value="Submit Changes"  ng-click="updateRoles()" onClick="location.reload()"/>
+
+            <input class="btn btn-default" type="submit" value="Submit Bitches"  ng-click="updateRoles()" onClick="location.reload()"/>
         </form>
     </div>
 </div>
