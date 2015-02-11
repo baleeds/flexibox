@@ -13,9 +13,16 @@
         <div class="col-md-12">
             <ul class="panel-list">
                 <li ng-repeat="set in project.sets | filter:searchText | orderBy:'name'" class="panel">
-                    <a href="#" class="panel-delete repeated-item" ng-click="deleteSet(set._id)">&#215;</a>
-                    <h4><a href="/projects/{{ project._id }}/{{ set._id }}">{{ set.name }}</a></h4>
-                    <p style="clear:both;">{{ set.description }}</p>
+                    <div class="panel-top">
+                        <a href="#" class="panel-delete repeated-item" ng-click="deleteSet(set._id)">&#215;</a>
+                    </div>
+                    <div class="panel-middle">
+                        <h4><a href="/projects/{{ project._id }}/{{ set._id }}">{{ set.name }}</a></h4>
+                        <p style="clear:both;">{{ set.description }}</p>
+                    </div>
+                    <div class="panel-bottom">
+                        <!--<span class="label label-success notification">Success</span><span class="label label-warning notification">Warning</span>-->
+                    </div>
                 </li>
                 <li>
                     <div class="new panel" data-toggle="modal" data-target="#newSetModal">

@@ -13,10 +13,18 @@
         <div class="col-md-12">
             <ul class="panel-list">
                 <li ng-repeat="post in set.posts | filter:searchText | orderBy:'name'" class="panel post-panel">
-                    <a href="#" class="panel-delete" ng-click="deletePost(post._id)">x</a>
-                    <h4><a href="/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">{{ post.name }}</a></h4>
-                    <p style="clear:both;">{{ post.description }}</p>
-                    <img src="/{{ post.imageURL }}" />
+                    <div class="panel-top">
+                        <a href="#" class="panel-delete" ng-click="deletePost(post._id)">x</a>
+                    </div>
+                    <div class="panel-middle">
+                        <h4><a href="/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">{{ post.name }}</a></h4>
+                        <p style="clear:both;">{{ post.description }}</p>
+                        <img src="/{{ post.imageURL }}" />
+                    </div>
+                    <div class="panel-bottom">
+
+                    </div>
+
                 </li>
                 <li class="panel new" data-toggle="modal" data-target="#newPostModal">
                     <p>+</p>
@@ -68,31 +76,3 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<!--
-<div id="newPostModal" class="reveal-modal medium" data-reveal modal>
-    <h2>Create a new Post</h2>
-    <div class="newPostForm">
-        <div class="large-12 columns">
-
-        	<form name="imageForm" id="imageForm" resetable>
-	            <label><span ng-class="{'red' : imageUp === 0}">*</span> Image <span style="color:grey;"><i>(.jpg and .png only)</i></span>
-	                <input type="file" name="image" id="imageFileUpload" onchange="angular.element(this).scope().uploadFile(this.files);" ng-model="formData.image" ng-disabled="imageUp === 1" />
-	            </label>
-				<button ng-disabled="imageButtonState === 'Uploading...' || imageButtonState === 'Invalid file type'" ng-show="imageButtonState != ''" type="reset" class="button tiny alert" ng-click="resetImage()">{{ imageButtonState }}</button>
-                <span style="color:red;" ng-show="errorMessage != ''">{{ errorMessage }}</span>
-           	</form>
-
-            <form name="createForm" novalidate enctype="multipart/form-data">
-                <label><span ng-class="{'red' : createForm.name.$pristine || createForm.name.$invalid}">*</span> Name
-                    <input type="text" name="name" placeholder="name of post" ng-model="formData.name" required/>
-                </label>
-                <label>Description
-                    <input type="text" name="description" placeholder="description" ng-model="formData.description" />
-                </label>
-                <button type="submit" class="button" ng-click="addPost(); dReset('imageForm'); dClose('newPostModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid || imageUp == 0">Create Post</button>
-            </form>
-        </div>
-        <a class="close-reveal-modal" ng-click="resetImage(); clearForm(); dReset('imageForm');">&#215;</a>
-    </div>
-</div> -->
