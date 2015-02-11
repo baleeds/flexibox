@@ -10,6 +10,7 @@ require.config({
     paths: {
         "angular": "../dependencies/js/angular/angular.min",
         "angularRoute": "../dependencies/js/angular-route/angular-route.min",
+        "angularRouteStyles": "../dependencies/js/angular-route-styles/route-styles",
         "angularSanitize": "../dependencies/js/angular-sanitize/angular-sanitize.min",
         "angularMocks": "../dependencies/js/angular-mocks/angular-mocks",
         "bootstrap": "../dependencies/js/openstyle/bootstrap",
@@ -27,6 +28,9 @@ require.config({
         },
         angularRoute: {
             deps: ["angular"]
+        },
+        angularRouteStyles: {
+            deps: ["angularRoutes"]
         },
         angularSanitize: {
             deps: ["angular"]

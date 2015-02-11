@@ -23,7 +23,8 @@
     "angular-route": "1.2.21",
     "angular-sanitize": "1.2.21",
     "openstyle": "./.openstyle",
-    "jquery": "2.1.1"
+    "jquery": "2.1.1",
+    "angular-route-styles": "*"
   },
   "devDependencies": {
     "requirejs-bower": "2.1.14",
@@ -36,6 +37,9 @@
     },
     "angular-route": {
       "js": "angular-route.min.js"
+    },
+    "angular-route-styles": {
+      "js": "route-styles.js"
     },
     "angular-sanitize": {
       "js": "angular-sanitize.min.js"
@@ -57,10 +61,12 @@
       "js": "require.js"
     },
     "jasmine-core": {
-      "js": ["lib/jasmine-core/boot.js",
+      "js": [
+        "lib/jasmine-core/boot.js",
         "lib/jasmine-core/console.js",
         "lib/jasmine-core/jasmine.js",
-        "lib/jasmine-core/jasmine-html.js"],
+        "lib/jasmine-core/jasmine-html.js"
+      ],
       "css": "lib/jasmine-core/jasmine.css"
     }
   }

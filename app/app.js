@@ -17,6 +17,7 @@ define([
 		"jquery",
 		"bootstrap",
 		"angularRoute",
+		"angularRouteStyles",
 		"angularSanitize",
 		"./common/module.require",
 		"./flexibox-home/module.require",
