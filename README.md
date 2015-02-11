@@ -10,13 +10,17 @@ Modelled after the Zurb tool, Notable.
 * Grunt - JavaScript task runner (builds)
 * RequireJS - provides the structure for writing modular code with dependency management
 * Angular - provides the code organization for developing MVC
-* Foundation - CSS framework for prototype styling
+* OpenStyle - CSS framework for prototype styling
 * ExpressJS - Nodejs framework for routing and parsing
 * MongooseJS - Nodejs framework for queries and schemas
 * NodeJS - server written in JavaScript
 * Mongodb - database that uses documents instead of tables
 * Jasmine - unit testing!!
 * Karma - Angular unit test runner
+* Frisby - Express API Unit testing
+* Passport - Authentication system
+* Istanbul - JavaScript coverage tool
+* Jenkins - Continuous Integration Environment
 
 
 ### Future possibilities for third party tools (in case of amnesia...) ###
@@ -30,7 +34,7 @@ Modelled after the Zurb tool, Notable.
 * dependencies - Dependency files from bower components that are used by the webapp
 * dist - Target directory of the build.  Includes the production index.html for testing the final bundled version
 * node_modules - Contains Grunt plugins for project
-* test - A visual test HTML page pointed directly at the source for development (*Directory will contain unit test configuration in future!*)
+* test - A visual test HTML page pointed directly at the source for development and contains unit tests as well as test data
 * vendor - Non-bower libraries that are used by the webapp and can't/shouldn't be downloaded through bower.
 
 
