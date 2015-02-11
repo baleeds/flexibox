@@ -30,6 +30,7 @@ function (module, namespace, namespaceCommon) {
 	$scope.fd = {};           // form data from the view
 	$scope.location = $location.path();
 
+
 	// Log out user
 	$scope.logout = function() {
 		sessionFactory.logout();

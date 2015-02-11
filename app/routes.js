@@ -39,7 +39,8 @@ define([
                     // When specified projectId and setId and postId (/<project_id>/<set_id>/<post_id>)
                     .when('/projects/:projectId/:setId/:postId', {
                         templateUrl : '/app/flexibox-post/template/post.html',
-                        controller  : 'FlexiBox.post.postController'
+                        controller  : 'FlexiBox.post.postController',
+                        css : '/styles/post.css'
                     })
 
                     // When specified at login page

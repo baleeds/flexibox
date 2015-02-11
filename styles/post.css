@@ -1,0 +1,12 @@
+.row {
+    padding: 0px;
+}
+.imageDiv {
+    padding: 50px;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}

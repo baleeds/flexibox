@@ -57,9 +57,5 @@ define([
 						logger.error('projectController - Error deleting set from project: ' + project);
 					});
 			};
-
-
-			$(document).foundation(); // Load foundation when view loads
-
 		}]);
 	});

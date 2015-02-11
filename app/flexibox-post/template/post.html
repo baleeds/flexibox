@@ -4,10 +4,10 @@
         <h1>{{ post.name }}</b></h1>
     </div>
 </div>-->
-
+<link rel="stylesheet" href="../../../styles/post.css" />
 <div class="row">
 	<div id="imageDiv" class="col-md-9 main workspace">
-    	<img draggable="false" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" style="max-width: 100%" />
+    	<img draggable="false" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" ng-mousemove="mMove($event);" style="max-width: 100%" />
     	<div ng-repeat="comment in post.comments" class="flexiBox" id="comment{{ comment.number }}" style="top:{{ comment.smallest.y }}px; left:{{ comment.smallest.x }}px; width:{{ comment.width }}px; height:{{ comment.height }}px; border: 4px solid {{ comment.color }};" ng-mouseenter="$parent.currentComment = comment._id" ng-mouseleave="$parent.currentComment = 0" ng-class="{'flexiBoxHover': $parent.currentComment == comment._id}">
     		<div class="commentNumber flexiNumber" style="background: {{ comment.color }};" ng-class="{'flexiNumberHover': $parent.currentComment == comment._id}">{{ comment.number }}</div>
 			<div class="hoverComment" style="top:{{ comment.height - 4 }}px;" ng-class="{'hoverCommentHover': $parent.currentComment == comment._id}">
@@ -16,7 +16,7 @@
 			</div>
     	</div>
     </div>
-    <div class="col-md-3 sidebar">
+    <div class="col-md-3 col-md-offset-9 sidebar">
 		<ul style="margin: 0px; padding: 0px;">
 			<li ng-repeat="comment in post.comments" class="commentBlock" style="list-style:none;" ng-class="{'commentBlockHovered': $parent.currentComment == comment._id}" ng-mouseenter="$parent.currentComment = comment._id" ng-mouseleave="$parent.currentComment = 0">
 				<div class="commentNumber" style="background: {{ comment.color }};">{{ comment.number }}</div>
