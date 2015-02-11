@@ -1,7 +1,8 @@
 .row {
-    padding: 0px;
+    padding: 0;
+    margin: 0;
 }
-.imageDiv {
+#imageDiv {
     padding: 50px;
 }
 .navbar {

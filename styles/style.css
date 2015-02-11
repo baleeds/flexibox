@@ -98,7 +98,7 @@
   position: relative;
   float: left;
   cursor: crosshair;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 .flexiBox {
   background: rgba(255, 255, 255, 0.63);
@@ -245,7 +245,7 @@
 }
 .workspace {
   height: auto;
-  overflow: scroll;
+  overflow-x: scroll;
   background: url("/img/workspace-bg.jpg");
 }
 
