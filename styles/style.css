@@ -284,3 +284,6 @@
 .big-image {
   box-shadow: 4px 4px 15px rgba(0,0,0,.3);
 }
+.new-comment {
+  padding: 15px;
+}
