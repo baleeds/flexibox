@@ -4,30 +4,25 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>FlexiBox</title>
-        <link rel="stylesheet" href="/dependencies/css/foundation/foundation.css" />
+        <link rel="stylesheet" href="/.openstyle/themes/autobahn-Flat/stylesheets/autobahn-flat.min.css" />
         <link rel="stylesheet" href="/styles/style.css" />
     </head>
-    <body ng-controller="FlexiBox.session.sessionController">
-        <div class="login-bar row">
-            <div class="small-4 columns">
-                <a href="/projects" class="brand"><b>FlexiBox</b></a>
-            </div>
-            <div class="small-4 columns">
-                <input type="text" ng-model="searchText" placeholder="Filter" ng-hide="!user.name">
-            </div>
-            <div class="small-4 columns" ng-hide="user.role != 'System Admin'">
-                <div>
-                    <a href="/admin">Admin Page</a>
+    <body ng-controller="FlexiBox.session.sessionController" class="openstyle">
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/projects" class="brand"><b>FlexiBox</b></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-hide="user.role != 'System Admin'"><a href="/admin">Admin Page</a></li>
+                        <li ng-hide="!user.name"><a href="#" ng-click="logout();">Logout</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <input type="text" ng-model="searchText" placeholder="Filter" ng-hide="!user.name" class="form-control" >
+                    </form>
                 </div>
             </div>
-        	<div class="small-4 columns ng-hide=" ng-hide="!user.name">
-                <div class="small-8 columns">
-                    <p style="float:right; padding-top: 5px;">Hello, {{user.name}}</p>
-                </div>
-                <div class="small-4 columns">
-                    <a href="#" class="button small postfix " ng-click="logout();">Logout</a>
-                </div>
-        	</div>
         </div>
 
         <div ng-view>

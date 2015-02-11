@@ -15,11 +15,11 @@ define([
 				link: function($scope, elem, attrs) {
 
 					$scope.dClose = function(e) {
-						$("#" + e).foundation('reveal', 'close');
+						$("#" + e).modal('hide');
 					};
 
 					$scope.dOpen = function(e) {
-						$("#" + e).foundation('reveal', 'open');
+						$("#" + e).modal('show');
 					};
 
 				}

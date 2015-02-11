@@ -6,8 +6,8 @@
 </div>-->
 
 <div class="row">
-	<div id="imageDiv" class="large-8 columns">
-    	<img draggable="false" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" style="max-width: 100%" />
+	<div id="imageDiv" class="col-md-9 main workspace">
+    	<img draggable="false" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" style="max-width: 100%" />
     	<div ng-repeat="comment in post.comments" class="flexiBox" id="comment{{ comment.number }}" style="top:{{ comment.smallest.y }}px; left:{{ comment.smallest.x }}px; width:{{ comment.width }}px; height:{{ comment.height }}px; border: 4px solid {{ comment.color }};" ng-mouseenter="$parent.currentComment = comment._id" ng-mouseleave="$parent.currentComment = 0" ng-class="{'flexiBoxHover': $parent.currentComment == comment._id}">
     		<div class="commentNumber flexiNumber" style="background: {{ comment.color }};" ng-class="{'flexiNumberHover': $parent.currentComment == comment._id}">{{ comment.number }}</div>
 			<div class="hoverComment" style="top:{{ comment.height - 4 }}px;" ng-class="{'hoverCommentHover': $parent.currentComment == comment._id}">
@@ -16,37 +16,39 @@
 			</div>
     	</div>
     </div>
-    <div class="large-4 columns" style="margin-top: 17px;">
-	    <div class="panel commentPanel">
-			<ul style="margin-left: 0;">
-				<li ng-repeat="comment in post.comments" class="commentBlock" style="list-style:none;" ng-class="{'commentBlockHovered': $parent.currentComment == comment._id}" ng-mouseenter="$parent.currentComment = comment._id" ng-mouseleave="$parent.currentComment = 0">
-					<div class="commentNumber" style="background: {{ comment.color }};">{{ comment.number }}</div>
-					<div class="commentContent">
-						<h6>{{ comment.posterName }}</h6>
-						<p>{{ comment.txt }}</p>
-                        <ul>
-                            <li ng-repeat="reply in comment.replies" style="border-color: {{ comment.color }};">
-                                <h6>{{ reply.posterName }}</h6>
-                                <p>{{ reply.txt }}</p>
-                            </li>
-                            <li class="replyBlock">
-                                <a ng-click="showReply($index)" ng-hide="$index == replyIndex" class="replyLink">Add a reply</a>
-                                <form name="newReply" ng-show="$index == replyIndex">
-                                    <input type="text" name="txt" placeholder="post a reply..." ng-model="newReply.rText" ng-minlength="2" required/>
-                                    <button type="submit" class="button tiny" ng-click="addReply(comment._id, newReply.rText);" ng-disabled="newReply.txt.$pristine || newReply.txt.$invalid || $parent.username === ''">Reply</button>
-									<button type="cancel" class="button tiny secondary" ng-click="showReply(null)" style="background-color: #CFCFCF">Cancel</button>
-                                </form>
-                            </li>
-                        </ul>
-					</div>
-				</li>
-			</ul>
-			<form name="newComment" novalidate enctype="multipart/form-data" class="commentBlock">
-				<input type="text" name="txt" placeholder="post a comment..." ng-model="newComment.cText" ng-minlength="2" required/>
-				<div class="panel callout" ng-show="$parent.username === ''"><p>Please login first.</p></div>
-				<div class="panel callout" ng-show="newDiv === 0"><p>Select an area on the picture to comment on</p></div>
-				<button type="submit" class="button small" ng-click="addComment();" ng-disabled="newComment.txt.$pristine || newComment.txt.$invalid || $parent.username === ''">Post</button>
-			</form>
-	    </div>
+    <div class="col-md-3 sidebar">
+		<ul style="margin: 0px; padding: 0px;">
+			<li ng-repeat="comment in post.comments" class="commentBlock" style="list-style:none;" ng-class="{'commentBlockHovered': $parent.currentComment == comment._id}" ng-mouseenter="$parent.currentComment = comment._id" ng-mouseleave="$parent.currentComment = 0">
+				<div class="commentNumber" style="background: {{ comment.color }};">{{ comment.number }}</div>
+				<div class="commentContent">
+					<h6>{{ comment.posterName }}</h6>
+					<p>{{ comment.txt }}</p>
+					<ul>
+						<li ng-repeat="reply in comment.replies" style="border-color: {{ comment.color }};">
+							<h6>{{ reply.posterName }}</h6>
+							<p>{{ reply.txt }}</p>
+						</li>
+						<li class="replyBlock">
+							<a ng-click="showReply($index)" ng-hide="$index == replyIndex" class="replyLink">Add a reply</a>
+							<form name="newReply" ng-show="$index == replyIndex">
+								<div class="form-group">
+									<input type="text" class="form-control" name="txt" placeholder="post a reply..." ng-model="newReply.rText" ng-minlength="2" required/>
+									<button type="submit" class="btn btn-small btn-primary" ng-click="addReply(comment._id, newReply.rText);" ng-disabled="newReply.txt.$pristine || newReply.txt.$invalid || $parent.username === ''">Reply</button>
+									<button type="cancel" class="btn btn-small btn-secondary" ng-click="showReply(null)" style="background-color: #CFCFCF">Cancel</button>
+								</div>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<form name="newComment" novalidate enctype="multipart/form-data">
+			<div class="form-group">
+				<input class="form-control" type="text" name="txt" placeholder="post a comment..." ng-model="newComment.cText" ng-minlength="2" required/>
+				<div class="alert alert-warning" ng-show="$parent.username === ''"><p>Please login first.</p></div>
+				<div class="alert alert-warning" ng-show="newDiv === 0"><p>Select an area on the picture to comment on</p></div>
+				<button type="submit" class="btn btn-small btn-primary" ng-click="addComment();" ng-disabled="newComment.txt.$pristine || newComment.txt.$invalid || $parent.username === ''">Post</button>
+			</div>
+		</form>
    	</div>
 </div>

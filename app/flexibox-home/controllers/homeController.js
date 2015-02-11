@@ -57,8 +57,5 @@ define([
                         logger.error('homeController - Error deleting project: ' + projectData);
                     });
             };
-
-            $(document).foundation(); // Load foundation when view loads
-
         }]);
     });

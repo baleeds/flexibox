@@ -1,46 +1,61 @@
-<div class="row">
-    <div class="small-12 back-link">
-        <a href="/projects" >&larr; back to projects</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 back-link">
+            <a href="/projects" >&larr; back to projects</a>
+        </div>
+        <div class="col-md-12">
+            <h1 class="left">{{ project.name }}</h1>
+            <a href="#" data-toggle="modal" data-target="#newSetModal" class="btn btn-default btn-sm add-item">Create a new set</a>
+        </div>
     </div>
-    <div class="large-12 columns">
-        <h1 class="left">{{ project.name }}</h1>
-        <a href="#" data-reveal-id="newSetModal" class="tiny button left secondary add-item">Create a new set</a>
-    </div>
-</div>
 
-<div class="row">
-    <div class="large-12 columns">
-        <ul class="large-block-grid-5">
-            <li ng-repeat="set in project.sets | filter:searchText | orderBy:'name'">
-                <div class="panel" style="height:200px; margin-bottom: 0px;">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="panel-list">
+                <li ng-repeat="set in project.sets | filter:searchText | orderBy:'name'" class="panel">
                     <a href="#" class="panel-delete repeated-item" ng-click="deleteSet(set._id)">&#215;</a>
                     <h4><a href="/projects/{{ project._id }}/{{ set._id }}">{{ set.name }}</a></h4>
-                    <p style="clear:both;">{{ set.description }}</p>    
-                </div>
-            </li>
-            <li>
-                <div class="new panel" data-reveal-id="newSetModal">
-                    <p>+</p>   
-                </div>
-            </li>    
-        </ul>
+                    <p style="clear:both;">{{ set.description }}</p>
+                </li>
+                <li>
+                    <div class="new panel" data-toggle="modal" data-target="#newSetModal">
+                        <p>+</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
-<div id="newSetModal" class="reveal-modal medium" data-reveal modal>
-    <h2>Create a new Set</h2>
-    <div class="newSetForm">
-        <div class="large-12 columns">
-            <form name="createForm" enctype="multipart/form-data">
-                <label><span ng-class="{'red' : createForm.name.$pristine || createForm.name.$invalid}">*</span> Name
-                    <input type="text" name="name" placeholder="name of set" ng-model="formData.name" ng-maxlength="64" ng-minlength="3" required/>
-                </label>
-                <label>Description
-                    <input type="text" name="description" placeholder="description" ng-model="formData.description" ng-maxlength="256" />
-                </label>
-                <button type="submit" class="button" ng-click="addSet(); dClose('newSetModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Create Set</button>
-            </form>
-        </div>
-        <a class="close-reveal-modal">&#215;</a>
-    </div>
-</div>
+
+<div class="modal fade" id="newSetModal" modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create a new set!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form name="createForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label"><span ng-class="{'red' : createForm.name.$pristine || createForm.name.$invalid}">*</span> Name</label>
+                                <input class="form-control" type="text" name="name" placeholder="name of set" ng-model="formData.name" ng-maxlength="64" ng-minlength="3" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Description</label>
+                                <input class="form-control" type="text" name="description" placeholder="description" ng-model="formData.description" ng-maxlength="256" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" ng-click="addSet(); dClose('newSetModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Create Set</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

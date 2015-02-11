@@ -116,8 +116,5 @@ define([
 						logger.error('setController - Error deleting posts: ' + data);
 					});
 			};
-
-			$(document).foundation(); // Load foundation when view loads
-
 		}]);
 	});

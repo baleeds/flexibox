@@ -131,8 +131,5 @@ function (module, namespace, namespaceCommon) {
 		document.getElementById('imageDiv').appendChild($scope.newDiv);
 
 	};
-
-	$(document).foundation(); // Load foundation when view loads
-
 	}]);
 });
