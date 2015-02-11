@@ -157,8 +157,8 @@ function (module, namespace, namespaceCommon) {
         $scope.currentComment = commentId;
         var comment = utilityFactory.findById($scope.post.comments, commentId);
 
-		$("html, body").animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) });
-		$(".workspace").animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)});
+		$("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) });
+		$(".workspace").stop().animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)});
         //window.scrollTo(0, comment.smallest.y - ( (window.innerHeight - comment.height) / 2));
         //$scope.container.scrollLeft = comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2);
     };
