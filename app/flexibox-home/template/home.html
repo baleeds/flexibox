@@ -10,9 +10,16 @@
         <div class="col-md-12">
             <ul class="panel-list">
                 <li ng-repeat="project in projects | filter:searchText | orderBy:'name'" class="panel">
-                    <a href="#" class="panel-delete" ng-click="deleteProject(project._id)">&#215;</a>
-                    <h4><a href="/projects/{{ project._id }}">{{ project.name }}</a></h4>
-                    <p style="clear:both;">{{ project.description }}</p>
+                    <div class="panel-top">
+                        <a href="#" class="panel-delete" ng-click="deleteProject(project._id)">&#215;</a>
+                    </div>
+                    <div class="panel-middle">
+                        <h4><a href="/projects/{{ project._id }}">{{ project.name }}</a></h4>
+                        <p style="clear:both;">{{ project.description }}</p>
+                    </div>
+                    <div class="panel-bottom">
+                        <!--<span class="label label-success notification">Success</span><span class="label label-warning notification">Warning</span>-->
+                    </div>
                 </li>
                 <li class="new panel" data-toggle="modal" data-target="#newProjectModal">
                     <p>+</p>

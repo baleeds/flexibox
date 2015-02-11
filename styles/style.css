@@ -23,11 +23,42 @@
   list-style: none;
   width: 300px;
   float: left;
-  padding: 20px;
   margin-right: 30px;
   background-color: #EAEAEA;
   min-height: 200px;
   margin-bottom: 30px;
+  position: relative;
+}
+.panel:hover > .panel-top {
+  opacity: 1;
+}
+.panel-top {
+  width: 100%;
+  height: 25px;
+  opacity: 0;
+}
+.panel-middle h4 {
+  margin-top: 0px;
+}
+.panel-middle {
+  padding: 0px 15px 30px 30px;
+  height: 125px;
+}
+.panel-bottom {
+  height: 25px;
+  position: absolute;
+  bottom: 0px;
+  left: 5px;
+}
+.panel-delete {
+  top: 2px;
+  float: right;
+  right: 6px;
+  position: relative;
+}
+.panel-delete:hover {
+  color: red;
+  text-decoration: none;
 }
 .panel img {
   max-width: 100%;
@@ -50,15 +81,6 @@
 }
 .new:hover p {
   color:  #828282;
-}
-.panel-delete {
-	top: -19px;
-	float: right;
-	right: -11px;
-	position: relative;
-}
-.panel-delete:hover {
-	color: red;
 }
 #imageForm {
 	background-color: #eee;
@@ -93,7 +115,9 @@
 .brand img:hover {
   opacity: 1;
 }
-
+.notification {
+  margin-left: 3px;
+}
 
 #imageDiv {
   -khtml-user-select: none;
