@@ -13,6 +13,7 @@ module.exports = function (grunt) {
 
             "angular": "../dependencies/js/angular/angular.min",
             "jquery": "../dependencies/js/jquery/jquery",
+            "jqueryUI": "../dependencies/js/jquery-ui/jquery-ui.min",
             "angularRoute": "../dependencies/js/angular-route/angular-route.min",
             "angularRouteStyles": "../dependencies/js/angular-route-styles/route-styles",
             "angularSanitize": "../dependencies/js/angular-sanitize/angular-sanitize.min",
