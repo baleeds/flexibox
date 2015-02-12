@@ -150,6 +150,16 @@ function (module, namespace, namespaceCommon) {
 
 	};
 
+	var timeoutId;
+
+
+	$scope.isOut = function() {
+		if (timeoutId) {
+			window.clearTimeout(timeoutId);
+			timeoutId = null;
+		}
+	};
+
     $scope.isOver = function(commentId){
         if($scope.container == null) {
             $scope.container = document.getElementById('imageDiv')
@@ -157,8 +167,13 @@ function (module, namespace, namespaceCommon) {
         $scope.currentComment = commentId;
         var comment = utilityFactory.findById($scope.post.comments, commentId);
 
-		$("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) },500);
-		$(".workspace").stop().animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)},500);
+		if (!timeoutId) {
+			timeoutId = window.setTimeout(function() {
+				timeoutId = null; // EDIT: added this line
+					$("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) },500);
+					$(".workspace").stop().animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)},500);
+			}, 500);
+		}
         //window.scrollTo(0, comment.smallest.y - ( (window.innerHeight - comment.height) / 2));
         //$scope.container.scrollLeft = comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2);
     };
