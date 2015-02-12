@@ -206,7 +206,7 @@
   left: 50%;
   margin-top: -15px !important;
   margin-left: -15px;
-  padding-top: 7px !important;
+  padding-top: 5px !important;
   -webkit-transition:0.2s linear all;
   -moz-transition:0.2s linear all;
   -o-transition:0.2s linear all;
@@ -275,7 +275,7 @@
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   background-color: #f5f5f5;
-  border-right: 1px solid #eee;
+  border-left: 1px solid #A5A5A5;
 }
 .workspace {
   height: auto;
