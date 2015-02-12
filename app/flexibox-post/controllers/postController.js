@@ -20,6 +20,8 @@ function (module, namespace, namespaceCommon) {
 	$scope.currentComment = 0;
     $scope.container = null;
     $scope.isDown = false;
+	$scope.currentView = 'full';
+	$scope.locationComments = 1;
 
 	var firstClick = 1;
 	var a = {};
@@ -144,6 +146,10 @@ function (module, namespace, namespaceCommon) {
         });
     };
 
+	$scope.testFunction = function() {
+				alert("hello");
+			};
+
     $scope.mMove = function(e) {
         if($scope.isDown) {
             b.x = e.pageX + $scope.container.scrollLeft;
@@ -210,6 +216,22 @@ function (module, namespace, namespaceCommon) {
 			timeoutId = null;
 		}
 	};
+
+	$scope.toggleView = function() {
+		if ($scope.currentView == 'full') {
+			$scope.currentView = 'scaled';
+		} else {
+			$scope.currentView = 'full';
+		}
+	};
+
+	$scope.toggleLocationComments = function() {
+		if ($scope.locationComments == 1) {
+			$scope.locationComments = 0;
+		} else {
+			$scope.locationComments = 1;
+		}
+	}
 
 	}]);
 });
