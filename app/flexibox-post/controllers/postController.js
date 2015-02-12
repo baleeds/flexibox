@@ -128,6 +128,20 @@ function (module, namespace, namespaceCommon) {
      */
     $scope.mUp = function(e){
         $scope.isDown = false;
+        $($scope.newDiv).resizable({
+            handles : "n, s, e, w, nw, se, sw",
+            containment : "#draggable-container",
+            stop : function(e, ui){
+                smallest = {x : ui.position.left, y : ui.position.top};
+                biggest = {x : ui.position.left + ui.size.width, y : ui.position.top + ui.size.height};
+            }
+        }).draggable({
+            containment : "#draggable-container",
+            stop : function(e, ui){
+                biggest = {x : biggest.x + (ui.position.left - smallest.x), y : biggest.y + (ui.position.top - smallest.y)};
+                smallest = {x : ui.position.left, y : ui.position.top};
+            }
+        });
     };
 
     $scope.mMove = function(e) {

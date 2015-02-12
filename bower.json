@@ -24,6 +24,7 @@
     "angular-sanitize": "1.2.21",
     "openstyle": "./.openstyle",
     "jquery": "2.1.1",
+    "jquery-ui": "1.11.2",
     "angular-route-styles": "*"
   },
   "devDependencies": {
@@ -56,6 +57,9 @@
     },
     "jquery": {
       "js": "dist/jquery.js"
+    },
+    "jquery-ui": {
+      "js": "jquery-ui.min.js"
     },
     "requirejs-bower": {
       "js": "require.js"

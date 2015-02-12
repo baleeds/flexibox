@@ -9,7 +9,8 @@ require.config({
 		"angularRouteStyles": "../dependencies/js/angular-route-styles/route-styles",
 		"angularSanitize": "../dependencies/js/angular-sanitize/angular-sanitize.min",
 		"bootstrap": "../dependencies/js/openstyle/bootstrap",
-		"jquery": "../dependencies/js/jquery/jquery"
+		"jquery": "../dependencies/js/jquery/jquery",
+		"jqueryUI": "../dependencies/js/jquery-ui/jquery-ui.min"
 	},
 
 	shim: {
@@ -34,6 +35,10 @@ require.config({
 		},
 		jquery: {
 			exports: "jquery"
+		},
+		jqueryUI: {
+            deps: ["jquery"],
+			exports: "jqueryUI"
 		}
 	}
 });

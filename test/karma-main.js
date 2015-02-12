@@ -23,6 +23,7 @@ require.config({
         "angularMocks": "/base/dependencies/js/angular-mocks/angular-mocks",
         "bootstrap": "/base/dependencies/js/openstyle/bootstrap",
         "jquery": "/base/dependencies/js/jquery/jquery",
+        "jqueryUI": "/base/dependencies/js/jquery-ui/jquery-ui.min",
         "specs": "/base/test/specs"
     },
 
@@ -48,6 +49,10 @@ require.config({
         },
         jquery: {
             exports: "jquery"
+        },
+        jqueryUI: {
+            deps: ["jquery"],
+            exports: "jqueryUI"
         }
     },
 

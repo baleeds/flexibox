@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../../../styles/post.css" />
 <div class="row">
 	<div id="imageDiv" class="col-md-9 main workspace">
-    	<img draggable="false" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" ng-mousemove="mMove($event);" />
+    	<img draggable="false" id="draggable-container" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" ng-mousemove="mMove($event);" />
     	<div ng-repeat="comment in post.comments" class="flexiBox" id="comment{{ comment.number }}" ng-style="{top:'{{ comment.smallest.y }}px', left:'{{ comment.smallest.x }}px', width:'{{ comment.width }}px', height:'{{ comment.height }}px', border: '4px solid {{ comment.color }}'}" ng-mouseenter="scrollSideBarOn(comment._id);" ng-mouseleave="scrollSideBarOff();" ng-class="{'flexiBoxHover': $parent.currentComment == comment._id}">
     		<div class="commentNumber flexiNumber" ng-style="{background: '{{ comment.color }}'}" ng-class="{'flexiNumberHover': $parent.currentComment == comment._id}">{{ comment.number }}</div>
 			<div class="hoverComment" ng-style="{top:'{{ comment.height - 5 }}px', 'border-bottom':'4px solid {{ comment.color }}'}" ng-class="{'hoverCommentHover': $parent.currentComment == comment._id}">
