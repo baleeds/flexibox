@@ -1,6 +1,7 @@
 define([
         "./resetable",
-        "./modal"
+        "./modal",
+        "./closable"
 ], function () {
    "use strict";
 });

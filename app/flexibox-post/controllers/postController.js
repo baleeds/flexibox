@@ -108,7 +108,7 @@ function (module, namespace, namespaceCommon) {
         $scope.newDiv = document.createElement("div");
 
         $scope.newDiv.className = 'flexiBox maybe';
-        $scope.newDiv.innerHTML = '<div class="flexiNumber">New</div>';
+        $scope.newDiv.innerHTML = '<div class="flexiNumber">New</div><div class="flexiClose" ng-click="newDiv = 0;">x</div>';
 
         $scope.newDiv.style.top = a.y + 'px';
         $scope.newDiv.style.left = a.x + 'px';
@@ -129,7 +129,6 @@ function (module, namespace, namespaceCommon) {
     $scope.mUp = function(e){
         $scope.isDown = false;
     };
-
 
     $scope.mMove = function(e) {
         if($scope.isDown) {
