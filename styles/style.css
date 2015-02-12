@@ -79,7 +79,7 @@
 .new p {
   color: #D3D3D3;
   font-size: 50px;
-  margin-top: 35px !important;
+  margin-top: 60px !important;
   text-align: center;
 }
 .new:hover p {
@@ -267,9 +267,10 @@
 }
 .replyLink {
   font-size: .8em !important;
+  opacity: .5;
 }
 .replyBlock {
-  border-color: #CBCBCB !important;
+  border-color: #DDDDDD !important;
 }
 .add-item {
   margin: 23px 0 0 30px;

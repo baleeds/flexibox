@@ -50,7 +50,7 @@
                                 <label class="control-label"><span ng-class="{'red' : imageUp === 0}">*</span> Image <span style="color:grey;"><i>(.jpg and .png only)</i></span></label>
                                 <input class="form-control" type="file" name="image" id="imageFileUpload" onchange="angular.element(this).scope().uploadFile(this.files);" ng-model="formData.image" ng-disabled="imageUp === 1" />
 
-                                <button ng-disabled="imageButtonState === 'Uploading...' || imageButtonState === 'Invalid file type'" ng-show="imageButtonState != ''" type="reset" class="btn btn-sm btn-warning" ng-click="resetImage()">{{ imageButtonState }}</button>
+                                <button ng-disabled="imageButtonState === 'Uploading...' || imageButtonState === 'Invalid file type'" ng-show="imageButtonState != ''" type="reset" class="btn btn-sm btn-warning" style="margin-top:7px;" ng-click="resetImage()">{{ imageButtonState }}</button>
                                 <span style="color:red;" ng-show="errorMessage != ''">{{ errorMessage }}</span>
                             </div>
                         </form>
