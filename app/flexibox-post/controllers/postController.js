@@ -154,6 +154,7 @@ function (module, namespace, namespaceCommon) {
 
 
 	$scope.isOut = function() {
+		$scope.currentComment = 0;
 		if (timeoutId) {
 			window.clearTimeout(timeoutId);
 			timeoutId = null;
@@ -161,9 +162,7 @@ function (module, namespace, namespaceCommon) {
 	};
 
     $scope.isOver = function(commentId){
-        if($scope.container == null) {
-            $scope.container = document.getElementById('imageDiv')
-        }
+
         $scope.currentComment = commentId;
         var comment = utilityFactory.findById($scope.post.comments, commentId);
 
@@ -177,6 +176,27 @@ function (module, namespace, namespaceCommon) {
         //window.scrollTo(0, comment.smallest.y - ( (window.innerHeight - comment.height) / 2));
         //$scope.container.scrollLeft = comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2);
     };
+
+	$scope.scrollSideBarOn = function(commentId) {
+		$scope.currentComment = commentId;
+
+		var comment = utilityFactory.findById($scope.post.comments, commentId);
+		if (!timeoutId) {
+			timeoutId = window.setTimeout(function() {
+				timeoutId = null; // EDIT: added this line
+				var p = $("#commentSide" + comment.number).position();
+				$(".sidebar").stop().animate({ scrollTop: p.top},500);
+			}, 500);
+		}
+	};
+
+	$scope.scrollSideBarOff = function() {
+		$scope.currentComment = 0;
+		if (timeoutId) {
+			window.clearTimeout(timeoutId);
+			timeoutId = null;
+		}
+	};
 
 	}]);
 });
