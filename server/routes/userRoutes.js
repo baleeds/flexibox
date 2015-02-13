@@ -88,5 +88,42 @@ module.exports = function(router, protect) {
                 })
             }
             res.json({message: "Sucessfully updated"});
-        })
+        });
+
+    router.route('/users/projects/:project_id')
+        .all(protect)
+        .delete(function(req, res){
+            User.findById(req.user._id, function(err, user) {
+                if (err)
+                    res.send(err)
+                for (var i = 0; i < req.user.projectsVisible.length; i++) {
+                    if (user.projectsVisible[i] == req.params.project_id) {
+                        user.projectsVisible.splice(i, 1);
+                    }
+                }
+                user.save(function (err) {
+                    if (err)
+                        res.send(err)
+                    res.json({message: 'User Updated'});
+                })
+            })
+        });
+
+    router.route('/users/updateProjects')
+        .all(protect)
+        .post(function(req, res){
+            User.findById(req.body.userID, function (err, user) {
+                if (err)
+                    res.send(err);
+
+                // upddate Project
+                user.projectsVisible = user.projectsVisible.concat(req.body.projectID);
+                // save the user
+                user.save(function (err) {
+                    if (err)
+                        res.send(err);
+                    res.json({message: 'User Updated'});
+                });
+            });
+        });
 };

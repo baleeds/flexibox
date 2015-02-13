@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="left">Welcome to <b>Flexi</b></h1>
-            <a href="#" data-toggle="modal" data-target="#newProjectModal" class="btn btn-default btn-sm add-item">Create a project</a>
+            <a href="#" data-toggle="modal" data-target="#newProjectModal" class="btn btn-default btn-sm add-item" ng-hide="user.role=='Commenter'">Create a project</a>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
                         <!--<span class="label label-success notification">Success</span><span class="label label-warning notification">Warning</span>-->
                     </div>
                 </li>
-                <li class="new panel" data-toggle="modal" data-target="#newProjectModal">
+                <li class="new panel" data-toggle="modal" data-target="#newProjectModal" ng-hide="user.role =='Commenter'">
                     <p>+</p>
                 </li>
             </ul>

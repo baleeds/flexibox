@@ -11,6 +11,8 @@ var ProjectSchema = new Schema({
 	name: { type:String, required: true },
 	description: String,
 	members: [Schema.ObjectId],
+	owners: [],
+	commenters: [],
 	entryURL: String,
 	setsURL: String,
 	sets: [{

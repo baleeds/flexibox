@@ -12,14 +12,33 @@ define([
 
         var name = namespace + ".homeController";
         module.controller(name,
-              ['$scope','$rootScope', '$log', namespaceCommon + '.homeFactory', namespaceCommon + '.utilityFactory',
-               function ($scope, $rootScope, $log, homeFactory, utilityFactory) {
+              ['$scope','$rootScope', '$log', namespaceCommon + '.homeFactory', namespaceCommon + '.utilityFactory',namespaceCommon +'.sessionFactory',
+               function ($scope, $rootScope, $log, homeFactory, utilityFactory, sessionFactory) {
 
             var logger = $log.getInstance(name);
 
             $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
+            sessionFactory.getCurrentUser()
+                 .success(function(user) {
+                    $scope.user = user;
+                    $scope.userForm ={};
+                    $scope.userForm.projects =$scope.user.projectsVisible;
+                    /**
+                    homeFactory.getUserProjects($scope.userForm)
+                        .success(function(projectData){
+                            $scope.projects = projectData;
+                        })
+                        .error(function(projectData) {
+                            logger.error('homeController - Error getting projects: ' + projectData);
+                        });
+                     */
+                   })
+                .error(function(err) {
+                               // Do nothing
+                   });
+            // On controller load, populate project
 
-            // On controller load, populate projects
+
             homeFactory.getProjects()
                 .success(function(projectData) {
                     $scope.projects = projectData;
@@ -30,12 +49,23 @@ define([
 
             // Create a project based on form data.  Called by upload modal
             $scope.createProject = function() {
+                $scope.formData.userID = $scope.user._id;
                 var fd = $scope.formData;
+
 
                 homeFactory.createProject(fd)
                     .success(function(projectData) {
                         $scope.formData = {};
                         $scope.projects = projectData;
+                        $scope.formData.projectID = $scope.projects[$scope.projects.length-1]._id;
+                        $scope.formData.userID = $scope.user._id;
+                        homeFactory.updateUserProjects($scope.formData)
+                            .success(function(data){
+                                scope.formData ={};
+                            })
+                            .error(function(data){
+                                logger.error('homeController - Error creating project: ' + data);
+                            })
                     })
                     .error(function(projectData) {
                         logger.error('homeController - Error creating project: ' + projectData);
@@ -56,6 +86,14 @@ define([
                     .error(function(projectData) {
                         logger.error('homeController - Error deleting project: ' + projectData);
                     });
+                homeFactory.deleteUserProject(id)
+                    .success(function(data){
+
+                    })
+                    .error(function(projectData) {
+                        logger.error('homeController - Error deleting project: ' + projectData);
+                    });
+
             };
 
         }]);

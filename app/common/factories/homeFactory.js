@@ -13,10 +13,15 @@ define([
 		module.factory(name, ['$http', function ($http) {
 
 			var homeFactory = {};
-			
+
 			// Get all projects
 			homeFactory.getProjects = function() {
 				return $http.get('/api/projects');
+			};
+
+			homeFactory.getUserProjects = function(fd) {
+				console.log("Project ID: " + fd.projects[0]);
+				return $http.get('/api/projects/userProjects', fd);
 			};
 
 			// Create a project from form data
@@ -26,10 +31,18 @@ define([
 				});
 			};
 
+			homeFactory.updateUserProjects = function(fd){
+				return $http.post('/api/users/updateProjects', fd)
+			};
 			// Delete a project by ID
 			homeFactory.deleteProject = function(id) {
 				return $http.delete('/api/projects/' + id);
 			};
+
+			homeFactory.deleteUserProject = function(id){
+				return $http.delete('/api/users/projects/' + id)
+			};
+
 
 			// Update a project's persistence to match project object
 			homeFactory.updateProject = function(id, fd) {

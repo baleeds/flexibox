@@ -15,7 +15,7 @@ module.exports = function(router, protect){
             project.description = req.body.description;
             project.entryURL = '/api/projects/' + project._id;
             project.setsURL = project.entryURL + '/sets';
-
+            project.owners = req.body.userID;
             project.save(function(err) {
                 if (err)
                     res.send(err);
@@ -29,21 +29,34 @@ module.exports = function(router, protect){
 
         // get all projects
         .get(function(req, res) {
-            Project
+            if (req.user.role == 'System Admin'){
+                console.log(req.user.role);
+                Project
                 .find()
                 .select('name description setsURL entryURL')
-                .exec(function(err, projects) {
+                .exec(function (err, projects) {
                     if (err)
                         res.send(err);
 
                     res.json(projects);
                 });
+            }else {
+                Project
+                    .find({"_id": {$in: req.user.projectsVisible}})
+                    .select('name description setsURL entryURL')
+                    .exec(function (err, projects) {
+                        if (err)
+                            res.send(err);
+
+                        res.json(projects);
+                    });
+            }
         });
 
     router.route('/projects/:project_id') // accessed at //<server>:<port>/api/projects/id
         .all(protect)
         // get a project
-        .get(function(req, res) {
+        .get(function(req, res){
             if (req.query.includeSets) {
                 Project
                     .findById(req.params.project_id)
@@ -98,6 +111,12 @@ module.exports = function(router, protect){
                     res.json(projects);
                 });
             });
+        });
+    router.route('/projects/userProjects') // accessed at //<server>:<port>/api/projects/id
+        .all(protect)
+        // get a project
+        .get(function(req, res) {
+                console.log(req.body);
         });
 
 };
