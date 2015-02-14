@@ -78,7 +78,6 @@ router.route('/signup')
 router.route('/logout')
 	.get(function(req, res) {
 		req.logout();
-		console.log("Logged out");
 		res.redirect('/');
 });
 
@@ -86,10 +85,7 @@ router.route('/logout')
 function isLoggedIn(req, res, next) {
 
 	// if user is authenticated in the session, carry on
-	console.log("Are you logged in: " + req.isAuthenticated());
-
 	if (req.isAuthenticated()) {
-		console.log("Current User: " + req.user.id);
 		return next();
 	}
 	else {
@@ -156,7 +152,6 @@ app.get('/', function(req, res) {
 });
 app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
-	console.log(req.user);
 });
 
 app.get('*', function(req, res) {

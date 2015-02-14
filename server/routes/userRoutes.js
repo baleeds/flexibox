@@ -32,7 +32,6 @@ module.exports = function(router, protect) {
     router.route('/users/current')
         .all(protect)
         .get(function (req, res) {
-            console.log(req.user);
             User.findById(req.user.id, function (err, user) {
                 if (err)
                     res.send(err);
@@ -107,23 +106,5 @@ module.exports = function(router, protect) {
                     res.json({message: 'User Updated'});
                 })
             })
-        });
-
-    router.route('/users/updateProjects')
-        .all(protect)
-        .post(function(req, res){
-            User.findById(req.body.userID, function (err, user) {
-                if (err)
-                    res.send(err);
-
-                // upddate Project
-                user.projectsVisible = user.projectsVisible.concat(req.body.projectID);
-                // save the user
-                user.save(function (err) {
-                    if (err)
-                        res.send(err);
-                    res.json({message: 'User Updated'});
-                });
-            });
         });
 };

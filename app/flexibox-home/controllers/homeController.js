@@ -57,15 +57,6 @@ define([
                     .success(function(projectData) {
                         $scope.formData = {};
                         $scope.projects = projectData;
-                        $scope.formData.projectID = $scope.projects[$scope.projects.length-1]._id;
-                        $scope.formData.userID = $scope.user._id;
-                        homeFactory.updateUserProjects($scope.formData)
-                            .success(function(data){
-                                scope.formData ={};
-                            })
-                            .error(function(data){
-                                logger.error('homeController - Error creating project: ' + data);
-                            })
                     })
                     .error(function(projectData) {
                         logger.error('homeController - Error creating project: ' + projectData);
