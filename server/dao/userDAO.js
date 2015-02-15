@@ -15,9 +15,24 @@ module.exports= {
             user.save(function (err) {
                 if (err)
                     console.log(err);
+
                 callback(user);
             });
 
         })
+    },
+    deleteProjects: function(projID, callback){
+        User.find({projectsVisible:projID}, function(err, users){
+            var idx;
+            for(var i=0; i<users.length;i++){
+                idx = users[i].projectsVisible.indexOf(projID);
+                users[i].projectsVisible.splice(idx, 1);
+                users[i].save(function(err){
+                    if(err)
+                        console.log(err);
+                })
+            }
+        });
+        callback();
     }
 };

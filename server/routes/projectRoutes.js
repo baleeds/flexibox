@@ -102,8 +102,10 @@ module.exports = function(router, protect){
                     }
                     res.json(projects);
                 };
-                projectDAO.getMyProjects(req.user, callback);
-
+                var userCallback = function(){
+                    projectDAO.getMyProjects(req.user, callback);
+                };
+                userDAO.deleteProjects(req.params.project_id, userCallback);
             });
         });
     router.route('/projects/userProjects') // accessed at //<server>:<port>/api/projects/id
