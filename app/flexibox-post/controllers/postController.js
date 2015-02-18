@@ -96,29 +96,35 @@ function (module, namespace, namespaceCommon) {
      * @param e {MouseEvent} The event object created by the mouse down event.
      */
 	$scope.mDown = function(e) {
-        if($scope.container == null){
-            $scope.container = document.getElementById('imageDiv')
+        if($scope.currentView == 'full') {
+            if ($scope.container == null) {
+                $scope.container = document.getElementById('imageDiv')
+            }
+            if ($scope.newDiv !== 0) {
+                $scope.container.removeChild($scope.newDiv);
+                $scope.newDiv = 0;
+            }
+            $scope.isDown = true;
+            a.x = e.pageX + $scope.container.scrollLeft;
+            a.y = e.pageY - $scope.container.offsetTop - $scope.container.scrollTop;
+
+            $scope.newDiv = document.createElement("div");
+
+            $scope.newDiv.className = 'flexiBox maybe';
+            $scope.newDiv.innerHTML = '<div class="flexiNumber">New</div><div class="flexiClose" ng-click="newDiv = 0;">x</div>';
+
+            $scope.newDiv.style.top = a.y + 'px';
+            $scope.newDiv.style.left = a.x + 'px';
+
+            document.getElementById('imageDiv').appendChild($scope.newDiv);
+
+            $scope.newDiv.onmousemove = function (e) {
+                $scope.mMove(e);
+            };
+            $scope.newDiv.onmouseup = function (e) {
+                $scope.mUp(e);
+            };
         }
-		if ($scope.newDiv !== 0) {
-            $scope.container.removeChild($scope.newDiv);
-			$scope.newDiv = 0;
-		}
-        $scope.isDown = true;
-		a.x = e.pageX + $scope.container.scrollLeft;
-		a.y = e.pageY - $scope.container.offsetTop - $scope.container.scrollTop;
-
-        $scope.newDiv = document.createElement("div");
-
-        $scope.newDiv.className = 'flexiBox maybe';
-        $scope.newDiv.innerHTML = '<div class="flexiNumber">New</div><div class="flexiClose" ng-click="newDiv = 0;">x</div>';
-
-        $scope.newDiv.style.top = a.y + 'px';
-        $scope.newDiv.style.left = a.x + 'px';
-
-        document.getElementById('imageDiv').appendChild($scope.newDiv);
-
-        $scope.newDiv.onmousemove = function(e){$scope.mMove(e);};
-        $scope.newDiv.onmouseup = function(e){$scope.mUp(e);};
 	};
 
     /**
@@ -185,7 +191,7 @@ function (module, namespace, namespaceCommon) {
         $scope.currentComment = commentId;
         var comment = utilityFactory.findById($scope.post.comments, commentId);
 
-		if (!timeoutId) {
+		if (!timeoutId && $scope.currentView == 'full') {
 			timeoutId = window.setTimeout(function() {
 				timeoutId = null; // EDIT: added this line
 					$("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) },500);
@@ -217,21 +223,76 @@ function (module, namespace, namespaceCommon) {
 		}
 	};
 
-	$scope.toggleView = function() {
-		if ($scope.currentView == 'full') {
-			$scope.currentView = 'scaled';
-		} else {
-			$scope.currentView = 'full';
-		}
-	};
-
 	$scope.toggleLocationComments = function() {
 		if ($scope.locationComments == 1) {
 			$scope.locationComments = 0;
 		} else {
 			$scope.locationComments = 1;
 		}
-	}
+	};
+
+    $scope.toggleView = function(){
+        if($scope.currentView == 'full') {
+            if ($scope.container == null) {
+                $scope.container = document.getElementById('imageDiv')
+            }
+            var image = document.getElementById('draggable-container');
+            var imageWidth = image.width;
+            var imageHeight = image.height;
+            var imageRatio = imageWidth / imageHeight;
+
+            var sceneWidth = $scope.container.getClientRects()[0].width - (2 * 50);
+            var sceneHeight = $(".sidebar")[0].getClientRects()[0].height - (2 * 50);
+
+            if (imageWidth > sceneWidth && imageHeight > sceneHeight) {
+                if (imageWidth > imageHeight) {
+                    var widthDiff = imageWidth - sceneWidth;
+                    $("#draggable-container").css({
+                        width: sceneWidth + "px",
+                        height: Math.floor(sceneWidth / imageRatio) + "px"
+                    });
+                    $scope.post.comments.forEach(function(comment, idx){
+                        var $comment = $("#comment" + (idx + 1));
+                        $comment.data("prev-css", $comment[0].getAttribute("style"));
+                        var commentHeightRatio = comment.smallest.y / imageHeight;
+                        var commentWidthRatio = comment.smallest.x / imageWidth;
+                        $comment.css({
+                            height: 0,
+                            width : 0,
+                            left : ((sceneWidth * commentWidthRatio) + 50) + "px",
+                            top : (Math.floor(sceneWidth * commentHeightRatio / imageRatio) + 50) + "px"
+                        });
+                    });
+                } else {
+                    var heightDiff = imageHeight - sceneHeight;
+                    $("#draggable-container").css({
+                        width: Math.ceil(sceneHeight * imageRatio) + "px",
+                        height: sceneHeight + "px"
+                    });
+                }
+            } else if (imageWidth > sceneWidth) {
+                var widthDiff = imageWidth - sceneWidth;
+                $("#draggable-container").css({
+                    width: sceneWidth + "px",
+                    height: Math.ceil(sceneWidth / imageRatio) + "px"
+                });
+            } else if (imageHeight > sceneHeight) {
+                var heightDiff = imageHeight - sceneHeight;
+                $("#draggable-container").css({
+                    width: Math.ceil(sceneHeight * imageRatio) + "px",
+                    height: sceneHeight + "px"
+                });
+            }
+            $scope.currentView = 'scaled';
+        } else {
+            $("#draggable-container")[0].removeAttribute("style");
+            $scope.post.comments.forEach(function(comment, idx){
+                var $comment = $("#comment" + (idx + 1));
+                $comment[0].setAttribute("style", $comment.data("prev-css"));
+            });
+            $scope.currentView = 'full';
+        }
+    };
 
 	}]);
 });
