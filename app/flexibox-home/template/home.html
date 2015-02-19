@@ -56,6 +56,14 @@
                                 <label class="control-label">Description</label>
                                 <input class="form-control" type="text" name="description" placeholder="description" ng-model="formData.description" ng-maxlength="256" />
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Tags</label>
+                                <div class="form-control form-tags">
+                                    <span ng-repeat="tag in formData.tags" class="form-tag">{{ tag.text }}</span>
+                                    <input class="form-new-tag" ng-model="newTag" placeholder="add a tag" press-enter="addTag();" />
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -88,6 +96,14 @@
                             <div class="form-group">
                                 <label class="control-label">Description</label>
                                 <input class="form-control" type="text" name="description" placeholder="description" ng-model="editableProject.description" ng-maxlength="256" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Tags</label>
+                                <div class="form-control form-tags">
+                                    <span ng-repeat="tag in editableProject.tags" class="form-tag">{{ tag.text }}</span>
+                                    <input class="form-new-tag" ng-model="newTag" />
+                                </div>
                             </div>
                         </form>
                     </div>

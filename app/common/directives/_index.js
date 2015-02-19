@@ -1,7 +1,8 @@
 define([
         "./resetable",
         "./modal",
-        "./closable"
+        "./closable",
+        "./pressEnter"
 ], function () {
    "use strict";
 });

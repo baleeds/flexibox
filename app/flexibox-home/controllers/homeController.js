@@ -19,6 +19,8 @@ define([
 
             $scope.editableProject = 0;
             $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
+            $scope.newTag = "";
+
             sessionFactory.getCurrentUser()
                  .success(function(user) {
                     $scope.user = user;
@@ -109,6 +111,10 @@ define([
                     });
 
             };
+
+           $scope.addTag = function() {
+
+           };
 
         }]);
     });
