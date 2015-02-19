@@ -62,9 +62,10 @@ function (module, namespace, namespaceCommon) {
 			.success(function(post) {
 				$scope.post = post;
 				$scope.newComment = {};
-				if ($scope.newDiv !== 0) {
+				if ($scope.newDiv != 0) {
 					document.getElementById('imageDiv').removeChild($scope.newDiv);
 					$scope.newDiv = 0;
+                    smallest = 0;
 				}
 			})
 			.error(function(post) {
@@ -187,7 +188,10 @@ function (module, namespace, namespaceCommon) {
         var p = $("#commentSide" + comment.number).position();
         $(".sidebar").stop().animate({ scrollTop: p.top},500);
     };
+
+
     /*
+    In case they want to go back to the hover method!
 
 	var timeoutId;
 
