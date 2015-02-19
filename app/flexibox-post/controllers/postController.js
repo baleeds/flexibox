@@ -270,16 +270,20 @@ function (module, namespace, namespaceCommon) {
                         height: Math.floor(sceneWidth / imageRatio) + "px"
                     });
                     $scope.post.comments.forEach(function(comment, idx){
-                        var $comment = $("#comment" + (idx + 1));
-                        $comment.data("prev-css", $comment[0].getAttribute("style"));
-                        var commentHeightRatio = comment.smallest.y / imageHeight;
-                        var commentWidthRatio = comment.smallest.x / imageWidth;
-                        $comment.css({
-                            height: 0,
-                            width : 0,
-                            left : ((sceneWidth * commentWidthRatio) + 50) + "px",
-                            top : (Math.floor(sceneWidth * commentHeightRatio / imageRatio) + 50) + "px"
-                        });
+                        if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                            var $comment = $("#comment" + (idx + 1));
+                            if($comment.length > 0) {
+                                $comment.data("prev-css", $comment[0].getAttribute("style"));
+                                var commentHeightRatio = comment.smallest.y / imageHeight;
+                                var commentWidthRatio = comment.smallest.x / imageWidth;
+                                $comment.css({
+                                    height: 0,
+                                    width: 0,
+                                    left: ((sceneWidth * commentWidthRatio) + 50) + "px",
+                                    top: (Math.floor(sceneWidth * commentHeightRatio / imageRatio) + 50) + "px"
+                                });
+                            }
+                        }
                     });
                 } else {
                     $("#draggable-container").css({
@@ -287,16 +291,20 @@ function (module, namespace, namespaceCommon) {
                         height: sceneHeight + "px"
                     });
                     $scope.post.comments.forEach(function(comment, idx){
-                        var $comment = $("#comment" + (idx + 1));
-                        $comment.data("prev-css", $comment[0].getAttribute("style"));
-                        var commentHeightRatio = comment.smallest.y / imageHeight;
-                        var commentWidthRatio = comment.smallest.x / imageWidth;
-                        $comment.css({
-                            height: 0,
-                            width : 0,
-                            left : (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px",
-                            top : (Math.floor(sceneWidth * commentHeightRatio) + 50) + "px"
-                        });
+                        if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                            var $comment = $("#comment" + (idx + 1));
+                            if(comment.length > 0) {
+                                $comment.data("prev-css", $comment[0].getAttribute("style"));
+                                var commentHeightRatio = comment.smallest.y / imageHeight;
+                                var commentWidthRatio = comment.smallest.x / imageWidth;
+                                $comment.css({
+                                    height: 0,
+                                    width: 0,
+                                    left: (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px",
+                                    top: (Math.floor(sceneWidth * commentHeightRatio) + 50) + "px"
+                                });
+                            }
+                        }
                     });
                 }
             } else if (imageWidth > sceneWidth) {
@@ -305,16 +313,20 @@ function (module, namespace, namespaceCommon) {
                     height: Math.ceil(sceneWidth / imageRatio) + "px"
                 });
                 $scope.post.comments.forEach(function(comment, idx){
-                    var $comment = $("#comment" + (idx + 1));
-                    $comment.data("prev-css", $comment[0].getAttribute("style"));
-                    var commentHeightRatio = comment.smallest.y / imageHeight;
-                    var commentWidthRatio = comment.smallest.x / imageWidth;
-                    $comment.css({
-                        height: 0,
-                        width : 0,
-                        left : ((sceneWidth * commentWidthRatio) + 50) + "px",
-                        top : (Math.floor(sceneWidth * commentHeightRatio / imageRatio) + 50) + "px"
-                    });
+                    if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                        var $comment = $("#comment" + (idx + 1));
+                        if($comment.length > 0) {
+                            $comment.data("prev-css", $comment[0].getAttribute("style"));
+                            var commentHeightRatio = comment.smallest.y / imageHeight;
+                            var commentWidthRatio = comment.smallest.x / imageWidth;
+                            $comment.css({
+                                height: 0,
+                                width: 0,
+                                left: ((sceneWidth * commentWidthRatio) + 50) + "px",
+                                top: (Math.floor(sceneWidth * commentHeightRatio / imageRatio) + 50) + "px"
+                            });
+                        }
+                    }
                 });
             } else if (imageHeight > sceneHeight) {
                 $("#draggable-container").css({
@@ -323,16 +335,20 @@ function (module, namespace, namespaceCommon) {
                 });
 
                 $scope.post.comments.forEach(function(comment, idx){
-                    var $comment = $("#comment" + (idx + 1));
-                    $comment.data("prev-css", $comment[0].getAttribute("style"));
-                    var commentHeightRatio = comment.smallest.y / imageHeight;
-                    var commentWidthRatio = comment.smallest.x / imageWidth;
-                    $comment.css({
-                        height: 0,
-                        width : 0,
-                        left : (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px",
-                        top : (Math.floor(sceneWidth * commentHeightRatio) + 50) + "px"
-                    });
+                    if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                        var $comment = $("#comment" + (idx + 1));
+                        if($comment.length > 0) {
+                            $comment.data("prev-css", $comment[0].getAttribute("style"));
+                            var commentHeightRatio = comment.smallest.y / imageHeight;
+                            var commentWidthRatio = comment.smallest.x / imageWidth;
+                            $comment.css({
+                                height: 0,
+                                width: 0,
+                                left: (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px",
+                                top: (Math.floor(sceneWidth * commentHeightRatio) + 50) + "px"
+                            });
+                        }
+                    }
                 });
             }
 
@@ -340,7 +356,9 @@ function (module, namespace, namespaceCommon) {
             $("#draggable-container")[0].removeAttribute("style");
             $scope.post.comments.forEach(function(comment, idx){
                 var $comment = $("#comment" + (idx + 1));
-                $comment[0].setAttribute("style", $comment.data("prev-css"));
+                if($comment.length > 0) {
+                    $comment[0].setAttribute("style", $comment.data("prev-css"));
+                }
             });
             $scope.currentView = 'full';
         }
