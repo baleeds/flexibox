@@ -17,6 +17,7 @@ define([
 
             var logger = $log.getInstance(name);
 
+            $scope.editableProject = 0;
             $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
             sessionFactory.getCurrentUser()
                  .success(function(user) {
@@ -38,6 +39,28 @@ define([
                    });
             // On controller load, populate project
 
+            var oldProject = {};
+
+            $scope.setEditable = function(projectId) {
+                $scope.editableProject = utilityFactory.findById($scope.projects, projectId);
+                oldProject.name = $scope.editableProject.name;
+                oldProject.description = $scope.editableProject.description;
+            };
+
+            $scope.confirmEdit = function() {
+               homeFactory.updateProject($scope.editableProject._id, $scope.editableProject)
+                   .success(function (set) {
+                       //
+                   }).error(function (err) {
+                       //
+                   });
+               oldProject = {};
+            };
+
+            $scope.cancelEdit = function() {
+                $scope.editableProject.name = oldProject.name;
+                $scope.editableProject.description = oldProject.description;
+            };
 
             homeFactory.getProjects()
                 .success(function(projectData) {
