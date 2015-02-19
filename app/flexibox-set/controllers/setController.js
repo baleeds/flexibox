@@ -12,8 +12,8 @@ define([
 
 		var name = namespace + '.setController';
 		module.controller(name,
-			['$scope', '$rootScope', '$log', namespaceCommon + '.setFactory', '$routeParams', namespaceCommon + '.utilityFactory',
-			function ($scope, $rootScope, $log, setFactory, $routeParams, utilityFactory) {
+			['$scope', '$rootScope', '$log', namespaceCommon + '.setFactory', '$routeParams', namespaceCommon + '.utilityFactory', namespaceCommon + '.postFactory',
+			function ($scope, $rootScope, $log, setFactory, $routeParams, utilityFactory, postFactory) {
 
 			var logger = $log.getInstance(name);
 
@@ -23,6 +23,28 @@ define([
 			var newImageURL = "";          // stores URL of most recently uploaded image
 			$scope.imageUp = 0;            // determines whether an image was uploaded
 			$scope.imageButtonState = "";  // text to be displayed on image button (uploading..., delete)
+			var oldPost = {};				//
+			$scope.editablePost = {};
+
+			$scope.postEditable = function(postId) {
+				$scope.editablePost = utilityFactory.findById($scope.set.posts, postId);
+				oldPost.name = $scope.editablePost.name;
+				oldPost.description = $scope.editablePost.description;
+			};
+
+			$scope.confirmEdit = function() {
+				postFactory.updatePost($routeParams.projectId, $routeParams.setId, $scope.editablePost._id, $scope.editablePost)
+					.success(function(post) {
+						//
+					}).error(function(err) {
+						alert("error");
+					});
+			};
+
+			$scope.cancelEdit = function() {
+				$scope.editablePost.name = oldPost.name;
+				$scope.editablePost.description = oldPost.description;
+			};
 
 			// On controller load, populate local instance of focused set
 			setFactory.getSet($routeParams.projectId, $routeParams.setId)

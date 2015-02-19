@@ -290,6 +290,7 @@
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   background-color: #f5f5f5;
   border-left: 1px solid #A5A5A5;
+  padding: 0px;
 }
 .workspace {
   height: auto;

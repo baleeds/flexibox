@@ -28,11 +28,12 @@ define([
 
 			$scope.confirmEdit = function() {
 				setFactory.updateSet($scope.project._id, $scope.editableSet._id, $scope.editableSet)
-					.success(function(set) {
+					.success(function (set) {
 						//
-					}).error(function(err) {
-						alert("error");
+					}).error(function (err) {
+						//
 					});
+				oldSet = {};
 			};
 
 			$scope.cancelEdit = function() {

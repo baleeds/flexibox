@@ -146,9 +146,9 @@ function (module, namespace, namespaceCommon) {
         });
     };
 
-	$scope.testFunction = function() {
-				alert("hello");
-			};
+	$scope.setCurrentComment = function(id) {
+		$scope.currentComment = id;
+	};
 
     $scope.mMove = function(e) {
         if($scope.isDown) {
@@ -180,41 +180,22 @@ function (module, namespace, namespaceCommon) {
 		}
 	};
 
-    $scope.isOver = function(commentId){
+    $scope.viewScroll = function(){
 
-        $scope.currentComment = commentId;
-        var comment = utilityFactory.findById($scope.post.comments, commentId);
+        var comment = utilityFactory.findById($scope.post.comments, $scope.currentComment);
 
-		if (!timeoutId) {
-			timeoutId = window.setTimeout(function() {
-				timeoutId = null; // EDIT: added this line
-					$("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) },500);
-					$(".workspace").stop().animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)},500);
-			}, 500);
-		}
-        //window.scrollTo(0, comment.smallest.y - ( (window.innerHeight - comment.height) / 2));
-        //$scope.container.scrollLeft = comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2);
+		$("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) },500);
+		$(".workspace").stop().animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)},500);
+
     };
 
-	$scope.scrollSideBarOn = function(commentId) {
-		$scope.currentComment = commentId;
+	$scope.scrollSideBar = function() {
 
-		var comment = utilityFactory.findById($scope.post.comments, commentId);
-		if (!timeoutId) {
-			timeoutId = window.setTimeout(function() {
-				timeoutId = null; // EDIT: added this line
-				var p = $("#commentSide" + comment.number).position();
-				$(".sidebar").stop().animate({ scrollTop: p.top},500);
-			}, 500);
-		}
-	};
+		var comment = utilityFactory.findById($scope.post.comments, $scope.currentComment);
 
-	$scope.scrollSideBarOff = function() {
-		$scope.currentComment = 0;
-		if (timeoutId) {
-			window.clearTimeout(timeoutId);
-			timeoutId = null;
-		}
+		var p = $("#commentSide" + comment.number).position();
+		$(".sidebar").stop().animate({ scrollTop: p.top},500);
+
 	};
 
 	$scope.toggleView = function() {
