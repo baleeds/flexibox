@@ -31,9 +31,6 @@ define([
 				});
 			};
 
-			homeFactory.updateUserProjects = function(fd){
-				return $http.post('/api/users/updateProjects', fd)
-			};
 			// Delete a project by ID
 			homeFactory.deleteProject = function(id) {
 				return $http.delete('/api/projects/' + id);

@@ -1,4 +1,6 @@
 var Project = require('../../app/common/models/projects');
+var projectDAO = require('../dao/projectDAO');
+var userDAO = require('../dao/userDAO');
 
 module.exports = function(router, protect){
 
@@ -8,7 +10,6 @@ module.exports = function(router, protect){
         .all(protect)
         // add a project
         .post(function(req, res) {
-            console.log(req.body);
             var project = new Project();
 
             project.name = req.body.name;
@@ -19,38 +20,28 @@ module.exports = function(router, protect){
             project.save(function(err) {
                 if (err)
                     res.send(err);
-
-                Project.find(function(err, projects) {
-                    if (err) res.send(err);
+                var callback = function(projects) {
+                    if (projects == null) {
+                        res.status(404).end();
+                    }
                     res.json(projects);
-                });
+                };
+                var userCallback = function(user){
+                    projectDAO.getMyProjects(user, callback);
+                };
+                userDAO.updateProjects(req.user, project._id, userCallback );
             });
         })
 
         // get all projects
         .get(function(req, res) {
-            if (req.user.role == 'System Admin'){
-                console.log(req.user.role);
-                Project
-                .find()
-                .select('name description setsURL entryURL')
-                .exec(function (err, projects) {
-                    if (err)
-                        res.send(err);
-
-                    res.json(projects);
-                });
-            }else {
-                Project
-                    .find({"_id": {$in: req.user.projectsVisible}})
-                    .select('name description setsURL entryURL')
-                    .exec(function (err, projects) {
-                        if (err)
-                            res.send(err);
-
-                        res.json(projects);
-                    });
-            }
+            var callback = function(projects) {
+                if (projects == null) {
+                    res.status(404).end();
+                }
+                res.json(projects);
+            };
+            projectDAO.getMyProjects(req.user, callback);
         });
 
     router.route('/projects/:project_id') // accessed at //<server>:<port>/api/projects/id
@@ -105,11 +96,16 @@ module.exports = function(router, protect){
             }, function(err, bear) {
                 if (err)
                     res.send(err);
-
-                Project.find(function(err, projects) {
-                    if (err) res.send(err);
+                var callback = function(projects) {
+                    if (projects == null) {
+                        res.status(404).end();
+                    }
                     res.json(projects);
-                });
+                };
+                var userCallback = function(){
+                    projectDAO.getMyProjects(req.user, callback);
+                };
+                userDAO.deleteProjects(req.params.project_id, userCallback);
             });
         });
     router.route('/projects/userProjects') // accessed at //<server>:<port>/api/projects/id
