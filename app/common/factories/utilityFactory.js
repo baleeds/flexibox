@@ -15,7 +15,7 @@ define([
 			// Find a subset of data by _id
 			utilityFactory.findById = function(data, id) {
 				for (var i = 0; i < data.length; i++) {
-					if (data[i]._id == id) {
+					if (data[i]._id === id) {
 						return(data[i]);
 					}
 				}
@@ -25,12 +25,21 @@ define([
 			// Find index of a piece of data
 			utilityFactory.findIndexById = function(data, id) {
 				for (var i = 0; i < data.length; i++) {
-					if (data[i]._id == id) {
+					if (data[i]._id === id) {
 						return(i);
 					}
 				}
-				return "";
+				return -1;
 			};
+
+			utilityFactory.findTagIndex = function(data, text) {
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].text === text) {
+						return(i);
+					}
+				}
+				return -1;
+			}
 
 			utilityFactory.randomColor = function(brightness) {
 				//6 levels of brightness from 0 to 5, 0 being the darkest

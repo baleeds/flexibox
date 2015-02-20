@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label class="control-label">Tags</label>
                                 <div class="form-control form-tags">
-                                    <span ng-repeat="tag in newTags" class="form-tag">{{ tag.text }}</span>
+                                    <span ng-repeat="tag in newTags" class="form-tag"  ng-click="removeTag($index);">{{ tag.text }}</span>
                                     <input class="form-new-tag" ng-model="newTag" placeholder="add a tag" press-enter="addTag();" />
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="form-group">
                                 <label class="control-label">Tags</label>
                                 <div class="form-control form-tags">
-                                    <span ng-repeat="tag in newTags" class="form-tag">{{ tag.text }}</span>
+                                    <span ng-repeat="tag in newTags" ng-click="removeTag($index);" class="form-tag">{{ tag.text }}</span>
                                     <input class="form-new-tag" ng-model="newTag" placeholder="add a tag" press-enter="addTag();"/>
                                 </div>
                             </div>

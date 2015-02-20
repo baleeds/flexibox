@@ -120,11 +120,18 @@ define([
             };
 
             $scope.addTag = function() {
-                if($scope.newTag != '') {
+                var tagIndex = utilityFactory.findTagIndex($scope.newTags, $scope.newTag);
+                if($scope.newTag != '' && tagIndex === -1) {
+                    $scope.newTag = $scope.newTag.toLowerCase();
+                    $scope.newTag = $scope.newTag.replace(/[^a-zA-Z0-9\+\-\.#]/g,'');
                     $scope.newTags.push({'text':$scope.newTag});
                     $scope.newTag = '';
                 }
             };
+
+           $scope.removeTag = function(index) {
+               $scope.newTags.splice(index,1);
+           };
 
         }]);
     });
