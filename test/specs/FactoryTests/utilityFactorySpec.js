@@ -59,7 +59,7 @@ define(
 
                 it("Valid input data but _id search", function(){
 
-                    expect(utilityFactory.findIndexById(data, 10)).toEqual("");
+                    expect(utilityFactory.findIndexById(data, 10)).toEqual(-1);
                 });
             });
 
