@@ -60,8 +60,8 @@
                             <div class="form-group">
                                 <label class="control-label">Tags</label>
                                 <div class="form-control form-tags">
-                                    <span ng-repeat="tag in formData.tags" class="form-tag">{{ tag.text }}</span>
-                                    <input class="form-new-tag" ng-model="newTag" placeholder="add a tag" press-enter="addTag();" />
+                                    <span ng-repeat="tag in newTags" class="form-tag">{{ tag.text }}</span>
+                                    <input class="form-new-tag" ng-model="newTag" placeholder="add a tag" press-enter="addTag(); dValueNone();" resetable/>
                                 </div>
                             </div>
                         </div>

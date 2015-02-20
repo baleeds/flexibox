@@ -20,6 +20,8 @@ define([
             $scope.editableProject = 0;
             $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
             $scope.newTag = "";
+            $scope.newTags = [];
+            $scope.formData = {};
 
             sessionFactory.getCurrentUser()
                  .success(function(user) {
@@ -67,6 +69,7 @@ define([
             homeFactory.getProjects()
                 .success(function(projectData) {
                     $scope.projects = projectData;
+                    console.log($scope.projects);
                 })
                 .error(function(projectData) {
                     logger.error('homeController - Error getting projects: ' + projectData);
@@ -75,6 +78,8 @@ define([
             // Create a project based on form data.  Called by upload modal
             $scope.createProject = function() {
                 $scope.formData.userID = $scope.user._id;
+                $scope.formData.tags = $scope.newTags;
+                console.log($scope.formData);
                 var fd = $scope.formData;
 
 
@@ -112,9 +117,12 @@ define([
 
             };
 
-           $scope.addTag = function() {
-
-           };
+            $scope.addTag = function() {
+                console.log($scope.newTag);
+                $scope.newTags.push({'text':$scope.newTag});
+                $scope.newTag = '';
+                console.log($scope.newTags);
+            };
 
         }]);
     });

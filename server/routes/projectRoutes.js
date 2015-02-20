@@ -17,6 +17,7 @@ module.exports = function(router, protect){
             project.entryURL = '/api/projects/' + project._id;
             project.setsURL = project.entryURL + '/sets';
             project.owners = req.body.userID;
+            project.tags = req.body.tags;
             project.save(function(err) {
                 if (err)
                     res.send(err);
@@ -79,6 +80,7 @@ module.exports = function(router, protect){
 
                 project.name = req.body.name;
                 project.description = req.body.description;
+                project.tags = req.body.tags;
 
                 // save the project
                 project.save(function(err) {
