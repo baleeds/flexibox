@@ -374,3 +374,21 @@
   padding: 10px 0px;
   margin-right: 10px;
 }
+.form-tag {
+  padding: 3px 8px;
+  background-color: #DDDDDD;
+  border-radius: 2px;
+  margin: 2px 2px;
+  float: left;
+}
+.form-tag:hover {
+  text-decoration: line-through;
+  cursor: pointer;
+}
+.form-new-tag {
+  border: none;
+  margin: 5px;
+}
+.form-tags {
+  height: auto;
+}

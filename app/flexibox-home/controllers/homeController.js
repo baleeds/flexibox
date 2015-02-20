@@ -49,21 +49,26 @@ define([
                 $scope.editableProject = utilityFactory.findById($scope.projects, projectId);
                 oldProject.name = $scope.editableProject.name;
                 oldProject.description = $scope.editableProject.description;
+                $scope.newTags = $scope.editableProject.tags.slice(0);
             };
 
             $scope.confirmEdit = function() {
-               homeFactory.updateProject($scope.editableProject._id, $scope.editableProject)
+                $scope.editableProject.tags = $scope.newTags;
+                homeFactory.updateProject($scope.editableProject._id, $scope.editableProject)
                    .success(function (set) {
-                       //
+
                    }).error(function (err) {
                        //
                    });
-               oldProject = {};
+                oldProject = {};
+                $scope.newTags = [];
             };
 
             $scope.cancelEdit = function() {
+                $scope.newTags = [];
                 $scope.editableProject.name = oldProject.name;
                 $scope.editableProject.description = oldProject.description;
+                // tags are handled separately
             };
 
             homeFactory.getProjects()
@@ -86,16 +91,13 @@ define([
                 homeFactory.createProject(fd)
                     .success(function(projectData) {
                         $scope.formData = {};
+                        $scope.newTags = [];
                         $scope.projects = projectData;
                     })
                     .error(function(projectData) {
                         logger.error('homeController - Error creating project: ' + projectData);
                     });
-            };
 
-            // Update a project's persistence based on local project data
-            $scope.updateProject = function(project) {
-                //update project
             };
 
             // Delete project based on id
@@ -118,10 +120,10 @@ define([
             };
 
             $scope.addTag = function() {
-                console.log($scope.newTag);
-                $scope.newTags.push({'text':$scope.newTag});
-                $scope.newTag = '';
-                console.log($scope.newTags);
+                if($scope.newTag != '') {
+                    $scope.newTags.push({'text':$scope.newTag});
+                    $scope.newTag = '';
+                }
             };
 
         }]);
