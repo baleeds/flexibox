@@ -389,6 +389,8 @@
 .form-new-tag {
   border: none;
   margin: 5px;
+  outline: none;
+  width: 100%;
 }
 .form-tags {
   height: auto;
