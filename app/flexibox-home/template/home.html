@@ -64,6 +64,19 @@
                                     <input class="form-new-tag" ng-model="newTag" placeholder="add a tag" press-enter="addTag();" />
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Share this project</label>
+                                <div class="form-control form-tags">
+                                    <span ng-repeat="sharedUser in newSharedUsers" ng-click="removeNewSharedUser(sharedUser._id);" class="form-tag">{{ sharedUser.name }}<span> ({{ sharedUser.email }})</span></span>
+                                    <input class="form-new-tag" ng-model="newSharedUser" ng-keyup="filterPotentialUsers();" placeholder="add a user"/>
+                                </div>
+                                <div class="potential-users" ng-hide="!potentialUsers[0]">
+                                    <ul>
+                                        <li ng-repeat="potentialUser in potentialUsers" ng-click="addSharedUser(potentialUser);">{{ potentialUser.name }}<span> ({{ potentialUser.email }})</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -109,8 +122,13 @@
                             <div class="form-group">
                                 <label class="control-label">Share this project</label>
                                 <div class="form-control form-tags">
-                                    <span ng-repeat="sharedUser in sharedUsers" ng-click="removeSharedUser($index);" class="form-tag">{{ sharedUser.name }}</span>
-                                    <input class="form-new-tag" ng-model="newSharedUser" placeholder="add a user"/>
+                                    <span ng-repeat="sharedUser in newSharedUsers" ng-click="removeNewSharedUser(sharedUser._id);" class="form-tag">{{ sharedUser.name }}<span> ({{ sharedUser.email }})</span></span>
+                                    <input class="form-new-tag" ng-model="newSharedUser" ng-keyup="filterPotentialUsers();" placeholder="add a user"/>
+                                </div>
+                                <div class="potential-users" ng-hide="!potentialUsers[0]">
+                                    <ul>
+                                        <li ng-repeat="potentialUser in potentialUsers" ng-click="addSharedUser(potentialUser);">{{ potentialUser.name }}<span> ({{ potentialUser.email }})</span></li>
+                                    </ul>
                                 </div>
                             </div>
                         </form>

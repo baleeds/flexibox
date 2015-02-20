@@ -18,6 +18,7 @@ module.exports = function(router, protect){
             project.setsURL = project.entryURL + '/sets';
             project.owners = req.body.userID;
             project.tags = req.body.tags;
+            project.members = req.body.members;
             project.save(function(err) {
                 if (err)
                     res.send(err);
@@ -52,7 +53,7 @@ module.exports = function(router, protect){
             if (req.query.includeSets) {
                 Project
                     .findById(req.params.project_id)
-                    .select('name description setsURL entryURL sets._id sets.name sets.description')
+                    .select('name description setsURL entryURL sets._id sets.name sets.description members')
                     .exec(function(err, project) {
                         if (err)
                             res.send(err);
@@ -81,6 +82,7 @@ module.exports = function(router, protect){
                 project.name = req.body.name;
                 project.description = req.body.description;
                 project.tags = req.body.tags;
+                project.members = req.body.members;
 
                 // save the project
                 project.save(function(err) {

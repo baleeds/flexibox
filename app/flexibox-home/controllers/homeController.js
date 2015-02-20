@@ -48,11 +48,13 @@ define([
                         $scope.editableProject = utilityFactory.findById($scope.projects, projectId);
                         oldProject.name = $scope.editableProject.name;
                         oldProject.description = $scope.editableProject.description;
-                        $scope.newTags = $scope.editableProject.tags.slice(0);
+                        $scope.newTags = $scope.editableProject.tags.slice(0); // use slice to copy data as opposed to point to it.
+                        $scope.newSharedUsers = $scope.editableProject.members.slice(0); // same
                     };
 
                     $scope.confirmEdit = function () {
                         $scope.editableProject.tags = $scope.newTags;
+                        $scope.editableProject.members = $scope.newSharedUsers;
                         homeFactory.updateProject($scope.editableProject._id, $scope.editableProject)
                             .success(function (set) {
 
@@ -61,10 +63,12 @@ define([
                             });
                         oldProject = {};
                         $scope.newTags = [];
+                        $scope.newSharedUsers = [];
                     };
 
                     $scope.cancelEdit = function () {
                         $scope.newTags = [];
+                        $scope.newSharedUsers = [];
                         $scope.editableProject.name = oldProject.name;
                         $scope.editableProject.description = oldProject.description;
                         // tags are handled separately
@@ -83,6 +87,7 @@ define([
                     $scope.createProject = function () {
                         $scope.formData.userID = $scope.user._id;
                         $scope.formData.tags = $scope.newTags;
+                        $scope.formData.members = $scope.newSharedUsers;
                         console.log($scope.formData);
                         var fd = $scope.formData;
 
@@ -91,6 +96,7 @@ define([
                             .success(function (projectData) {
                                 $scope.formData = {};
                                 $scope.newTags = [];
+                                $scope.newSharedUsers = [];
                                 $scope.projects = projectData;
                             })
                             .error(function (projectData) {
@@ -138,11 +144,34 @@ define([
                     $scope.newSharedUser = "";
                     $scope.newSharedUsers = [];
 
-                    $scope.addSharedUser = function(id) {
-                        var newUserIndex = utilityFactory.findIndexBy("_id", $scope.newSharedUsers, $scope.newSharedUser);
-                        if ($scope.newSharedUser != '' && newUserIndex === -1) {
-                            $scope.newSharedUsers.push()
+                    $scope.filterPotentialUsers = function() {
+                        if ($scope.newSharedUser === "") {
+                            $scope.potentialUsers = [];
+                        } else {
+                            sessionFactory.filterPotentialUsers($scope.newSharedUser)
+                                .success(function (potentialUsers) {
+                                    console.log(potentialUsers);
+                                    $scope.potentialUsers = potentialUsers;
+                                })
+                                .error(function (err) {
+                                    console.log(err);
+                                });
                         }
+                    };
+
+                    $scope.addSharedUser = function(user) {
+                        var newUserIndex = utilityFactory.findIndexBy("_id", $scope.newSharedUsers, user._id);
+                        if ($scope.newSharedUser != '' && newUserIndex === -1) {
+                            $scope.newSharedUsers.push(user);
+                            $scope.newSharedUser = "";
+                            $scope.potentialUsers = [];
+                            console.log("new shared users: " + $scope.newSharedUsers);
+                        }
+                    };
+
+                    $scope.removeNewSharedUser = function(userId) {
+                        var newUserIndex = utilityFactory.findIndexBy("_id", $scope.newSharedUsers, userId);
+                        $scope.newSharedUsers.splice(newUserIndex, 1);
                     };
 
                 }]);

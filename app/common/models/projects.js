@@ -13,7 +13,7 @@ var ProjectSchema = new Schema({
 	members: [{
 		name: String,
 		email: String,
-		_mid: Schema.ObjectId
+		_id: Schema.ObjectId
 	}],
 	owners: [],
 	commenters: [],

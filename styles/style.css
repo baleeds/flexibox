@@ -403,3 +403,23 @@
 .form-tags {
   height: auto;
 }
+.potential-users {
+  width: 100%;
+  border: 1px solid grey;
+  top: -5px;
+  position: relative;
+  background-color: white;
+  border-radius: 0 0 4px 4px;
+}
+.potential-users ul {
+  margin: 0px;
+  padding: 0px;
+}
+.potential-users ul li {
+  list-style: none;
+  padding: 2px 16px;
+  cursor: pointer;
+}
+.potential-users ul li:hover {
+  background-color: #DDDDDD;
+}

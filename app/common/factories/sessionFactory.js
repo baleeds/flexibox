@@ -27,6 +27,9 @@ define([
                 return $http.get('/api/users/current');
             };
 
+            sessionFactory.filterPotentialUsers = function(filterText) {
+                return $http.get('/api/users/search/' + filterText);
+            }
 
             sessionFactory.signup = function(fd) {
                 return $http.post('/api/signup', fd);
