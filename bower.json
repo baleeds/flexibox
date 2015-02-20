@@ -53,7 +53,8 @@
       "css": [
         "components/css/fonts/font-awesome-4.2.0/css/font-awesome.min.css",
         "themes/autobahn-Flat/stylesheets/autobahn-flat.css"
-      ]
+      ],
+      "fonts" : "components/css/fonts/font-awesome-4.2.0/fonts/*"
     },
     "jquery": {
       "js": "dist/jquery.js"

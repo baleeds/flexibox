@@ -1,4 +1,5 @@
 "use strict"
+var path = require('path');
 
 module.exports = function (grunt) {
 
@@ -47,7 +48,13 @@ module.exports = function (grunt) {
             install: {
                 options: {
                     targetDir: "<%=dirs.dependencies%>",
-                    verbose: true // Enable logging
+                    verbose: true, // Enable logging
+                    layout : function(type, component, src){
+                        if(type == "fonts"){
+                            return path.join("css", type);
+                        }
+                        return path.join(type, component);
+                    }
                 }
             }
         },
