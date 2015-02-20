@@ -10,7 +10,11 @@ var Schema = mongoose.Schema;
 var ProjectSchema = new Schema({
 	name: { type:String, required: true },
 	description: String,
-	members: [Schema.ObjectId],
+	members: [{
+		name: String,
+		email: String,
+		_mid: Schema.ObjectId
+	}],
 	owners: [],
 	commenters: [],
 	tags: [{
