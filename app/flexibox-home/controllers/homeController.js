@@ -20,6 +20,7 @@ define([
                     $scope.editableProject = 0;
                     $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
                     $scope.formData = {};
+                    $scope.potentialUsers = [];
 
                     sessionFactory.getCurrentUser()
                         .success(function (user) {
@@ -136,13 +137,13 @@ define([
 
                     $scope.newSharedUser = "";
                     $scope.newSharedUsers = [];
-                    /*
-                    $scope.addSharedUser = function() {
-                        var newUserIndex = utilityFactory.findIndexBy("email", $scope.newSharedUsers, $scope.newSharedUser);
+
+                    $scope.addSharedUser = function(id) {
+                        var newUserIndex = utilityFactory.findIndexBy("_id", $scope.newSharedUsers, $scope.newSharedUser);
                         if ($scope.newSharedUser != '' && newUserIndex === -1) {
-                            $scope.newSharedUsers.push({''})
+                            $scope.newSharedUsers.push()
                         }
-                    };*/
+                    };
 
                 }]);
     });

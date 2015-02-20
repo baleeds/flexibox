@@ -54,14 +54,22 @@
   left: 5px;
 }
 .panel-delete {
-  top: 2px;
+  top: 4px;
   float: right;
-  right: 6px;
+  right: 9px;
+  font-size: 17px;
   position: relative;
 }
 .panel-delete:hover {
-  color: red;
+  color: #cd1b0e;
   text-decoration: none;
+}
+.panel-edit {
+  float: right;
+  position: relative;
+  right: 18px;
+  top: 6px;
+  font-size: 13px;
 }
 .panel img {
   max-width: 100%;
