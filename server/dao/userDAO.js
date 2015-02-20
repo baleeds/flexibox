@@ -36,6 +36,9 @@ module.exports= {
         callback();
     },
     userSearch: function(str, callback){
+        if(str == ""){
+            callback([]);
+        }
         User.find({$or : [{"name":{$regex:"^" + str}}, {"local.email":{$regex: "^" + str}}]}, function(err, users){
             if(err){
                 callback(null);
