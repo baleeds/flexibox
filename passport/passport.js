@@ -87,7 +87,6 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, email, password, done) { // callback with email and password from our form
-            console.log("1");
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
             User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -111,11 +110,9 @@ module.exports = function(passport) {
                     return done(err, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
                 }
                     // all is well, return successful user
-                console.log("logged in");
                 return done(null, user);
 
             });
-            console.log("2");
         }));
 
 };

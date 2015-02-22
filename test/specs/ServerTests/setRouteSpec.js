@@ -8,7 +8,7 @@ var SID = "54d82082b46e200418000007";
 Utils.loadTestData();
 
 frisby.create("setRoutes")
-    .post("http://localhost:8080/api/login",
+    .post(URL + "api/login",
     {
         email: "commenter@test.com",
         password: "commenter"

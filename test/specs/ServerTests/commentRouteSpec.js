@@ -9,7 +9,7 @@ var OID = "54d8209cb46e200418000008";
 Utils.loadTestData();
 
 frisby.create("commentRoutes")
-    .post("http://localhost:8080/api/login",
+    .post(URL + "api/login",
     {
         email: "commenter@test.com",
         password: "commenter"
