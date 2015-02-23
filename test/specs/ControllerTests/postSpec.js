@@ -24,16 +24,7 @@ define(
             });
 
             describe("Post Comment Tests", function(){
-/*
-                it("Test GetPost", function(){
-                    var $scope = {};
-                    var $routeParams = {"projectId" : 5, "scopeID": 5, "postId": 3};
-                    $controller(name, {$scope : $scope, $routeParams: $routeParams});
 
-                    $scope.getPost();
-                    expect($scope.post.id).toEqual($routeParams.postId);
- });
-*/
                 it("Test mDown with new Div as 2", function(){
                     var $scope = {};
                     var testLoc = {"pageX": 100 , "pageY": 150};

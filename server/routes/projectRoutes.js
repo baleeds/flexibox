@@ -8,7 +8,17 @@ module.exports = function(router, protect){
     // ==========================================================================
     router.route('/projects')  // accessed at //<server>:<port>/api/projects
         .all(protect)
-        // add a project
+    /**
+     * POST /api/projects
+     * Creates a new project.
+     * @param req.body.name {String} The name of the new project.
+     * @param req.body.description {String} The description of the new project.
+     * @param req.body.userID {ObjectID} The mongo object ID of the project owner
+     *                                   (from users collection)
+     * @return The JSON data containing all the users projects.
+     *
+     * TODO : Ensure that the user is an owner or admin. (Add a commenter test)
+     */
         .post(function(req, res) {
             var project = new Project();
 
@@ -40,7 +50,12 @@ module.exports = function(router, protect){
             });
         })
 
-        // get all projects
+    /**
+     * GET /api/projects
+     * This simply returns a JSON Array containing all the projects
+     * that are visible to the logged in user.
+     * @return The JSON data array for the user's projects.
+     */
         .get(function(req, res) {
             var callback = function(projects) {
                 if (projects == null) {
