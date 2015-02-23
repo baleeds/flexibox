@@ -18,7 +18,7 @@ module.exports = function(router, protect){
             project.setsURL = project.entryURL + '/sets';
             project.owners = req.body.userID;
             project.tags = req.body.tags;
-            project.members = req.body.members;
+            project.commenters = req.body.commenters;
             project.save(function(err) {
                 if (err)
                     res.send(err);
@@ -32,6 +32,11 @@ module.exports = function(router, protect){
                     projectDAO.getMyProjects(user, callback);
                 };
                 userDAO.updateProjects(req.user, project._id, userCallback );
+
+                for(var i=0; i<project.commenters.length; i++){
+                    var user = project.commenters[i];
+                    userDAO.updateProjects(user, project._id, userCallback);
+                }
             });
         })
 
@@ -53,7 +58,7 @@ module.exports = function(router, protect){
             if (req.query.includeSets) {
                 Project
                     .findById(req.params.project_id)
-                    .select('name description setsURL entryURL sets._id sets.name sets.description members')
+                    .select('name description setsURL entryURL sets._id sets.name sets.description commenters')
                     .exec(function(err, project) {
                         if (err)
                             res.send(err);
@@ -82,7 +87,7 @@ module.exports = function(router, protect){
                 project.name = req.body.name;
                 project.description = req.body.description;
                 project.tags = req.body.tags;
-                project.members = req.body.members;
+                project.commenters = req.body.commenters;
 
                 // save the project
                 project.save(function(err) {

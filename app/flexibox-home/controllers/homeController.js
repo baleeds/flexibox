@@ -49,12 +49,12 @@ define([
                         oldProject.name = $scope.editableProject.name;
                         oldProject.description = $scope.editableProject.description;
                         $scope.newTags = $scope.editableProject.tags.slice(0); // use slice to copy data as opposed to point to it.
-                        $scope.newSharedUsers = $scope.editableProject.members.slice(0); // same
+                        $scope.newSharedUsers = $scope.editableProject.commenters.slice(0); // same
                     };
 
                     $scope.confirmEdit = function () {
                         $scope.editableProject.tags = $scope.newTags;
-                        $scope.editableProject.members = $scope.newSharedUsers;
+                        $scope.editableProject.commenters = $scope.newSharedUsers;
                         homeFactory.updateProject($scope.editableProject._id, $scope.editableProject)
                             .success(function (set) {
 
@@ -87,7 +87,7 @@ define([
                     $scope.createProject = function () {
                         $scope.formData.userID = $scope.user._id;
                         $scope.formData.tags = $scope.newTags;
-                        $scope.formData.members = $scope.newSharedUsers;
+                        $scope.formData.commenters = $scope.newSharedUsers;
                         console.log($scope.formData);
                         var fd = $scope.formData;
 
