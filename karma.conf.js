@@ -23,7 +23,7 @@ module.exports = function(config) {
 
 
           // list of files to exclude
-          exclude: ['test/specs/ServerTests/*.js'],
+          exclude: ['test/specs/ServerTests/*.js','test/specs/DaoTests/*.js'],
 
 
           // preprocess matching files before serving them to the browser
