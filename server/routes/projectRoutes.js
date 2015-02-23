@@ -35,7 +35,7 @@ module.exports = function(router, protect){
 
                 for(var i=0; i<project.commenters.length; i++){
                     var user = project.commenters[i];
-                    userDAO.updateProjects(user, project._id, userCallback);
+                    userDAO.updateProjects(user, project._id, function(){});
                 }
             });
         })
@@ -93,6 +93,10 @@ module.exports = function(router, protect){
                 project.save(function(err) {
                     if (err)
                         res.send(err);
+                    for(var i=0; i<project.commenters.length; i++){
+                        var user = project.commenters[i];
+                        userDAO.updateProjects(user, project._id, function(){});
+                    }
                     res.json(project);
                 });
             });
