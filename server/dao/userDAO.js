@@ -32,8 +32,9 @@ module.exports= {
                         console.log(err);
                 })
             }
+            callback();
         });
-        callback();
+
     },
     userSearch: function(str, callback){
         if(str == ""){
