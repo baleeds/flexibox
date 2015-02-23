@@ -16,6 +16,8 @@ frisby.create("commentRoutes")
     }).after(function(body, res){
         var cookie = res.headers['set-cookie'][0].split(';')[0];
 
+        Utils.loadTestData();
+
         frisby.create("POST : api/project/pid/sets/sid/post/id")
             .addHeader('Cookie', cookie)
             .post(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID + "/comments",{
