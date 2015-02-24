@@ -126,7 +126,8 @@ frisby.create("postRoutes")
             .put(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID,
             {
                 name : "This is my new name!",
-                description : "This is my new description."
+                description : "This is my new description.",
+                tags: []
             })
             .expectJSON({
                 name : "This is my new name!",
