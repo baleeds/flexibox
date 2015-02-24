@@ -26,6 +26,7 @@ define([
 					$scope.project = project;
 				})
 				.error(function(project) {
+					$scope.error = 'projectController - Error getting project by id';
 					logger.error('projectController - Error getting project by id: ' + project);
 				});
 
@@ -41,8 +42,10 @@ define([
 				setFactory.updateSet($scope.project._id, $scope.editableSet._id, $scope.editableSet)
 					.success(function (set) {
 						//
-					}).error(function (err) {
+					})
+					.error(function (err) {
 						//
+						$scope.error = "Error in Editing";
 					});
 				oldSet = {};
 				$scope.newTags = [];
@@ -65,6 +68,7 @@ define([
 						$scope.project = project;
 					})
 					.error(function(project) {
+						$scope.error= 'projectController - Error adding set to project';
 						logger.error('projectController - Error adding set to project: ' + project);
 					});
 				$scope.newTags = [];
@@ -77,6 +81,7 @@ define([
 						$scope.project = project;
 					})
 					.error(function(project) {
+						$scope.error = 'projectController - Error deleting set from project';
 						logger.error('projectController - Error deleting set from project: ' + project);
 					});
 			};
