@@ -16,15 +16,15 @@ define(
 
             var $routeParams = {projectId : PID, setId : SID};
             var posts = [
-                {_id : 0, name : "First", description : "First Description", imageURL : "uploads\\imageOne"},
-                {_id : 1, name : "Second", description : "Second Description", imageURL : "uploads\\imageTwo"},
-                {_id : 2, name : "Third", description : "Third Description", imageURL : "uploads\\imageThree"},
-                {_id : 3, name : "Fourth", description : "Fourth Description", imageURL : "uploads\\imageFour"},
-                {_id : 4, name : "Fifth", description : "Fifth Description", imageURL : "uploads\\imageFive"},
-                {_id : 5, name : "Sixth", description : "Sixth Description", imageURL : "uploads\\imageSix"},
-                {_id : 6, name : "Seventh", description : "Seventh Description", imageURL : "uploads\\imageSeven"},
-                {_id : 7, name : "Eighth", description : "Eighth Description", imageURL : "uploads\\imageEight"},
-                {_id : 8, name : "Ninth", description : "Ninth Description", imageURL : "uploads\\imageNine"}
+                {_id : 0, name : "First", description : "First Description", imageURL : "uploads\\imageOne", tags : [{ _id : 01, text : "tag1"}]},
+                {_id : 1, name : "Second", description : "Second Description", imageURL : "uploads\\imageTwo", tags : [{ _id : 02, text : "tag2"}]},
+                {_id : 2, name : "Third", description : "Third Description", imageURL : "uploads\\imageThree", tags : [{ _id : 03, text : "tag3"}]},
+                {_id : 3, name : "Fourth", description : "Fourth Description", imageURL : "uploads\\imageFour", tags : [{ _id : 04, text : "tag4"}]},
+                {_id : 4, name : "Fifth", description : "Fifth Description", imageURL : "uploads\\imageFive", tags : [{ _id : 05, text : "tag5"}]},
+                {_id : 5, name : "Sixth", description : "Sixth Description", imageURL : "uploads\\imageSix", tags : [{ _id : 06, text : "tag6"}]},
+                {_id : 6, name : "Seventh", description : "Seventh Description", imageURL : "uploads\\imageSeven", tags : [{ _id : 07, text : "tag7"}]},
+                {_id : 7, name : "Eighth", description : "Eighth Description", imageURL : "uploads\\imageEight", tags : [{ _id : 08, text : "tag8"}]},
+                {_id : 8, name : "Ninth", description : "Ninth Description", imageURL : "uploads\\imageNine", tags : [{ _id : 09, text : "tag9"}]}
             ];
 
             beforeEach(function () {
@@ -55,6 +55,7 @@ define(
                     expect($scope.editablePost._id).toBe(3);
                     expect($scope.editablePost.name).toBe(posts[3].name);
                     expect($scope.editablePost.description).toBe(posts[3].description);
+                    expect($scope.editablePost.tags._id).toBe(posts[3].tags._id);
 
                 });
             });
@@ -145,18 +146,21 @@ define(
                     $httpBackend.expectPOST('/api/upload')
                         .respond(200, {imageURL : "uploads/imageTen"});
                     $scope.uploadFile([{type : "image/jpeg"}]);
+                    $scope.newTags = [{_id : 01, text : "tag1"}];
                     $httpBackend.flush();
 
                     expect($scope.imageButtonState).toBe("Remove");
                     expect($scope.imageUp).toBe(1);
 
                     $httpBackend.expectPOST('/api/projects/' + PID + '/sets/' + SID + '/posts',
-                        { imageURL : "uploads/imageTen" })
+                        { imageURL : "uploads/imageTen", tags : [{_id : 01, text : "tag1"}] })// form data that would be passed in.
                         .respond(200, {posts : posts.concat({
                             _id : 9,
                             name : "Tenth",
                             description : "Tenth Description",
-                            imageURL : "uploads\\imageTen"})});
+                            imageURL : "uploads\\imageTen",
+                            tags : [{_id : 01, text : "tag1"}]
+                        })});
 
                     $scope.addPost();
 
@@ -194,6 +198,37 @@ define(
                     $httpBackend.flush();
                     expect($scope.set.posts.length).toBe(posts.length - 1);
 
+                });
+            });
+
+            describe("addTag", function () {
+                it("Test adding a tag to the new tags array", function () {
+                    expect($scope.newTags.length).toBe(0);
+                    $scope.newTag = "New&*(*&*tag";
+                    $scope.addTag();
+                    expect($scope.newTags[0].text).toBe("newtag");
+                });
+            });
+
+            describe("removeTag", function () {
+                it("Test removing a tag from the new tags array", function () {
+                    $scope.newTag = "newtag";
+                    $scope.addTag();
+                    expect($scope.newTags.length).toBe(1);
+                    $scope.removeTag(0);
+                    expect($scope.newTags.length).toBe(0);
+                });
+            });
+
+            describe("addTagThatExists", function () {
+                it("Test adding a tag that exists", function () {
+                    expect($scope.newTags.length).toBe(0);
+                    $scope.newTag = "New&*(*&*tag";
+                    $scope.addTag();
+                    expect($scope.newTags[0].text).toBe("newtag");
+                    $scope.newTag = "newtag";
+                    $scope.addTag();
+                    expect($scope.newTags.length).toBe(1);
                 });
             });
         })
