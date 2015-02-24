@@ -73,7 +73,7 @@ module.exports = function(router, protect){
             if (req.query.includeSets) {
                 Project
                     .findById(req.params.project_id)
-                    .select('name description setsURL entryURL sets._id sets.name sets.description commenters')
+                    .select('name description setsURL entryURL sets._id sets.name sets.description commenters sets.tags')
                     .exec(function(err, project) {
                         if (err)
                             res.send(err);
@@ -82,7 +82,7 @@ module.exports = function(router, protect){
             } else {
                 Project
                     .findById(req.params.project_id)
-                    .select('name description setsURL entryURL')
+                    .select('name description setsURL entryURL tags commenters')
                     .exec(function(err, project) {
                         if (err)
                             res.send(err);

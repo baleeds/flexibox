@@ -40,6 +40,7 @@ module.exports = function(router, protect) {
                     newPost.name = req.body.name;
                     newPost.description = req.body.description;
                     newPost.imageURL = req.body.imageURL;
+                    newPost.tags = req.body.tags;
 
                     project.sets.id(req.params.set_id).posts.push(newPost);
 
@@ -90,13 +91,15 @@ module.exports = function(router, protect) {
                 if (err)
                     res.send(err);
 
-                project.sets.id(req.params.set_id).posts.id(req.params.post_id).name = req.body.name;
-                project.sets.id(req.params.set_id).posts.id(req.params.post_id).description = req.body.description;
+                var thisPost = project.sets.id(req.params.set_id).posts.id(req.params.post_id);
+                thisPost.name = req.body.name;
+                thisPost.description = req.body.description;
+                thisPost.tags = req.body.tags;
 
                 project.save(function (err) {
                     if (err)
                         res.send(err);
-                    res.json(project.sets.id(req.params.set_id).posts.id(req.params.post_id));
+                    res.json(thisPost);
                 });
             });
         })

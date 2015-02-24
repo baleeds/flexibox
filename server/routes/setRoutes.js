@@ -9,7 +9,7 @@ module.exports = function(router, protect) {
         .get(function (req, res) {
             Project
                 .findById(req.params.project_id)
-                .select('sets._id sets.name sets.description sets.entryURL sets.postsURL')
+                .select('sets._id sets.name sets.description sets.entryURL sets.postsURL sets.tags')
                 .exec(function (err, project) {
                     if (err)
                         res.send(err);
@@ -21,7 +21,7 @@ module.exports = function(router, protect) {
         .post(function (req, res) {
             Project
                 .findById(req.params.project_id)
-                .select('name description sets._id sets.name sets.description sets.entryURL sets.postsURL')
+                .select('name description sets._id sets.name sets.description sets.entryURL sets.postsURL sets.tags')
                 .exec(function (err, project) {
                     if (err)
                         res.send(err);
@@ -30,6 +30,7 @@ module.exports = function(router, protect) {
                     newSet.description = req.body.description;
                     newSet.entryURL = '/api/projects' + req.params.project_id + '/sets/' + newSet._id;
                     newSet.postsURL = '/api/projects' + req.params.project_id + '/sets/' + newSet._id + '/posts';
+                    newSet.tags = req.body.tags;
 
                     project.sets.push(newSet);
 
@@ -72,15 +73,23 @@ module.exports = function(router, protect) {
                 if (err)
                     res.send(err);
 
+                var thisSet = project.sets.id(req.params.set_id);
+                thisSet.name = req.body.name;
+                thisSet.description = req.body.description;
+                thisSet.tags = req.body.tags;
+                /*
                 project.sets.id(req.params.set_id).name = req.body.name;
                 project.sets.id(req.params.set_id).description = req.body.description;
+                project.sets.id(req.params.set_id)
+                */
 
                 project.save(function (err) {
                     if (err)
                         res.send(err);
                     res.json({
-                        "name": project.sets.id(req.params.set_id).name,
-                        "description": project.sets.id(req.params.set_id).description
+                        "name": thisSet.name,
+                        "description": thisSet.description,
+                        "tags": thisSet.tags
                     });
                 });
             });
@@ -90,7 +99,7 @@ module.exports = function(router, protect) {
         .delete(function (req, res) {
             Project
                 .findById(req.params.project_id)
-                .select('name description sets._id sets.name sets.description')
+                .select('name description sets._id sets.name sets.description sets.tags')
                 .exec(function (err, project) {
                     if (err)
                         res.send(err);

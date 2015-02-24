@@ -10,13 +10,12 @@ var Schema = mongoose.Schema;
 var ProjectSchema = new Schema({
 	name: { type:String, required: true },
 	description: String,
-	members: [{
+	owners: [],
+	commenters: [{
 		name: String,
 		email: String,
 		_id: Schema.ObjectId
 	}],
-	owners: [],
-	commenters: [],
 	tags: [{
 		text: String
 	}],
@@ -27,11 +26,17 @@ var ProjectSchema = new Schema({
 		description: String,
 		entryURL: String,
 		postsURL: String,
+		tags: [{
+			text: String
+		}],
 		posts: [{
 			name: String,
 			description: String,
 			imageURL: String,
 			entryURL: String,
+			tags: [{
+				text: String
+			}],
 			commentsURL: String,
 			comments: [{
 				smallest: {

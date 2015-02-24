@@ -26,39 +26,40 @@ define([
 			var oldPost = {};				//
 			$scope.editablePost = {};
 
+			// On controller load, populate local instance of focused set
+			setFactory.getSet($routeParams.projectId, $routeParams.setId)
+				.success(function(set) {
+					$scope.backURL = $routeParams.projectId;
+					$scope.set = set;
+					console.log(set.posts);
+				})
+				.error(function(project) {
+					logger.error('setController - Error getting project by id: ' + project);
+				});
+
 			$scope.postEditable = function(postId) {
 				$scope.editablePost = utilityFactory.findById($scope.set.posts, postId);
 				oldPost.name = $scope.editablePost.name;
 				oldPost.description = $scope.editablePost.description;
+				$scope.newTags = $scope.editablePost.tags.slice(0); // use slice to copy data as opposed to point to it.
 			};
 
 			$scope.confirmEdit = function() {
+				$scope.editablePost.tags = $scope.newTags;
 				postFactory.updatePost($routeParams.projectId, $routeParams.setId, $scope.editablePost._id, $scope.editablePost)
 					.success(function(post) {
 						//
 					}).error(function(err) {
 						alert("error");
 					});
+				$scope.newTags = [];
 			};
 
 			$scope.cancelEdit = function() {
 				$scope.editablePost.name = oldPost.name;
 				$scope.editablePost.description = oldPost.description;
-			};
-
-			// On controller load, populate local instance of focused set
-			setFactory.getSet($routeParams.projectId, $routeParams.setId)
-				.success(function(set) {
-					$scope.backURL = $routeParams.projectId;
-					$scope.set = set;
-				})
-				.error(function(project) {
-					logger.error('setController - Error getting project by id: ' + project);
-				});
-
-			// Update set name and description
-			$scope.updateSet = function(project) {
-				// update set
+				$scope.newTags = [];
+				$scope.newTag = "";
 			};
 
 			// Upload an image to filesystem and set newImageURL
@@ -85,6 +86,7 @@ define([
 			$scope.addPost = function() {
 				var fd = $scope.formData;
 				fd.imageURL = newImageURL;
+				fd.tags = $scope.newTags;
 				setFactory.createPost($routeParams.projectId, $routeParams.setId, fd)
 					.success(function(set) {
 						newImageURL = {};
@@ -96,6 +98,7 @@ define([
 					.error(function(project) {
 						logger.error('setController - Error creating post: ' + project);
 					});
+				$scope.newTags = [];
 			};
 
 			// Clear form 
@@ -137,6 +140,23 @@ define([
 					.error(function(data) {
 						logger.error('setController - Error deleting posts: ' + data);
 					});
+			};
+
+			$scope.newTag = "";
+			$scope.newTags = [];
+
+			$scope.addTag = function() {
+				var tagIndex = utilityFactory.findIndexBy("text", $scope.newTags, $scope.newTag);
+				if ($scope.newTag != '' && tagIndex === -1) {
+					$scope.newTag = $scope.newTag.toLowerCase();
+					$scope.newTag = $scope.newTag.replace(/[^a-zA-Z0-9\+\-\.#]/g, '');
+					$scope.newTags.push({'text': $scope.newTag});
+					$scope.newTag = '';
+				}
+			};
+
+			$scope.removeTag = function(index) {
+				$scope.newTags.splice(index, 1);
 			};
 
 		}]);
