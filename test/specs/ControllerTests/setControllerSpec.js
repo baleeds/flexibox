@@ -12,6 +12,8 @@ define(
             var PID = "54d82057b46e200418000006";
             var SID = "54d82082b46e200418000007";
 
+            var $scope = {};
+
             var $routeParams = {projectId : PID, setId : SID};
             var posts = [
                 {_id : 0, name : "First", description : "First Description", imageURL : "uploads\\imageOne"},
@@ -31,8 +33,13 @@ define(
                 inject(function ($injector) {
                     $controller = $injector.get("$controller");
                     $httpBackend = $injector.get("$httpBackend");
+
                     $httpBackend.expectGET('/api/projects/' + PID + '/sets/' + SID + '?includePosts=1')
-                        .respond(200, {posts : posts})
+                        .respond(200, {posts : posts});
+
+                    $scope = {};
+                    $controller(name, {$scope: $scope, $routeParams: $routeParams});
+                    $httpBackend.flush();
                 });
             });
 
@@ -43,22 +50,17 @@ define(
 
             describe("postEditable", function () {
                 it("Test making a post editable", function () {
-                    var $scope = {};
-                    $controller(name, {$scope : $scope, $routeParams : $routeParams});
-                    $httpBackend.flush();
 
                     $scope.postEditable(3);
                     expect($scope.editablePost._id).toBe(3);
                     expect($scope.editablePost.name).toBe(posts[3].name);
                     expect($scope.editablePost.description).toBe(posts[3].description);
+
                 });
             });
 
             describe("confirmEdit", function () {
                 it("Should make a call to the correct route.", function () {
-                    var $scope = {};
-                    $controller(name, {$scope : $scope, $routeParams : $routeParams});
-                    $httpBackend.flush();
 
                     $scope.postEditable(3);
                     expect($scope.editablePost._id).toBe(3);
@@ -68,40 +70,107 @@ define(
 
                     $scope.confirmEdit();
                     $httpBackend.flush();
+
                 });
             });
 
             describe("cancelEditable", function () {
                 it("Test cancelling editing", function () {
-                    var $scope = {};
-                    $controller(name, {$scope : $scope, $routeParams : $routeParams});
-                    $httpBackend.flush();
 
                     $scope.postEditable(3);
                     expect($scope.editablePost._id).toBe(posts[3]._id);
                     $scope.editablePost = posts[0];
                     expect($scope.editablePost._id).toBe(0);
                     $scope.cancelEdit();
+
                 });
             });
 
             describe("clearForm", function () {
                 it("Test clearing the form data", function () {
-                    var $scope = {};
-                    $controller(name, {$scope : $scope, $routeParams : $routeParams});
-                    $httpBackend.flush();
 
                     $scope.formData = "Hi there!";
                     $scope.clearForm();
                     expect($scope.formData).toEqual({});
+
+                });
+            });
+
+            describe("uploadFile", function() {
+                it("Uploading a proper image type", function() {
+
+                    expect($scope.imageUp).toBe(0);
+
+                    $httpBackend.expectPOST('/api/upload')
+                        .respond(200, {imageURL : "uploads/54d82082b46e200418000008"});
+
+                    $scope.uploadFile([{type : "image/jpeg"}]);
+                    expect($scope.imageButtonState).toBe("Uploading...");
+                    $httpBackend.flush();
+                    expect($scope.imageButtonState).toBe("Remove");
+                    expect($scope.imageUp).toBe(1);
+
+                });
+
+                //TODO Incorrect file type
+            });
+
+            describe("resetImage", function() {
+                it("Testing a successful reset", function() {
+
+                    $httpBackend.expectPOST('/api/upload')
+                        .respond(200, {imageURL : "uploads/54d82082b46e200418000008"});
+                    $scope.uploadFile([{type : "image/jpeg"}]);
+                    $httpBackend.flush();
+
+                    expect($scope.imageButtonState).toBe("Remove");
+                    expect($scope.imageUp).toBe(1);
+
+                    $httpBackend.expectDELETE('/api/upload/54d82082b46e200418000008')
+                        .respond(200, {});
+                    $scope.resetImage();
+                    $httpBackend.flush();
+
+                    expect($scope.imageButtonState).toBe("");
+                    expect($scope.imageUp).toBe(0);
+
+                });
+
+
+            });
+
+            describe("addPost", function() {
+                it("Testing a successful addition", function() {
+
+                    $httpBackend.expectPOST('/api/upload')
+                        .respond(200, {imageURL : "uploads/imageTen"});
+                    $scope.uploadFile([{type : "image/jpeg"}]);
+                    $httpBackend.flush();
+
+                    expect($scope.imageButtonState).toBe("Remove");
+                    expect($scope.imageUp).toBe(1);
+
+                    $httpBackend.expectPOST('/api/projects/' + PID + '/sets/' + SID + '/posts',
+                        { imageURL : "uploads/imageTen" })
+                        .respond(200, {posts : posts.concat({
+                            _id : 9,
+                            name : "Tenth",
+                            description : "Tenth Description",
+                            imageURL : "uploads\\imageTen"})});
+
+                    $scope.addPost();
+
+                    $httpBackend.flush();
+
+                    expect($scope.imageButtonState).toBe("");
+                    expect($scope.imageUp).toBe(0);
+                    expect($scope.set.posts.length).toBe(posts.length + 1);
+
                 });
             });
 
             describe("deletePost", function () {
                 it("Test deleting a post", function () {
-                    var $scope = {};
-                    $controller(name, {$scope : $scope, $routeParams : $routeParams});
-                    $httpBackend.flush();
 
                     expect($scope.set.posts.length).toBe(posts.length);
 
@@ -124,6 +193,7 @@ define(
 
                     $httpBackend.flush();
                     expect($scope.set.posts.length).toBe(posts.length - 1);
+
                 });
             });
         })
