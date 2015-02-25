@@ -18,6 +18,7 @@ define([
            $scope.loginData = {};
            $scope.isLoggedIn = false;
            $scope.username = "";
+           $scope.loginFail = false;
 
 
            if (sessionFactory.user != null) {
@@ -30,9 +31,9 @@ define([
 
            $scope.login = function() {
                if(!$scope.loginData.password && $scope.loginData.password != 0){
-                   $("#loginFailDiv").show();
+                   $scope.loginFail = true;
                }else if( !$scope.loginData.email && $scope.loginData.email != 0){
-                   $("#loginFailDiv").show();
+                   $scope.loginFail = true;
                } else {
                    sessionFactory.login($scope.loginData)
                        .success(function (err, user, flash) {
@@ -49,7 +50,7 @@ define([
                        .error(function (err) {
                            $log.error('Login error: ' + err);
                            //$location.path('/');
-                           $("#loginFailDiv").show();
+                           $scope.loginFail = true;
                        });
                }
            };
