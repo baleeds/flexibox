@@ -150,7 +150,7 @@ define([
                         } else {
                             sessionFactory.filterPotentialUsers($scope.newSharedUser)
                                 .success(function (potentialUsers) {
-                                    console.log(potentialUsers);
+
                                     $scope.potentialUsers = potentialUsers;
                                 })
                                 .error(function (err) {
@@ -165,7 +165,7 @@ define([
                             $scope.newSharedUsers.push(user);
                             $scope.newSharedUser = "";
                             $scope.potentialUsers = [];
-                            console.log("new shared users: " + $scope.newSharedUsers);
+
                         }
                     };
 
