@@ -9,6 +9,7 @@ define([
     ],
     function (module, namespace, namespaceCommon) {
         'use strict';
+        var PROJECTS_PER_PAGE = 10;
 
         var name = namespace + ".homeController";
         module.controller(name,
@@ -21,6 +22,8 @@ define([
                     $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
                     $scope.formData = {};
                     $scope.potentialUsers = [];
+                    $scope.pagination = PROJECTS_PER_PAGE;
+                    $scope.pageLength = PROJECTS_PER_PAGE;
 
                     sessionFactory.getCurrentUser()
                         .success(function (user) {
@@ -127,7 +130,7 @@ define([
                     $scope.newTag = "";
                     $scope.newTags = [];
 
-                    $scope.addTag = function() {
+                    $scope.addTag = function () {
                         var tagIndex = utilityFactory.findIndexBy("text", $scope.newTags, $scope.newTag);
                         if ($scope.newTag != '' && tagIndex === -1) {
                             $scope.newTag = $scope.newTag.toLowerCase();
@@ -137,14 +140,14 @@ define([
                         }
                     };
 
-                    $scope.removeTag = function(index) {
+                    $scope.removeTag = function (index) {
                         $scope.newTags.splice(index, 1);
                     };
 
                     $scope.newSharedUser = "";
                     $scope.newSharedUsers = [];
 
-                    $scope.filterPotentialUsers = function() {
+                    $scope.filterPotentialUsers = function () {
                         if ($scope.newSharedUser === "") {
                             $scope.potentialUsers = [];
                         } else {
@@ -159,7 +162,7 @@ define([
                         }
                     };
 
-                    $scope.addSharedUser = function(user) {
+                    $scope.addSharedUser = function (user) {
                         var newUserIndex = utilityFactory.findIndexBy("_id", $scope.newSharedUsers, user._id);
                         if ($scope.newSharedUser != '' && newUserIndex === -1) {
                             $scope.newSharedUsers.push(user);
@@ -169,9 +172,29 @@ define([
                         }
                     };
 
-                    $scope.removeNewSharedUser = function(userId) {
+                    $scope.removeNewSharedUser = function (userId) {
                         var newUserIndex = utilityFactory.findIndexBy("_id", $scope.newSharedUsers, userId);
                         $scope.newSharedUsers.splice(newUserIndex, 1);
+                    };
+
+                    $scope.pageLeft = function(){
+                        if($scope.paginationUpper > PROJECTS_PER_PAGE){
+                            $scope.paginationUpper -= PROJECTS_PER_PAGE;
+                        }
+                    };
+
+                    $scope.endLeft = function(){
+                        $scope.pagination = PROJECTS_PER_PAGE;
+                    };
+
+                    $scope.pageRight = function () {
+                        if ($scope.pagination < $scope.projects.length) {
+                            $scope.pagination += PROJECTS_PER_PAGE;
+                        }
+                    };
+
+                    $scope.endRight = function(){
+                        $scope.pagination = Math.ceil($scope.projects.length / PROJECTS_PER_PAGE) * PROJECTS_PER_PAGE;
                     };
 
                 }]);

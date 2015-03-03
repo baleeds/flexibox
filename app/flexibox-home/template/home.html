@@ -8,8 +8,17 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="pagination-handles">
+                <a href="#" ng-click="endLeft()" class="fa fa-angle-double-left"></a>
+                <a href="#" ng-click="pageLeft()" class="fa fa-angle-left"></a>
+                {{pagination - pageLength < 0 ? 1 : pagination - pageLength + 1}}
+                -
+                {{pagination > projects.length ? projects.length : pagination}} of {{projects.length}}
+                <a href="#" ng-click="pageRight()" class="fa fa-angle-right"></a>
+                <a href="#" ng-click="endRight()" class="fa fa-angle-double-right"></a>
+            </div>
             <ul class="panel-list">
-                <li ng-repeat="project in projects | filter:searchText | orderBy:'name'" class="panel">
+                <li ng-repeat="project in projects | filter:searchText | orderBy:'name' | limitTo: pagination | limitTo: -pageLength" class="panel">
                     <div class="panel-top">
                         <a href="#" class="panel-delete" ng-click="deleteProject(project._id)" ng-hide="user.role =='Commenter'"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="setEditable(project._id)" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#editProjectModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
