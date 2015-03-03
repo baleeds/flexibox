@@ -62,6 +62,7 @@ require([
         "specs/ControllerTests/setControllerSpec",
         "specs/ControllerTests/projectControllerSpec",
         "specs/ControllerTests/homeControllerSpec",
+        "specs/ControllerTests/homeSpec",
 
         "specs/FactoryTests/utilityFactorySpec",
         "specs/FactoryTests/homeFactorySpec",
