@@ -1,8 +1,10 @@
 var Project = require('../../app/common/models/projects');
-var projectDAO = require('../dao/projectDAO');
-var userDAO = require('../dao/userDAO');
+var ProjectDAO = require('../dao/projectDAO');
+var UserDAO = require('../dao/userDAO');
 
-module.exports = function(router, protect){
+var async = require('async');
+
+module.exports = function (router, protect) {
 
     // PROJECT ROUTES
     // ==========================================================================
@@ -19,7 +21,7 @@ module.exports = function(router, protect){
      *
      * TODO : Ensure that the user is an owner or admin. (Add a commenter test)
      */
-        .post(function(req, res) {
+        .post(function (req, res) {
             var project = new Project();
 
             project.name = req.body.name;
@@ -29,24 +31,28 @@ module.exports = function(router, protect){
             project.owners = req.body.userID;
             project.tags = req.body.tags;
             project.commenters = req.body.commenters;
-            project.save(function(err) {
-                if (err)
-                    res.send(err);
-                var callback = function(projects) {
-                    if (projects == null) {
-                        res.status(404).end();
-                    }
-                    res.json(projects);
-                };
-                var userCallback = function(user){
-                    projectDAO.getMyProjects(user, callback);
-                };
-                userDAO.updateProjects(req.user, project._id, userCallback );
 
-                for(var i=0; i<project.commenters.length; i++){
-                    var user = project.commenters[i];
-                    userDAO.updateProjects(user, project._id, function(){});
+            async.waterfall([
+                function (callback) {
+                    project.save(function (err) {
+                        if (err)
+                            res.send(err);
+
+                        for (var i = 0; i < project.commenters.length; i++) {
+                            var user = project.commenters[i];
+                            UserDAO.updateProjects(user, project._id, function () {
+                            });
+                        }
+                        callback(null, req.user, project._id);
+                    });
+                },
+                UserDAO.updateProjects,
+                ProjectDAO.getMyProjects
+            ], function (err, projects) {
+                if (err) {
+                    res.status(404).end();
                 }
+                res.json(projects);
             });
         })
 
@@ -56,25 +62,28 @@ module.exports = function(router, protect){
      * that are visible to the logged in user.
      * @return The JSON data array for the user's projects.
      */
-        .get(function(req, res) {
-            var callback = function(projects) {
-                if (projects == null) {
-                    res.status(404).end();
-                }
-                res.json(projects);
-            };
-            projectDAO.getMyProjects(req.user, callback);
+        .get(function (req, res) {
+            async.waterfall([
+                    function (callback) {
+                        ProjectDAO.getMyProjects(req.user, callback)
+                    }],
+                function (err, projects) {
+                    if (err) {
+                        res.status(404).end();
+                    }
+                    res.json(projects);
+                });
         });
 
     router.route('/projects/:project_id') // accessed at //<server>:<port>/api/projects/id
         .all(protect)
         // get a project
-        .get(function(req, res){
+        .get(function (req, res) {
             if (req.query.includeSets) {
                 Project
                     .findById(req.params.project_id)
                     .select('name description setsURL entryURL sets._id sets.name sets.description commenters sets.tags')
-                    .exec(function(err, project) {
+                    .exec(function (err, project) {
                         if (err)
                             res.send(err);
                         res.json(project);
@@ -83,7 +92,7 @@ module.exports = function(router, protect){
                 Project
                     .findById(req.params.project_id)
                     .select('name description setsURL entryURL tags commenters')
-                    .exec(function(err, project) {
+                    .exec(function (err, project) {
                         if (err)
                             res.send(err);
                         res.json(project);
@@ -93,9 +102,9 @@ module.exports = function(router, protect){
         })
 
         // update a project
-        .put(function(req, res) {
+        .put(function (req, res) {
 
-            Project.findById(req.params.project_id, function(err, project) {
+            Project.findById(req.params.project_id, function (err, project) {
                 if (err)
                     res.send(err);
 
@@ -105,12 +114,13 @@ module.exports = function(router, protect){
                 project.commenters = req.body.commenters;
 
                 // save the project
-                project.save(function(err) {
+                project.save(function (err) {
                     if (err)
                         res.send(err);
-                    for(var i=0; i<project.commenters.length; i++){
+                    for (var i = 0; i < project.commenters.length; i++) {
                         var user = project.commenters[i];
-                        userDAO.updateProjects(user, project._id, function(){});
+                        UserDAO.updateProjects(user, project._id, function () {
+                        });
                     }
                     res.json(project);
                 });
@@ -118,29 +128,29 @@ module.exports = function(router, protect){
         })
 
         // delete a project
-        .delete(function(req, res) {
+        .delete(function (req, res) {
             Project.remove({
                 _id: req.params.project_id
-            }, function(err, bear) {
-                if (err)
-                    res.send(err);
-                var callback = function(projects) {
-                    if (projects == null) {
-                        res.status(404).end();
+            }, function (err, bear) {
+                async.waterfall([
+                    function (callback) {
+                        UserDAO.deleteProjects(req.params.project_id, callback);
+                    },
+                    function (callback) {
+                        ProjectDAO.getMyProjects(req.user, callback);
                     }
+                ], function (err, projects) {
+                    if (err)
+                        res.status(404).end();
                     res.json(projects);
-                };
-                var userCallback = function(){
-                    projectDAO.getMyProjects(req.user, callback);
-                };
-                userDAO.deleteProjects(req.params.project_id, userCallback);
+                });
             });
         });
     router.route('/projects/userProjects') // accessed at //<server>:<port>/api/projects/id
         .all(protect)
         // get a project
-        .get(function(req, res) {
-                console.log(req.body);
+        .get(function (req, res) {
+            console.log(req.body);
         });
 
 };

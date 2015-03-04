@@ -4,27 +4,27 @@
 var Project = require('../../app/common/models/projects');
 
 module.exports = {
-    getMyProjects: function(user, callback){
-        if (user.role == 'System Admin'){
+    getMyProjects: function (user, callback) {
+        if (user.role == 'System Admin') {
             Project
                 .find()
                 .select('name description setsURL entryURL tags commenters')
                 .exec(function (err, projects) {
                     if (err) {
-                        console.log(err);
+                        callback(err);
                     } else {
-                        callback(projects);
+                        callback(null, projects);
                     }
                 });
-        }else {
+        } else {
             Project
                 .find({"_id": {$in: user.projectsVisible}})
                 .select('name description setsURL entryURL tags commenters')
                 .exec(function (err, projects) {
                     if (err) {
-                      console.log(err);
+                        callback(err);
                     } else {
-                        callback(projects);
+                        callback(null, projects);
                     }
                 });
         }
