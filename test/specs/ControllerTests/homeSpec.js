@@ -10,6 +10,7 @@ define(
             var $controller;
             var $httpBackend;
             var $scope;
+            var PROJECTS_PER_PAGE = 9;
 
             beforeEach(function () {
                 module(namespace);
@@ -59,6 +60,27 @@ define(
 
                 });
 
+                it("confirmEdit Failure Test", function(){
+                    $scope.setEditable('222');
+                    $scope.newTags = 'newTags';
+                    $scope.newSharedUsers = [{_id:'234', role:'commenter', name:'Commenter'},{_id:'123', role:'commenter', name:'Commenter2'}];
+                    $httpBackend.whenPUT('/api/projects/222', function(postData){
+                        postData = JSON.parse(postData);
+                        expect(postData.tags).toBe('newTags');
+                        expect(postData.commenters.length).toBe(2);
+                        expect(postData.commenters[0].name).toBe('Commenter');
+                        expect(postData.commenters[1].name).toBe('Commenter2');
+                        return true;
+                    }).respond(400, false);
+                    $scope.confirmEdit();
+
+                    $httpBackend.flush();
+                    expect($scope.error).toBe("Error confirming confirming Edit");
+
+                });
+
+
+
                 it("cancelEdit Test", function(){
                     $scope.setEditable('222');
                     $scope.newTags = 'newTag';
@@ -93,6 +115,22 @@ define(
                     expect($scope.projects.length).toBe(2);
 
                 });
+                it("createProject Failure Test", function(){
+                    $scope.newTags = [{text:"testTag"}];
+                    $scope.newSharedUsers = [{_id:'234', name:'Commenter', email:'Commenter@email.com'}];
+                    $httpBackend.whenPOST('/api/projects', function(postData){
+                        postData = JSON.parse(postData);
+                        expect(postData.userID).toBe('555');
+                        expect(postData.tags[0].text).toBe('testTag');
+                        expect(postData.commenters[0].name).toBe('Commenter');
+                        return true;
+                    }).respond(400);
+
+                    $scope.createProject();
+                    $httpBackend.flush();
+
+                    expect($scope.error).toBe('Error creating project');
+                });
 
                 it("deleteProject Test", function(){
                     expect($scope.projects.length).toBe(1);
@@ -101,6 +139,24 @@ define(
                     $scope.deleteProject('222');
                     $httpBackend.flush();
                     expect($scope.projects.length).toBe(0);
+                });
+
+                it("deleteProject failure Test", function(){
+                    expect($scope.projects.length).toBe(1);
+                    $httpBackend.expectDELETE('/api/projects/222').respond(400);
+                    $httpBackend.expectDELETE('/api/users/projects/222').respond(200, []);
+                    $scope.deleteProject('222');
+                    $httpBackend.flush();
+                    expect($scope.error).toBe('Error Deleting Project');
+                });
+
+                it("deleteProject Factory failure Test", function(){
+                    expect($scope.projects.length).toBe(1);
+                    $httpBackend.expectDELETE('/api/projects/222').respond(200,[]);
+                    $httpBackend.expectDELETE('/api/users/projects/222').respond(400);
+                    $scope.deleteProject('222');
+                    $httpBackend.flush();
+                    expect($scope.error).toBe('Error in homeFactory deleting project');
                 });
 
                 it("addTag Test", function(){
@@ -144,6 +200,14 @@ define(
 
                 });
 
+                it('filterPotentialUsers Failure Test', function(){
+                    $scope.newSharedUser = "o";
+                    $httpBackend.expectGET('/api/users/search/o').respond(400);
+                    $scope.filterPotentialUsers();
+                    $httpBackend.flush();
+                    expect($scope.error).toBe("Error filtering potential users");
+                });
+
                 it("addSharedUser Test", function(){
                     var user = {_id:'234', name:'Commenter', email:'Commenter@email.com'};
                     $scope.newSharedUser = 'Commenter';
@@ -172,6 +236,61 @@ define(
                     expect($scope.newSharedUsers[0]._id).toBe('235');
                     expect($scope.newSharedUsers[0].email).toBe('Owner@email.com');
                 });
+
+                it("pageLeft Test", function(){
+                    var result = (14 - PROJECTS_PER_PAGE);
+                    $scope.paginationUpper = 14;
+                    $scope.pageLeft();
+                    expect($scope.paginationUpper).toBe(result);
+                    $scope.pageLeft();
+                    expect($scope.paginationUpper).toBe(result);
+                });
+
+                it("endLeft Test", function(){
+                    $scope.pagination = 414;
+                    expect($scope.pagination).toBe(414);
+                    $scope.endLeft();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+                });
+
+                it("pageRight Test", function(){
+                    expect($scope.projects.length).toBe(1);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+
+                 });
+
+                it("endRight Test", function(){
+                    expect($scope.projects.length).toBe(1);
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+                });
+
+                it("Constructor Test: Session Factory Failure", function(){
+                    $httpBackend.expectGET('/api/users/current').respond(400);
+                    $httpBackend.expectGET('/api/projects').respond(200, [ {_id: '222', name: 'Test Project',description:'Test Description', tags:[],
+                        commenters:[], sets:[{_id: '1', name:"Test Set", description:"Test Description", tags:[]}]}]);
+
+                    $scope = {};
+
+                    $controller(name, {$scope: $scope});
+                    $httpBackend.flush();
+                    expect($scope.error).toBe('Session Factory Error getting user');
+                });
+
+                it("Constructor Test: Home Factory Failure", function(){
+                    $httpBackend.expectGET('/api/users/current').respond(200,  {_id: '555', name: 'Admin', role:'System Admin'});
+                    $httpBackend.expectGET('/api/projects').respond(400);
+
+                    $scope = {};
+
+                    $controller(name, {$scope: $scope});
+                    $httpBackend.flush();
+                    expect($scope.error).toBe('Error getting projects from bomeFactory');
+                })
 
             });
         });

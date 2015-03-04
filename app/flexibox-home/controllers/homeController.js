@@ -9,7 +9,7 @@ define([
     ],
     function (module, namespace, namespaceCommon) {
         'use strict';
-        var PROJECTS_PER_PAGE = 10;
+        var PROJECTS_PER_PAGE = 9;
 
         var name = namespace + ".homeController";
         module.controller(name,
@@ -41,6 +41,7 @@ define([
                              */
                         })
                         .error(function (err) {
+                            $scope.error = "Session Factory Error getting user";
                             // Do nothing
                         });
                     // On controller load, populate project
@@ -62,7 +63,8 @@ define([
                             .success(function (set) {
 
                             }).error(function (err) {
-                                //
+
+                                $scope.error = "Error confirming confirming Edit";
                             });
                         oldProject = {};
                         $scope.newTags = [];
@@ -84,6 +86,7 @@ define([
                         })
                         .error(function (projectData) {
                             logger.error('homeController - Error getting projects: ' + projectData);
+                            $scope.error = 'Error getting projects from bomeFactory';
                         });
 
                     // Create a project based on form data.  Called by upload modal
@@ -104,6 +107,7 @@ define([
                             })
                             .error(function (projectData) {
                                 logger.error('homeController - Error creating project: ' + projectData);
+                                $scope.error = 'Error creating project';
                             });
 
                     };
@@ -116,6 +120,7 @@ define([
                             })
                             .error(function (projectData) {
                                 logger.error('homeController - Error deleting project: ' + projectData);
+                                $scope.error = 'Error Deleting Project';
                             });
                         homeFactory.deleteUserProject(id)
                             .success(function (data) {
@@ -123,6 +128,7 @@ define([
                             })
                             .error(function (projectData) {
                                 logger.error('homeController - Error deleting project: ' + projectData);
+                                $scope.error = 'Error in homeFactory deleting project';
                             });
 
                     };
@@ -158,6 +164,7 @@ define([
                                 })
                                 .error(function (err) {
                                     console.log(err);
+                                    $scope.error = "Error filtering potential users";
                                 });
                         }
                     };
