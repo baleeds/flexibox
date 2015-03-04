@@ -8,18 +8,20 @@ module.exports = {
 
     updateProjects: function (user, projID, callback) {
         User.findById(user._id, function (err, user) {
-            if (err)
+            if (err) {
                 callback(err);
-
-            // upddate Project
-            user.projectsVisible = user.projectsVisible.concat(projID);
-            // save the user
-            user.save(function (err) {
-                if (err)
-                    callback(err);
-
-                callback(null, user);
-            });
+            } else {
+                // upddate Project
+                user.projectsVisible = user.projectsVisible.concat(projID);
+                // save the user
+                user.save(function (err) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, user);
+                    }
+                });
+            }
 
         })
     },
@@ -41,14 +43,16 @@ module.exports = {
 
     },
     userSearch: function (str, callback) {
-        if (str == "") {
+        console.log("String: " + (!str));
+        if (!str) {
             callback(null, []);
+        } else {
+            User.find({$or: [{"name": {$regex: "^" + str}}, {"local.email": {$regex: "^" + str}}]}, function (err, users) {
+                if (err) {
+                    callback(err);
+                }
+                callback(null, users);
+            })
         }
-        User.find({$or: [{"name": {$regex: "^" + str}}, {"local.email": {$regex: "^" + str}}]}, function (err, users) {
-            if (err) {
-                callback(err);
-            }
-            callback(null, users);
-        })
     }
 };
