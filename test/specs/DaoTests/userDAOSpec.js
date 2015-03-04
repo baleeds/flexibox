@@ -40,4 +40,35 @@ describe("UserDAO Tests", function () {
 
         });
     });
+
+    describe("userSearch", function(){
+        it("searching for a valid user", function(){
+            async.waterfall([
+                function(callback){
+                    UserDAO.userSearch("com", callback);
+                }
+            ], function(err, users){
+                if(err){
+                    expect("Fail:").toBe("true");
+                } else {
+                    expect(users.length).toBe(1);
+                    expect(users[0].name).toBe("commenter");
+                }
+
+            });
+        });
+        it("searching for an empty string", function(){
+            async.waterfall([
+                function(callback){
+                    UserDAO.userSearch("", callback);
+                }
+            ], function(err, users){
+                if(err){
+                    expect("Fail:").toBe("true");
+                } else {
+                    expect(users.length).toBe(0);
+                }
+            });
+        });
+    })
 });

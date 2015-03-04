@@ -185,23 +185,31 @@ define([
                     };
 
                     $scope.pageLeft = function(){
-                        if($scope.paginationUpper > PROJECTS_PER_PAGE){
-                            $scope.paginationUpper -= PROJECTS_PER_PAGE;
+                        if($scope.pagination > PROJECTS_PER_PAGE){
+                            $scope.pagination -= PROJECTS_PER_PAGE;
+                            $scope.pageLength = PROJECTS_PER_PAGE;
                         }
                     };
 
                     $scope.endLeft = function(){
                         $scope.pagination = PROJECTS_PER_PAGE;
+                        $scope.pageLength = PROJECTS_PER_PAGE;
                     };
 
                     $scope.pageRight = function () {
                         if ($scope.pagination < $scope.projects.length) {
                             $scope.pagination += PROJECTS_PER_PAGE;
+                            if($scope.pagination > $scope.projects.length){
+                                $scope.pageLength = ($scope.projects.length % PROJECTS_PER_PAGE);
+                            }
                         }
                     };
 
                     $scope.endRight = function(){
                         $scope.pagination = Math.ceil($scope.projects.length / PROJECTS_PER_PAGE) * PROJECTS_PER_PAGE;
+                        if($scope.pagination > $scope.projects.length){
+                            $scope.pageLength = ($scope.projects.length % PROJECTS_PER_PAGE);
+                        }
                     };
 
                 }]);

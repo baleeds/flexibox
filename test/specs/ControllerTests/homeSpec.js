@@ -239,11 +239,11 @@ define(
 
                 it("pageLeft Test", function(){
                     var result = (14 - PROJECTS_PER_PAGE);
-                    $scope.paginationUpper = 14;
+                    $scope.pagination = 14;
                     $scope.pageLeft();
-                    expect($scope.paginationUpper).toBe(result);
+                    expect($scope.pagination).toBe(result);
                     $scope.pageLeft();
-                    expect($scope.paginationUpper).toBe(result);
+                    expect($scope.pagination).toBe(result);
                 });
 
                 it("endLeft Test", function(){
@@ -263,12 +263,30 @@ define(
 
                  });
 
+                it("pageRight Test Overflow", function(){
+                    expect($scope.projects.length).toBe(1);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+                    expect($scope.pageLength).toBe(1);
+
+                 });
+
                 it("endRight Test", function(){
                     expect($scope.projects.length).toBe(1);
                     $scope.endRight();
                     expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
                 });
 
+
+                it("endRight Test Overflow", function(){
+                    expect($scope.projects.length).toBe(1);
+                    $scope.pagination = 0;
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+                    expect($scope.pageLength).toBe(1);
+
+                });
                 it("Constructor Test: Session Factory Failure", function(){
                     $httpBackend.expectGET('/api/users/current').respond(400);
                     $httpBackend.expectGET('/api/projects').respond(200, [ {_id: '222', name: 'Test Project',description:'Test Description', tags:[],
