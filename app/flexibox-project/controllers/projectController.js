@@ -133,11 +133,17 @@ define([
                     $scope.pageRight = function () {
                         if ($scope.pagination < $scope.project.sets.length) {
                             $scope.pagination += SETS_PER_PAGE;
+                            if($scope.pagination > $scope.project.sets.length){
+                                $scope.pageLength = ($scope.project.sets.length % SETS_PER_PAGE);
+                            }
                         }
                     };
 
                     $scope.endRight = function(){
                         $scope.pagination = Math.ceil($scope.project.sets.length / SETS_PER_PAGE) * SETS_PER_PAGE;
+                        if($scope.pagination > $scope.project.sets.length){
+                            $scope.pageLength = ($scope.project.sets.length % SETS_PER_PAGE);
+                        }
                     };
                     
                 }]);

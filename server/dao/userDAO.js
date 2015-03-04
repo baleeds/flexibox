@@ -43,7 +43,6 @@ module.exports = {
 
     },
     userSearch: function (str, callback) {
-        console.log("String: " + (!str));
         if (!str) {
             callback(null, []);
         } else {

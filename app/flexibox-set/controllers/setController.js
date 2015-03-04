@@ -181,11 +181,17 @@ define([
                     $scope.pageLeft = function(){
                         if($scope.paginationUpper > POSTS_PER_PAGE){
                             $scope.paginationUpper -= POSTS_PER_PAGE;
+                            if($scope.pagination > $scope.set.posts.length){
+                                $scope.pageLength = ($scope.set.posts.length % POSTS_PER_PAGE);
+                            }
                         }
                     };
 
                     $scope.endLeft = function(){
                         $scope.pagination = POSTS_PER_PAGE;
+                        if($scope.pagination > $scope.set.posts.length){
+                            $scope.pageLength = ($scope.set.posts.length % POSTS_PER_PAGE);
+                        }
                     };
 
                 }]);

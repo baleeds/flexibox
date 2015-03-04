@@ -14,7 +14,7 @@
             <div class="pagination-handles">
                 <a href="#" ng-click="endLeft()" class="fa fa-angle-double-left"></a>
                 <a href="#" ng-click="pageLeft()" class="fa fa-angle-left"></a>
-                {{pagination - pageLength < 0 ? 1 : pagination - pageLength + 1}}
+                {{pagination - pageLength < 0 ? 1 : pagination > set.posts.length ? set.posts.length : pagination - pageLength + 1}}
                 -
                 {{pagination > set.posts.length ? set.posts.length : pagination}} of {{set.posts.length}}
                 <a href="#" ng-click="pageRight()" class="fa fa-angle-right"></a>
@@ -22,7 +22,9 @@
             </div>
             <ul class="panel-list">
 
-                <li ng-repeat="post in set.posts | filter:searchText | orderBy:'name' | limitTo: pagination | limitTo: -pageLength" class="panel post-panel">
+                <li ng-repeat="post in set.posts | filter:searchText | orderBy:'name' |
+                 limitTo: searchText == '' || searchText == undefined ? pagination : 9 |
+                 limitTo: searchText == '' || searchText == undefined ? -pageLength: -9" class="panel">
                     <div class="panel-top">
                         <a href="#" class="panel-delete" ng-click="deletePost(post._id)"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="postEditable(post._id)" data-toggle="modal" data-target="#editPostModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
