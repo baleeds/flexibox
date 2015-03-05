@@ -5,8 +5,6 @@ var URL = Utils.URL;
 var PID = "54d82057b46e200418000006";
 var SID = "54d82082b46e200418000007";
 
-Utils.loadTestData();
-
 frisby.create("setRoutes")
     .post(URL + "api/login",
     {
@@ -14,6 +12,8 @@ frisby.create("setRoutes")
         password: "commenter"
     }).after(function (body, res) {
         var cookie = res.headers['set-cookie'][0].split(';')[0];
+
+        Utils.loadTestData();
 
         frisby.create("GET : api/project/pid/sets")
             .addHeader('Cookie', cookie)
@@ -42,6 +42,35 @@ frisby.create("setRoutes")
                 name: "AMERICA",
                 description : "AMERICA IS THE GREATEST COUNTRY EVER!!!!"
             }]})
+            .toss();
+
+        Utils.loadTestData();
+
+        frisby.create("GET : api/project/pid/sets/sid?includePosts=true")
+            .addHeader('Cookie', cookie)
+            .get(URL + "api/projects/" + PID + "/sets/" + SID + "?includePosts=true")
+            .expectStatus(200)
+            .expectJSON({
+                "name": "DB Flexibox Set",
+                "description": "A set containing flexibox stuff.",
+                "entryURL": "/api/projects54d82057b46e200418000006/sets/undefined",
+                "postsURL": "/api/projects54d82057b46e200418000006/sets/undefined/posts",
+                "posts" : [],
+                "_id": "54d82082b46e200418000007"
+            })
+            .toss();
+
+        frisby.create("GET : api/project/pid/sets/sid")
+            .addHeader('Cookie', cookie)
+            .get(URL + "api/projects/" + PID + "/sets/" + SID)
+            .expectStatus(200)
+            .expectJSON({
+                "name": "DB Flexibox Set",
+                "description": "A set containing flexibox stuff.",
+                "entryURL": "/api/projects54d82057b46e200418000006/sets/undefined",
+                "postsURL": "/api/projects54d82057b46e200418000006/sets/undefined/posts",
+                "_id": "54d82082b46e200418000007"
+            })
             .toss();
 
     }).toss();

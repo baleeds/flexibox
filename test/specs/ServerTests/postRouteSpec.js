@@ -145,11 +145,7 @@ frisby.create("postRoutes")
          */
         frisby.create("DELETE : api/project/pid/sets/sid/posts/id")
             .addHeader('Cookie', cookie)
-            .delete(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID,
-            {
-                name : "This is my new name!",
-                description : "This is my new description."
-            })
+            .delete(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID)
             .expectJSON({
             })
             .expectStatus(200)
