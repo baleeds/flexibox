@@ -65,7 +65,7 @@ function (module, namespace, namespaceCommon) {
 				if ($scope.newDiv != 0) {
 					document.getElementById('imageDiv').removeChild($scope.newDiv);
 					$scope.newDiv = 0;
-                    smallest = 0;
+                    smallest = {};
 				}
 			})
 			.error(function(post) {
@@ -179,8 +179,10 @@ function (module, namespace, namespaceCommon) {
 
     $scope.scrollView = function() {
         var comment = utilityFactory.findById($scope.post.comments, $scope.currentComment);
-        $("html, body").stop().animate({ scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2) },500);
-        $(".workspace").stop().animate({ scrollLeft: comment.smallest.x - ( ( (window.innerWidth *.75) - comment.width) / 2)},500);
+        if(comment.hasOwnProperty("smallest")) {
+            $("html, body").stop().animate({scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2)}, 500);
+            $(".workspace").stop().animate({scrollLeft: comment.smallest.x - ( ( (window.innerWidth * .75) - comment.width) / 2)}, 500);
+        }
     };
 
     $scope.scrollSideBar = function() {
@@ -270,7 +272,7 @@ function (module, namespace, namespaceCommon) {
                         height: Math.floor(sceneWidth / imageRatio) + "px"
                     });
                     $scope.post.comments.forEach(function(comment, idx){
-                        if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                        if(comment.hasOwnProperty("smallest")) {
                             var $comment = $("#comment" + (idx + 1));
                             if($comment.length > 0) {
                                 $comment.data("prev-css", $comment[0].getAttribute("style"));
@@ -291,7 +293,7 @@ function (module, namespace, namespaceCommon) {
                         height: sceneHeight + "px"
                     });
                     $scope.post.comments.forEach(function(comment, idx){
-                        if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                        if(comment.hasOwnProperty("smallest")) {
                             var $comment = $("#comment" + (idx + 1));
                             if(comment.length > 0) {
                                 $comment.data("prev-css", $comment[0].getAttribute("style"));
@@ -301,7 +303,7 @@ function (module, namespace, namespaceCommon) {
                                     height: 0,
                                     width: 0,
                                     left: (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px",
-                                    top: (Math.floor(sceneWidth * commentHeightRatio) + 50) + "px"
+                                    top: (Math.floor(sceneHeight * commentHeightRatio) + 50) + "px"
                                 });
                             }
                         }
@@ -313,7 +315,7 @@ function (module, namespace, namespaceCommon) {
                     height: Math.ceil(sceneWidth / imageRatio) + "px"
                 });
                 $scope.post.comments.forEach(function(comment, idx){
-                    if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                    if(comment.hasOwnProperty("smallest")) {
                         var $comment = $("#comment" + (idx + 1));
                         if($comment.length > 0) {
                             $comment.data("prev-css", $comment[0].getAttribute("style"));
@@ -335,7 +337,7 @@ function (module, namespace, namespaceCommon) {
                 });
 
                 $scope.post.comments.forEach(function(comment, idx){
-                    if(comment.smallest.hasOwnProperty("x") && comment.smallest.hasOwnProperty("y")) {
+                    if(comment.hasOwnProperty("smallest")) {
                         var $comment = $("#comment" + (idx + 1));
                         if($comment.length > 0) {
                             $comment.data("prev-css", $comment[0].getAttribute("style"));
@@ -345,7 +347,7 @@ function (module, namespace, namespaceCommon) {
                                 height: 0,
                                 width: 0,
                                 left: (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px",
-                                top: (Math.floor(sceneWidth * commentHeightRatio) + 50) + "px"
+                                top: (Math.floor(sceneHeight * commentHeightRatio) + 50) + "px"
                             });
                         }
                     }
