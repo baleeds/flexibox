@@ -5,7 +5,7 @@ var URL = Utils.URL;
 var PID = "54d82057b46e200418000006";
 var SID = "54d82082b46e200418000007";
 var OID = "54d8209cb46e200418000008";
-
+var CID = "54d820b5b46e200418000009";
 Utils.loadTestData();
 
 frisby.create("commentRoutes")
@@ -51,4 +51,13 @@ frisby.create("commentRoutes")
                         }}]
             })
             .toss();
+        // Delete Comment Test
+        frisby.create("Delete : api/project/pid/sets/sid/post/id/comments/cid")
+            .addHeader('Cookie', cookie)
+            .delete(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID + "/comments/" + CID)
+            .expectStatus(200)
+            .expectJSON({
+                _id: SID
+            }).toss();
+
     }).toss();
