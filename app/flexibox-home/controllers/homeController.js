@@ -26,10 +26,11 @@ define([
                     $scope.pageLength = PROJECTS_PER_PAGE;
 
                     $scope.options = [
-                        { label: 'Project Name', value: 'name' },
+                        { label: 'Alphabetically by Project Name', value: 'name' },
+                        { label: 'Reverse Alphabetically by Project Name', value: 'revName' },
                         { label: 'Project Last Edited', value: 'lastEdit' },
                         {label:  'Newest', value: 'newest'},
-                        {label: 'Number of Members', value:'numMembers'}
+                       // {label: 'Number of Members', value:'numMembers'}
                     ];
                     $scope.filter = "";
 
@@ -92,7 +93,7 @@ define([
                     homeFactory.getProjects()
                         .success(function (projectData) {
                             $scope.projects = projectData;
-                            sortByKey($scope.projects, "name");
+                            sortAlphabetically($scope.projects, "name");
                             console.log($scope.projects);
                         })
                         .error(function (projectData) {
@@ -225,23 +226,43 @@ define([
 
                     function sortByKey(array, key) {
                         return array.sort(function(a, b) {
-                            var x = a[key]; var y = b[key];
+                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
                             return ((x > y) ? -1 : ((x < y) ? 1 : 0));
                         });
                     }
+                    function sortAlphabetically(array, key) {
+                        return array.sort(function(a, b) {
+                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                        });
+                    }
 
+                    function sortByNumberOfCommenters(array){
+                        return array.sort(function(a, b) {
+                            var x = a["commenters"].length(); var y = b["commenters"].length();
+                            return ((x >y) ? -1 : ((x < y) ? 1 : 0));
+                        });
+                    }
                     $scope.filterSelected = function(){
                         var filter = $scope.filter.value;
-                        if(filter == "lastEdit" ){
+                        if(filter =="name"){
+                           sortAlphabetically($scope.projects, "name");
+                        }else if(filter =="revName"){
+                            sortByKey($scope.projects, "name")
+                        }
+                        else if(filter == "lastEdit" ){
                             console.log($scope.projects);
                             sortByKey($scope.projects, "editedAt");
                             console.log($scope.projects);
                         }
-                        if(filter == "newest"){
+                        else if(filter == "newest"){
                             console.log($scope.projects);
                             sortByKey($scope.projects, "createdAt");
                             console.log($scope.projects);
                         }
+                        /*else if(filter == "numMembers"){
+                            sortByNumberOfCommenters($scope.projects)
+                        }*/
                     }
 
                 }]);
