@@ -8,7 +8,7 @@ module.exports = {
         if (user.role == 'System Admin') {
             Project
                 .find()
-                .select('name description setsURL entryURL tags commenters')
+                .select('name description createdAt editedAt setsURL entryURL tags commenters')
                 .exec(function (err, projects) {
                     if (err) {
                         callback(err);
@@ -19,7 +19,7 @@ module.exports = {
         } else {
             Project
                 .find({"_id": {$in: user.projectsVisible}})
-                .select('name description setsURL entryURL tags commenters')
+                .select('name description createdAt editedAt setsURL entryURL tags commenters')
                 .exec(function (err, projects) {
                     if (err) {
                         callback(err);

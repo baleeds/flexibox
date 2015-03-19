@@ -16,9 +16,15 @@
                 {{pagination > projects.length ? projects.length : pagination}} of {{projects.length}}
                 <a href="#" ng-click="pageRight()" class="fa fa-angle-right"></a>
                 <a href="#" ng-click="endRight()" class="fa fa-angle-double-right"></a>
+                <div>
+                    Sort By:
+                    <select id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
+                    </select>
+
+                </div>
             </div>
             <ul class="panel-list">
-                <li ng-repeat="project in projects | filter:searchText | orderBy:'name' |
+                <li ng-repeat="project in projects | filter:searchText |
                  limitTo: searchText == '' || searchText == undefined ? pagination : 9|
                  limitTo: searchText == '' || searchText == undefined ? -pageLength: -9" class="panel">
                     <div class="panel-top">

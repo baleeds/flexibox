@@ -112,6 +112,7 @@ module.exports = function (router, protect) {
                 project.description = req.body.description;
                 project.tags = req.body.tags;
                 project.commenters = req.body.commenters;
+                project.editedAt = req.body.editedAt;
 
                 // save the project
                 project.save(function (err) {

@@ -25,11 +25,20 @@ define([
                     $scope.pagination = PROJECTS_PER_PAGE;
                     $scope.pageLength = PROJECTS_PER_PAGE;
 
+                    $scope.options = [
+                        { label: 'Project Name', value: 'name' },
+                        { label: 'Project Last Edited', value: 'lastEdit' },
+                        {label:  'Newest', value: 'newest'},
+                        {label: 'Number of Members', value:'numMembers'}
+                    ];
+                    $scope.filter = "";
+
                     sessionFactory.getCurrentUser()
                         .success(function (user) {
                             $scope.user = user;
                             $scope.userForm = {};
                             $scope.userForm.projects = $scope.user.projectsVisible;
+
                             /**
                              homeFactory.getUserProjects($scope.userForm)
                              .success(function(projectData){
@@ -59,6 +68,7 @@ define([
                     $scope.confirmEdit = function () {
                         $scope.editableProject.tags = $scope.newTags;
                         $scope.editableProject.commenters = $scope.newSharedUsers;
+                        $scope.editableProject.editedAt = new Date().toISOString();
                         homeFactory.updateProject($scope.editableProject._id, $scope.editableProject)
                             .success(function (set) {
 
@@ -82,6 +92,7 @@ define([
                     homeFactory.getProjects()
                         .success(function (projectData) {
                             $scope.projects = projectData;
+                            sortByKey($scope.projects, "name");
                             console.log($scope.projects);
                         })
                         .error(function (projectData) {
@@ -211,6 +222,28 @@ define([
                             $scope.pageLength = ($scope.projects.length % PROJECTS_PER_PAGE);
                         }
                     };
+
+                    function sortByKey(array, key) {
+                        return array.sort(function(a, b) {
+                            var x = a[key]; var y = b[key];
+                            debugger;
+                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                        });
+                    }
+
+                    $scope.filterSelected = function(){
+                        var filter = $scope.filter.value;
+                        if(filter == "lastEdit" ){
+                            console.log($scope.projects);
+                            sortByKey($scope.projects, "editedAt");
+                            console.log($scope.projects);
+                        }
+                        if(filter == "newest"){
+                            console.log($scope.projects);
+                            sortByKey($scope.projects, "createdAt");
+                            console.log($scope.projects);
+                        }
+                    }
 
                 }]);
     });

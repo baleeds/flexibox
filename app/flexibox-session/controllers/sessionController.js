@@ -14,12 +14,6 @@ define([
 		module.controller(name, ['$scope','$rootScope', namespaceCommon + '.sessionFactory', '$location', function ($scope,
 																													$rootScope, sessionFactory, $location) {
 			$scope.user = {}; // user that is currently logged in
-			$scope.options = [
-				{ label: 'Project Name', value: 'name' },
-				{ label: 'Project Tags', value: 'tags' },
-				{label:  'Project Owner', value: 'owner'}
-			];
-			$scope.filterModels = [];
 
 			sessionFactory.getCurrentUser()
 				.success(function(user) {

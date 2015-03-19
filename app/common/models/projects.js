@@ -11,6 +11,8 @@ var ProjectSchema = new Schema({
 	name: { type:String, required: true },
 	description: String,
 	owners: [],
+	createdAt: {type: Date, default: Date.now},
+	editedAt:{type: Date, default: Date.now},
 	commenters: [{
 		name: String,
 		email: String,
