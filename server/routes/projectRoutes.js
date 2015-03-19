@@ -137,8 +137,8 @@ module.exports = function (router, protect) {
                     function (callback) {
                         UserDAO.deleteProjects(req.params.project_id, callback);
                     },
-                    function (callback) {
-                        ProjectDAO.getMyProjects(req.user, callback);
+                    function (projectcallback) {
+                        ProjectDAO.getMyProjects(req.user, projectcallback);
                     }
                 ], function (err, projects) {
                     if (err)

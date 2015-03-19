@@ -31,14 +31,20 @@ module.exports = {
             for (var i = 0; i < users.length; i++) {
                 vals.push(i);
             }
-            async.map(vals, function (i) {
+            async.map(vals, function (i, callback) {
                 var idx = users[i].projectsVisible.indexOf(projID);
                 users[i].projectsVisible.splice(idx, 1);
                 users[i].save(function (err) {
-                    if (err)
+                    if (err) {
                         callback(err);
-                })
-            }, callback);
+                    } else {
+                        callback(null, i);
+                    }
+                });
+            }, function(err) {
+                console.log("Next callback");
+                callback(null)
+            });
         });
 
     },
