@@ -1,6 +1,9 @@
 var User = require('../../app/common/models/users');
 var Utils = require('../utils.js');
 var UserDAO = require('../dao/userDAO');
+
+var async = require('async');
+
 module.exports = function(router, protect) {
 // USER ROUTES
 // =====================================================================================
@@ -112,21 +115,23 @@ module.exports = function(router, protect) {
     router.route('/users/search/:search_str')
         .all(protect)
         .get(function(req, res){
-            var callback = function(users){
-                if(users == null){
-                    res.end();
-                } else {
-                    var result = [];
-                    for(var i = 0; i < users.length; i++){
-                        result.push({
-                            _id: users[i]._id,
-                            name : users[i].name,
-                            email : users[i].local.email
-                        })
+            async.waterfall([function(callback) {
+                UserDAO.userSearch(req.params.search_str, callback);
+            }],
+                function(err, users){
+                    if(err || users == null){
+                        res.end();
+                    } else {
+                        var result = [];
+                        for(var i = 0; i < users.length; i++){
+                            result.push({
+                                _id: users[i]._id,
+                                name : users[i].name,
+                                email : users[i].local.email
+                            })
+                        }
+                        res.json(result);
                     }
-                    res.json(result);
-                }
-            };
-            UserDAO.userSearch(req.params.search_str, callback);
+                });
         })
 };
