@@ -129,18 +129,6 @@
 .notification {
   margin-left: 3px;
 }
-
-#imageDiv {
-  -khtml-user-select: none;
-  -o-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  position: relative;
-  float: left;
-  cursor: crosshair;
-  margin-top: 50px;
-}
 .flexiBox {
   background: rgba(255, 255, 255, 0.63);
   border-radius: 8px;
@@ -376,11 +364,6 @@
     cursor:se-resize;
     bottom:-10px;
     right:-10px;
-}
-.sidebar-options {
-  float: right;
-  padding: 10px 0px;
-  margin-right: 10px;
 }
 .form-tag {
   padding: 3px 8px;

@@ -20,21 +20,6 @@
 
     </div>
     <div class="col-md-3 col-md-offset-9 sidebar">
-		<div class="sidebar-options">
-			<span><strong>View style: </strong></span>
-			<div class="btn-group">
-				<button class="btn" ng-class="{'btn-primary': currentView == 'full', 'btn-default': currentView == 'scaled'}" ng-click="toggleView();" ng-disabled="currentView == 'full'">Full Size</button>
-				<button class="btn" ng-class="{'btn-primary': currentView == 'scaled', 'btn-default': currentView == 'full'}" ng-click="toggleView();" ng-disabled="currentView == 'scaled'">Scaled</button>
-			</div>
-		</div>
-		<div class="sidebar-options">
-			<span><strong>Comment locations: </strong></span>
-			<div class="btn-group">
-				<button class="btn" ng-class="{'btn-primary': locationComments, 'btn-default': !locationComments}" ng-click="toggleLocationComments();" ng-disabled="locationComments">Show</button>
-				<button class="btn" ng-class="{'btn-primary': !locationComments, 'btn-default': locationComments}" ng-click="toggleLocationComments();" ng-disabled="!locationComments">Hide</button>
-			</div>
-		</div>
-
 		<ul style="margin: 0px; padding: 0px;">
 			<li ng-repeat="comment in post.comments" id="commentSide{{ comment.number }}" class="commentBlock" style="list-style:none;" ng-class="{'commentBlockHovered': $parent.currentComment == comment._id}" ng-click="$parent.scrollView();" ng-mouseenter="$parent.setCurrentComment(comment._id)" ng-mouseleave="$parent.setCurrentComment(0)">
 				<div class="commentNumber" ng-style="{background: '{{ comment.color }}'}">{{ comment.number }}</div>
@@ -60,6 +45,7 @@
 				</div>
 			</li>
 		</ul>
+
 		<div class="new-comment">
 			<form name="newComment" novalidate enctype="multipart/form-data">
 				<div class="form-group">
@@ -70,4 +56,10 @@
 			</form>
 		</div>
    	</div>
+	<div class="post-toolbar">
+		<div class="post-toolbar-buttons">
+			<i class="fa fa-arrows-alt" ng-click="toggleView();" ng-class="{'post-toolbar-button-on': currentView == 'full', 'post-toolbar-button-off': currentView == 'scaled'}" ng-click="toggleView();"></i>
+			<i class="fa fa-comment" ng-click="toggleLocationComments();" ng-class="{'post-toolbar-button-on': locationComments, 'post-toolbar-button-off': !locationComments}"></i>
+		</div>
+	</div>
 </div>
