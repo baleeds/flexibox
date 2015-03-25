@@ -28,5 +28,50 @@ module.exports = {
                     }
                 });
         }
+    },
+    updateEditedAt: function(project_id){
+      Project
+          .findById(project_id, function(err, project){
+              if (err)
+                res.send(err);
+              else{
+                  project.editedAt = new Date().toISOString();
+                  project.save(function(err){
+                    if(err)
+                        console.log(err)
+                  });
+              }
+
+          }
+          );
+    },
+    updatedSetEditedAt: function(project_id, set_id){
+        Project.findById(project_id, function (err, project) {
+            if (err)
+                res.send(err);
+            else {
+                project.sets.id(set_id).editedAt = new Date().toISOString();
+                project.save(function(err){
+                    if (err){
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    },
+    updatePostEditedAt: function (project_id, set_id, post_id){
+        Project.findById(project_id, function (err, project) {
+            if (err)
+                res.send(err);
+            else {
+               console.log(post_id);
+                project.sets.id(set_id).posts.id(post_id).editedAt = new Date().toISOString();
+                project.save(function(err){
+                    if (err){
+                        console.log(err);
+                    }
+                });
+            }
+        });
     }
 };

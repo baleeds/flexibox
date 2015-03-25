@@ -28,6 +28,13 @@ define([
                     $scope.editablePost = {};
                     $scope.pagination = POSTS_PER_PAGE;
                     $scope.pageLength = POSTS_PER_PAGE;
+                    $scope.options = [
+                        { label: 'Alphabetically by Set Name', value: 'name' },
+                        { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
+                        { label: 'Set Last Edited', value: 'lastEdit' },
+                        {label:  'Newest Set', value: 'newest'}
+                        // {label: 'Number of Members', value:'numMembers'}
+                    ];
 
                     // On controller load, populate local instance of focused set
                     setFactory.getSet($routeParams.projectId, $routeParams.setId)
@@ -192,6 +199,38 @@ define([
                         if($scope.pagination > $scope.set.posts.length){
                             $scope.pageLength = ($scope.set.posts.length % POSTS_PER_PAGE);
                         }
+                    };
+                    function sortByKey(array, key) {
+                        return array.sort(function(a, b) {
+                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                        });
+                    }
+
+                    function sortAlphabetically(array, key) {
+                        return array.sort(function(a, b) {
+                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                        });
+                    }
+
+                    $scope.filterSelected = function(){
+                        var filter = $scope.filter.value;
+                        if(filter =="name"){
+                            sortAlphabetically($scope.set.posts, "name");
+                        }else if(filter =="revName"){
+                            sortByKey($scope.set.posts, "name");
+                        }
+                        else if(filter == "lastEdit" ){
+                            sortByKey($scope.set.posts, "editedAt");
+                        }
+                        else if(filter == "newest"){
+                            console.log($scope.project.sets);
+                            sortByKey($scope.set.posts, "createdAt");
+                        }
+                        /*else if(filter == "numMembers"){
+                         sortByNumberOfCommenters($scope.projects)
+                         }*/
                     };
 
                 }]);

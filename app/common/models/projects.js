@@ -28,6 +28,8 @@ var ProjectSchema = new Schema({
 		description: String,
 		entryURL: String,
 		postsURL: String,
+		createdAt:{type: Date, default: Date.now},
+		editedAt:{type: Date, default: Date.now},
 		tags: [{
 			text: String
 		}],
@@ -36,6 +38,8 @@ var ProjectSchema = new Schema({
 			description: String,
 			imageURL: String,
 			entryURL: String,
+			createdAt:{type: Date, default: Date.now},
+			editedAt:{type: Date, default: Date.now},
 			tags: [{
 				text: String
 			}],

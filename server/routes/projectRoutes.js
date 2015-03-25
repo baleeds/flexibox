@@ -82,7 +82,7 @@ module.exports = function (router, protect) {
             if (req.query.includeSets) {
                 Project
                     .findById(req.params.project_id)
-                    .select('name description setsURL entryURL sets._id sets.name sets.description commenters sets.tags')
+                    .select('name description setsURL entryURL sets._id sets.name sets.description commenters sets.tags sets.createdAt sets.editedAt')
                     .exec(function (err, project) {
                         if (err)
                             res.send(err);

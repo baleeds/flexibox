@@ -1,5 +1,6 @@
 var Project = require('../../app/common/models/projects');
 var Utils = require('../utils');
+var ProjectDAO = require('../dao/projectDAO');
 
 module.exports = function(router, protect) {
     // COMMENT ROUTES
@@ -34,12 +35,16 @@ module.exports = function(router, protect) {
 
 
                 project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.push(newComment);
+                project.sets.id(req.params.set_id).posts.id(req.params.post_id).editedAt = new Date().toISOString();
 
                 project.save(function (err) {
                     if (err)
                         res.send(err);
                     res.json(project.sets.id(req.params.set_id).posts.id(req.params.post_id));
                 });
+                ProjectDAO.updateEditedAt(req.params.project_id);
+                ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
+
             });
         });
 
@@ -66,12 +71,14 @@ module.exports = function(router, protect) {
                     reply.txt = req.body.txt;
 
                     project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.id(req.params.comment_id).replies.push(reply);
-
                     project.save(function(err){
                         if(err)
                             res.send(err);
                         res.json(project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.id(req.params.comment_id));
-                    })
+                    });
+                    ProjectDAO.updateEditedAt(req.params.project_id);
+                    ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
+                    ProjectDAO.updatePostEditedAt(req.params.project_id, req.params.set_id, req.params.post_id);
                 });
         })
 
@@ -89,6 +96,9 @@ module.exports = function(router, protect) {
                             res.send(err);
                         res.json(project.sets.id(req.params.set_id).posts.id(req.params.post_id).comments.id(req.params.comment_id));
                     });
+                    ProjectDAO.updateEditedAt(req.params.project_id);
+                    ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
+                    ProjectDAO.updatePostEditedAt(req.params.project_id, req.params.set_id, req.params.post_id);
                 });
         })
 
@@ -103,6 +113,9 @@ module.exports = function(router, protect) {
                         res.send(err);
                     res.json(project.sets.id(req.params.set_id));
                 });
+                ProjectDAO.updateEditedAt(req.params.project_id);
+                ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
+                ProjectDAO.updatePostEditedAt(req.params.project_id, req.params.set_id, req.params.post_id);
             });
         });
 };
