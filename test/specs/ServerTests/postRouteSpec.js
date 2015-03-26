@@ -1,4 +1,3 @@
-require('../../../server');
 var frisby = require('frisby');
 var Utils = require('../../testingUtils');
 

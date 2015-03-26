@@ -42,7 +42,6 @@ module.exports = {
                     }
                 });
             }, function(err) {
-                console.log("Next callback");
                 callback(null)
             });
         });
@@ -57,7 +56,7 @@ module.exports = {
                     callback(err);
                 }
                 callback(null, users);
-            })
+            });
         }
     }
 };

@@ -1,6 +1,8 @@
 var exec = require('child_process').exec;
 var async = require('async');
-var mongoose = require('mongoose');
+
+//Startup the server for testing.
+require('../server');
 
 var config = require('../config');
 var Users = require('../app/common/models/users');
@@ -9,30 +11,31 @@ var Projects = require('../app/common/models/projects');
 var projectsData = require('./data/projects.json');
 var userData = require('./data/users.json');
 
-mongoose.connect('mongodb://' + config.server.host + '/flexibox');
-
 var dropCollections = function(callback){
     async.waterfall([
-        function(callback){console.log("removing projects");Projects.remove({}, callback)},
-        function(err, callback){console.log("removing users"); Users.remove({}, callback)}
+        function(callback){Projects.remove({}, callback)},
+        function(err, callback){Users.remove({}, callback)}
     ], function(){callback(null)});
 };
 
 var addCollection = function( callback ){
-    var json2Mongoose = function(obj, depth){
-        if(typeof obj === 'object' && obj.hasOwnProperty("_id") ) {
-            obj._id = mongoose.Types.ObjectId(obj['$oid']);
+    var json2Mongoose = function(obj){
+        if(typeof obj === 'object' && obj.hasOwnProperty('$oid') ) {
+            return obj['$oid'];
         }
         for(var e in obj){
-            if(typeof obj[e] === 'object' && obj[e].hasOwnProperty("_id") ) {
-                obj[e] = json2Mongoose(obj[e], depth + 1);
+            if(!obj.hasOwnProperty(e)){
+                continue;
+            }
+            if(typeof obj[e] === 'object' ) {
+                obj[e] = json2Mongoose(obj[e]);
             }
         }
         return obj;
     };
     async.waterfall([
         function(callback){
-            async.map(userData, function(obj, callback){
+            async.map(projectsData, function(obj, callback){
                     obj = json2Mongoose(obj, 0);
                     var proj = new Projects(obj);
                     proj.save(function(err){
@@ -52,7 +55,7 @@ var addCollection = function( callback ){
                 })
         },
         function(callback){
-            async.map(projectsData, function(obj, callback){
+            async.map(userData, function(obj, callback){
                     obj = json2Mongoose(obj);
                     var user = new Users(obj);
                     user.save(function(err){
@@ -80,6 +83,7 @@ var addCollection = function( callback ){
 };
 
 module.exports = {
+    URL : "http://" + config.server.host + ":" + config.server.port + "/",
     dropCollections : dropCollections,
     addCollections : addCollection,
     loadTestData : function(callback){
@@ -87,11 +91,9 @@ module.exports = {
             dropCollections,
             addCollection
         ], function(){
-            //mongoose.disconnect();
-            //mongoose.connection.close();
-            callback();
+            if(callback) {
+                callback();
+            }
         })
-    },
-    URL : "http://" + config.server.host + ":" + config.server.port + "/"
-
+    }
 };
