@@ -1,4 +1,5 @@
 var Project = require('../../app/common/models/projects');
+var ProjectDAO = require('../dao/projectDAO');
 
 module.exports = function(router, protect) {
 
@@ -39,6 +40,7 @@ module.exports = function(router, protect) {
                             res.send(err);
                         res.json(project);
                     });
+                    ProjectDAO.updateEditedAt(req.params.project_id);
                 });
         });
 
@@ -49,7 +51,7 @@ module.exports = function(router, protect) {
             if (req.query.includePosts) {
                 Project
                     .find({'sets._id': req.params.set_id}, {sets: 1})
-                    .select({sets: {$elemMatch: {_id: req.params.set_id}}, 'sets.posts.comments': 0})
+                    .select({sets: {$elemMatch: {_id: req.params.set_id}}, 'sets.posts.comments': 0}, 'sets.posts.createdAt', 'sets.posts.editedAt')
                     .exec(function (err, project) {
                         if (err)
                             res.send(err);
@@ -77,6 +79,7 @@ module.exports = function(router, protect) {
                 thisSet.name = req.body.name;
                 thisSet.description = req.body.description;
                 thisSet.tags = req.body.tags;
+
                 /*
                 project.sets.id(req.params.set_id).name = req.body.name;
                 project.sets.id(req.params.set_id).description = req.body.description;
@@ -92,6 +95,8 @@ module.exports = function(router, protect) {
                         "tags": thisSet.tags
                     });
                 });
+                ProjectDAO.updateEditedAt(req.params.project_id);
+                ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
             });
         })
 
@@ -104,11 +109,13 @@ module.exports = function(router, protect) {
                     if (err)
                         res.send(err);
                     project.sets.id(req.params.set_id).remove();
+
                     project.save(function (err) {
                         if (err)
                             res.send(err);
                         res.json(project);
                     });
+                    ProjectDAO.updateEditedAt(req.params.project_id);
                 });
         });
 };

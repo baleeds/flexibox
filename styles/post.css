@@ -3,11 +3,55 @@
     margin: 0;
 }
 #imageDiv {
-    padding: 50px;
+    padding: 50px 50px 90px 50px;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    position: relative;
+    float: left;
+    cursor: crosshair;
+    margin-top: 50px;
 }
 .navbar {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
+}
+.post-toolbar {
+    position: fixed;
+    width: 75%;
+    height: 44px;
+    bottom: 0;
+    background-color: #f5f5f5;
+    border-top: 1px solid #A5A5A5;
+    user-select:none;
+}
+.post-toolbar-buttons {
+    width: 80px;
+    margin: 0 auto;
+}
+.post-toolbar-button-off {
+    font-size: 2em;
+    color: #BEC3C8;
+    text-shadow: 0px 2px #64696E;
+    line-height: 41px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.post-toolbar-button-off:hover {
+    color: #BEC3C8;
+}
+.post-toolbar-button-on {
+    font-size: 2em;
+    color: #0082BC;
+    text-shadow: 0px 2px #073459;
+    line-height: 41px;
+    margin: 0 5px;
+}
+.post-toolbar-button-on:hover {
+    color: #0090D0;
+    cursor: pointer;
 }

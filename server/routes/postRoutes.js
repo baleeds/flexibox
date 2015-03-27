@@ -1,5 +1,5 @@
 var Project = require('../../app/common/models/projects');
-
+var ProjectDAO = require('../dao/projectDAO');
 module.exports = function(router, protect) {
 
     // POST ROUTES
@@ -49,6 +49,8 @@ module.exports = function(router, protect) {
                             res.send(err);
                         res.json(project.sets.id(req.params.set_id));
                     });
+                    ProjectDAO.updateEditedAt(req.params.project_id);
+                    ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
                 });
         });
 
@@ -95,12 +97,18 @@ module.exports = function(router, protect) {
                 thisPost.name = req.body.name;
                 thisPost.description = req.body.description;
                 thisPost.tags = req.body.tags;
+                thisPost.editedAt = new Date().toISOString();
+
 
                 project.save(function (err) {
                     if (err)
                         res.send(err);
                     res.json(thisPost);
                 });
+
+                ProjectDAO.updateEditedAt(req.params.project_id);
+                ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
+
             });
         })
 
@@ -115,6 +123,9 @@ module.exports = function(router, protect) {
                         res.send(err);
                     res.json(project.sets.id(req.params.set_id));
                 });
+                ProjectDAO.updateEditedAt(req.params.project_id);
+                ProjectDAO.updatedSetEditedAt(req.params.project_id, req.params.set_id);
+
             });
         });
 };

@@ -23,11 +23,19 @@ define([
                     var oldSet = {};
                     $scope.pagination = SETS_PER_PAGE;
                     $scope.pageLength = SETS_PER_PAGE;
+                    $scope.options = [
+                        { label: 'Alphabetically by Set Name', value: 'name' },
+                        { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
+                        { label: 'Set Last Edited', value: 'lastEdit' },
+                        {label:  'Newest Set', value: 'newest'}
+                        // {label: 'Number of Members', value:'numMembers'}
+                    ];
 
                     // On controller load, populate local instance of focused project
                     projectFactory.getProject($routeParams.projectId)
                         .success(function (project) {
                             $scope.project = project;
+                            sortAlphabetically($scope.project.sets)
                         })
                         .error(function (project) {
                             $scope.error = 'projectController - Error getting project by id';
@@ -144,6 +152,41 @@ define([
                         if($scope.pagination > $scope.project.sets.length){
                             $scope.pageLength = ($scope.project.sets.length % SETS_PER_PAGE);
                         }
+                    };
+
+                    function sortByKey(array, key) {
+                        return array.sort(function(a, b) {
+                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                        });
+                    }
+
+                    function sortAlphabetically(array, key) {
+                        return array.sort(function(a, b) {
+                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                        });
+                    }
+
+                    $scope.filterSelected = function(){
+                        var filter = $scope.filter.value;
+                        if(filter =="name"){
+                            sortAlphabetically($scope.project.sets, "name");
+                        }else if(filter =="revName"){
+                            console.log($scope.project.sets);
+                            sortByKey($scope.project.sets, "name");
+                            console.log($scope.project.sets);
+                        }
+                        else if(filter == "lastEdit" ){
+                            sortByKey($scope.project.sets, "editedAt");
+                        }
+                        else if(filter == "newest"){
+                            console.log($scope.project.sets);
+                            sortByKey($scope.project.sets, "createdAt");
+                        }
+                        /*else if(filter == "numMembers"){
+                         sortByNumberOfCommenters($scope.projects)
+                         }*/
                     };
                     
                 }]);
