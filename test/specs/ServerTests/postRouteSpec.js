@@ -1,8 +1,6 @@
 var frisby = require('frisby');
 var Utils = require('../../testingUtils');
 
-var async = require('async');
-
 var URL = Utils.URL;
 var PID = "54d82057b46e200418000006";
 var SID = "54d82082b46e200418000007";
