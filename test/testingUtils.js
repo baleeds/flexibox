@@ -11,7 +11,9 @@ var Projects = require('../app/common/models/projects');
 var projectsData = require('./data/projects.json');
 var userData = require('./data/users.json');
 
-jasmine.getEnv().defaultTimeoutInterval = 15 * 1000;
+var TIMEOUT = 5000;
+
+jasmine.getEnv().defaultTimeoutInterval = TIMEOUT;
 
 var dropCollections = function(callback){
     async.waterfall([
@@ -86,6 +88,7 @@ var addCollection = function( callback ){
 
 module.exports = {
     URL : "http://" + config.server.host + ":" + config.server.port + "/",
+    TIMEOUT : TIMEOUT,
     dropCollections : dropCollections,
     addCollections : addCollection,
     loadTestData : function(callback){
