@@ -141,7 +141,7 @@ module.exports = function (grunt) {
                     forceExit: false,
                     match: '.',
                     matchAll: false,
-                    specFolders: ['test/specs/DaoTests'],
+                    specFolders: ['test/specs/DaoTests', 'test/specs/ServerTests'],
                     extensions: 'js',
                     specNameMatcher: 'spec',
                     captureExceptions: true,

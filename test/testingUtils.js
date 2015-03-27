@@ -11,6 +11,8 @@ var Projects = require('../app/common/models/projects');
 var projectsData = require('./data/projects.json');
 var userData = require('./data/users.json');
 
+jasmine.getEnv().defaultTimeoutInterval = 15 * 1000;
+
 var dropCollections = function(callback){
     async.waterfall([
         function(callback){Projects.remove({}, callback)},
@@ -92,7 +94,7 @@ module.exports = {
             addCollection
         ], function(){
             if(callback) {
-                callback();
+                callback(null);
             }
         })
     }
