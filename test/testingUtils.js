@@ -22,21 +22,23 @@ var dropCollections = function(callback){
     ], function(){callback(null)});
 };
 
+//Converts the json file data into something consumable by mongoose.
+var json2Mongoose = function(obj){
+    if(typeof obj === 'object' && obj.hasOwnProperty('$oid') ) {
+        return obj['$oid'];
+    }
+    for(var e in obj){
+        if(!obj.hasOwnProperty(e)){
+            continue;
+        }
+        if(typeof obj[e] === 'object' ) {
+            obj[e] = json2Mongoose(obj[e]);
+        }
+    }
+    return obj;
+};
+
 var addCollection = function( callback ){
-    var json2Mongoose = function(obj){
-        if(typeof obj === 'object' && obj.hasOwnProperty('$oid') ) {
-            return obj['$oid'];
-        }
-        for(var e in obj){
-            if(!obj.hasOwnProperty(e)){
-                continue;
-            }
-            if(typeof obj[e] === 'object' ) {
-                obj[e] = json2Mongoose(obj[e]);
-            }
-        }
-        return obj;
-    };
     async.waterfall([
         function(callback){
             async.map(projectsData, function(obj, callback){

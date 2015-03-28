@@ -28,7 +28,7 @@ module.exports = function (router, protect) {
             project.description = req.body.description;
             project.entryURL = '/api/projects/' + project._id;
             project.setsURL = project.entryURL + '/sets';
-            project.owners = req.body.userID;
+            project.owners = req.user.id;
             project.tags = req.body.tags;
             project.commenters = req.body.commenters;
 
@@ -147,11 +147,4 @@ module.exports = function (router, protect) {
                 });
             });
         });
-    router.route('/projects/userProjects') // accessed at //<server>:<port>/api/projects/id
-        .all(protect)
-        // get a project
-        .get(function (req, res) {
-            console.log(req.body);
-        });
-
 };
