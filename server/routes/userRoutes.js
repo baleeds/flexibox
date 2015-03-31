@@ -98,7 +98,7 @@ module.exports = function(router, protect) {
         .delete(function(req, res){
             User.findById(req.user._id, function(err, user) {
                 if (err)
-                    res.send(err)
+                    res.send(err);
                 for (var i = 0; i < req.user.projectsVisible.length; i++) {
                     if (user.projectsVisible[i] == req.params.project_id) {
                         user.projectsVisible.splice(i, 1);
@@ -106,8 +106,8 @@ module.exports = function(router, protect) {
                 }
                 user.save(function (err) {
                     if (err)
-                        res.send(err)
-                    res.json({message: 'User Updated'});
+                        res.send(err);
+                    res.json({projects: user.projectsVisible});
                 })
             })
         });
@@ -120,7 +120,7 @@ module.exports = function(router, protect) {
             }],
                 function(err, users){
                     if(err || users == null){
-                        res.end();
+                        res.json([]);
                     } else {
                         var result = [];
                         for(var i = 0; i < users.length; i++){

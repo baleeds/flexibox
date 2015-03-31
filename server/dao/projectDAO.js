@@ -64,7 +64,6 @@ module.exports = {
             if (err)
                 res.send(err);
             else {
-               console.log(post_id);
                 project.sets.id(set_id).posts.id(post_id).editedAt = new Date().toISOString();
                 project.save(function(err){
                     if (err){
