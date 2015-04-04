@@ -8,6 +8,7 @@ var bodyParser     = require('body-parser');
 var mongoose       = require('mongoose');
 var multer         = require('multer');
 var fs             = require('fs');
+var path           = require('path');
 var session		   = require('express-session');
 var cookieParser   = require('cookie-parser');
 
@@ -125,7 +126,7 @@ router.route('/upload')
     .all(isLoggedIn)
     .post(function(req, res) {
 		
-		res.json({imageURL:req.files.image.path});
+		res.json({imageURL: 'uploads/' + (req.files.image.path + '').substr(config.uploadsDir.length + 1)});
 	});
 
 router.route('/upload/:url')
@@ -152,6 +153,19 @@ app.get('/', function(req, res) {
 });
 app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
+});
+
+app.get('/uploads/:url', function(req, res){
+    var file = path.normalize(req.params.url);
+    file = config.uploadsDir + '/' + file;
+    fs.readFile(file, function(err, data){
+        if(err){
+            res.end();
+        } else {
+            res.end(data);
+        }
+    });
+
 });
 
 app.get('*', function(req, res) {
