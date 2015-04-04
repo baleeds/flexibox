@@ -95,7 +95,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetImage(); clearForm(); dReset('imageForm');">Close</button>
-                <button type="submit" modal class="btn btn-primary" ng-click="addPost(); dReset('imageForm'); dClose('newPostModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid || imageUp == 0">Create Set</button>
+                <button type="submit" modal class="btn btn-primary" ng-click="addPost(); dReset('imageForm'); dClose('newPostModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid || imageUp == 0">Create Post</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -135,7 +135,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit();">Close</button>
-                <button type="submit" modal class="btn btn-primary" ng-click="confirmEdit(); dClose('editPostModal');" ng-disabled="editForm.name.$invalid">Edit Set</button>
+                <button type="submit" modal class="btn btn-primary" ng-click="confirmEdit(); dClose('editPostModal');" ng-disabled="editForm.name.$invalid">Edit Post</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
