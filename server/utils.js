@@ -10,7 +10,6 @@ module.exports = {
         User.findById(req.user.id, function (err, user) {
             if (err)
                 res.send(err);
-            console.log(user.role);
             if(user.role == "System Admin"){
                 return next();
             }

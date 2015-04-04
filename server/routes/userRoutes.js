@@ -36,16 +36,12 @@ module.exports = function(router, protect) {
     router.route('/users/current')
         .all(protect)
         .get(function (req, res) {
-            User.findById(req.user.id, function (err, user) {
-                if (err)
-                    res.send(err);
-                res.json(user);
-            });
+            res.json(req.user);
         })
 
         .put(function (req, res) {
 
-            User.findById(req.params.user_id, function (err, user) {
+            User.findById(req.user.id, function (err, user) {
                 if (err)
                     res.send(err);
 
