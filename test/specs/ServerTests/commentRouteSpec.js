@@ -27,8 +27,57 @@ frisby.create("Logging in as an owner.")
         });
         describe("commentRouteSpec", function () {
             beforeEach(function (done) {
+
                 Utils.loadTestData(done);
             });
+
+            frisby.create("GET : api/projects/pid/sets/sid/post/id/comments")
+                .get(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID + "/comments")
+                .expectStatus(200)
+                .expectJSON([{
+                    posterName: 'commenter',
+                    txt: 'Work here'
+                },
+                    {posterName: 'commenter', txt: 'Gym here'}])
+                .toss();
+
+            frisby.create("GET : api/projects/pid/sets/sid/post/id/comments/cid")
+                .get(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID + "/comments/" + CID)
+                .expectStatus(200)
+                .expectJSON({ posterName: 'commenter',
+                    txt: 'Work here',
+                    width: 85,
+                    height: 41,
+                    color: 'rgb(145,127,127)',
+                    number: 1,
+                    _id: '54d820b5b46e200418000009',
+                    replies:
+                        [ { posterName: 'commenter',
+                            txt: 'No, that should be gym',
+                            _id: '54d820ceb46e20041800000b' } ],
+                    smallest: { x: 505, y: 108 } })
+                .toss();
+
+            frisby.create("GET : api/projects/pid/sets/sid/post/id/comments/cid")
+                .post(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID + "/comments/" + CID, {
+                    "txt": 'Andies reply'
+                })
+                .expectStatus(200)
+                .expectJSON({ posterName: 'commenter',
+                    txt: 'Work here',
+                    width: 85,
+                    height: 41,
+                    color: 'rgb(145,127,127)',
+                    number: 1,
+                    _id: '54d820b5b46e200418000009',
+                    replies:
+                        [ { posterName: 'commenter',
+                            txt: 'No, that should be gym',
+                            _id: '54d820ceb46e20041800000b' },
+                            { posterName: 'owner',
+                                txt: 'Andies reply'} ],
+                    smallest: { x: 505, y: 108 } })
+                .toss();
 
             frisby.create("POST : api/project/pid/sets/sid/post/id")
                 .post(URL + "api/projects/" + PID + "/sets/" + SID + "/posts/" + OID + "/comments", {
