@@ -11,7 +11,7 @@ define(
             var $controller;
             var $httpBackend;
             var $scope;
-
+            var SETS_PER_PAGE = 10;
 
             beforeEach(function () {
                 module(namespace);
@@ -176,6 +176,82 @@ define(
                     expect($scope.newTags.length).toBe(2);
                     expect($scope.newTags[0].text).toBe("testtag");
                     expect($scope.newTags[1].text).toBe("testthreetag");
+                });
+
+                it("pageLeft Test", function(){
+                    var result = (14 - SETS_PER_PAGE);
+                    $scope.pagination = 14;
+                    $scope.pageLeft();
+                    expect($scope.pagination).toBe(result);
+                    $scope.pageLeft();
+                    expect($scope.pagination).toBe(result);
+                });
+
+                it("endLeft Test", function(){
+                    $scope.pagination = 414;
+                    expect($scope.pagination).toBe(414);
+                    $scope.endLeft();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+                });
+
+                it("pageRight Test", function(){
+                    expect($scope.project.sets.length).toBe(1);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+
+                });
+
+                it("pageRight Test Overflow", function(){
+                    expect($scope.project.sets.length).toBe(1);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+                    expect($scope.pageLength).toBe(1);
+
+                });
+
+                it("pageRight Test End", function(){
+                    for(var i = 0; i < 10; i++){
+                        $scope.project.sets.push($scope.project.sets[0]);
+                    }
+                    expect($scope.project.sets.length).toBe(11);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+                    expect($scope.pageLength).toBe(SETS_PER_PAGE);
+
+                });
+
+                it("endRight Test", function(){
+                    expect($scope.project.sets.length).toBe(1);
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+                });
+
+
+                it("endRight Test Overflow", function(){
+                    expect($scope.project.sets.length).toBe(1);
+                    $scope.pagination = 0;
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE);
+                    expect($scope.pageLength).toBe(1);
+
+                });
+
+
+                it("endRight Test End", function(){
+                    for(var i = 0; i < (SETS_PER_PAGE * 2) - 1; i++){
+                        $scope.project.sets.push($scope.project.sets[0]);
+                    }
+                    expect($scope.project.sets.length).toBe(SETS_PER_PAGE * 2);
+                    $scope.pagination = 0;
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(SETS_PER_PAGE * 2);
+                    expect($scope.pageLength).toBe(SETS_PER_PAGE);
+
                 });
 
             });
