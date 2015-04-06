@@ -272,6 +272,18 @@ define(
 
                  });
 
+                it("pageRight Test End", function(){
+                    for(var i = 0; i < 10; i++){
+                        $scope.projects.push($scope.projects[0]);
+                    }
+                    expect($scope.projects.length).toBe(11);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
+                    expect($scope.pageLength).toBe(PROJECTS_PER_PAGE);
+
+                 });
+
                 it("endRight Test", function(){
                     expect($scope.projects.length).toBe(1);
                     $scope.endRight();
@@ -285,6 +297,19 @@ define(
                     $scope.endRight();
                     expect($scope.pagination).toBe(PROJECTS_PER_PAGE);
                     expect($scope.pageLength).toBe(1);
+
+                });
+
+
+                it("endRight Test End", function(){
+                    for(var i = 0; i < (PROJECTS_PER_PAGE * 2) - 1; i++){
+                        $scope.projects.push($scope.projects[0]);
+                    }
+                    expect($scope.projects.length).toBe(PROJECTS_PER_PAGE * 2);
+                    $scope.pagination = 0;
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(PROJECTS_PER_PAGE * 2);
+                    expect($scope.pageLength).toBe(PROJECTS_PER_PAGE);
 
                 });
                 it("Constructor Test: Session Factory Failure", function(){
