@@ -35,14 +35,14 @@
                     <div class="panel-middle panel-middle-image">
                         <h4><a href="/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">{{ post.name }}</a></h4>
                         <p style="clear:both;">{{ post.description }}</p>
-                        <img src="/{{ post.imageURL }}" />
+                        <div class="panel-image-container"><img src="/{{ post.imageURL }}" /></div>
                     </div>
                     <div class="panel-bottom">
 
                     </div>
 
                 </li>
-                <li class="panel new" data-toggle="modal" data-target="#newPostModal">
+                <li class="panel new new-post" data-toggle="modal" data-target="#newPostModal">
                     <p>+</p>
                 </li>
             </ul>
