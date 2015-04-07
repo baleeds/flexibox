@@ -173,14 +173,14 @@ define([
                     };
 
                     $scope.pageLeft = function () {
-                        if ($scope.paginationUpper > POSTS_PER_PAGE) {
-                            $scope.paginationUpper -= POSTS_PER_PAGE;
+                        if ($scope.pagination > POSTS_PER_PAGE) {
+                            $scope.pagination -= POSTS_PER_PAGE;
                         }
                     };
 
                     $scope.pageRight = function () {
-                        if ($scope.paginationUpper < $scope.set.posts.length) {
-                            $scope.paginationUpper += POSTS_PER_PAGE;
+                        if ($scope.pagination < $scope.set.posts.length) {
+                            $scope.pagination += POSTS_PER_PAGE;
                         }
                     };
 
@@ -189,8 +189,8 @@ define([
                     };
 
                     $scope.pageLeft = function(){
-                        if($scope.paginationUpper > POSTS_PER_PAGE){
-                            $scope.paginationUpper -= POSTS_PER_PAGE;
+                        if($scope.pagination > POSTS_PER_PAGE){
+                            $scope.pagination -= POSTS_PER_PAGE;
                             if($scope.pagination > $scope.set.posts.length){
                                 $scope.pageLength = ($scope.set.posts.length % POSTS_PER_PAGE);
                             }
