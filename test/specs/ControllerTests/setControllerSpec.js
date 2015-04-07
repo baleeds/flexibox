@@ -107,7 +107,7 @@ define(
                     $httpBackend.expectPOST('/api/upload')
                         .respond(200, {imageURL : "uploads/54d82082b46e200418000008"});
 
-                    $scope.uploadFile([{type : "image/jpeg"}]);
+                    $scope.uploadFile([{type : "image/jpeg", name:"testImg.jpg"}]);
                     expect($scope.imageButtonState).toBe("Uploading...");
                     $httpBackend.flush();
                     expect($scope.imageButtonState).toBe("Remove");
@@ -123,7 +123,7 @@ define(
 
                     $httpBackend.expectPOST('/api/upload')
                         .respond(200, {imageURL : "uploads/54d82082b46e200418000008"});
-                    $scope.uploadFile([{type : "image/jpeg"}]);
+                    $scope.uploadFile([{type : "image/jpeg", name:"testImg.jpg"}]);
                     $httpBackend.flush();
 
                     expect($scope.imageButtonState).toBe("Remove");
@@ -147,7 +147,7 @@ define(
 
                     $httpBackend.expectPOST('/api/upload')
                         .respond(200, {imageURL : "uploads/imageTen"});
-                    $scope.uploadFile([{type : "image/jpeg"}]);
+                    $scope.uploadFile([{type : "image/jpeg", name:"testImg.jpg"}]);
                     $scope.newTags = [{_id : 01, text : "tag1"}];
                     $httpBackend.flush();
 
@@ -155,7 +155,7 @@ define(
                     expect($scope.imageUp).toBe(1);
 
                     $httpBackend.expectPOST('/api/projects/' + PID + '/sets/' + SID + '/posts',
-                        { imageURL : "uploads/imageTen", tags : [{_id : 01, text : "tag1"}] })// form data that would be passed in.
+                        { name:"testImg", imageURL : "uploads/imageTen", tags : [{_id : 01, text : "tag1"}] })// form data that would be passed in.
                         .respond(200, {posts : posts.concat({
                             _id : 9,
                             name : "Tenth",
