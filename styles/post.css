@@ -2,6 +2,31 @@
     padding: 0;
     margin: 0;
 }
+.sidebar {
+    top: 50px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-left: 1px solid #696969;
+    padding: 0px;
+}
+.workspace {
+    height: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    background: url("/img/workspace-bg.jpg");
+}
+.workspace-scaled {
+    overflow-x: hidden !important;
+}
+.big-image {
+    box-shadow: 4px 4px 15px rgba(0,0,0,.3);
+}
 #imageDiv {
     padding: 50px 50px 90px 50px;
     -khtml-user-select: none;
@@ -26,7 +51,7 @@
     height: 44px;
     bottom: 0;
     background-color: #f5f5f5;
-    border-top: 1px solid #A5A5A5;
+    border-top: 1px solid #696969;
     user-select:none;
 }
 .post-toolbar-buttons {
@@ -54,4 +79,196 @@
 .post-toolbar-button-on:hover {
     color: #0090D0;
     cursor: pointer;
+}
+.ui-draggable{
+    cursor:move;
+}
+.ui-resizable-handle {
+    position: absolute;
+}
+
+.ui-resizable-n {
+    top:-6px;
+    left:0;
+    cursor:n-resize;
+    width: 100%;
+    height:12px;
+}
+.ui-resizable-s {
+    bottom:-6px;
+    left:0;
+    cursor:s-resize;
+    width: 100%;
+    height:12px;
+}
+.ui-resizable-e {
+    top:0;
+    right:-6px;
+    cursor:e-resize;
+    height: 100%;
+    width:12px;
+}
+.ui-resizable-w {
+    top:0;
+    left:-6px;
+    cursor:w-resize;
+    height: 100%;
+    width:12px;
+}
+.ui-resizable-nw{
+    width: 20px;
+    height:20px;
+    cursor:nw-resize;
+    top:-10px;
+    left:-10px;
+}
+.ui-resizable-sw{
+    width: 20px;
+    height:20px;
+    cursor:sw-resize;
+    bottom:-10px;
+    left:-10px;
+}
+.ui-resizable-se{
+    width: 20px;
+    height:20px;
+    cursor:se-resize;
+    bottom:-10px;
+    right:-10px;
+}
+.commentContent ul {
+    margin: 0 0 0 -40px;
+}
+.commentContent ul li {
+    list-style: none;
+    border-left: 3px solid;
+    padding-left: 10px;
+    margin: 0;
+}
+.replyLink {
+    font-size: .8em !important;
+    opacity: .5;
+    cursor: pointer;
+}
+.replyBlock {
+    border-color: #DDDDDD !important;
+}
+.maybe {
+    background: rgba(52, 112, 160, 0) ;
+    border: 4px solid black;
+}
+.commentNumber {
+    float: left;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 4px;
+    margin-top: 10px;
+}
+.commentContent {
+    margin-left: 45px;
+}
+.commentContent p {
+    font-size: .8em;
+}
+.flexiBox {
+    background: rgba(255, 255, 255, 0.63);
+    border-radius: 8px;
+    position: absolute;
+    -webkit-transition:0.2s linear background;
+    -moz-transition:0.2s linear background;
+    -o-transition:0.2s linear background;
+    transition:0.2s linear background;
+}
+
+.flexiBoxHover {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-transition:0.2s linear background;
+    -moz-transition:0.2s linear background;
+    -o-transition:0.2s linear background;
+    transition:0.2s linear background;
+}
+
+.flexiNumberHover {
+    opacity: .1;
+    -webkit-transition:0.2s linear all;
+    -moz-transition:0.2s linear all;
+    -o-transition:0.2s linear all;
+    transition:0.2s linear all;
+}
+.commentPanel {
+    padding: 0px;
+}
+.hoverCommentHover {
+    opacity: 1 !important;
+    -webkit-transition:0.2s linear all;
+    -moz-transition:0.2s linear all;
+    -o-transition:0.2s linear all;
+    transition:0.2s linear all;
+    visibility: visible !important;
+}
+.commentBlockHovered {
+    background-color: #E5E5E5;
+}
+.hoverComment {
+    background-color: #323232;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    min-width: 100px;
+    left: 0;
+    z-index: 99;
+    padding: 8px;
+    visibility: hidden;
+    -webkit-transition:0.2s linear all;
+    -moz-transition:0.2s linear all;
+    -o-transition:0.2s linear all;
+    transition:0.2s linear all;
+}
+.hoverComment h6 {
+    font-weight: bold;
+    font-size: 14px;
+    color: #e7e7e7;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+.hoverComment p {
+    color: rgb(199, 199, 199);
+    font-size: .8em;
+}
+.flexiClose {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: #000000;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    font-weight: bold;
+    color: rgb(237, 237, 237);
+    text-align: center;
+}
+.flexiNumber {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px !important;
+    margin-left: -15px;
+    padding-top: 5px !important;
+    -webkit-transition:0.2s linear all;
+    -moz-transition:0.2s linear all;
+    -o-transition:0.2s linear all;
+    transition:0.2s linear all;
+}
+.post-toolbar-back-button {
+    float: left;
+    width: 150px;
+    margin: 12px 0 0 12px;
 }

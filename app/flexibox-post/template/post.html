@@ -57,6 +57,7 @@
 		</div>
    	</div>
 	<div class="post-toolbar">
+		<a class="post-toolbar-back-button" href="/projects/{{ backURL }}" >&larr; back to posts</a>
 		<div class="post-toolbar-buttons">
 			<i class="fa fa-arrows-alt" ng-click="toggleView();" ng-class="{'post-toolbar-button-on': currentView == 'full', 'post-toolbar-button-off': currentView == 'scaled'}" ng-click="toggleView();"></i>
 			<i class="fa fa-comment" ng-click="toggleLocationComments();" ng-class="{'post-toolbar-button-on': locationComments, 'post-toolbar-button-off': !locationComments}"></i>
