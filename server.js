@@ -132,7 +132,7 @@ router.route('/upload')
 router.route('/upload/:url')
     .all(isLoggedIn)
     .delete(function(req, res) {
-		fs.unlink('./uploads/' + req.params.url, function(err) {
+		fs.unlink( config.uploadsDir + "/" + req.params.url, function(err) {
 			if (err) throw err;
 			res.json({message:'Successfully Deleted'});
 		});
