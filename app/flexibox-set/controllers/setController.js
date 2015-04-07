@@ -82,6 +82,8 @@ define([
                                     newImageURL = data.imageURL;
                                     $scope.imageButtonState = "Remove";
                                     $scope.imageUp = 1;
+                                    var postName = files[0].name.split(".");
+                                    $scope.formData.name = postName[0];
                                 })
                                 .error(function (imageURL) {
                                     logger.error('setController - Error uploading file: ' + imageURL);
@@ -124,6 +126,7 @@ define([
                                     newImageURL = "";
                                     $scope.imageUp = 0;
                                     $scope.imageButtonState = "";
+                                    $scope.formData.name = '';
                                 })
                                 .error(function (data) {
                                     $scope.imageButtonState = "";
