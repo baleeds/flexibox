@@ -46,7 +46,30 @@ define(
                     expect($sessionFactory.user.name).toBe("benjamin");
 
                 });
+
+                it("logs in with user", function() {
+                    $sessionFactory.user = {name: "Hi"};
+                    $controller(name, {$scope: $scope, $routeParams: $routeParams});
+                    expect($scope.isLoggedIn).toEqual(true);
+                    expect($scope.username).toBe("Hi");
+                })
+
+                it("password login failure", function() {
+                    $scope.loginData.email = "ben";
+                    $scope.loginData.password = null;
+                    $scope.login();
+                    expect($scope.loginFail).toEqual(true);
+                })
+
+                it("email login failure", function() {
+                    $scope.loginData.email = null;
+                    $scope.loginData.password = "password";
+                    $scope.login();
+                    expect($scope.loginFail).toEqual(true);
+                })
             });
+
+
 
         });
     });
