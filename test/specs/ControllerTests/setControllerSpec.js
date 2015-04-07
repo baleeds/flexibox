@@ -12,6 +12,8 @@ define(
             var PID = "54d82057b46e200418000006";
             var SID = "54d82082b46e200418000007";
 
+            var POSTS_PER_PAGE = 10;
+
             var $scope = {};
 
             var $routeParams = {projectId : PID, setId : SID};
@@ -231,6 +233,84 @@ define(
                     expect($scope.newTags.length).toBe(1);
                 });
             });
+            
+            describe("pagination tests", function () {
+                it("pageLeft Test", function(){
+                    var result = (14 - POSTS_PER_PAGE);
+                    $scope.pagination = 14;
+                    $scope.pageLeft();
+                    expect($scope.pagination).toBe(result);
+                    $scope.pageLeft();
+                    expect($scope.pagination).toBe(result);
+                });
+
+                it("endLeft Test", function(){
+                    $scope.pagination = 414;
+                    expect($scope.pagination).toBe(414);
+                    $scope.endLeft();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+                });
+
+                it("pageRight Test", function(){
+                    expect($scope.set.posts.length).toBe(9);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+
+                });
+
+                it("pageRight Test Overflow", function(){
+                    expect($scope.set.posts.length).toBe(9);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+                    expect($scope.pageLength).toBe(10);
+
+                });
+
+                it("pageRight Test End", function(){
+                    for(var i = 0; i < 2; i++){
+                        $scope.set.posts.push($scope.set.posts[0]);
+                    }
+                    expect($scope.set.posts.length).toBe(11);
+                    $scope.pagination = 0;
+                    $scope.pageRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+                    expect($scope.pageLength).toBe(POSTS_PER_PAGE);
+
+                });
+
+                it("endRight Test", function(){
+                    expect($scope.set.posts.length).toBe(9);
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+                });
+
+
+                it("endRight Test Overflow", function(){
+                    expect($scope.set.posts.length).toBe(9);
+                    $scope.pagination = 0;
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE);
+                    expect($scope.pageLength).toBe(10);
+
+                });
+
+
+                it("endRight Test End", function(){
+                    for(var i = 0; i < (POSTS_PER_PAGE + 1); i++){
+                        $scope.set.posts.push($scope.set.posts[0]);
+                    }
+                    expect($scope.set.posts.length).toBe(POSTS_PER_PAGE * 2);
+                    $scope.pagination = 0;
+                    $scope.endRight();
+                    expect($scope.pagination).toBe(POSTS_PER_PAGE * 2);
+                    expect($scope.pageLength).toBe(POSTS_PER_PAGE);
+
+                });
+            })
         })
     }
 );
