@@ -116,21 +116,21 @@ define([
                     };
 
                     $scope.pageLeft = function () {
-                        if ($scope.paginationUpper > SETS_PER_PAGE) {
-                            $scope.paginationUpper -= SETS_PER_PAGE;
+                        if ($scope.pagination > SETS_PER_PAGE) {
+                            $scope.pagination -= SETS_PER_PAGE;
                         }
                     };
 
                     $scope.pageRight = function () {
-                        if ($scope.paginationUpper < $scope.project.sets.length) {
-                            $scope.paginationUpper += SETS_PER_PAGE;
+                        if ($scope.pagination < $scope.project.sets.length) {
+                            $scope.pagination += SETS_PER_PAGE;
                         }
                     };
 
 
                     $scope.pageLeft = function(){
-                        if($scope.paginationUpper > SETS_PER_PAGE){
-                            $scope.paginationUpper -= SETS_PER_PAGE;
+                        if($scope.pagination > SETS_PER_PAGE){
+                            $scope.pagination -= SETS_PER_PAGE;
                         }
                     };
 

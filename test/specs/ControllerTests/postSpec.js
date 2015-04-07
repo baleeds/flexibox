@@ -23,6 +23,13 @@ define(
 
             });
 
+            describe("Test Update Post", function() {
+
+                it("Test update post with project", function() {
+
+                })
+            })
+
             describe("Post Comment Tests", function(){
 
                 it("Test mDown with new Div as 2", function(){
@@ -256,7 +263,14 @@ define(
 
                     expect($scope.replyIndex).toEqual($commentId)
                 });
+                it("Test showReply failure", function() {
+                    var $scope = {};
+                    var $commentId = 5;
 
+                });
+                it("Test setCurrentComment", function() {
+
+                });
             });
         });
     });
