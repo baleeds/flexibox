@@ -3,6 +3,7 @@ node_modules
 reports
 dist/js
 uploads
+bower_components
 backup
 .idea
 test-results.xml
