@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/*Headers*/
+h1 {
+    font-size: 2.5em;
+}
+h2 {
+    font-size: 2em;
+}
+h3 {
+    font-size: 1.5em;
+}
+h4 {
+    font-size: 1em;
+}
+h5 {
+    font-size: 0.875em;
+}
+h6 {
+    font-size: 0.75em;
+    font-weight: normal;
+}
+
+/*Side Bar*/
+.sidebar li {
+    margin: 1em 0;
+}
+
+/*Horizontal Rule*/
+hr {
+    border: 0 solid #eee;
+    border-top-width: 0.0625em;
+}
+
+/*Code*/
+pre[class*="language-"],
+code[class*="language-"] {
+    margin-bottom: 20px;
+}
+
+/*Vertical Rhythm*/
+.vertical-rhythm {
+    background-image: linear-gradient(rgba(0, 0, 0, 0) 95%, rgba(177, 228, 229, 1) 95%);
+    background-position: 0 0;
+    background-size: 16px 16px;
+}
+
+
+/*openStyle Index*/
+
+/*TODO: This is only a placeholder until we get a font library in place*/
+.main-content .support-icon img {
+    width: 195px;
+    height: 130px;
+    opacity: 0.1;
+    filter: alpha(opacity=10); 
+}
+
+.jumbotron {
+    background-image: url(../images/openstyle-symbol-flat.svg);
+    background-size: 600px 400px;
+    background-position: 15% center;
+    background-repeat: no-repeat;
+}
+
+.jumbotron-large {
+    background-image: url(../images/openstyle-symbol-flat.svg);
+    background-size: 1200px 800px;
+    background-position: 10% center;
+    background-repeat: no-repeat;
+}

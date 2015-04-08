@@ -1,0 +1,65 @@
+//
+// Pager pagination
+// --------------------------------------------------
+
+
+.pager {
+  padding-left: 0;
+  margin: $line-height-computed 0;
+  list-style: none;
+  text-align: center;
+  @include clearfix();
+  li {
+    display: inline;
+    > a,
+    > span {
+      display: inline-block;
+      padding: 5px 14px;
+      background-color: $pager-bg;
+      border: 1px solid $pager-border;
+      border-radius: $pager-border-radius;
+      @include gradient-vertical($gray-panel-lighter, $gray-panel-light, 40%, 100%);
+      -webkit-box-shadow: inset 0px 0px 1px 1px #fbfbfc;
+      box-shadow: inset 0px 0px 1px 1px #fbfbfc;
+    }
+
+    > a:hover,
+    > a:focus {
+      text-decoration: none;
+      color: $pagination-active-color;
+      @include gradient-vertical($brand-primary, $brand-primary-dark, 40%, 100%);
+      border: solid 1px $pagination-active-border;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  .next {
+    > a,
+    > span {
+      float: right;
+    }
+  }
+
+  .previous {
+    > a,
+    > span {
+      float: left;
+    }
+  }
+
+  .disabled {
+    > a,
+    > a:hover,
+    > a:focus,
+    > span {
+      color: $pager-disabled-color;
+      border-color: $gray-panel-light;
+      background-image: none;
+      -webkit-box-shadow: inset 0px 0px 1px 1px #fbfbfc;
+      box-shadow: inset 0px 0px 1px 1px #fbfbfc;
+      cursor: not-allowed;
+    }
+  }
+
+}
