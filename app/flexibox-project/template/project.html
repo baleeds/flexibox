@@ -33,10 +33,10 @@
                         <a href="#" class="panel-delete" ng-click="deleteSet(set._id)"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="setEditable(set._id)" data-toggle="modal" data-target="#editSetModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
-                    <div class="panel-middle">
-                        <h4><a href="/projects/{{ project._id }}/{{ set._id }}">{{ set.name }}</a></h4>
+                    <a href="/projects/{{ project._id }}/{{ set._id }}" class="panel-middle">
+                        <h4>{{ set.name }}</h4>
                         <p style="clear:both;">{{ set.description }}</p>
-                    </div>
+                    </a>
                     <div class="panel-bottom">
                         <!--<span class="label label-success notification">Success</span><span class="label label-warning notification">Warning</span>-->
                     </div>

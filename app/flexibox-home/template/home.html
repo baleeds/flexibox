@@ -31,11 +31,16 @@
                         <a href="#" class="panel-delete" ng-click="deleteProject(project._id)" ng-hide="user.role =='Commenter'"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="setEditable(project._id)" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#editProjectModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
-                    <div class="panel-middle">
-                        <h4><a href="/projects/{{ project._id }}">{{ project.name }}</a></h4>
+                    <a class="panel-middle" href="/projects/{{ project._id }}">
+                        <h4>{{ project.name }}</h4>
                         <p style="clear:both;">{{ project.description }}</p>
-                    </div>
+
+                    </a>
                     <div class="panel-bottom">
+                        <a class="shared-with-icon" ng-show="project.commenters[0]"><span class="fa fa-users" aria-hidden="true" /></a>
+                        <div class="shared-with">
+                            <span ng-repeat="commenter in project.commenters">{{commenter.name}}<br /></span>
+                        </div>
                         <!--<span class="label label-success notification">Success</span><span class="label label-warning notification">Warning</span>-->
                     </div>
                 </li>

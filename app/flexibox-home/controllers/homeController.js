@@ -56,6 +56,22 @@ define([
                         });
                     // On controller load, populate project
 
+                    homeFactory.getProjects()
+                        .success(function (projectData) {
+                            $scope.projects = projectData;
+                            sortAlphabetically($scope.projects, "name");
+                            console.log($scope.projects);
+                            buildMembersList();
+                        })
+                        .error(function (projectData) {
+                            logger.error('homeController - Error getting projects: ' + projectData);
+                            $scope.error = 'Error getting projects from bomeFactory';
+                        });
+
+                    var buildMembersList = function() {
+
+                    };
+
                     var oldProject = {};
 
                     $scope.setEditable = function (projectId) {
@@ -89,17 +105,6 @@ define([
                         $scope.editableProject.description = oldProject.description;
                         // tags are handled separately
                     };
-
-                    homeFactory.getProjects()
-                        .success(function (projectData) {
-                            $scope.projects = projectData;
-                            sortAlphabetically($scope.projects, "name");
-                            console.log($scope.projects);
-                        })
-                        .error(function (projectData) {
-                            logger.error('homeController - Error getting projects: ' + projectData);
-                            $scope.error = 'Error getting projects from bomeFactory';
-                        });
 
                     // Create a project based on form data.  Called by upload modal
                     $scope.createProject = function () {

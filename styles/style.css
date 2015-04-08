@@ -29,7 +29,13 @@
   margin-bottom: 30px;
   position: relative;
 }
+.panel:hover {
+  background-color: #DDDDDD;
+}
 .panel:hover > .panel-top {
+  opacity: 1;
+}
+.panel:hover > .panel-bottom {
   opacity: 1;
 }
 .panel-top {
@@ -43,6 +49,10 @@
 .panel-middle {
   padding: 0px 15px 30px 30px;
   height: 125px;
+  display: block;
+}
+.panel-middle:hover {
+  text-decoration: none;
 }
 .panel-middle-image {
   height: auto;
@@ -51,7 +61,9 @@
   height: 25px;
   position: absolute;
   bottom: 0px;
-  left: 5px;
+  padding: 0 7px;
+  width: 100%;
+  opacity: 0;
 }
 .panel-delete {
   top: 4px;
@@ -81,15 +93,16 @@
 }
 .new-post {
   height: 265px !important;
+  padding-top: 30px;
 }
 .new {
   height: 200px;
   border-style: dashed;
-  background: none;
+  background: none !important;
   border-color: #D3D3D3;
 }
 .new:hover {
-  border-color: #828282;
+  border-color: rgb(7, 52, 89);
   cursor: pointer;
 }
 .new p {
@@ -99,7 +112,7 @@
   text-align: center;
 }
 .new:hover p {
-  color:  #828282;
+  color:  rgb(7, 52, 89);
 }
 #imageForm {
 	background-color: #eee;
@@ -199,4 +212,32 @@
 }
 .potential-users ul li:hover {
   background-color: #DDDDDD;
+}
+.shared-with-icon {
+  float: right;
+}
+.shared-with-icon:hover + div  {
+  visibility: visible;
+}
+.shared-with-icon + div {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  z-index: 99;
+  position: absolute;
+  right: 35px;
+  top: -5px;
+  padding: 10px;
+}
+.shared-with-icon + div::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid black;
+  position: absolute;
+  top: 8px;
+  right: -5px;
 }
