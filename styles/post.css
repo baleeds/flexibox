@@ -1,3 +1,11 @@
+html, body{
+    height: 100%;
+}
+
+body > .ng-scope {
+    height:100%;
+}
+
 .row {
     padding: 0;
     margin: 0;
@@ -28,7 +36,7 @@
     box-shadow: 4px 4px 15px rgba(0,0,0,.3);
 }
 #imageDiv {
-    padding: 50px 50px 90px 50px;
+    padding: 100px 50px 90px 50px;
     -khtml-user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -37,7 +45,10 @@
     position: relative;
     float: left;
     cursor: crosshair;
-    margin-top: 50px;
+    height:100%;
+    /*Moving margin into padding so that it
+    can be 100% height*/
+    /*margin-top: 50px;*/
 }
 .navbar {
     position: fixed;

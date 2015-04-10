@@ -154,6 +154,8 @@ define([
                             smallest = {x: ui.position.left, y: ui.position.top};
                         }
                     });
+
+                    $("#comment-box").focus();
                 };
 
                 $scope.mMove = function (e) {
