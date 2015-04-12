@@ -6,18 +6,21 @@
 </div>-->
 <link rel="stylesheet" href="../../../styles/post.css" />
 <div class="row" style="height:100%;">
-	<div id="imageDiv" class="col-md-9 main workspace" ng-class="{'workspace-scaled': currentView == 'scaled'}">
+    <!-- make the margins using this wrapper div and padding so that we can maintain 100% height -->
+    <div id="imageWrapper">
+        <div id="imageDiv" class="col-md-9 main workspace" ng-class="{'workspace-scaled': currentView == 'scaled'}">
 
-    	<img draggable="false" id="draggable-container" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" ng-mousemove="mMove($event)" />
+            <img draggable="false" id="draggable-container" class="big-image" src="/{{ post.imageURL }}" ng-mousedown="mDown($event)" ng-mouseup="mUp($event)" ng-mousemove="mMove($event)" />
 
-		<div ng-repeat="comment in post.comments" ng-comment="{{comment}}" class="flexiBox" id="comment{{ comment.number }}" ng-style="getStyle($index)" ng-click="scrollSideBar()" ng-mouseenter="setCurrentComment(comment._id);" ng-mouseleave="setCurrentComment(0);" ng-class="{'flexiBoxHover': $parent.currentComment == comment._id}" ng-hide="!$parent.locationComments || !comment.smallest">
-    		<div class="commentNumber flexiNumber" ng-style="{background: '{{ comment.color }}'}" ng-class="{'flexiNumberHover': $parent.currentComment == comment._id}">{{ comment.number }}</div>
-			<div class="hoverComment" ng-style="{top:'{{ comment.height - 5 }}px', 'border-bottom':'4px solid {{ comment.color }}'}" ng-class="{'hoverCommentHover': $parent.currentComment == comment._id}" ng-show="currentView == 'full'">
-				<h6>{{ comment.posterName }}</h6>
-				<p>{{ comment.txt }}</p>
-			</div>
-		</div>
+            <div ng-repeat="comment in post.comments" ng-comment="{{comment}}" class="flexiBox" id="comment{{ comment.number }}" ng-style="getStyle($index)" ng-click="scrollSideBar()" ng-mouseenter="setCurrentComment(comment._id);" ng-mouseleave="setCurrentComment(0);" ng-class="{'flexiBoxHover': $parent.currentComment == comment._id}" ng-hide="!$parent.locationComments || !comment.smallest">
+                <div class="commentNumber flexiNumber" ng-style="{background: '{{ comment.color }}'}" ng-class="{'flexiNumberHover': $parent.currentComment == comment._id}">{{ comment.number }}</div>
+                <div class="hoverComment" ng-style="{top:'{{ comment.height - 5 }}px', 'border-bottom':'4px solid {{ comment.color }}'}" ng-class="{'hoverCommentHover': $parent.currentComment == comment._id}" ng-show="currentView == 'full'">
+                    <h6>{{ comment.posterName }}</h6>
+                    <p>{{ comment.txt }}</p>
+                </div>
+            </div>
 
+        </div>
     </div>
     <div class="col-md-3 col-md-offset-9 sidebar">
 		<ul style="margin: 0px; padding: 0px;">

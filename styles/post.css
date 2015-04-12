@@ -1,3 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+body > .ng-scope {
+    height: 100%;
+}
+
 .row {
     padding: 0;
     margin: 0;
@@ -27,8 +35,13 @@
 .big-image {
     box-shadow: 4px 4px 15px rgba(0,0,0,.3);
 }
+#imageWrapper {
+    height:100%;
+    padding-top:50px;
+    padding-bottom: 44px;
+}
 #imageDiv {
-    padding: 50px 50px 90px 50px;
+    padding: 50px;
     -khtml-user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -37,7 +50,9 @@
     position: relative;
     float: left;
     cursor: crosshair;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
+    height: 100%;
+    overflow:scroll;
 }
 .navbar {
     position: fixed;

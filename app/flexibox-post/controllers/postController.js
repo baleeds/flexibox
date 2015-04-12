@@ -107,7 +107,7 @@ define([
                         }
                         $scope.isDown = true;
                         a.x = e.pageX + $scope.container.scrollLeft;
-                        a.y = e.pageY - $scope.container.offsetTop - $scope.container.scrollTop;
+                        a.y = e.pageY - $scope.container.offsetTop + $scope.container.scrollTop;
 
                         $scope.newDiv = document.createElement("div");
 
@@ -161,7 +161,7 @@ define([
                 $scope.mMove = function (e) {
                     if ($scope.isDown) {
                         b.x = e.pageX + $scope.container.scrollLeft;
-                        b.y = e.pageY - $scope.container.offsetTop - $scope.container.scrollTop;
+                        b.y = e.pageY - $scope.container.offsetTop + $scope.container.scrollTop;
 
                         smallest.x = ((a.x < b.x) ? a.x : b.x);
                         smallest.y = ((a.y < b.y) ? a.y : b.y);
@@ -185,8 +185,9 @@ define([
                 $scope.scrollView = function () {
                     var comment = utilityFactory.findById($scope.post.comments, $scope.currentComment);
                     if (comment.hasOwnProperty("smallest")) {
-                        $("html, body").stop().animate({scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2)}, 500);
-                        $(".workspace").stop().animate({scrollLeft: comment.smallest.x - ( ( (window.innerWidth * .75) - comment.width) / 2)}, 500);
+                        $(".workspace").stop().animate({
+                            scrollTop: comment.smallest.y - ( (window.innerHeight - comment.height) / 2),
+                            scrollLeft: comment.smallest.x - ( ( (window.innerWidth * .75) - comment.width) / 2)}, 500);
                     }
                 };
 
@@ -213,7 +214,12 @@ define([
                     if ($scope.currentView == 'full') {
                         $scope.currentView = 'scaled';
                         if ($scope.container == null) {
-                            $scope.container = document.getElementById('imageDiv')
+                            $scope.container = document.getElementById('imageDiv');
+                        }
+                        if ($scope.newDiv != 0) {
+                            $scope.container.removeChild($scope.newDiv);
+                            $scope.newDiv = 0;
+                            smallest = {};
                         }
 
                         $scope.post.comments.forEach(function (comment, idx) {
