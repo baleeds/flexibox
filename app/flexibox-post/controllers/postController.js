@@ -222,8 +222,10 @@ define([
                             smallest = {};
                         }
 
+
                         $scope.post.comments.forEach(function (comment, idx) {
                             var $comment = $("#comment" + (idx + 1));
+
                             $comment.css($scope.getStyle(idx));
                         });
 
@@ -264,12 +266,16 @@ define([
                     } else {
                         $scope.currentView = 'full';
 
+
                         $("#draggable-container")[0].removeAttribute("style");
 
+                        /*
                         $scope.post.comments.forEach(function (comment, idx) {
                             var $comment = $("#comment" + (idx + 1));
                             $comment.css($scope.getStyle(idx));
                         });
+                        */
+
 
                     }
                 };
@@ -327,8 +333,8 @@ define([
                             if (comment.hasOwnProperty("smallest")) {
                                 commentHeightRatio = comment.smallest.y / imageHeight;
                                 commentWidthRatio = comment.smallest.x / imageWidth;
-                                left = (Math.ceil(sceneWidth * commentWidthRatio) + 50) + "px";
-                                top = (Math.floor(sceneWidth * commentHeightRatio / imageRatio) + 50) + "px";
+                                left = (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px";
+                                top = (Math.floor(sceneHeight * commentHeightRatio) + 50) + "px";
                             }
                         }
 
