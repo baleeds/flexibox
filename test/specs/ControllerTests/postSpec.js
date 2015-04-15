@@ -1,6 +1,3 @@
-/**
- * Created by dfperry on 1/21/2015.
- */
 define(
     ["namespace", "flexibox-post/namespace", "flexibox-post/module.require", "common/module.require"],
         function(namespace, ctrlNamespace){
@@ -9,8 +6,24 @@ define(
 
         describe(name, function() {
 
+            var PID = "54d82057b46e200418000006";
+            var SID = "54d82082b46e200418000007";
+            var OID = "54d8209cb46e200418000008";
+
             var $controller;
             var $httpBackend;
+
+            var $scope;
+            var $routeParams = {"projectId" : PID, "setId": SID, "postId": OID};
+
+            var postsComments = [{
+                smallest : {
+                    x : 34,
+                    y : 50
+                },
+                width : 100,
+                height: 101
+            }];
 
             beforeEach(function () {
                 module(namespace);
@@ -18,25 +31,35 @@ define(
                 inject(function ($injector) {
                     $controller = $injector.get("$controller");
                     $httpBackend = $injector.get("$httpBackend");
+
+                    $scope = {};
+                    $httpBackend.expectGET('/api/projects/' + PID + '/sets/' + SID + '/posts/' + OID + '?includeComments=1')
+                        .respond(200, {
+                                comments: postsComments
+                            });
+
+                    $controller(name, {$scope : $scope, $routeParams: $routeParams});
+
+                    $httpBackend.flush();
                 });
-
-
             });
 
-            describe("Test Update Post", function() {
+            afterEach(function() {
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+            });
 
-                it("Test update post with project", function() {
-
-                })
-            })
+            //describe("Test Update Post", function() {
+            //
+            //    it("Test update post with project", function() {
+            //
+            //    });
+            //});
 
             describe("Post Comment Tests", function(){
 
                 it("Test mDown with new Div as 2", function(){
-                    var $scope = {};
                     var testLoc = {"pageX": 100 , "pageY": 150};
-
-                    $controller(name, {$scope : $scope});
 
                     $scope.newDiv = document.createElement('div');
 
@@ -56,11 +79,8 @@ define(
                 });
 
                 it("Test mDown With newDiv as 0", function(){
-                    var $scope = {};
                     var testLoc = {"pageX": 100 , "pageY": 150};
                     $scope.newDiv = 0;
-
-                    $controller(name, {$scope : $scope});
 
                     var $element = document.createElement('div');
                     $element.id = 'imageDiv';
@@ -74,9 +94,6 @@ define(
 
                 it("Tests eager mMove", function(){
                     var testLoc = {"pageX": 100 , "pageY": 150};
-                    var $scope = {};
-
-                    $controller(name, {$scope : $scope});
 
                     expect($scope.isDown).toBe(false);
 
@@ -92,9 +109,6 @@ define(
                 it("Test mMove", function(){
                     var testLoc = {"pageX": 100 , "pageY": 150};
                     var testLoc2 = {"pageX": 150 , "pageY": 275};
-                    var $scope = {};
-
-                    $controller(name, {$scope : $scope});
 
                     var $element = document.createElement('div');
                     $element.id = 'imageDiv';
@@ -116,10 +130,31 @@ define(
 
                 });
 
-                it("Test mUp", function(){
-                    var $scope = {};
+                it("Test mMove with reversed points", function(){
+                    var testLoc2 = {"pageX": 100 , "pageY": 150};
+                    var testLoc = {"pageX": 150 , "pageY": 275};
 
-                    $controller(name, {$scope : $scope});
+                    var $element = document.createElement('div');
+                    $element.id = 'imageDiv';
+                    document.body.appendChild($element);
+
+                    $scope.mDown(testLoc);
+
+                    expect($scope.isDown).toBe(true);
+
+                    $scope.mMove(testLoc2);
+
+                    expect($scope.newDiv.style.width).toBe((testLoc.pageX - testLoc2.pageX) + "px");
+                    expect($scope.newDiv.style.height).toBe((testLoc.pageY - testLoc2.pageY) + "px");
+
+                    expect($scope.newDiv.style.left).toBe((testLoc2.pageX - $scope.container.scrollLeft) + "px");
+                    expect($scope.newDiv.style.top).toBe((testLoc2.pageY - $scope.container.offsetTop - $scope.container.scrollTop) + "px");
+
+                    document.body.removeChild($element);
+
+                });
+
+                it("Test mUp", function(){
                     var testLoc = {"offsetX": 100 , "offsetY": 150};
 
                     var $element = document.createElement('div');
@@ -138,16 +173,6 @@ define(
                 });
 
                 it("Test addComment", function(){
-                    var $scope = {};
-
-                    var $routeParams = {"projectId" : 5, "setId": 5, "postId": 3};
-                    $controller(name, {$scope : $scope, $routeParams: $routeParams});
-
-                    $httpBackend.expectGET('/api/projects/' + $routeParams.projectId + '/sets/'
-                    + $routeParams.setId + '/posts/' + $routeParams.postId + '?includeComments=1').respond(200, {});
-
-
-
                     $scope.newComment.cText = "Hello World";
                     $scope.$parent = {
                                         "user": {"name": "Dylan"}
@@ -174,16 +199,6 @@ define(
 
                 });
                 it("Test addComment fail", function(){
-                    var $scope = {};
-
-                    var $routeParams = {"projectId" : 5, "setId": 5, "postId": 3};
-                    $controller(name, {$scope : $scope, $routeParams: $routeParams});
-
-                    $httpBackend.expectGET('/api/projects/' + $routeParams.projectId + '/sets/'
-                    + $routeParams.setId + '/posts/' + $routeParams.postId + '?includeComments=1').respond(200, {});
-
-
-
                     $scope.newComment.cText = "Hello World";
                     $scope.$parent = {
                         "user": {"name": "Dylan"}
@@ -210,19 +225,11 @@ define(
 
                 });
                 it("Test addReply", function(){
-                    var $scope = {};
                     var $commentId = 5;
                     var $txt = "This is a reply";
 
-
-                    var $routeParams = {"projectId" : 5, "setId": 5, "postId": 3};
-                    $controller(name, {$scope : $scope, $routeParams: $routeParams});
-
                    // $scope.post = {};
                     $scope.replyIndex = 0;
-                    $httpBackend.expectGET('/api/projects/' + $routeParams.projectId + '/sets/'
-                    + $routeParams.setId + '/posts/' + $routeParams.postId + '?includeComments=1').respond(200, {"comments": ["Test Comment"]});
-
                     $httpBackend.expectPOST('/api/projects/' + $routeParams.projectId + '/sets/'
                     + $routeParams.setId + '/posts/' + $routeParams.postId + '/comments/' + $commentId).respond(200, {txt : "Hello World"});
 
@@ -256,20 +263,45 @@ define(
                     expect($scope.post.comments[$scope.replyIndex]).toEqual("Test Comment");
                 });
                 it("Test showReply", function(){
-                    var $scope = {};
                     var $commentId = 5;
-                    $controller(name, {$scope : $scope});
                     $scope.showReply($commentId);
 
                     expect($scope.replyIndex).toEqual($commentId)
                 });
-                it("Test showReply failure", function() {
-                    var $scope = {};
-                    var $commentId = 5;
-
-                });
                 it("Test setCurrentComment", function() {
+                    $scope.setCurrentComment("Secret");
+                    expect($scope.currentComment).toBe("Secret");
+                });
+            });
 
+            describe("Test toggleLocationComments", function(){
+                it("should set the location to 0", function(){
+                    expect($scope.locationComments).toBe(1);
+                    $scope.toggleLocationComments();
+                    expect($scope.locationComments).toBe(0);
+                    $scope.toggleLocationComments();
+                    expect($scope.locationComments).toBe(1);
+                });
+            });
+
+            describe("Test getStyle", function(){
+                it("should set full, and return original styles", function(){
+                    var comment = {
+                        smallest : {
+                            x : 34,
+                            y : 50
+                        },
+                        width : 100,
+                        height: 101
+                    };
+                    $scope.post.comments[0] = comment;
+                    expect($scope.currentView).toBe("full");
+
+                    var style = $scope.getStyle(0);
+                    expect(style.top).toBe(comment.smallest.y + "px");
+                    expect(style.left).toBe(comment.smallest.x + "px");
+                    expect(style.width).toBe(comment.width + "px");
+                    expect(style.height).toBe(comment.height + "px");
                 });
             });
         });
