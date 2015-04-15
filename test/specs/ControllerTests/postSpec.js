@@ -286,14 +286,7 @@ define(
 
             describe("Test getStyle", function(){
                 it("should set full, and return original styles", function(){
-                    var comment = {
-                        smallest : {
-                            x : 34,
-                            y : 50
-                        },
-                        width : 100,
-                        height: 101
-                    };
+                    var comment = postsComments[0];
                     $scope.post.comments[0] = comment;
                     expect($scope.currentView).toBe("full");
 
@@ -302,6 +295,126 @@ define(
                     expect(style.left).toBe(comment.smallest.x + "px");
                     expect(style.width).toBe(comment.width + "px");
                     expect(style.height).toBe(comment.height + "px");
+                });
+
+                it("should have dimensions larger than the screen, but be wider than tall", function(){
+                    var workspaceDimensions = {
+                        width : 1180,
+                        height: 980
+                    };
+
+                    //Mock out the DOM elements we use to calculate stuff
+                    $scope.container = {
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    };
+                    $scope.$sidebar = [{
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    }];
+
+                    $scope.imageWidth = 1550;
+                    $scope.imageHeight = 1240;
+                    $scope.currentView = 'scaled';
+                    var style = $scope.getStyle(0);
+
+                    expect(style.top).toBe("84px");
+                    expect(style.left).toBe("74px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+                });
+
+                it("should have dimensions larger than the screen, but be taller than wide", function(){
+                    var workspaceDimensions = {
+                        width : 1180,
+                        height: 980
+                    };
+
+                    //Mock out the DOM elements we use to calculate stuff
+                    $scope.container = {
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    };
+                    $scope.$sidebar = [{
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    }];
+
+                    $scope.imageWidth = 1240;
+                    $scope.imageHeight = 1550;
+                    $scope.currentView = 'scaled';
+                    var style = $scope.getStyle(0);
+
+                    expect(style.top).toBe("78px");
+                    expect(style.left).toBe("70px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+                });
+
+                it("should be wider than tall", function(){
+                    var workspaceDimensions = {
+                        width : 1180,
+                        height: 980
+                    };
+
+                    //Mock out the DOM elements we use to calculate stuff
+                    $scope.container = {
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    };
+                    $scope.$sidebar = [{
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    }];
+
+                    $scope.imageWidth = 1440;
+                    $scope.imageHeight = 900;
+                    $scope.currentView = 'scaled';
+                    var style = $scope.getStyle(0);
+
+                    expect(style.top).toBe("87px");
+                    expect(style.left).toBe("76px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+                });
+
+                it("should be taller than wide", function(){
+                    var workspaceDimensions = {
+                        width : 1180,
+                        height: 980
+                    };
+
+                    //Mock out the DOM elements we use to calculate stuff
+                    $scope.container = {
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    };
+                    $scope.$sidebar = [{
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    }];
+
+                    $scope.imageWidth = 900;
+                    $scope.imageHeight = 1080;
+                    $scope.currentView = 'scaled';
+                    var style = $scope.getStyle(0);
+
+                    expect(style.top).toBe("90px");
+                    expect(style.left).toBe("78px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
                 });
             });
         });

@@ -23,6 +23,8 @@ define([
                 $scope.currentView = 'full';
                 $scope.locationComments = 1;
 
+                $scope.$sidebar = $(".sidebar");
+
                 var firstClick = 1;
                 var a = {};
                 var b = {};
@@ -222,19 +224,12 @@ define([
                             smallest = {};
                         }
 
-
-                        $scope.post.comments.forEach(function (comment, idx) {
-                            var $comment = $("#comment" + (idx + 1));
-
-                            $comment.css($scope.getStyle(idx));
-                        });
-
                         var imageWidth = $scope.imageWidth;
                         var imageHeight = $scope.imageHeight;
                         var imageRatio = imageWidth / imageHeight;
 
                         var sceneWidth = $scope.container.getClientRects()[0].width - (2 * 50);
-                        var sceneHeight = $(".sidebar")[0].getClientRects()[0].height - (2 * 50);
+                        var sceneHeight = $scope.$sidebar[0].getClientRects()[0].height - (2 * 50);
 
                         if (imageWidth > sceneWidth && imageHeight > sceneHeight) {
                             if (imageWidth > imageHeight) {
@@ -266,17 +261,7 @@ define([
                     } else {
                         $scope.currentView = 'full';
 
-
                         $("#draggable-container")[0].removeAttribute("style");
-
-                        /*
-                        $scope.post.comments.forEach(function (comment, idx) {
-                            var $comment = $("#comment" + (idx + 1));
-                            $comment.css($scope.getStyle(idx));
-                        });
-                        */
-
-
                     }
                 };
 
@@ -301,7 +286,7 @@ define([
                         var imageRatio = imageWidth / imageHeight;
 
                         var sceneWidth = $scope.container.getClientRects()[0].width - (2 * 50);
-                        var sceneHeight = $(".sidebar")[0].getClientRects()[0].height - (2 * 50);
+                        var sceneHeight = $scope.$sidebar[0].getClientRects()[0].height - (2 * 50);
 
                         var commentHeightRatio;
                         var commentWidthRatio;
