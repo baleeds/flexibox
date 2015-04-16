@@ -28,6 +28,7 @@
   min-height: 200px;
   margin-bottom: 30px;
   position: relative;
+  overflow: hidden;
 }
 .panel:hover {
   background-color: #DDDDDD;
@@ -240,4 +241,14 @@
   position: absolute;
   top: 8px;
   right: -5px;
+}
+.sorting-options {
+  width: 100%;
+}
+.sorting-options .pagination {
+  float: left;
+}
+.sorting-dropdown {
+  float: left;
+  margin-right: 20px;
 }

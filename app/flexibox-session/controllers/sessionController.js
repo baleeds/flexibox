@@ -39,5 +39,9 @@ define([
 				$location.path('/login');
 			};
 
+			$scope.range = function(n) {
+				return new Array(n);
+			};
+
 		}]);
 	});

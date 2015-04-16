@@ -5,28 +5,34 @@
             <a href="#" data-toggle="modal" data-target="#newProjectModal" class="btn btn-default btn-sm add-item" ng-hide="user.role=='Commenter'">Create a project</a>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
-            <div class="pagination-handles">
-                <a href="#" ng-click="endLeft()" class="fa fa-angle-double-left"></a>
-                <a href="#" ng-click="pageLeft()" class="fa fa-angle-left"></a>
-                {{pagination - pageLength < 0 ? 1 : pagination > projects.length ? projects.length : pagination - pageLength + 1}}
-                -
-                {{pagination > projects.length ? projects.length : pagination}} of {{projects.length}}
-                <a href="#" ng-click="pageRight()" class="fa fa-angle-right"></a>
-                <a href="#" ng-click="endRight()" class="fa fa-angle-double-right"></a>
-                <div>
+            <nav class="sorting-options">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous" ng-click="pageLeft();">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li ng-repeat="i in pages track by $index" ng-class="{'active':page === ($index + 1)}"><a href="#" ng-click="setPage($index + 1)">{{ $index + 1}}</a></li>
+                    <li>
+                        <a href="#" aria-label="Next" ng-click="pageRight();">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="sorting-dropdown">
                     Sort By:
-                    <select id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
+                    <select class="form-control" id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
                     </select>
-
                 </div>
-            </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <ul class="panel-list">
-                <li ng-repeat="project in projects | filter:searchText |
-                 limitTo: searchText == '' || searchText == undefined ? pagination : 9|
-                 limitTo: searchText == '' || searchText == undefined ? -pageLength: -9" class="panel">
+                <li ng-repeat="project in visibleProjects | filter:searchText" class="panel">
                     <div class="panel-top">
                         <a href="#" class="panel-delete" ng-click="deleteProject(project._id)" ng-hide="user.role =='Commenter'"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="setEditable(project._id)" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#editProjectModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>

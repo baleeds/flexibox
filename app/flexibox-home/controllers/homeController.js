@@ -9,7 +9,7 @@ define([
     ],
     function (module, namespace, namespaceCommon) {
         'use strict';
-        var PROJECTS_PER_PAGE = 9;
+        var PROJECTS_PER_PAGE = 5;
 
         var name = namespace + ".homeController";
         module.controller(name,
@@ -22,8 +22,11 @@ define([
                     $scope.projects = {}; // Local instance of projects.  Only contains project name and project description.
                     $scope.formData = {};
                     $scope.potentialUsers = [];
-                    $scope.pagination = PROJECTS_PER_PAGE;
-                    $scope.pageLength = PROJECTS_PER_PAGE;
+                    $scope.pages = [];
+                    //$scope.pagination = PROJECTS_PER_PAGE;
+                    //$scope.pageLength = PROJECTS_PER_PAGE;
+                    $scope.page = 1;
+                    var maxPage = 1;
 
                     $scope.options = [
                         { label: 'Alphabetically by Project Name', value: 'name' },
@@ -62,6 +65,7 @@ define([
                             sortAlphabetically($scope.projects, "name");
                             console.log($scope.projects);
                             buildMembersList();
+                            calculatePages();
                         })
                         .error(function (projectData) {
                             logger.error('homeController - Error getting projects: ' + projectData);
@@ -201,32 +205,37 @@ define([
                         $scope.newSharedUsers.splice(newUserIndex, 1);
                     };
 
-                    $scope.pageLeft = function(){
-                        if($scope.pagination > PROJECTS_PER_PAGE){
-                            $scope.pagination -= PROJECTS_PER_PAGE;
-                            $scope.pageLength = PROJECTS_PER_PAGE;
-                        }
-                    };
 
-                    $scope.endLeft = function(){
-                        $scope.pagination = PROJECTS_PER_PAGE;
-                        $scope.pageLength = PROJECTS_PER_PAGE;
+                    $scope.visibleProjects = [];
+                    $scope.pageLeft = function(){
+                        if ($scope.page > 1) {
+                            $scope.page -= 1;
+                        }
+                        console.log("page left, new page: " + $scope.page);
+                        calculatePages();
+
                     };
 
                     $scope.pageRight = function () {
-                        if ($scope.pagination < $scope.projects.length) {
-                            $scope.pagination += PROJECTS_PER_PAGE;
-                            if($scope.pagination > $scope.projects.length){
-                                $scope.pageLength = ($scope.projects.length % PROJECTS_PER_PAGE);
-                            }
+                        if ($scope.page < maxPage) {
+                            $scope.page += 1;
                         }
+                        console.log("page right, new page: " + $scope.page);
+                        calculatePages();
                     };
 
-                    $scope.endRight = function(){
-                        $scope.pagination = Math.ceil($scope.projects.length / PROJECTS_PER_PAGE) * PROJECTS_PER_PAGE;
-                        if($scope.pagination > $scope.projects.length){
-                            $scope.pageLength = ($scope.projects.length % PROJECTS_PER_PAGE);
-                        }
+                    $scope.setPage = function(p) {
+                        $scope.page = p;
+                        console.log("page clicked, new page: " + $scope.page);
+                        calculatePages();
+                    };
+
+                    var calculatePages = function() {
+                        maxPage = Math.floor($scope.projects.length / PROJECTS_PER_PAGE) + 1;
+                        console.log("calculated pages, maxPage: " + maxPage);
+                        $scope.pages = new Array(maxPage);
+                        $scope.visibleProjects = $scope.projects.slice(PROJECTS_PER_PAGE * ($scope.page - 1), PROJECTS_PER_PAGE * $scope.page);
+                        console.log($scope.visibleProjects);
                     };
 
                     function sortByKey(array, key) {
@@ -269,6 +278,5 @@ define([
                             sortByNumberOfCommenters($scope.projects)
                         }*/
                     }
-
                 }]);
     });
