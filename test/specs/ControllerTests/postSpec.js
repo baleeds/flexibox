@@ -325,6 +325,14 @@ define(
 
                     expect(style.width).toBe(0);
                     expect(style.height).toBe(0);
+
+                    $scope.post.comments[0] = {};
+                    style = $scope.getStyle(0);
+                    expect(style.top).toBe(0);
+                    expect(style.left).toBe(0);
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
                 });
 
                 it("should have dimensions larger than the screen, but be taller than wide", function(){
@@ -355,6 +363,14 @@ define(
 
                     expect(style.width).toBe(0);
                     expect(style.height).toBe(0);
+
+                    $scope.post.comments[0] = {};
+                    style = $scope.getStyle(0);
+                    expect(style.top).toBe(0);
+                    expect(style.left).toBe(0);
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
                 });
 
                 it("should be wider than tall", function(){
@@ -376,12 +392,20 @@ define(
                     }];
 
                     $scope.imageWidth = 1440;
-                    $scope.imageHeight = 900;
+                    $scope.imageHeight = 800;
                     $scope.currentView = 'scaled';
                     var style = $scope.getStyle(0);
 
                     expect(style.top).toBe("87px");
                     expect(style.left).toBe("76px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+
+                    $scope.post.comments[0] = {};
+                    style = $scope.getStyle(0);
+                    expect(style.top).toBe(0);
+                    expect(style.left).toBe(0);
 
                     expect(style.width).toBe(0);
                     expect(style.height).toBe(0);
@@ -412,6 +436,14 @@ define(
 
                     expect(style.top).toBe("90px");
                     expect(style.left).toBe("78px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+
+                    $scope.post.comments[0] = {};
+                    style = $scope.getStyle(0);
+                    expect(style.top).toBe(0);
+                    expect(style.left).toBe(0);
 
                     expect(style.width).toBe(0);
                     expect(style.height).toBe(0);
