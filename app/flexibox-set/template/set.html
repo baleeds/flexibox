@@ -39,7 +39,7 @@
             <ul class="panel-list">
                 <li ng-repeat="post in visiblePosts | filter:searchText" class="panel">
                     <div class="panel-top">
-                        <a href="#" class="panel-delete" ng-click="deletePost(post._id)"><span class="fa fa-times" aria-hidden="true"></span></a>
+                        <a href="#" class="panel-delete" ng-click="setDeletable(post)" data-toggle="modal" data-target="#deletePostModal"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="postEditable(post._id)" data-toggle="modal" data-target="#editPostModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
                     <a class="panel-middle panel-middle-image" href="/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">
@@ -146,6 +146,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit();">Close</button>
                 <button type="submit" modal class="btn btn-primary" ng-click="confirmEdit(); dClose('editPostModal');" ng-disabled="editForm.name.$invalid">Edit Post</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="deletePostModal" modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Post</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Do you want to completely destroy <strong>{{ deletable.name }}</strong>?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="setDeletable({});">Close</button>
+                <button type="submit" class="btn btn-danger" ng-click="deletePost(); dClose('deletePostModal');">Delete Post</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

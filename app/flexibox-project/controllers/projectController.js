@@ -90,8 +90,13 @@ define([
                         $scope.newTags = [];
                     };
 
+                    $scope.setDeletable = function(s) {
+                        $scope.deletable = s;
+                    };
+
                     // Delete a set based on ID
-                    $scope.deleteSet = function (id) {
+                    $scope.deleteSet = function() {
+                        var id = $scope.deletable._id;
                         projectFactory.deleteSet($routeParams.projectId, id)
                             .success(function (project) {
                                 $scope.project = project;

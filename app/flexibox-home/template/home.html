@@ -34,7 +34,7 @@
             <ul class="panel-list">
                 <li ng-repeat="project in visibleProjects | filter:searchText" class="panel">
                     <div class="panel-top">
-                        <a href="#" class="panel-delete" ng-click="deleteProject(project._id)" ng-hide="user.role =='Commenter'"><span class="fa fa-times" aria-hidden="true"></span></a>
+                        <a href="#" class="panel-delete" ng-click="setDeletable(project);" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#deleteProjectModal"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" class="panel-edit" ng-click="setEditable(project._id)" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#editProjectModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
                     <a class="panel-middle" href="/projects/{{ project._id }}">
@@ -166,6 +166,28 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit();">Close</button>
                 <button type="submit" class="btn btn-primary" ng-click="confirmEdit(); dClose('editProjectModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Edit Project</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="deleteProjectModal" modal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Project</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Do you want to completely destroy <strong>{{ deletable.name }}</strong>?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="setDeletable({});">Close</button>
+                <button type="submit" class="btn btn-danger" ng-click="deleteProject(); dClose('deleteProjectModal');">Delete Project</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

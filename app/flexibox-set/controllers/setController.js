@@ -29,6 +29,7 @@ define([
                     $scope.pages = [];
                     $scope.page = 1;
                     var maxPage = 1;
+                    $scope.deletable = {};
                     $scope.options = [
                         { label: 'Alphabetically by Set Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
@@ -138,8 +139,13 @@ define([
                         }
                     };
 
+                    $scope.setDeletable = function(post) {
+                        $scope.deletable = post;
+                    };
+
                     // Delete post.  Includes deleting the image from filesystem.
-                    $scope.deletePost = function (id) {
+                    $scope.deletePost = function() {
+                        var id = $scope.deletable._id;
                         var deleteImg = utilityFactory.findById($scope.set.posts, id).imageURL;
                         setFactory.deleteUpload(deleteImg.replace("\\", "/"))
                             .success(function (data) {

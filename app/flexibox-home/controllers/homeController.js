@@ -24,6 +24,7 @@ define([
                     $scope.potentialUsers = [];
                     $scope.pages = [];
                     $scope.page = 1;
+                    $scope.deletable = {};
                     var maxPage = 1;
 
                     $scope.options = [
@@ -123,19 +124,27 @@ define([
                                 $scope.newTags = [];
                                 $scope.newSharedUsers = [];
                                 $scope.projects = projectData;
+                                calculatePages();
                             })
                             .error(function (projectData) {
                                 logger.error('homeController - Error creating project: ' + projectData);
                                 $scope.error = 'Error creating project';
                             });
-                        calculatePages();
+                    };
+
+                    $scope.setDeletable = function(project) {
+                        $scope.deletable = project;
                     };
 
                     // Delete project based on id
-                    $scope.deleteProject = function (id) {
+                    $scope.deleteProject = function() {
+                        console.log($scope.deletable);
+                        var id = $scope.deletable._id;
+
                         homeFactory.deleteProject(id)
                             .success(function (projectData) {
                                 $scope.projects = projectData;
+                                calculatePages();
                             })
                             .error(function (projectData) {
                                 logger.error('homeController - Error deleting project: ' + projectData);
@@ -143,13 +152,12 @@ define([
                             });
                         homeFactory.deleteUserProject(id)
                             .success(function (data) {
-
+                                calculatePages();
                             })
                             .error(function (projectData) {
                                 logger.error('homeController - Error deleting project: ' + projectData);
                                 $scope.error = 'Error in homeFactory deleting project';
                             });
-                        calculatePages();
                     };
 
                     $scope.newTag = "";
