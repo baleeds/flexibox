@@ -243,12 +243,14 @@ define([
                             var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
                             return ((x > y) ? -1 : ((x < y) ? 1 : 0));
                         });
+                        calculatePages();
                     }
                     function sortAlphabetically(array, key) {
                         return array.sort(function(a, b) {
                             var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
                             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                         });
+                        calculatePages();
                     }
 
                     function sortByNumberOfCommenters(array){
@@ -256,6 +258,7 @@ define([
                             var x = a["commenters"].length(); var y = b["commenters"].length();
                             return ((x >y) ? -1 : ((x < y) ? 1 : 0));
                         });
+                        calculatePages();
                     }
                     $scope.filterSelected = function(){
                         var filter = $scope.filter.value;
@@ -277,6 +280,7 @@ define([
                         /*else if(filter == "numMembers"){
                             sortByNumberOfCommenters($scope.projects)
                         }*/
+                        calculatePages();
                     }
                 }]);
     });
