@@ -448,6 +448,43 @@ define(
                     expect(style.width).toBe(0);
                     expect(style.height).toBe(0);
                 });
+                it("shouldn't scale at all", function(){
+                    var workspaceDimensions = {
+                        width : 1180,
+                        height: 980
+                    };
+
+                    //Mock out the DOM elements we use to calculate stuff
+                    $scope.container = {
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    };
+                    $scope.$sidebar = [{
+                        getClientRects : function(){
+                            return [workspaceDimensions];
+                        }
+                    }];
+
+                    $scope.imageWidth = 500;
+                    $scope.imageHeight = 500;
+                    $scope.currentView = 'scaled';
+                    var style = $scope.getStyle(0);
+
+                    expect(style.top).toBe("100px");
+                    expect(style.left).toBe("84px");
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+
+                    $scope.post.comments[0] = {};
+                    style = $scope.getStyle(0);
+                    expect(style.top).toBe(0);
+                    expect(style.left).toBe(0);
+
+                    expect(style.width).toBe(0);
+                    expect(style.height).toBe(0);
+                });
             });
         });
     });

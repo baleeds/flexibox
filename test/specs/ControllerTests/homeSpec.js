@@ -167,6 +167,12 @@ define(
                     expect($scope.newTags[0].text).toBe('newtagfortesting');
                 });
 
+                it("addTag Bad Test", function(){
+                   expect($scope.newTags.length).toBe(0);
+                    $scope.addTag();
+                    expect($scope.newTags.length).toBe(0);
+                });
+
                 it("removeTag Test", function(){
                     expect($scope.newTags.length).toBe(0);
                     $scope.newTag = 'New Tag For Testing';
@@ -216,6 +222,12 @@ define(
                     expect($scope.newSharedUsers[0].name).toBe('Commenter');
                     expect($scope.newSharedUsers[0]._id).toBe('234');
                     expect($scope.newSharedUsers[0].email).toBe('Commenter@email.com');
+                });
+
+                it("addSharedUser bad Test", function(){
+                    var user = {_id:'234', name:'Commenter', email:'Commenter@email.com'};
+                    $scope.addSharedUser(user);
+                    expect($scope.newSharedUsers.length).toBe(0);
                 });
 
                 it("removeSharedUser Test", function(){

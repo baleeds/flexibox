@@ -115,18 +115,6 @@ define([
                         $scope.newTags.splice(index, 1);
                     };
 
-                    $scope.pageLeft = function () {
-                        if ($scope.pagination > SETS_PER_PAGE) {
-                            $scope.pagination -= SETS_PER_PAGE;
-                        }
-                    };
-
-                    $scope.pageRight = function () {
-                        if ($scope.pagination < $scope.project.sets.length) {
-                            $scope.pagination += SETS_PER_PAGE;
-                        }
-                    };
-
 
                     $scope.pageLeft = function(){
                         if($scope.pagination > SETS_PER_PAGE){

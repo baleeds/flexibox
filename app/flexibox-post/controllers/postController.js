@@ -321,6 +321,11 @@ define([
                                 left = (Math.ceil(sceneHeight * imageRatio * commentWidthRatio) + 50) + "px";
                                 top = (Math.floor(sceneHeight * commentHeightRatio) + 50) + "px";
                             }
+                        } else {
+                            if (comment.hasOwnProperty("smallest")) {
+                                left = (comment.smallest.x + 50) + "px";
+                                top = (comment.smallest.y + 50) + "px";
+                            }
                         }
 
                         return {
