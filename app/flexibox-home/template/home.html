@@ -8,6 +8,11 @@
     <div class="row">
         <div class="col-md-12">
             <nav class="sorting-options">
+                <div class="sorting-dropdown">
+                    Sort By:
+                    <select class="form-control" id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
+                    </select>
+                </div>
                 <ul class="pagination" ng-hide="pages.length <= 1">
                     <li>
                         <a href="#" aria-label="Previous" ng-click="pageLeft();">
@@ -21,11 +26,6 @@
                         </a>
                     </li>
                 </ul>
-                <div class="sorting-dropdown">
-                    Sort By:
-                    <select class="form-control" id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
-                    </select>
-                </div>
             </nav>
         </div>
     </div>
