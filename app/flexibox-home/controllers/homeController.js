@@ -23,8 +23,6 @@ define([
                     $scope.formData = {};
                     $scope.potentialUsers = [];
                     $scope.pages = [];
-                    //$scope.pagination = PROJECTS_PER_PAGE;
-                    //$scope.pageLength = PROJECTS_PER_PAGE;
                     $scope.page = 1;
                     var maxPage = 1;
 
@@ -130,7 +128,7 @@ define([
                                 logger.error('homeController - Error creating project: ' + projectData);
                                 $scope.error = 'Error creating project';
                             });
-
+                        calculatePages();
                     };
 
                     // Delete project based on id
@@ -151,7 +149,7 @@ define([
                                 logger.error('homeController - Error deleting project: ' + projectData);
                                 $scope.error = 'Error in homeFactory deleting project';
                             });
-
+                        calculatePages();
                     };
 
                     $scope.newTag = "";
@@ -213,7 +211,6 @@ define([
                         }
                         console.log("page left, new page: " + $scope.page);
                         calculatePages();
-
                     };
 
                     $scope.pageRight = function () {
@@ -243,14 +240,12 @@ define([
                             var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
                             return ((x > y) ? -1 : ((x < y) ? 1 : 0));
                         });
-                        calculatePages();
                     }
                     function sortAlphabetically(array, key) {
                         return array.sort(function(a, b) {
                             var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
                             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                         });
-                        calculatePages();
                     }
 
                     function sortByNumberOfCommenters(array){
@@ -258,7 +253,6 @@ define([
                             var x = a["commenters"].length(); var y = b["commenters"].length();
                             return ((x >y) ? -1 : ((x < y) ? 1 : 0));
                         });
-                        calculatePages();
                     }
                     $scope.filterSelected = function(){
                         var filter = $scope.filter.value;

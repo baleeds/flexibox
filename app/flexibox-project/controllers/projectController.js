@@ -9,7 +9,7 @@ define([
     function (module, namespace, namespaceCommon) {
         'use strict';
 
-        var SETS_PER_PAGE = 10;
+        var SETS_PER_PAGE = 5;
 
         var name = namespace + ".projectController";
         module.controller(name,
@@ -21,8 +21,9 @@ define([
                     $scope.formData = {};                     // Data from the new set modal
                     $scope.editableSet = {};
                     var oldSet = {};
-                    $scope.pagination = SETS_PER_PAGE;
-                    $scope.pageLength = SETS_PER_PAGE;
+                    $scope.pages = [];
+                    $scope.page = 1;
+                    var maxPage = 1;
                     $scope.options = [
                         { label: 'Alphabetically by Set Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
@@ -35,7 +36,9 @@ define([
                     projectFactory.getProject($routeParams.projectId)
                         .success(function (project) {
                             $scope.project = project;
-                            sortAlphabetically($scope.project.sets)
+                            console.log(project);
+                            //sortAlphabetically($scope.project.sets);
+                            calculatePages();
                         })
                         .error(function (project) {
                             $scope.error = 'projectController - Error getting project by id';
@@ -78,6 +81,7 @@ define([
                             .success(function (project) {
                                 $scope.formData = {};
                                 $scope.project = project;
+                                calculatePages();
                             })
                             .error(function (project) {
                                 $scope.error = 'projectController - Error adding set to project';
@@ -91,6 +95,7 @@ define([
                         projectFactory.deleteSet($routeParams.projectId, id)
                             .success(function (project) {
                                 $scope.project = project;
+                                calculatePages();
                             })
                             .error(function (project) {
                                 $scope.error = 'projectController - Error deleting set from project';
@@ -111,35 +116,37 @@ define([
                         }
                     };
 
-                    $scope.removeTag = function (index) {
-                        $scope.newTags.splice(index, 1);
-                    };
 
-
+                    $scope.visibleSets = [];
                     $scope.pageLeft = function(){
-                        if($scope.pagination > SETS_PER_PAGE){
-                            $scope.pagination -= SETS_PER_PAGE;
+                        if ($scope.page > 1) {
+                            $scope.page -= 1;
                         }
-                    };
-
-                    $scope.endLeft = function(){
-                        $scope.pagination = SETS_PER_PAGE;
+                        console.log("page left, new page: " + $scope.page);
+                        calculatePages();
                     };
 
                     $scope.pageRight = function () {
-                        if ($scope.pagination < $scope.project.sets.length) {
-                            $scope.pagination += SETS_PER_PAGE;
-                            if($scope.pagination > $scope.project.sets.length){
-                                $scope.pageLength = ($scope.project.sets.length % SETS_PER_PAGE);
-                            }
+                        if ($scope.page < maxPage) {
+                            $scope.page += 1;
                         }
+                        console.log("page right, new page: " + $scope.page);
+                        calculatePages();
                     };
 
-                    $scope.endRight = function(){
-                        $scope.pagination = Math.ceil($scope.project.sets.length / SETS_PER_PAGE) * SETS_PER_PAGE;
-                        if($scope.pagination > $scope.project.sets.length){
-                            $scope.pageLength = ($scope.project.sets.length % SETS_PER_PAGE);
-                        }
+                    $scope.setPage = function(p) {
+                        $scope.page = p;
+                        console.log("page clicked, new page: " + $scope.page);
+                        calculatePages();
+                    };
+
+
+                    var calculatePages = function() {
+                        maxPage = Math.floor(($scope.project.sets.length - 1) / SETS_PER_PAGE) + 1;
+                        console.log("calculated pages, maxPage: " + maxPage);
+                        $scope.pages = new Array(maxPage);
+                        $scope.visibleSets = $scope.project.sets.slice(SETS_PER_PAGE * ($scope.page - 1), SETS_PER_PAGE * $scope.page);
+                        console.log("visible: ", $scope.visibleSets);
                     };
 
                     function sortByKey(array, key) {
@@ -175,6 +182,7 @@ define([
                         /*else if(filter == "numMembers"){
                          sortByNumberOfCommenters($scope.projects)
                          }*/
+                        calculatePages();
                     };
                     
                 }]);

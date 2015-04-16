@@ -10,7 +10,7 @@ define([
     function (module, namespace, namespaceCommon) {
         'use strict';
 
-        var POSTS_PER_PAGE = 10;
+        var POSTS_PER_PAGE = 5;
 
         var name = namespace + '.setController';
         module.controller(name,
@@ -26,8 +26,9 @@ define([
                     $scope.imageButtonState = "";  // text to be displayed on image button (uploading..., delete)
                     var oldPost = {};				//
                     $scope.editablePost = {};
-                    $scope.pagination = POSTS_PER_PAGE;
-                    $scope.pageLength = POSTS_PER_PAGE;
+                    $scope.pages = [];
+                    $scope.page = 1;
+                    var maxPage = 1;
                     $scope.options = [
                         { label: 'Alphabetically by Set Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
@@ -41,6 +42,7 @@ define([
                         .success(function (set) {
                             $scope.backURL = $routeParams.projectId;
                             $scope.set = set;
+                            calculatePages();
                             console.log(set.posts);
                         })
                         .error(function (project) {
@@ -106,6 +108,7 @@ define([
                                 $scope.imageUp = 0;
                                 $scope.imageButtonState = "";
                                 $scope.set = set;
+                                calculatePages();
                             })
                             .error(function (project) {
                                 logger.error('setController - Error creating post: ' + project);
@@ -149,6 +152,7 @@ define([
                         setFactory.deletePost($routeParams.projectId, $routeParams.setId, id)
                             .success(function (set) {
                                 $scope.set = set;
+                                calculatePages();
                             })
                             .error(function (data) {
                                 logger.error('setController - Error deleting posts: ' + data);
@@ -172,37 +176,41 @@ define([
                         $scope.newTags.splice(index, 1);
                     };
 
-                    $scope.pageLeft = function () {
-                        if ($scope.pagination > POSTS_PER_PAGE) {
-                            $scope.pagination -= POSTS_PER_PAGE;
+
+
+                    $scope.visiblePosts = [];
+                    $scope.pageLeft = function(){
+                        if ($scope.page > 1) {
+                            $scope.page -= 1;
                         }
+                        console.log("page left, new page: " + $scope.page);
+                        calculatePages();
                     };
 
                     $scope.pageRight = function () {
-                        if ($scope.pagination < $scope.set.posts.length) {
-                            $scope.pagination += POSTS_PER_PAGE;
+                        if ($scope.page < maxPage) {
+                            $scope.page += 1;
                         }
+                        console.log("page right, new page: " + $scope.page);
+                        calculatePages();
                     };
 
-                    $scope.endRight = function(){
-                        $scope.pagination = Math.ceil($scope.set.posts.length / POSTS_PER_PAGE) * POSTS_PER_PAGE;
+                    $scope.setPage = function(p) {
+                        $scope.page = p;
+                        console.log("page clicked, new page: " + $scope.page);
+                        calculatePages();
                     };
 
-                    $scope.pageLeft = function(){
-                        if($scope.pagination > POSTS_PER_PAGE){
-                            $scope.pagination -= POSTS_PER_PAGE;
-                            if($scope.pagination > $scope.set.posts.length){
-                                $scope.pageLength = ($scope.set.posts.length % POSTS_PER_PAGE);
-                            }
-                        }
+
+                    var calculatePages = function() {
+                        maxPage = Math.floor(($scope.set.posts.length - 1) / POSTS_PER_PAGE) + 1;
+                        console.log("calculated pages, maxPage: " + maxPage);
+                        $scope.pages = new Array(maxPage);
+                        $scope.visiblePosts = $scope.set.posts.slice(POSTS_PER_PAGE * ($scope.page - 1), POSTS_PER_PAGE * $scope.page);
+                        console.log("visible: ", $scope.visiblePosts);
                     };
 
-                    $scope.endLeft = function(){
-                        $scope.pagination = POSTS_PER_PAGE;
-                        if($scope.pagination > $scope.set.posts.length){
-                            $scope.pageLength = ($scope.set.posts.length % POSTS_PER_PAGE);
-                        }
-                    };
+
                     function sortByKey(array, key) {
                         return array.sort(function(a, b) {
                             var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
@@ -234,6 +242,7 @@ define([
                         /*else if(filter == "numMembers"){
                          sortByNumberOfCommenters($scope.projects)
                          }*/
+                        calculatePages();
                     };
 
                 }]);
