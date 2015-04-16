@@ -20,7 +20,10 @@ define(
                     $controller = $injector.get("$controller");
                     $httpBackend = $injector.get("$httpBackend");
 
-                    $httpBackend.expectGET('/api/projects/555?includeSets=1').respond(200,  {_id: '555', name: 'Test Project', sets:[{_id: '1', name:"Test Set", description:"Test Description", tags:[]}]});
+                    $httpBackend.expectGET('/api/projects/555?includeSets=1').respond(200,  {
+                        _id: '555', name: 'Test Project', sets:[
+                            {_id: '1', name:"Test Set", description:"Test Description", tags:[]}]
+                    });
                     $scope = {};
 
                     $controller(name, {$scope: $scope, $routeParams:{projectId: "555"}});
@@ -49,12 +52,7 @@ define(
                     });
                 });
 
-
-
-
                 it("Set Editable Set", function () {
-
-
                     $scope.setEditable("1");
                     expect($scope.editableSet.name).toBe("Test Set");
                     expect($scope.editableSet._id).toBe('1');
@@ -62,8 +60,6 @@ define(
 
                 it("Confirm Edit", function(){
                     $scope.editableSet = {_id: '1', name:"Edited Set", description:"Edited Description"};
-
-
                     $httpBackend.whenPUT('/api/projects/555/sets/1',
                         function (postData) {
                             postData = JSON.parse(postData);
@@ -177,83 +173,6 @@ define(
                     expect($scope.newTags[0].text).toBe("testtag");
                     expect($scope.newTags[1].text).toBe("testthreetag");
                 });
-
-                it("pageLeft Test", function(){
-                    var result = (14 - SETS_PER_PAGE);
-                    $scope.pagination = 14;
-                    $scope.pageLeft();
-                    expect($scope.pagination).toBe(result);
-                    $scope.pageLeft();
-                    expect($scope.pagination).toBe(result);
-                });
-
-                it("endLeft Test", function(){
-                    $scope.pagination = 414;
-                    expect($scope.pagination).toBe(414);
-                    $scope.endLeft();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-                });
-
-                it("pageRight Test", function(){
-                    expect($scope.project.sets.length).toBe(1);
-                    $scope.pagination = 0;
-                    $scope.pageRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-                    $scope.pageRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-
-                });
-
-                it("pageRight Test Overflow", function(){
-                    expect($scope.project.sets.length).toBe(1);
-                    $scope.pagination = 0;
-                    $scope.pageRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-                    expect($scope.pageLength).toBe(1);
-
-                });
-
-                it("pageRight Test End", function(){
-                    for(var i = 0; i < 10; i++){
-                        $scope.project.sets.push($scope.project.sets[0]);
-                    }
-                    expect($scope.project.sets.length).toBe(11);
-                    $scope.pagination = 0;
-                    $scope.pageRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-                    expect($scope.pageLength).toBe(SETS_PER_PAGE);
-
-                });
-
-                it("endRight Test", function(){
-                    expect($scope.project.sets.length).toBe(1);
-                    $scope.endRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-                });
-
-
-                it("endRight Test Overflow", function(){
-                    expect($scope.project.sets.length).toBe(1);
-                    $scope.pagination = 0;
-                    $scope.endRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE);
-                    expect($scope.pageLength).toBe(1);
-
-                });
-
-
-                it("endRight Test End", function(){
-                    for(var i = 0; i < (SETS_PER_PAGE * 2) - 1; i++){
-                        $scope.project.sets.push($scope.project.sets[0]);
-                    }
-                    expect($scope.project.sets.length).toBe(SETS_PER_PAGE * 2);
-                    $scope.pagination = 0;
-                    $scope.endRight();
-                    expect($scope.pagination).toBe(SETS_PER_PAGE * 2);
-                    expect($scope.pageLength).toBe(SETS_PER_PAGE);
-
-                });
-
             });
         });
     });
