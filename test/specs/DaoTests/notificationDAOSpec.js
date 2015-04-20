@@ -31,7 +31,7 @@ describe("NotificationDAO Tests", function () {
         it("counts the number of notifications of a user", function (done) {
             async.waterfall([
                 function (callback) {
-                    NotificationDAO.getNotificationsFor("54d81fffb46e200418000005", callback);
+                    NotificationDAO.getAllNotificationsFor("54d81fffb46e200418000005", callback);
                 }
             ], function (err, count) {
                 if (err) {
