@@ -3,7 +3,7 @@
 var config = {
    server: {
       host: "localhost",
-      port: "8181"
+      port: "8080"
    },
    uploadsDir: "C:/data/uploads"
 };
