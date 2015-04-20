@@ -38,8 +38,8 @@
             <ul class="panel-list">
                 <li ng-repeat="set in visibleSets | filter:searchText" class="panel">
                     <div class="panel-top">
-                        <a href="#" class="panel-delete" ng-click="setDeletable(set);" data-toggle="modal" data-target="#deleteSetModal"><span class="fa fa-times" aria-hidden="true"></span></a>
-                        <a href="#" class="panel-edit" ng-click="setEditable(set._id)" data-toggle="modal" data-target="#editSetModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
+                        <a href="#" title="delete this set" class="panel-delete" ng-click="setDeletable(set);" data-toggle="modal" data-target="#deleteSetModal"><span class="fa fa-times" aria-hidden="true"></span></a>
+                        <a href="#" title="edit this set" class="panel-edit" ng-click="setEditable(set._id)" data-toggle="modal" data-target="#editSetModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
                     <a href="/projects/{{ project._id }}/{{ set._id }}" class="panel-middle">
                         <h4>{{ set.name }}</h4>
@@ -50,7 +50,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="new panel" data-toggle="modal" data-target="#newSetModal">
+                    <div title="create a new set" class="new panel" data-toggle="modal" data-target="#newSetModal">
                         <p>+</p>
                     </div>
                 </li>
@@ -64,7 +64,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Create a new set!</h4>
             </div>
             <div class="modal-body">
@@ -106,7 +106,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit();"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit();"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Edit {{ editableSet.name }}!</h4>
             </div>
             <div class="modal-body">
@@ -136,7 +136,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit();">Close</button>
-                <button type="submit" class="btn btn-primary" ng-click="confirmEdit(); dClose('editSetModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Edit Set</button>
+                <button type="submit" class="btn btn-primary" ng-click="confirmEdit(); dClose('editSetModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Confirm Edit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -146,7 +146,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Delete Set</h4>
             </div>
             <div class="modal-body">

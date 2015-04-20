@@ -39,8 +39,8 @@
             <ul class="panel-list">
                 <li ng-repeat="post in visiblePosts | filter:searchText" class="panel">
                     <div class="panel-top">
-                        <a href="#" class="panel-delete" ng-click="setDeletable(post)" data-toggle="modal" data-target="#deletePostModal"><span class="fa fa-times" aria-hidden="true"></span></a>
-                        <a href="#" class="panel-edit" ng-click="postEditable(post._id)" data-toggle="modal" data-target="#editPostModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
+                        <a href="#" title="delete this post" class="panel-delete" ng-click="setDeletable(post)" data-toggle="modal" data-target="#deletePostModal"><span class="fa fa-times" aria-hidden="true"></span></a>
+                        <a href="#" title="edit this post" class="panel-edit" ng-click="postEditable(post._id)" data-toggle="modal" data-target="#editPostModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
                     <a class="panel-middle panel-middle-image" href="/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">
                         <h4>{{ post.name }}</h4>
@@ -52,7 +52,7 @@
                     </div>
 
                 </li>
-                <li class="panel new new-post" data-toggle="modal" data-target="#newPostModal">
+                <li title="create a new post" class="panel new new-post" data-toggle="modal" data-target="#newPostModal">
                     <p>+</p>
                 </li>
             </ul>
@@ -64,7 +64,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" ng-click="dReset('imageForm');" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" ng-click="dReset('imageForm');" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Create a new post!</h4>
             </div>
             <div class="modal-body">
@@ -115,7 +115,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" ng-click="cancelEdit();" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" ng-click="cancelEdit();" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Edit post!</h4>
             </div>
             <div class="modal-body">
@@ -145,7 +145,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit();">Close</button>
-                <button type="submit" modal class="btn btn-primary" ng-click="confirmEdit(); dClose('editPostModal');" ng-disabled="editForm.name.$invalid">Edit Post</button>
+                <button type="submit" modal class="btn btn-primary" ng-click="confirmEdit(); dClose('editPostModal');" ng-disabled="editForm.name.$invalid">Confirm Edit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -156,7 +156,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Delete Post</h4>
             </div>
             <div class="modal-body">

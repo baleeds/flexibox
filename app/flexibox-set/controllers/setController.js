@@ -227,7 +227,7 @@ define([
                                 if(a.hasOwnProperty(key)){
                                     var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
                                     return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                                };
+                                }
                                 return 1;
                             });
                         }

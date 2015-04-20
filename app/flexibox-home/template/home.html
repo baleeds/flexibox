@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row"> s
+    <div class="row">
         <div class="col-md-12">
             <h1 class="left">Welcome to <b>Flexi</b></h1>
             <a href="#" data-toggle="modal" data-target="#newProjectModal" class="btn btn-default btn-sm add-item" ng-hide="user.role=='Commenter'">Create a project</a>
@@ -34,8 +34,8 @@
             <ul class="panel-list">
                 <li ng-repeat="project in visibleProjects | filter:searchText" class="panel">
                     <div class="panel-top">
-                        <a href="#" class="panel-delete" ng-click="setDeletable(project);" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#deleteProjectModal"><span class="fa fa-times" aria-hidden="true"></span></a>
-                        <a href="#" class="panel-edit" ng-click="setEditable(project._id)" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#editProjectModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
+                        <a href="#" class="panel-delete" title="delete this project" ng-click="setDeletable(project);" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#deleteProjectModal"><span class="fa fa-times" aria-hidden="true"></span></a>
+                        <a href="#" class="panel-edit" title="edit this project" ng-click="setEditable(project._id)" ng-hide="user.role =='Commenter'" data-toggle="modal" data-target="#editProjectModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
                     <a class="panel-middle" href="/projects/{{ project._id }}">
                         <h4>{{ project.name }}</h4>
@@ -43,14 +43,14 @@
 
                     </a>
                     <div class="panel-bottom">
-                        <a class="shared-with-icon" ng-show="project.commenters[0]"><span class="fa fa-users" aria-hidden="true" /></a>
+                        <a class="shared-with-icon" title="shared users" href="#" ng-show="project.commenters[0]"><span class="fa fa-users" aria-hidden="true" /></a>
                         <div class="shared-with">
                             <span ng-repeat="commenter in project.commenters">{{commenter.name}}<br /></span>
                         </div>
                         <!--<span class="label label-success notification">Success</span><span class="label label-warning notification">Warning</span>-->
                     </div>
                 </li>
-                <li class="new panel" data-toggle="modal" data-target="#newProjectModal" ng-hide="user.role =='Commenter'">
+                <li class="new panel" data-toggle="modal" title="create a new project" data-target="#newProjectModal" ng-hide="user.role =='Commenter'">
                     <p>+</p>
                 </li>
             </ul>
@@ -67,7 +67,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Create a new project!</h4>
             </div>
             <div class="modal-body">
@@ -122,7 +122,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit();"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit();"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Edit {{ editableProject.name }}!</h4>
             </div>
             <div class="modal-body">
@@ -165,7 +165,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit();">Close</button>
-                <button type="submit" class="btn btn-primary" ng-click="confirmEdit(); dClose('editProjectModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Edit Project</button>
+                <button type="submit" class="btn btn-primary" ng-click="confirmEdit(); dClose('editProjectModal');" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Confirm Edit</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -175,7 +175,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
+                <button type="button" title="close" class="close" data-dismiss="modal" aria-label="Close" ng-click="setDeletable({});"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Delete Project</h4>
             </div>
             <div class="modal-body">
