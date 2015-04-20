@@ -7,9 +7,11 @@ require('../server');
 var config = require('../config');
 var Users = require('../app/common/models/users');
 var Projects = require('../app/common/models/projects');
+var Notifications = require('../app/common/models/notifications');
 
 var projectsData = require('./data/projects.json');
 var userData = require('./data/users.json');
+var notificationData = require('./data/notifications.json');
 
 var TIMEOUT = 5000;
 
@@ -18,7 +20,8 @@ jasmine.getEnv().defaultTimeoutInterval = TIMEOUT;
 var dropCollections = function(callback){
     async.waterfall([
         function(callback){Projects.remove({}, callback)},
-        function(err, callback){Users.remove({}, callback)}
+        function(err, callback){Users.remove({}, callback)},
+        function(err, callback){Notifications.remove({}, callback)}
     ], function(){callback(null)});
 };
 
@@ -60,20 +63,40 @@ var addCollection = function( callback ){
                     }
                 })
         },
-        function(callback){
-            async.map(userData, function(obj, callback){
+        function(callback) {
+            async.map(userData, function (obj, callback) {
                     obj = json2Mongoose(obj);
                     var user = new Users(obj);
-                    user.save(function(err){
-                        if(err){
+                    user.save(function (err) {
+                        if (err) {
                             callback(err);
                         } else {
                             callback(null);
                         }
                     });
                 },
-                function(err){
-                    if(err){
+                function (err) {
+                    if (err) {
+                        throw new Error(err);
+                    } else {
+                        callback(null);
+                    }
+                })
+        },
+        function(callback) {
+            async.map(notificationData, function (obj, callback) {
+                    obj = json2Mongoose(obj);
+                    var notification = new Notifications(obj);
+                    notification.save(function (err) {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(null);
+                        }
+                    });
+                },
+                function (err) {
+                    if (err) {
                         throw new Error(err);
                     } else {
                         callback(null);
