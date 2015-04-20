@@ -140,6 +140,10 @@ define([
                                 });
                         }
                     };
+                    $scope.removeTag = function (index) {
+                        $scope.newTags.splice(index, 1)
+                    };
+
 
                     $scope.setDeletable = function(post) {
                         $scope.deletable = post;
@@ -206,7 +210,7 @@ define([
 
 
                     var calculatePages = function() {
-                        if ($scope.project.set.hasOwnProperty("posts")) {
+                        if ($scope.set.hasOwnProperty("posts")) {
                             maxPage = Math.floor(($scope.set.posts.length - 1) / POSTS_PER_PAGE) + 1;
                             console.log("calculated pages, maxPage: " + maxPage);
                             $scope.pages = new Array(maxPage);
@@ -217,10 +221,14 @@ define([
 
 
                     function sortByKey(array, key) {
+
                         if(typeof array != "undefined"){
                             return array.sort(function(a, b) {
-                                var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                                if(a.hasOwnProperty(key)){
+                                    var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                                };
+                                return 1;
                             });
                         }
 
