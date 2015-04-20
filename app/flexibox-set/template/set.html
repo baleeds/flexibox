@@ -14,7 +14,7 @@
             <nav class="sorting-options">
                 <div class="sorting-dropdown">
                     Sort By:
-                    <select class="form-control" id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
+                    <select class="form-control" id="filterDropdown" ng-init="filter=options[2]" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
                     </select>
                 </div>
                 <ul class="pagination"  ng-hide="pages.length <= 1">
