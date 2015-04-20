@@ -90,6 +90,11 @@ define([
                         $scope.newTags = [];
                     };
 
+                    $scope.removeTag = function (index) {
+                        $scope.newTags.splice(index, 1);
+                    };
+
+
                     $scope.setDeletable = function(s) {
                         $scope.deletable = s;
                     };

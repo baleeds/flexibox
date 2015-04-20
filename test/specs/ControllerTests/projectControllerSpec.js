@@ -126,20 +126,22 @@ define(
                 });
 
                 it(" Successful Delete Set", function(){
+                    $scope.deletable = {'_id':'1'};
                     $httpBackend.expectDELETE('/api/projects/555/sets/1').respond({_id: "222", name:"Deleted Set Project"});
                     expect($scope.project.name).toBe("Test Project");
                     expect($scope.project._id).toBe("555");
-                    $scope.deleteSet("1");
+                    $scope.deleteSet();
                     $httpBackend.flush();
                     expect($scope.project.name).toBe("Deleted Set Project");
                     expect($scope.project._id).toBe("222");
                 });
 
                 it("Failed Delete Set", function(){
+                    $scope.deletable = {'_id':'1'};
                     $httpBackend.expectDELETE('/api/projects/555/sets/1').respond(400);
                     expect($scope.project.name).toBe("Test Project");
                     expect($scope.project._id).toBe("555");
-                    $scope.deleteSet("1");
+                    $scope.deleteSet();
                     $httpBackend.flush();
                     expect($scope.project.name).toBe("Test Project");
                     expect($scope.project._id).toBe("555");

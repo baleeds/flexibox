@@ -146,7 +146,7 @@ define([
                     // Delete post.  Includes deleting the image from filesystem.
                     $scope.deletePost = function() {
                         var id = $scope.deletable._id;
-                        var deleteImg = utilityFactory.findById($scope.set.posts, id).imageURL;
+                        var deleteImg = $scope.deletable.imageURL;
                         setFactory.deleteUpload(deleteImg.replace("\\", "/"))
                             .success(function (data) {
                                 //
@@ -177,11 +177,6 @@ define([
                             $scope.newTag = '';
                         }
                     };
-
-                    $scope.removeTag = function (index) {
-                        $scope.newTags.splice(index, 1);
-                    };
-
 
 
                     $scope.visiblePosts = [];
