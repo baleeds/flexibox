@@ -30,7 +30,7 @@ define([
                     $scope.options = [
                         { label: 'Alphabetically by Project Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Project Name', value: 'revName' },
-                        { label: 'Project Last Edited', value: 'lastEdit' },
+                        { label: 'Last Edited Project', value: 'lastEdit' },
                         {label:  'Newest', value: 'newest'},
                        // {label: 'Number of Members', value:'numMembers'}
                     ];
@@ -61,7 +61,7 @@ define([
                     homeFactory.getProjects()
                         .success(function (projectData) {
                             $scope.projects = projectData;
-                            sortAlphabetically($scope.projects, "name");
+                            sortByKey($scope.projects, "editedAt");
                             console.log($scope.projects);
                             buildMembersList();
                             calculatePages();
@@ -236,24 +236,35 @@ define([
                     };
 
                     var calculatePages = function() {
-                        maxPage = Math.floor($scope.projects.length / PROJECTS_PER_PAGE) + 1;
-                        console.log("calculated pages, maxPage: " + maxPage);
-                        $scope.pages = new Array(maxPage);
-                        $scope.visibleProjects = $scope.projects.slice(PROJECTS_PER_PAGE * ($scope.page - 1), PROJECTS_PER_PAGE * $scope.page);
-                        console.log($scope.visibleProjects);
+                        if ($scope.hasOwnProperty("projects")) {
+                            maxPage = Math.floor($scope.projects.length / PROJECTS_PER_PAGE) + 1;
+                            console.log("calculated pages, maxPage: " + maxPage);
+                            $scope.pages = new Array(maxPage);
+                            $scope.visibleProjects = $scope.projects.slice(PROJECTS_PER_PAGE * ($scope.page - 1), PROJECTS_PER_PAGE * $scope.page);
+                            console.log($scope.visibleProjects);
+                        }
                     };
 
                     function sortByKey(array, key) {
-                        return array.sort(function(a, b) {
-                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                        });
+                        if(typeof array != "undefined") {
+                            return array.sort(function (a, b) {
+                                if(a.hasOwnProperty(key)){
+                                    var x = a[key].toLowerCase();
+                                    var y = b[key].toLowerCase();
+                                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                                }
+                                return 1;
+                            });
+                        }
                     }
                     function sortAlphabetically(array, key) {
-                        return array.sort(function(a, b) {
-                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                        });
+                        if(typeof array != "undefined") {
+                            return array.sort(function (a, b) {
+                                var x = a[key].toLowerCase();
+                                var y = b[key].toLowerCase();
+                                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                            });
+                        }
                     }
 
                     function sortByNumberOfCommenters(array){

@@ -33,16 +33,16 @@
 .panel:hover {
   background-color: #DDDDDD;
 }
+/*
 .panel:hover > .panel-top {
   opacity: 1;
 }
 .panel:hover > .panel-bottom {
   opacity: 1;
-}
+}*/
 .panel-top {
   width: 100%;
   height: 25px;
-  opacity: 0;
 }
 .panel-middle h4 {
   margin-top: 0px;
@@ -64,7 +64,6 @@
   bottom: 0px;
   padding: 0 7px;
   width: 100%;
-  opacity: 0;
 }
 .panel-delete {
   top: 4px;
@@ -181,8 +180,13 @@
   float: left;
   border-bottom: 1px solid rgb(184, 184, 184);
 }
+.form-tag::after {
+  content: "\00D7";
+  font-size: 13px;
+  margin-left: 4px;
+}
 .form-tag:hover {
-  text-decoration: line-through;
+  color: rgb(178, 49, 49);
   cursor: pointer;
 }
 .form-new-tag {
@@ -251,4 +255,7 @@
 .sorting-dropdown {
   float: left;
   margin-right: 20px;
+}
+.form-control {
+  color: #444444 !important;
 }

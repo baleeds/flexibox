@@ -194,8 +194,8 @@ define(
                             {_id : 7, name : "Eighth", description : "Eighth Description", imageURL : "uploads\\imageEight"},
                             {_id : 8, name : "Ninth", description : "Ninth Description", imageURL : "uploads\\imageNine"}
                         ]});
-
-                    $scope.deletePost(0);
+                    $scope.deletable = {_id : 0, name : "First", description : "First Description", imageURL : "uploads\\imageOne", tags : [{ _id : 01, text : "tag1"}]};
+                    $scope.deletePost();
 
                     $httpBackend.flush();
                     expect($scope.set.posts.length).toBe(posts.length - 1);

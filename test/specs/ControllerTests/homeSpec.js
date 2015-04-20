@@ -133,28 +133,31 @@ define(
                 });
 
                 it("deleteProject Test", function(){
+                    $scope.deletable = {'_id':'222'};
                     expect($scope.projects.length).toBe(1);
                     $httpBackend.expectDELETE('/api/projects/222').respond(200, []);
                     $httpBackend.expectDELETE('/api/users/projects/222').respond(200, []);
-                    $scope.deleteProject('222');
+                    $scope.deleteProject();
                     $httpBackend.flush();
                     expect($scope.projects.length).toBe(0);
                 });
 
                 it("deleteProject failure Test", function(){
+                    $scope.deletable = {'_id':'222'};
                     expect($scope.projects.length).toBe(1);
                     $httpBackend.expectDELETE('/api/projects/222').respond(400);
                     $httpBackend.expectDELETE('/api/users/projects/222').respond(200, []);
-                    $scope.deleteProject('222');
+                    $scope.deleteProject();
                     $httpBackend.flush();
                     expect($scope.error).toBe('Error Deleting Project');
                 });
 
                 it("deleteProject Factory failure Test", function(){
+                    $scope.deletable = {'_id':'222'};
                     expect($scope.projects.length).toBe(1);
                     $httpBackend.expectDELETE('/api/projects/222').respond(200,[]);
                     $httpBackend.expectDELETE('/api/users/projects/222').respond(400);
-                    $scope.deleteProject('222');
+                    $scope.deleteProject();
                     $httpBackend.flush();
                     expect($scope.error).toBe('Error in homeFactory deleting project');
                 });

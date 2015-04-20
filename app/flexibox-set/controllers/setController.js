@@ -31,10 +31,10 @@ define([
                     var maxPage = 1;
                     $scope.deletable = {};
                     $scope.options = [
-                        { label: 'Alphabetically by Set Name', value: 'name' },
-                        { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
-                        { label: 'Set Last Edited', value: 'lastEdit' },
-                        {label:  'Newest Set', value: 'newest'}
+                        { label: 'Alphabetically by Post Name', value: 'name' },
+                        { label: 'Reverse Alphabetically by Post Name', value: 'revName' },
+                        { label: 'Last Edited Post', value: 'lastEdit' },
+                        {label:  'Newest Post', value: 'newest'}
                         // {label: 'Number of Members', value:'numMembers'}
                     ];
 
@@ -43,6 +43,7 @@ define([
                         .success(function (set) {
                             $scope.backURL = $routeParams.projectId;
                             $scope.set = set;
+                            sortByKey($scope.set.posts, "editedAt");
                             calculatePages();
                             console.log(set.posts);
                         })
@@ -61,6 +62,7 @@ define([
                         $scope.editablePost.tags = $scope.newTags;
                         postFactory.updatePost($routeParams.projectId, $routeParams.setId, $scope.editablePost._id, $scope.editablePost)
                             .success(function (post) {
+
                                 //
                             }).error(function (err) {
                                 alert("error");
@@ -138,6 +140,10 @@ define([
                                 });
                         }
                     };
+                    $scope.removeTag = function (index) {
+                        $scope.newTags.splice(index, 1)
+                    };
+
 
                     $scope.setDeletable = function(post) {
                         $scope.deletable = post;
@@ -146,7 +152,7 @@ define([
                     // Delete post.  Includes deleting the image from filesystem.
                     $scope.deletePost = function() {
                         var id = $scope.deletable._id;
-                        var deleteImg = utilityFactory.findById($scope.set.posts, id).imageURL;
+                        var deleteImg = $scope.deletable.imageURL;
                         setFactory.deleteUpload(deleteImg.replace("\\", "/"))
                             .success(function (data) {
                                 //
@@ -178,11 +184,6 @@ define([
                         }
                     };
 
-                    $scope.removeTag = function (index) {
-                        $scope.newTags.splice(index, 1);
-                    };
-
-
 
                     $scope.visiblePosts = [];
                     $scope.pageLeft = function(){
@@ -209,26 +210,37 @@ define([
 
 
                     var calculatePages = function() {
-                        maxPage = Math.floor(($scope.set.posts.length - 1) / POSTS_PER_PAGE) + 1;
-                        console.log("calculated pages, maxPage: " + maxPage);
-                        $scope.pages = new Array(maxPage);
-                        $scope.visiblePosts = $scope.set.posts.slice(POSTS_PER_PAGE * ($scope.page - 1), POSTS_PER_PAGE * $scope.page);
-                        console.log("visible: ", $scope.visiblePosts);
+                        if ($scope.set.hasOwnProperty("posts")) {
+                            maxPage = Math.floor(($scope.set.posts.length - 1) / POSTS_PER_PAGE) + 1;
+                            console.log("calculated pages, maxPage: " + maxPage);
+                            $scope.pages = new Array(maxPage);
+                            $scope.visiblePosts = $scope.set.posts.slice(POSTS_PER_PAGE * ($scope.page - 1), POSTS_PER_PAGE * $scope.page);
+                            console.log("visible: ", $scope.visiblePosts);
+                        }
                     };
 
 
                     function sortByKey(array, key) {
-                        return array.sort(function(a, b) {
-                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                        });
+
+                        if(typeof array != "undefined"){
+                            return array.sort(function(a, b) {
+                                if(a.hasOwnProperty(key)){
+                                    var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                                }
+                                return 1;
+                            });
+                        }
+
                     }
 
                     function sortAlphabetically(array, key) {
-                        return array.sort(function(a, b) {
-                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                        });
+                        if(typeof array != "undefined"){
+                            return array.sort(function(a, b) {
+                                var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                            });
+                        }
                     }
 
                     $scope.filterSelected = function(){

@@ -27,7 +27,7 @@ define([
                     $scope.options = [
                         { label: 'Alphabetically by Set Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
-                        { label: 'Set Last Edited', value: 'lastEdit' },
+                        { label: 'Last Edited Set', value: 'lastEdit' },
                         {label:  'Newest Set', value: 'newest'}
                         // {label: 'Number of Members', value:'numMembers'}
                     ];
@@ -37,7 +37,7 @@ define([
                         .success(function (project) {
                             $scope.project = project;
                             console.log(project);
-                            //sortAlphabetically($scope.project.sets);
+                            sortByKey($scope.project.sets, "editedAt");
                             calculatePages();
                         })
                         .error(function (project) {
@@ -88,6 +88,14 @@ define([
                                 logger.error('projectController - Error adding set to project: ' + project);
                             });
                         $scope.newTags = [];
+                    };
+
+                    $scope.removeTag = function (index) {
+                        $scope.newTags.splice(index, 1);
+                    };
+
+                    $scope.removeTag = function (index) {
+                        $scope.newTags.splice(index, 1);
                     };
 
                     $scope.setDeletable = function(s) {
@@ -147,25 +155,31 @@ define([
 
 
                     var calculatePages = function() {
-                        maxPage = Math.floor(($scope.project.sets.length - 1) / SETS_PER_PAGE) + 1;
-                        console.log("calculated pages, maxPage: " + maxPage);
-                        $scope.pages = new Array(maxPage);
-                        $scope.visibleSets = $scope.project.sets.slice(SETS_PER_PAGE * ($scope.page - 1), SETS_PER_PAGE * $scope.page);
-                        console.log("visible: ", $scope.visibleSets);
+                        if ($scope.project.hasOwnProperty("sets")) {
+                            maxPage = Math.floor(($scope.project.sets.length - 1) / SETS_PER_PAGE) + 1;
+                            console.log("calculated pages, maxPage: " + maxPage);
+                            $scope.pages = new Array(maxPage);
+                            $scope.visibleSets = $scope.project.sets.slice(SETS_PER_PAGE * ($scope.page - 1), SETS_PER_PAGE * $scope.page);
+                            console.log("visible: ", $scope.visibleSets);
+                        }
                     };
 
                     function sortByKey(array, key) {
-                        return array.sort(function(a, b) {
-                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-                        });
+                        if(typeof array != "undefined"){
+                            return array.sort(function(a, b) {
+                                var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                            });
+                        }
                     }
 
                     function sortAlphabetically(array, key) {
-                        return array.sort(function(a, b) {
-                            var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
-                            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                        });
+                        if(typeof array != "undefined"){
+                            return array.sort(function(a, b) {
+                                var x = a[key].toLowerCase(); var y = b[key].toLowerCase();
+                                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                            });
+                        }
                     }
 
                     $scope.filterSelected = function(){
