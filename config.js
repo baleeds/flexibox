@@ -3,7 +3,8 @@
 var config = {
    server: {
       host: "localhost",
-      port: "8080"
+      port: "8080",
+      root: "flexi"
    },
    uploadsDir: "C:/data/uploads"
 };

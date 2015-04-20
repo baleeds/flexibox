@@ -45,7 +45,7 @@ define([
                                .error(function (err) {
                                    $log.error('Login error: ' + err);
                                });
-                           $location.path('/projects');
+                           $location.path(ROOT + '/projects');
                        })
                        .error(function (err) {
                            $log.error('Login error: ' + err);

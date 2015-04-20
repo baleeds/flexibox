@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 back-link">
-            <a href="/projects" >&larr; back to projects</a>
+            <a href="{{ROOT}}/projects" >&larr; back to projects</a>
         </div>
         <div class="col-md-12">
             <h1 class="left">{{ project.name }}</h1>
@@ -41,7 +41,7 @@
                         <a href="#" title="delete this set" class="panel-delete" ng-click="setDeletable(set);" data-toggle="modal" data-target="#deleteSetModal"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" title="edit this set" class="panel-edit" ng-click="setEditable(set._id)" data-toggle="modal" data-target="#editSetModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
-                    <a href="/projects/{{ project._id }}/{{ set._id }}" class="panel-middle">
+                    <a href="{{ROOT}}/projects/{{ project._id }}/{{ set._id }}" class="panel-middle">
                         <h4>{{ set.name }}</h4>
                         <p style="clear:both;">{{ set.description }}</p>
                     </a>

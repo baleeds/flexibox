@@ -112,7 +112,7 @@ var addCollection = function( callback ){
 };
 
 module.exports = {
-    URL : "http://" + config.server.host + ":" + config.server.port + "/",
+    URL : "http://" + config.server.host + ":" + config.server.port + "/" + config.server.root + "/",
     TIMEOUT : TIMEOUT,
     dropCollections : dropCollections,
     addCollections : addCollection,

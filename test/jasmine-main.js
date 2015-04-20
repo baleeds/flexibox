@@ -1,9 +1,7 @@
-/**
- * Created by dfperry on 1/21/2015.
- */
 // ------------------------------------------------------------
 // Manages dependencies using requirejs.  Bootstraps Angular to document.
 //-------------------------------------------------------------
+var ROOT = '';
 require.config({
     waitSeconds: 1000,
     baseUrl: "../app",
@@ -31,7 +29,7 @@ require.config({
             deps: ["angular"]
         },
         angularRouteStyles: {
-            deps: ["angularRoutes"]
+            deps: ["angularRoute"]
         },
         angularSanitize: {
             deps: ["angular"]

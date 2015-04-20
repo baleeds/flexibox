@@ -1,5 +1,6 @@
 var allTestFiles = [];
 var TEST_REGEXP = /(Spec|Test)\.js$/i;
+var ROOT = '';
 
 var pathToModule = function(path) {
   return path.replace(/^\/base\/test\/specs\//, 'specs/').replace(/\.js$/, '');

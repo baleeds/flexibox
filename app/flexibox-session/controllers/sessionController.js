@@ -13,6 +13,8 @@ define([
 		var name = namespace + ".sessionController";
 		module.controller(name, ['$scope','$rootScope', namespaceCommon + '.sessionFactory', '$location', function ($scope,
 																													$rootScope, sessionFactory, $location) {
+
+            $scope.ROOT = ROOT;
 			$scope.user = {}; // user that is currently logged in
 
 			sessionFactory.getCurrentUser()

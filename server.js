@@ -29,10 +29,13 @@ require('./passport/passport')(passport); // pass passport for configuration
 //connect to local server
 mongoose.connect('mongodb://' + config.server.host + '/flexibox');
 var port = process.env.PORT || config.server.port;  // set port
-
+var root = process.env.ROOT || config.server.root;
 // configure the client
-app.use('/', express.static(__dirname));
+app.use( '/' + root, express.static(__dirname));
+app.use( '/', express.static(__dirname));
+
 app.use(bodyParser());
+
 app.use(multer({ dest: config.uploadsDir }));
 
 
@@ -145,7 +148,7 @@ router.route('/upload/:url')
 
 
 // all of our routes are prefixed with /api
-app.use('/api', router);
+app.use('/' + root + '/api', router);
 
 app.get('/', function(req, res) {
 	res.sendfile('./index.html');
@@ -168,8 +171,14 @@ app.get('/uploads/:url', function(req, res){
 
 });
 
+//This will prevent any file from being root.js
+app.get('*/root.js', function(req, res) {
+    res.status(200)
+        .end("var ROOT = '/" + root + "';");
+});
+
 app.get('*', function(req, res) {
-	res.sendfile('./index.html');
+    res.sendfile('./index.html');
 });
 
 /**
