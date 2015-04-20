@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row"> s
         <div class="col-md-12">
             <h1 class="left">Welcome to <b>Flexi</b></h1>
             <a href="#" data-toggle="modal" data-target="#newProjectModal" class="btn btn-default btn-sm add-item" ng-hide="user.role=='Commenter'">Create a project</a>
@@ -10,7 +10,7 @@
             <nav class="sorting-options">
                 <div class="sorting-dropdown">
                     Sort By:
-                    <select class="form-control" id="filterDropdown" ng-change="filterSelected()"ng-model="filter" ng-options="opt as opt.label for opt in options">
+                    <select class="form-control" id="filterDropdown" ng-init="filter=options[2]" ng-change="filterSelected()" ng-model="filter" ng-options="opt as opt.label for opt in options">
                     </select>
                 </div>
                 <ul class="pagination" ng-hide="pages.length <= 1">

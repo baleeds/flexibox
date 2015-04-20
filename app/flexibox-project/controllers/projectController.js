@@ -27,7 +27,7 @@ define([
                     $scope.options = [
                         { label: 'Alphabetically by Set Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
-                        { label: 'Set Last Edited', value: 'lastEdit' },
+                        { label: 'Last Edited Set', value: 'lastEdit' },
                         {label:  'Newest Set', value: 'newest'}
                         // {label: 'Number of Members', value:'numMembers'}
                     ];
@@ -37,7 +37,7 @@ define([
                         .success(function (project) {
                             $scope.project = project;
                             console.log(project);
-                            //sortAlphabetically($scope.project.sets);
+                            sortByKey($scope.project.sets, "editedAt");
                             calculatePages();
                         })
                         .error(function (project) {

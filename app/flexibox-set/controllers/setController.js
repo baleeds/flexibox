@@ -31,10 +31,10 @@ define([
                     var maxPage = 1;
                     $scope.deletable = {};
                     $scope.options = [
-                        { label: 'Alphabetically by Set Name', value: 'name' },
-                        { label: 'Reverse Alphabetically by Set Name', value: 'revName' },
-                        { label: 'Set Last Edited', value: 'lastEdit' },
-                        {label:  'Newest Set', value: 'newest'}
+                        { label: 'Alphabetically by Post Name', value: 'name' },
+                        { label: 'Reverse Alphabetically by Post Name', value: 'revName' },
+                        { label: 'Last Edited Post', value: 'lastEdit' },
+                        {label:  'Newest Post', value: 'newest'}
                         // {label: 'Number of Members', value:'numMembers'}
                     ];
 
@@ -43,6 +43,7 @@ define([
                         .success(function (set) {
                             $scope.backURL = $routeParams.projectId;
                             $scope.set = set;
+                            sortByKey($scope.set.posts, "editedAt");
                             calculatePages();
                             console.log(set.posts);
                         })
@@ -61,6 +62,7 @@ define([
                         $scope.editablePost.tags = $scope.newTags;
                         postFactory.updatePost($routeParams.projectId, $routeParams.setId, $scope.editablePost._id, $scope.editablePost)
                             .success(function (post) {
+
                                 //
                             }).error(function (err) {
                                 alert("error");

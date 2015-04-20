@@ -30,7 +30,7 @@ define([
                     $scope.options = [
                         { label: 'Alphabetically by Project Name', value: 'name' },
                         { label: 'Reverse Alphabetically by Project Name', value: 'revName' },
-                        { label: 'Project Last Edited', value: 'lastEdit' },
+                        { label: 'Last Edited Project', value: 'lastEdit' },
                         {label:  'Newest', value: 'newest'},
                        // {label: 'Number of Members', value:'numMembers'}
                     ];
@@ -61,7 +61,7 @@ define([
                     homeFactory.getProjects()
                         .success(function (projectData) {
                             $scope.projects = projectData;
-                            sortAlphabetically($scope.projects, "name");
+                            sortByKey($scope.projects, "editedAt");
                             console.log($scope.projects);
                             buildMembersList();
                             calculatePages();
