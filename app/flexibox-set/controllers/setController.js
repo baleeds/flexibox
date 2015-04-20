@@ -206,11 +206,13 @@ define([
 
 
                     var calculatePages = function() {
-                        maxPage = Math.floor(($scope.set.posts.length - 1) / POSTS_PER_PAGE) + 1;
-                        console.log("calculated pages, maxPage: " + maxPage);
-                        $scope.pages = new Array(maxPage);
-                        $scope.visiblePosts = $scope.set.posts.slice(POSTS_PER_PAGE * ($scope.page - 1), POSTS_PER_PAGE * $scope.page);
-                        console.log("visible: ", $scope.visiblePosts);
+                        if ($scope.project.set.hasOwnProperty("posts")) {
+                            maxPage = Math.floor(($scope.set.posts.length - 1) / POSTS_PER_PAGE) + 1;
+                            console.log("calculated pages, maxPage: " + maxPage);
+                            $scope.pages = new Array(maxPage);
+                            $scope.visiblePosts = $scope.set.posts.slice(POSTS_PER_PAGE * ($scope.page - 1), POSTS_PER_PAGE * $scope.page);
+                            console.log("visible: ", $scope.visiblePosts);
+                        }
                     };
 
 

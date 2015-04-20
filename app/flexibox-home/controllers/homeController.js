@@ -236,11 +236,13 @@ define([
                     };
 
                     var calculatePages = function() {
-                        maxPage = Math.floor($scope.projects.length / PROJECTS_PER_PAGE) + 1;
-                        console.log("calculated pages, maxPage: " + maxPage);
-                        $scope.pages = new Array(maxPage);
-                        $scope.visibleProjects = $scope.projects.slice(PROJECTS_PER_PAGE * ($scope.page - 1), PROJECTS_PER_PAGE * $scope.page);
-                        console.log($scope.visibleProjects);
+                        if ($scope.hasOwnProperty("projects")) {
+                            maxPage = Math.floor($scope.projects.length / PROJECTS_PER_PAGE) + 1;
+                            console.log("calculated pages, maxPage: " + maxPage);
+                            $scope.pages = new Array(maxPage);
+                            $scope.visibleProjects = $scope.projects.slice(PROJECTS_PER_PAGE * ($scope.page - 1), PROJECTS_PER_PAGE * $scope.page);
+                            console.log($scope.visibleProjects);
+                        }
                     };
 
                     function sortByKey(array, key) {
