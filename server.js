@@ -158,8 +158,14 @@ app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
 });
 
-app.get('/uploads/:url', function(req, res){
+app.get('/' + root + '/uploads/:url', function(req, res){
     var file = path.normalize(req.params.url);
+    //file = file.toLowerCase();
+    //if(file.endsWith(".png")){
+    //    res.set({"Content-Type": "image/png"});
+    //} else if(file.endsWith(".jpg") || file.endsWith(".jpeg")){
+    //    res.set({"Content-Type": "image/jpeg"});
+    //}
     file = config.uploadsDir + '/' + file;
     fs.readFile(file, function(err, data){
         if(err){

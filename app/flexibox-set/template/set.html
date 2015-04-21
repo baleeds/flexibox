@@ -42,10 +42,10 @@
                         <a href="#" title="delete this post" class="panel-delete" ng-click="setDeletable(post)" data-toggle="modal" data-target="#deletePostModal"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" title="edit this post" class="panel-edit" ng-click="postEditable(post._id)" data-toggle="modal" data-target="#editPostModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
                     </div>
-                    <a class="panel-middle panel-middle-image" href="{{ROOT}}/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">
+                    <a class="panel-middle panel-middle-image" ng-href="{{ROOT}}/projects/{{ backURL }}/{{ set._id }}/{{ post._id }}">
                         <h4>{{ post.name }}</h4>
                         <p style="clear:both;">{{ post.description }}</p>
-                        <div class="panel-image-container"><img src="/{{ post.imageURL }}" /></div>
+                        <div class="panel-image-container"><img ng-src="{{ROOT}}/{{ post.imageURL }}" /></div>
                     </a>
                     <div class="panel-bottom">
 
