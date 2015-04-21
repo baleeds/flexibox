@@ -27,7 +27,7 @@ body > .ng-scope {
     height: auto;
     overflow-x: scroll;
     overflow-y: hidden;
-    background: url("/img/workspace-bg.jpg");
+    background: url("../img/workspace-bg.jpg");
 }
 .workspace-scaled {
     overflow-x: hidden !important;

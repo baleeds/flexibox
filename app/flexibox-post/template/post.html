@@ -1,6 +1,6 @@
 <!--<div class="row">
     <div class="large-6 columns">
-    	<h6><a href="/projects/{{ backURL }}" style="">&laquo; back to set</a></h6>
+    	<h6><a href="{{ROOT}}/projects/{{ backURL }}" style="">&laquo; back to set</a></h6>
         <h1>{{ post.name }}</b></h1>
     </div>
 </div>-->
@@ -60,7 +60,7 @@
 		</div>
    	</div>
 	<div class="post-toolbar">
-		<a class="post-toolbar-back-button" href="/projects/{{ backURL }}" >&larr; back to posts</a>
+		<a class="post-toolbar-back-button" href="{{ROOT}}/projects/{{ backURL }}" >&larr; back to posts</a>
 		<div class="post-toolbar-buttons">
 			<i class="fa fa-arrows-alt" ng-click="toggleView();" ng-class="{'post-toolbar-button-on': currentView == 'full', 'post-toolbar-button-off': currentView == 'scaled'}" ng-click="toggleView();"></i>
 			<i class="fa fa-comment" ng-click="toggleLocationComments();" ng-class="{'post-toolbar-button-on': locationComments, 'post-toolbar-button-off': !locationComments}"></i>
