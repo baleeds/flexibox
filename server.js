@@ -11,6 +11,7 @@ var fs             = require('fs');
 var path           = require('path');
 var session		   = require('express-session');
 var cookieParser   = require('cookie-parser');
+var _              = require('lodash');
 
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -30,6 +31,16 @@ require('./passport/passport')(passport); // pass passport for configuration
 mongoose.connect('mongodb://' + config.server.host + '/flexibox');
 var port = process.env.PORT || config.server.port;  // set port
 var root = process.env.ROOT || config.server.root;
+
+//Use lodash templating to set the root for static things on the client
+app.get('/' + root, function(req, res) {
+    fs.readFile('./index.html', function(err, data){
+        var template = _.template(data);
+        res.status(200)
+            .end(template({root: '/' + root}));
+    });
+});
+
 // configure the client
 app.use( '/' + root, express.static(__dirname));
 app.use( '/', express.static(__dirname));
@@ -150,22 +161,12 @@ router.route('/upload/:url')
 // all of our routes are prefixed with /api
 app.use('/' + root + '/api', router);
 
-app.get('/', function(req, res) {
-	res.sendfile('./index.html');
-
-});
 app.get('/test/', function(req, res) {
 	res.sendfile('./test/specRunner.html');
 });
 
 app.get('/' + root + '/uploads/:url', function(req, res){
     var file = path.normalize(req.params.url);
-    //file = file.toLowerCase();
-    //if(file.endsWith(".png")){
-    //    res.set({"Content-Type": "image/png"});
-    //} else if(file.endsWith(".jpg") || file.endsWith(".jpeg")){
-    //    res.set({"Content-Type": "image/jpeg"});
-    //}
     file = config.uploadsDir + '/' + file;
     fs.readFile(file, function(err, data){
         if(err){
@@ -177,14 +178,12 @@ app.get('/' + root + '/uploads/:url', function(req, res){
 
 });
 
-//This will prevent any file from being root.js
-app.get('*/root.js', function(req, res) {
-    res.status(200)
-        .end("var ROOT = '/" + root + "';");
-});
-
 app.get('*', function(req, res) {
-    res.sendfile('./index.html');
+    fs.readFile('./index.html', function(err, data){
+        var template = _.template(data);
+        res.status(200)
+            .end(template({root: '/' + root}));
+    });
 });
 
 /**

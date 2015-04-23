@@ -1,6 +1,8 @@
 // ------------------------------------------------------------
 // Manages dependencies using requirejs.  Bootstraps Angular to document.
 //-------------------------------------------------------------
+
+//Run with no root since I am too lazy to change all the httpBackend expects to have ROOT + ....
 var ROOT = '';
 require.config({
     waitSeconds: 1000,

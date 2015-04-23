@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>FlexiBox</title>
-        <link rel="stylesheet" href="/flexi/dependencies/css/openstyle/autobahn-flat.css" />
-        <link rel="stylesheet" href="/flexi/styles/style.css" />
+        <link rel="stylesheet" href="<%= root %>/dependencies/css/openstyle/autobahn-flat.css" />
+        <link rel="stylesheet" href="<%= root %>/styles/style.css" />
     </head>
     <body ng-controller="FlexiBox.session.sessionController" class="openstyle">
         <div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -30,7 +30,9 @@
         </div>
 
         <!-- SCRIPTS -->
-        <script src="root.js"></script>
-        <script data-main="/flexi/app/main" src="/flexi/dependencies/js/requirejs-bower/require.js"></script>
+        <script type="text/javascript">
+            var ROOT = "<%= root %>";
+        </script>
+        <script data-main="<%= root %>/app/main" src="<%= root %>/dependencies/js/requirejs-bower/require.js"></script>
     </body>
 </html>
