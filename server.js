@@ -85,8 +85,8 @@ router.route('/login')
 // process the signup form
 router.route('/signup')
 	.post(passport.authenticate('local-signup', {
-		successRedirect : '/projects', // redirect to the secure profile section
-		failureRedirect : '/login', // redirect back to the signup page if there is an error
+		successRedirect : '/' + root + '/projects', // redirect to the secure profile section
+		failureRedirect : '/' + root + '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 }));
 

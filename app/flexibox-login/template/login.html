@@ -16,7 +16,7 @@
                 </div>
                 <button type="submit" class="btn btn-small btn-primary" style="margin-bottom: 12px;"  onClick="this.form.reset()" ng-click="login()" ng-disabled="createForm.name.$pristine || createForm.name.$invalid">Login</button>
             </form>
-            <a href="/signup" style="margin-top: 10px">Click here to register</a>
+            <a href="{{ROOT}}/signup" style="margin-top: 10px">Click here to register</a>
         </div>
         <div class="col-md-4 col-md-offset-4 login-window" ng-show="isLoggedIn">
             <h4>{{username}}, you are already logged in.</h4>
