@@ -154,14 +154,48 @@ module.exports = function (grunt) {
                 },
                 src: ['server.js', 'server/**/*.js']
             }
+        },
+
+        uglify: {
+            //uglify can be used to minify individual files. This can be used in cooperation with
+            //file watchers in WebStorm to rapidly develop and test minified code.
+            //Source maps are included so that developers are happy!
+            dev : {
+                options: {
+                    mangle : {
+                        except : ['require', '$', 'angular']
+                    },
+                    sourceMap : true
+                },
+                files : [{
+                    expand: true,
+                    cwd: 'app',
+                    src: '**/*.js',
+                    dest: 'dist'
+                }]
+            },
+            production : {
+                options: {
+                    mangle : {
+                        except : ['require', '$', 'angular']
+                    },
+                    sourceMap : false
+                },
+                files : [{
+                    expand: true,
+                    cwd: 'app',
+                    src: '**/*.js',
+                    dest: 'dist'
+                }]
+            }
         }
     });
 
     // Enable logging
-    grunt.log.writeflags(grunt.config.get("requirejs.compile"), "Compile config:");
-    grunt.log.writeflags(grunt.config.get("requirejs.compile_min"), "Compile min config:");
-    grunt.log.writeflags(grunt.config.get("requirejs.compile_full"), "Compile full config:");
-    grunt.log.writeflags(grunt.config.get("requirejs.compile_full_min"), "Compile full min config:");
+    //grunt.log.writeflags(grunt.config.get("requirejs.compile"), "Compile config:");
+    //grunt.log.writeflags(grunt.config.get("requirejs.compile_min"), "Compile min config:");
+    //grunt.log.writeflags(grunt.config.get("requirejs.compile_full"), "Compile full config:");
+    //grunt.log.writeflags(grunt.config.get("requirejs.compile_full_min"), "Compile full min config:");
 
     grunt.loadNpmTasks("grunt-bower-task");
     grunt.loadNpmTasks("grunt-requirejs");
@@ -169,15 +203,18 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-jasmine-node-coverage");
     grunt.loadNpmTasks("grunt-karma");
+    grunt.loadNpmTasks("grunt-contrib-uglify");
 
     // Default task
-    grunt.registerTask("default", ["bower", "requirejs", "copy"]);
+    //grunt.registerTask("default", ["bower", "requirejs", "copy"]);
+    grunt.registerTask("default", ["clean", "bower", "uglify:dev", "copy"]);
 
     // Development task
-    grunt.registerTask("development", ["clean", "bower", "requirejs:compile", "requirejs:compile_full"]);
+    //grunt.registerTask("development", ["clean", "bower", "requirejs:compile", "requirejs:compile_full"]);
+    grunt.registerTask("development", ["clean", "bower", "uglify:dev"]);
 
     // Production task
-    grunt.registerTask("production", ["clean", "bower", "requirejs:compile_min", "requirejs:compile_full_min", "copy"]);
+    grunt.registerTask("production", ["clean", "bower", "uglify:production", "copy"]);
 
     //Testing
     grunt.registerTask("test", ["karma", "jasmine_node"]);

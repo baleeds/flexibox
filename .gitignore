@@ -1,10 +1,14 @@
 dependencies
 node_modules
 reports
-dist/js
+dist/**/*.js
+dist/**/*.map
+min
 uploads
 bower_components
 backup
-.idea
+.idea/*
+!.idea/scopes
+!.idea/watcherTasks.xml
 test-results.xml
 coverage.xml

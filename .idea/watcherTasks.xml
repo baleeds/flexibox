@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectTasksOptions">
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="../app/$FileDirPathFromParent(app)$$FileName$ -o $FileDirPathFromParent(app)$$FileNameWithoutExtension$.js --source-map $FileDirPathFromParent(app)$$FileNameWithoutExtension$.js.map --source-map-url $FileDirPathFromParent(app)$$FileNameWithoutExtension$.js.map " />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="Compress .js files" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="UglifyJS" />
+      <option name="output" value="$FileDirPathFromParent(app)$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="program" value="$ProjectFileDir$/uglifyjs.cmd" />
+      <option name="scopeName" value="app_files" />
+      <option name="trackOnlyRoot" value="true" />
+      <option name="workingDir" value="$ProjectFileDir$/dist" />
+      <envs />
+    </TaskOptions>
+  </component>
+</project>

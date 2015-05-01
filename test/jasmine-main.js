@@ -6,7 +6,7 @@
 var ROOT = '';
 require.config({
     waitSeconds: 1000,
-    baseUrl: "../app",
+    baseUrl: "../min",
     paths: {
         "angular": "../dependencies/js/angular/angular.min",
         "angularRoute": "../dependencies/js/angular-route/angular-route.min",

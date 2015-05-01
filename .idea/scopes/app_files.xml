@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="app_files" pattern="file[2015springTeam22]:app//*||file[2015springTeam22]:app/*" />
+</component>
