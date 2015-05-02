@@ -7,8 +7,6 @@ min
 uploads
 bower_components
 backup
-.idea/*
-!.idea/scopes
-!.idea/watcherTasks.xml
+.idea
 test-results.xml
 coverage.xml
