@@ -7,6 +7,5 @@ min
 uploads
 bower_components
 backup
-.idea
 test-results.xml
 coverage.xml
