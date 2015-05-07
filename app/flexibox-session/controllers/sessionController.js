@@ -16,6 +16,9 @@ define([
 
             $scope.ROOT = ROOT;
 			$scope.user = {}; // user that is currently logged in
+			var posts = {};
+			var currentPostIndex = {};
+			var mainURL = "";
 
 			sessionFactory.getCurrentUser()
 				.success(function(user) {
@@ -43,6 +46,29 @@ define([
 
 			$scope.range = function(n) {
 				return new Array(n);
+			};
+
+			$scope.setPosts = function(p, currentP, ROOT, backURL, setId) {
+				posts = p;
+				currentPostIndex = currentP;
+				console.log(p);
+				console.log(currentP);
+				mainURL = ROOT + "/projects/" + backURL + "/" + setId + "/";
+				console.log(mainURL);
+			};
+
+			$scope.moveLeft = function() {
+				if (currentPostIndex > 0 && typeof posts[currentPostIndex - 1] !== 'undefined') {
+					currentPostIndex = currentPostIndex - 1;
+					$location.path(mainURL + posts[currentPostIndex]._id);
+				}
+			};
+
+			$scope.moveRight = function() {
+				if (typeof posts[currentPostIndex + 1] !== 'undefined') {
+					currentPostIndex = currentPostIndex + 1;
+					$location.path(mainURL + posts[currentPostIndex]._id);
+				}
 			};
 
 		}]);

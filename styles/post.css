@@ -70,8 +70,13 @@ body > .ng-scope {
     user-select:none;
 }
 .post-toolbar-buttons {
-    width: 80px;
-    margin: 0 auto;
+    width: 160px;
+    margin-left: 30px;
+    float: right;
+}
+.post-toolbar-title {
+    float: left;
+    margin-top: 3px;
 }
 .post-toolbar-button-off {
     font-size: 2em;

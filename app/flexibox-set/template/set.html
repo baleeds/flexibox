@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-md-12">
             <ul class="panel-list">
-                <li ng-repeat="post in visiblePosts | filter:searchText" class="panel">
+                <li ng-repeat="post in visiblePosts | filter:searchText" class="panel" ng-click="$parent.setPosts(visiblePosts,$index,ROOT,backURL,set._id)">
                     <div class="panel-top">
                         <a href="#" title="delete this post" class="panel-delete" ng-click="setDeletable(post)" data-toggle="modal" data-target="#deletePostModal"><span class="fa fa-times" aria-hidden="true"></span></a>
                         <a href="#" title="edit this post" class="panel-edit" ng-click="postEditable(post._id)" data-toggle="modal" data-target="#editPostModal"><span class="fa fa-pencil" aria-hidden="true"></span></a>
