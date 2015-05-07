@@ -25,7 +25,6 @@ define([
 
                 $scope.$sidebar = $(".sidebar");
 
-                var firstClick = 1;
                 var a = {};
                 var b = {};
                 var smallest = {};
