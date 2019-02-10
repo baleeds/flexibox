@@ -9,3 +9,4 @@ bower_components
 backup
 test-results.xml
 coverage.xml
+.idea
